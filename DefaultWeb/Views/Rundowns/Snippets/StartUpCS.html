@@ -1,0 +1,625 @@
+﻿<head>
+    <style type="text/css">
+
+ p.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	}
+    </style>
+</head>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">namespace</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> SwartlingFamilyWeb<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">class</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">Startup</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> Startup(</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">IHostingEnvironment</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> env)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">var</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> builder = </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">new</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ConfigurationBuilder</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">()<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>.SetBasePath(env.ContentRootPath)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>.AddJsonFile(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;appsettings.json&quot;</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">, optional: </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">false</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">, reloadOnChange: </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">true</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>.AddJsonFile(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">$&quot;appsettings.</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">{env.EnvironmentName}</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">.json&quot;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">, optional: </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">true</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>.AddJsonFile(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;archivesettings.json&quot;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">,optional:</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">false</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">, reloadOnChange:</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">true</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (env.IsDevelopment())<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:green">// For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>builder.AddUserSecrets&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">Startup</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">&gt;();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:green">//builder.AddApplicationInsightsSettings(developerMode: true);</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:
+Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>builder.AddEnvironmentVariables();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Configuration = builder.Build();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">static</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">IConfigurationRoot</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> Configuration { </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:
+Consolas;color:blue">get</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">; </span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">set</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">; }<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">// This method gets called by the runtime. Use this method to add services to the container.</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">void</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> ConfigureServices(</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">IServiceCollection</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> services)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">// Add framework services.</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>services.AddDbContext&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ApplicationDbContext</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">&gt;(options =&gt;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>options.UseSqlServer(Configuration.GetConnectionString(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;DefaultConnection&quot;</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">)));<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>services.AddIdentity&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ApplicationUser</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">IdentityRole</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">&gt;()<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>.AddEntityFrameworkStores&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ApplicationDbContext</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">&gt;()<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>.AddDefaultTokenProviders();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>services.AddMvc(options =&gt;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:green">//options.SslPort = 44366;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:
+Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:green">//options.Filters.Add(new RequireHttpsAttribute());</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>});<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">// Add application services.</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>services.AddTransient&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">IEmailSender</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">AuthMessageSender</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">&gt;();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>services.AddTransient&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ISmsSender</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">, </span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">AuthMessageSender</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&gt;();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">// Add configuration services</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">//services.AddSingleton(Configuration);</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>services.Configure&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ArchiveSettings</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">&gt;(Configuration.GetSection(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;ArchiveSettings&quot;</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">));<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>services.Configure&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">IISOptions</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">&gt;(options =&gt;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>});<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:
+Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">void</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> Configure(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:
+Consolas;color:#2B91AF">IApplicationBuilder</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> app, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">IHostingEnvironment</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> env, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ILoggerFactory</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> loggerFactory)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>loggerFactory.AddConsole(Configuration.GetSection(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Logging&quot;</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">));<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>loggerFactory.AddDebug();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (env.IsDevelopment())<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseDeveloperExceptionPage();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseDatabaseErrorPage();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseBrowserLink();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">else</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseExceptionHandler(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;/Home/Error&quot;</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseStaticFiles();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseIdentity();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">// Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseGoogleAuthentication(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">GoogleOptions</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">()<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</span>ClientId = Configuration[</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Authentication:Google:ClientId&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">],<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ClientSecret = Configuration[</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Authentication:Google:ClientSecret&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">]<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>});<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseMicrosoftAccountAuthentication(</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">MicrosoftAccountOptions</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">()<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ClientId = Configuration[</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Authentication:Microsoft:ClientId&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">],<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ClientSecret = Configuration[</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Authentication:Microsoft:ClientSecret&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">]<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>});<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseFacebookAuthentication(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">FacebookOptions</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">()<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ClientId = Configuration[</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Authentication:Facebook:AppId&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">],<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ClientSecret = Configuration[</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Authentication:Facebook:AppSecret&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">]<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>});<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseTwitterAuthentication(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">TwitterOptions</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">()<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ConsumerKey = Configuration[</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Authentication:Twitter:ConsumerKey&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">],<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ConsumerSecret = Configuration[</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Authentication:Twitter:ConsumerSecret&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">]<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>});<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>app.UseMvc(routes =&gt;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>routes.MapRoute(<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>name: </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;default&quot;</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">,<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>template: </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;{controller=Home}/{action=Index}/{id?}&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>});<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal">
+    <span style="font-size:9.5pt;line-height:105%;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">}</span><o:p></o:p></p>

@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  defaultweb:
+    image: defaultweb
+    build:
+      context: ./DefaultWeb
+      dockerfile: Dockerfile

@@ -1,0 +1,444 @@
+﻿<head>
+    <style type="text/css">
+
+ p.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	}
+a:link
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;
+        }
+p.MsoListParagraphCxSpFirst
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	}
+p.MsoListParagraphCxSpMiddle
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	}
+p.MsoListParagraphCxSpLast
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:.5in;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	}
+    </style>
+</head>
+<p align="center" class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:
+-4.5pt;mso-margin-bottom-alt:auto;text-align:center;line-height:normal">
+    <b><span style="font-size:15.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">Document Archive Website Technical Discussion<o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin-right:-4.5pt">
+    <span style="font-size:12.0pt;
+line-height:105%;font-family:&quot;Times New Roman&quot;,serif">This discussion addresses the technologies and techniques used to engineer, implement and deploy a scalable document archive web-site. A sample of this technology implemented can be seen at <a href="https://swartling-family.com">https://swartling-family.com</a>. This particular archive content relates to family history, but content can relate to any possible “category” of documents. Content also scales from 1 to nth number of files. Where n is only limited by the server configuration.<o:p></o:p></span></p>
+<p align="center" class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:
+-4.5pt;mso-margin-bottom-alt:auto;text-align:center;line-height:normal">
+    <b><span style="font-size:15.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">The current version is designed and developed using <i>Microsoft™ Visual Studio Community 2015</i>, is supported by <i>Visual Studio Team Services </i>and powered by Microsoft™ C#, ASP.NET 4.6 and MVC 5 Web development technologies. <o:p></o:p></span></b>
+</p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <b><i><span style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">Architecture design targets ASP.NET 4.6 Model-View-Controller (MVC 5) development framework </span></i></b><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">as well as other web server and client development technologies. Web-site applications are physically powered by a <a href="../Home/About.cshtml"><b><i>GoDaddy.com™</i></b></a> <i style="mso-bidi-font-style:normal">Microsoft Windows 2012™ and IIS 8™</i> self-managed Virtual Private Server (VPS) environment. The server operates on an <i style="mso-bidi-font-style:normal">Intel(r) Xeon(r) E5-2620 v3 2.4GHz</i> CPU platform with 3GB available memory and 90GB disk space. The server is configured with Azure™ web deploy services and all the required ASP.NET and MVC components. All of these factors combine to provide exceptional performance, stability, security and usability. <o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <b><i><span style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">Many different plug-in, packages, etc. were considered</span></i></b><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"> in the design. In this day and age, the task of actual development has become more of a puzzle task to identify and piece together existing solutions. It has become taboo to try to re-invent the wheel! With good reason, considering the huge movement in open-source and consortium managed projects over the last decade. Even Microsoft is in the game now providing many of the &quot;pre-requisite&quot; VS2015 packages in all of its development technologies and templates. <o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <b><i><span style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">These packages are downloaded, installed and managed</span></i></b><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"> with the VS NuGet Package Manager (PM). The NuGet PM provides access to literally 1000&#39;s of other client and server-side third-party packages for Visual Studio development and beyond. Many of these packages are utilized/defined as &quot;pre-requisites&quot; to VS20015 web development templates. <o:p></o:p></span>
+</p>
+<p align="center" class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;
+margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+line-height:normal">
+    <b><span style="font-size:14.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">Application Architecture Basics</span></b><span style="font-size:14.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <b><i><span style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">The terminology used should be somewhat recognized </span></i></b><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">by the layman web developer and/or web technology enthusiast. Links are provided for most &quot;terms&quot; to relevant sites. For more info on ASP.NET and MVC start here: <o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <b><i><span style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">Model-View-Controller development approach and</span></i></b><span style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;"> methodology has been around for some time. First possible effective IDE functionally implemented in Oracle J-Developer Studio and Microsoft Web Client Software Factory. Whomever named it kinda got it wrong, the required approach is Model-&gt;Controller-&gt;View, but I guess MVC sounded better.&nbsp; Added to the mix is Model-View-View-Model (MVVM) client-side framework which provides dynamic data/control bindings; along with many other powerful client functionality. <o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <span style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">There are many products offering MVVM client frameworks: Angular, React, Ember, Polymer...the list goes on. The approaches utilized in the client-side development align to more standard and readily available technologies: Javascript, HTML5, JQuery, JQueryUI and Mobile, Bootstrap, FontAwesome and Knockout(provides a powerful and lightweight client MVVM model). <o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+line-height:normal">
+    <b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">Server-Side Stuff<o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin-right:-4.5pt;mso-margin-bottom-alt:auto;
+line-height:normal">
+    <b><i><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">On the server-side, we have the</span></i></b><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"> aforementioned C#/ASP.NET MVC web application. Along with these core or “foundation” tools we can integrate a number of technologies offered by the NuGet Package Manager. In this instance the document archive server takes advantage of one particular Microsoft™ Open Source technology, which would be Open Web Interface for .NET (OWIN) <a href="http://owin.org/">http://owin.org/</a> and Microsoft’s Open Source OWIN implementation with project <a href="https://www.asp.net/aspnet/overview/owin-and-katana">Katana</a>. Along with OAuth <a href="https://oauth.net/">https://oauth.net/</a>, the document archive server can ensure secure communications with web Social and Business Media services i.e. Facebook, Google, Microsoft Account, Twitter etc.; <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal">or your custom business/personal web services</i></b>. Microsoft already packages all the OWIN functionality you really need. The following are 
+    utilized by the document archive server, and can be found at <a href="https://github.com/aspnet/AspNetKatana/">GitHub AspNet Katana project</a>:<o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+margin-bottom:0in;margin-left:.5in;margin-bottom:.0001pt;text-indent:-.25in;
+line-height:normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://www.asp.net/aspnet/overview/owin-and-katana"><b><i>OAuth, OWIN and Katana</i></b></a><o:p></o:p></span></p>
+<p class="MsoListParagraphCxSpFirst" style="margin-right:-4.5pt;mso-margin-bottom-alt:
+auto;margin-left:.75in;mso-add-space:auto;text-indent:-.25in;line-height:normal;
+mso-list:l1 level1 lfo2">
+    <![if !supportLists]><span style="font-size:12.0pt;
+font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family:
+Wingdings"><span style="mso-list:Ignore">Ø<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">Microsoft.Owin<o:p></o:p></span></p>
+<p class="MsoListParagraphCxSpMiddle" style="margin-right:-4.5pt;mso-margin-bottom-alt:
+auto;margin-left:.75in;mso-add-space:auto;text-indent:-.25in;line-height:normal;
+mso-list:l1 level1 lfo2">
+    <![if !supportLists]><span style="font-size:12.0pt;
+font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family:
+Wingdings"><span style="mso-list:Ignore">Ø<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">Microsoft.Owin.Security.OAuth<o:p></o:p></span></p>
+<p class="MsoListParagraphCxSpMiddle" style="margin-right:-4.5pt;mso-margin-bottom-alt:
+auto;margin-left:.75in;mso-add-space:auto;text-indent:-.25in;line-height:normal;
+mso-list:l1 level1 lfo2">
+    <![if !supportLists]><span style="font-size:12.0pt;
+font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family:
+Wingdings"><span style="mso-list:Ignore">Ø<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">Microsoft.Owin.Security.Google<o:p></o:p></span></p>
+<p class="MsoListParagraphCxSpMiddle" style="margin-right:-4.5pt;mso-margin-bottom-alt:
+auto;margin-left:.75in;mso-add-space:auto;text-indent:-.25in;line-height:normal;
+mso-list:l1 level1 lfo2">
+    <![if !supportLists]><span style="font-size:12.0pt;
+font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family:
+Wingdings"><span style="mso-list:Ignore">Ø<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">Microsoft.Owin.Security.MicrosoftAccount<o:p></o:p></span></p>
+<p class="MsoListParagraphCxSpMiddle" style="margin-right:-4.5pt;mso-margin-bottom-alt:
+auto;margin-left:.75in;mso-add-space:auto;text-indent:-.25in;line-height:normal;
+mso-list:l1 level1 lfo2">
+    <![if !supportLists]><span style="font-size:12.0pt;
+font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family:
+Wingdings"><span style="mso-list:Ignore">Ø<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">Microsoft.Owin.Security.FaceBook<o:p></o:p></span></p>
+<p class="MsoListParagraphCxSpLast" style="margin-right:-4.5pt;mso-margin-bottom-alt:
+auto;margin-left:.75in;mso-add-space:auto;text-indent:-.25in;line-height:normal;
+mso-list:l1 level1 lfo2">
+    <![if !supportLists]><span style="font-size:12.0pt;
+font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family:
+Wingdings"><span style="mso-list:Ignore">Ø<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">Microsoft.Owin.Security.Twitter<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-right:-4.5pt">
+    <b style="mso-bidi-font-weight:
+normal"><span style="font-size:12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">The Model</span></b><span style="font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-right:-4.5pt">
+    <b style="mso-bidi-font-weight:
+normal"><i style="mso-bidi-font-style:normal"><span style="font-size:12.0pt;
+line-height:105%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">The “Model” of MVC defines a number of components and functionality</span></i></b><b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">:</span></b><span style="font-size:
+12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"> Configuration, Entities, Repositories, Security, etc. All of which represent part of The Model. The first and most significant Model element is the Repository. A Repository is the go-between for Controllers and the back-end data source(s). In the case of document archive server…</span><span style="font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span>
+</p>
+<p class="MsoNormal">
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/RepositoryInt.html" , Title = "Repository Class Interface" })
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/RepositoryImp.html" , Title = "Repository Class Implementation" })
+</p>
+<p class="MsoNormal" style="margin-right:-4.5pt">
+    <i style="mso-bidi-font-style:
+normal"><span style="font-size:12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">The &quot;Model&quot; in MVC contains the &quot;Entities&quot;,</span></i><span style="font-size:12.0pt;
+line-height:105%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"> which typically represent a database and its contents: Tables, Rows, Cells etc; and manage the requests create/select/insert/update/delete data actions. “Entities” or </span><span style="font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span>
+</p>
+<p align="center" class="MsoNormal" style="margin-right:-4.5pt;text-align:center">
+    <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="font-size:12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">No database or user registration requirement does not mean no &quot;Entities&quot;! The archive&#39;s physical file-system serves as the database.</span></i></b><b style="mso-bidi-font-weight:
+normal"><i style="mso-bidi-font-style:normal"><span style="font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span></i></b></p>
+<p class="MsoNormal" style="margin-right:-4.5pt">
+    <b><i><span style="font-size:
+12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">The primary &quot;Entities&quot; model the </span></i></b><span style="font-size:12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">classic embedded and recursive approach to logically representing a file-system. Similar to the .NET Framework </span><span style="font-size:10.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">System.IO.Directory</span><span style="font-size:12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;"> and </span><span style="font-size:
+10.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">System.IO.File</span><span style="font-size:12.0pt;
+line-height:105%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"> classes. </span><span style="font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span>
+</p>
+<p class="MsoNormal">
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/ArchiveFile.html", Title = "Primary Entities ArchiveFolder and ArchiveFile " })<span style="mso-spacerun:yes">&nbsp;&nbsp; </span><o:p></o:p>
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/CommentEtc.html", Title = "Comment And CodeFile Models" })
+</p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <span style="font-size:10.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-right:-4.5pt;line-height:normal">
+    <b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">The Controller<o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">The Controller in MVC does just like it sounds. It receives requests, does the work and returns results. The results can come in myriad of different types and formats: HTML, FileStream, Json, etc. The following illustrates some typical uses of Controllers<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal">
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/Controller1.html", Title = "Returns a stream depending on file type" })
+</p>
+<p class="MsoNormal">
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/Controller2.html", Title = "Returns a Json response" })
+</p>
+<p class="MsoNormal">
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/JsonServer.html", Title = "Where GetJsonFile() is…" })
+</p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <span style="font-size:10.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">The View<o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <span style="font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">The Views process the results from a Controller and dynamically create what the end-users sees, a processed HTML5 page. A number of techniques are used in defining View content, but one of the most common is using Razor Views or .cshtml files.<span style="mso-spacerun:yes">&nbsp; </span>This allows server-side View content to be pre-processed, before being received by the client. The </span><b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;;color:#FFC000;
+mso-themecolor:accent4">&amp</span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"> </span></b><span style="font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">indicates server-side code. <o:p></o:p></span>
+</p>
+<p class="MsoNormal">
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/RazorView.html", Title = "Main Razor View – calling other partial views " })
+</p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <span style="font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">We are not only limited to Razor in View content. The View is where we mix in the capabilities of the client-side packages. </span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-weight:bold;mso-bidi-font-style:
+italic">Augmenting ASP.NET and MVC server-side technologies is a<b><i> </i></b></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">robust set of client-side technology driving the browser. Everything leverages the best of the latest and greatest in web development technologies. <b><i>Starting with <a href="https://en.wikipedia.org/wiki/HTML5">HTML5! </a></i></b><span style="mso-spacerun:yes">&nbsp;</span><i>HTML5</i> defines the latest enhanced standards and foundations for web-page technology and specifications. Along with HTML5, client-side development also includes, but is not limited to: <o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/Font_Awesome"><b><i>•HTML5</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/JavaScript"><b><i>•Javascript</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/JQuery"><b><i>•JQuery</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/JQueryUI"><b><i>•JQueryUI</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/JQueryMobile"><b><i>•JQuery Mobile</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/JSON"><b><i>•Json - Javascript Object Notation</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/Ajax_(programming)"><b><i>•AJAX - Asynchronous Javascript and XML</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/Knockout_(web_framework)"><b><i>•Knockout/MVVM Framework</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="../Home/%20https:/en.wikipedia.org/wiki/Bootstrap_(front-end_framework)"><b><i>•Bootstrap</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="http://lesscss.org/"><b><i>•Less</i></b></a> and <a href="http://sass-lang.com/"><b><i>•SASS</i></b></a> CSS extension languages<o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://en.wikipedia.org/wiki/Font_Awesome"><b><i>•FontAwesome</i></b></a><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:11.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><a href="https://github.com/requirejs/almond"><b><i>•Almond-Asynchronous Module Definitions and RequireJS optimizations</i></b></a></span><span style="font-family:&quot;Times New Roman&quot;,serif"><o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;margin-left:.5in;text-indent:-.25in;line-height:
+normal;mso-list:l0 level1 lfo1;tab-stops:list .5in">
+    <![if !supportLists]><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Wingdings;
+mso-fareast-font-family:Wingdings;mso-bidi-font-family:Wingdings"><span style="mso-list:Ignore">v<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp; </span></span></span><![endif]><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">..........<o:p></o:p></span></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+margin-bottom:0in;margin-bottom:.0001pt;line-height:normal">
+    <b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">Some Ajax and Json<o:p></o:p></span></b></p>
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <span style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">After a page loads, it needs to get information from the server without causing the entire page to reload. Using Ajax and Json is an effective approach. The following shows the client-side request, that the Controller example above responds to. It also shows using the returned “data” variable to populate part of the Knockoutjs model. <o:p></o:p></span>
+</p>
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/JsonClient.html", Title = "Ajax request and deferred response" })
+<p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
+mso-margin-bottom-alt:auto;line-height:normal">
+    <b style="mso-bidi-font-weight:
+normal"><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">The MVVM – Using Knockout<i><span style="mso-bidi-font-weight:bold"><o:p></o:p></span></i></span></b></p>
+<p class="MsoNormal">
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/KnockDoc.html", Title = "src and friendly-name are bound to model" })
+</p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">Knockout Binding</span></b><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;"><br />
+    <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal">Anything contained in ${..} refers to a knockout</i></b> variable defined in the model.<o:p></o:p></span>
+</p>
+<p class="MsoNormal">
+@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/KnockDoc.html", Title = "src and friendly-name are bound to model" })
+</p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <span style="font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">We can also use the model to dynamically create</span></i></b><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"> elements from a template.<span style="mso-spacerun:yes">&nbsp; </span>The for-each indicator defines an iterator to process the model’s thumbnails array… <o:p></o:p></span>
+</p>
+<p class="MsoNormal">
+ @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/KnockThumb.html", Title = "Knockout variables" })
+</p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt">
+    <span style="font-size:10.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt">
+    <b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">Caching with Knockout<o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt">
+    <span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">As illustrated by the preceding Thumbnail example, the arguments of the “for-each” statement contain the subscribed events of each elements. A revisit of </span><span style="font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;">A Simple Knockout </span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">Model shows the defined handlers and subscriptions that perform the caching process. This only illustrates a minutia of the full functionality of <i style="mso-bidi-font-style:normal">Knockoutjs</i><o:p></o:p></span></p>
+<p class="MsoNormal">
+ @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/model2.html", Title = " Model Events and Subscriptions" })
+</p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">
+    <br />
+    <b><i>Thumbnails are processed with</i></b> an individual request for each specific thumbnail, and processed and responded <i>asynchronously</i>. After the thumbnail downloads, it displays as inactive, but is still click-able, as it is <i>Pre-fetching</i> referenced source file content into a temporary <i>HTML5</i> element defined by <i>JQuery</i>.
+    <br />
+    <b><i>This &quot;temporary&quot; element is </i></b>unassociated with the current DOM and simply resides in memory. When a display action is requested, if the bound &quot;src&quot; value matches a temp <i>Knockout.js</i> element, the img contents are defined by the cached knockout values. </span><span style="font-size:10.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <i><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">Note: on pre-fetching and caching....</span></i><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+6.0pt;margin-left:0in;line-height:normal">
+    <span style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">Currently <b>ONLY</b> Image files are pre-fetched. Documents (PDFs) and Videos are not pre-fetched. On folders with a large amount of files pre-fetching is limited to displayed/visible thumbnails. (disclosure- there is a bug with caching in the current version, addressing in .NET Core migration…)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
+    <b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">Styling with Bootstrap and LESS<o:p></o:p></span></b></p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+6.0pt;margin-left:0in;line-height:normal">
+    <span style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">The integration of Bootstrap takes a different approach than the standard Bootstrap.css and Site.css that overrides and defines the site’s styling. In this case a Site.less imports bootstrap source, as well as other things, to define the top parent of the LESS compile process. This results in a single Site.css, and also makes compiling the Bootswatch themes into the site much easier.<o:p></o:p></span></p>
+<p class="MsoNormal">
+   @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/SiteLess.html", Title = "Site Primary LESS file" })
+</p>
+<p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
+6.0pt;margin-left:0in;line-height:normal">
+    <span style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-right:-4.5pt;mso-margin-bottom-alt:auto;
+line-height:normal">
+    <b style="mso-bidi-font-weight:normal"><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">So that’s about it for now! No big secrets here, just lots of work putting all the pieces of this big puzzle together in an effective way.<o:p></o:p></span></b></p>
+<p align="center" class="MsoNormal" style="margin-right:-4.5pt;mso-margin-bottom-alt:
+auto;text-align:center;line-height:normal">
+    <b><span style="font-size:15.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">So What Is Next?!?!?!</span></b><span style="font-size:15.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span></p>
+<p align="center" class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:
+-4.5pt;mso-margin-bottom-alt:auto;text-align:center;line-height:normal">
+    <b><i><span style="font-size:16.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;">Migrating to Visual Studio 2017 and .NET Core technologies!!!</span></i></b><span style="font-size:16.0pt;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;"><br style="mso-special-character:
+line-break" />
+<![if !supportLineBreakNewLine]>
+    <br style="mso-special-character:line-break" />
+<![endif]><o:p></o:p></span>
+</p>

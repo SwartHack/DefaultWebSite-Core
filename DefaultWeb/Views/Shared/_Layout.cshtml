@@ -1,0 +1,13 @@
+﻿<html>
+<head>
+    @RenderSection("header", false)
+</head>
+<body>
+    @{Html.RenderPartial("_NavBarMain.cshtml"); }
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    @{Html.RenderPartial("_Templates.cshtml");}
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

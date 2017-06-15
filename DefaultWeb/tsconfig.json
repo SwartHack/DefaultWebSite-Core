@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ],
+  "typeAcquisition": {
+    "enable": true
+  }
+}

@@ -11,10 +11,10 @@ module.exports = function(grunt) {
         ' * Based on Bootstrap\n' +
         '*/\n',
         swatch: {
-            amelia: {}, cerulean: {}, cosmo: {}, cyborg: {}, darkly: {},
-            flatly: {}, journal: {}, lumen: {}, paper: {}, readable: {},
-            sandstone: {}, simplex: {}, slate: {}, solar: {}, spacelab: {},
-            superhero: {}, united: {}, yeti: {}, custom: {}
+            cerulean: {}, cosmo: {}, cyborg: {}, darkly: {},
+            flatly: {}, journal: {}, litera: {}, lumen: {}, lux: {}, materia: {}, minty: {},
+            pulse: {}, sandstone: {}, simplex: {}, slate: {}, solar: {}, spacelab: {},
+            superhero: {}, united: {}, yeti: {}
         },
         clean: {
             bootswatch: {
@@ -22,7 +22,12 @@ module.exports = function(grunt) {
             },
             distcss: {
                 src: ['dist/css/*']
-
+            },
+            distjs: {
+                src: ['dist/js/*.*']
+            },
+            theme: {
+                src: ''
             }
         },
         concat: {
@@ -30,86 +35,152 @@ module.exports = function(grunt) {
                 banner: '<%= banner %>',
                 stripBanners: false
             },
-            dist: {
-                src: [],
-                dest: ''
+            jcore: {
+                src: ['<%= pkg.corejs %>'],
+                dest: 'dist/js/jcore.js'
+            },
+            site: {
+                src: ['<%= pkg.sitejs %>'],
+                dest: 'dist/js/site.js'
             }
-        },
-        jshint: {
-          options: {
-            jshintrc: '.jshintrc'
-          },
-          all: [
-            'Gruntfile.js',
-            'js/**/*.js'
-          ]
         },
         sass: {
           dist: {
-            options: {
-
+              options: {
+                  sourceMap: false
             },
             src: [],
             dest: ''
           }
         },
-        uglify: {
-          dist: {
-            files: {
-              'assets/build/app.min.js': [
-                'assets/js/**/*.js'
-              ]
-            },
+        postcss: {
             options: {
-              sourceMap: 'assets/build/app.min.js.map',
-              sourceMappingURL: '/assets/build/app.min.js.map'
+                map: false, // inline sourcemaps
+                processors: [
+                    require('postcss')(), // add fallbacks for rem units
+                    
+                ]
+            },
+            dist: {
+                src: ''
             }
-          }
+        },
+        cssmin: {
+            options: {
+                // TODO: disable `zeroUnits` optimization once clean-css 3.2 is released
+                //    and then simplify the fix for https://github.com/twbs/bootstrap/issues/14837 accordingly
+                compatibility: 'ie10',
+                keepSpecialComments: '*',
+                sourceMap: true,
+                advanced: false
+            },
+            dist: {
+                src: '',
+                dest:''
+            }
+        },
+        copy: {
+            css: {
+                expand: true,
+                cwd: 'dist/css/themes',
+                src: '*.*',
+                dest: '../../css/themes',
+                filter: 'isFile'
+            },
+            fonts: {
+                expand: true,
+                src: 'dist/fonts/*.*',
+                dest: '../../fonts/',
+                filter: 'isFile'
+            }    
+        },
+        uglify: {
+            wwwroot: {
+                options: {
+                    compress: {
+                        warnings: false
+                    },
+                    mangle: true,
+                    preserveComments: 'some',
+                    sourceMap: '../../js/defaultwebsite.min.js.map',
+
+                },
+                files: {
+                    '../../js/defaultwebsite.min.js': ['dist/js/jcore.js', 'dist/js/site.js']
+                }
+            }
+
+        },
+        exec: {
+            //postcss: {
+            //    command: 'npm run postcss'
+            //}
         }
     });
 
-       require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
+      require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
       require('time-grunt')(grunt);
-
-      // Load tasks
-      //grunt.loadNpmTasks('grunt-contrib-jshint');
-      //grunt.loadNpmTasks('grunt-contrib-uglify');
-      //grunt.loadNpmTasks('grunt-contrib-watch');
-      //grunt.loadNpmTasks('grunt-contrib-sass');
 
       // Register tasks
       grunt.registerTask('none', function () { });
-      grunt.registerTask('default', 'build');
+      grunt.registerTask('default', '');
 
+      grunt.registerTask('build-all', function () {
+          grunt.task.run('themes');
+          grunt.task.run('js');
+          grunt.task.run('copy:deploy');
+
+      });
+
+      grunt.registerTask('build', function () {
+          grunt.task.run('theme');
+          grunt.task.run('copy:css')
+          grunt.task.run('js');
+
+      });
       //// Build project scss source, with only default theme
-      grunt.registerTask('build', 'Builds complete project dist, with only default theme', function () {
+      grunt.registerTask('theme-default', 'Builds dist/css, with only default theme', function () {
           //grunt.task.run('clean');
-          grunt.task.run('build-theme:default');
+          grunt.task.run('buildtheme:default');
       });
 
       /// Builds default bootstrap and cerulean themes
-      grunt.registerTask('build-one', 'Build default and cerulean theme', function () {
-          grunt.task.run('clean');
-          grunt.task.run('build-theme:default,false');
-          grunt.task.run('build-theme:cerulean,false');
+      grunt.registerTask('theme', 'Build default and cerulean theme', function () {
+          //grunt.task.run('clean');
+          grunt.task.run('buildtheme:default');
+          grunt.task.run('buildtheme:cerulean');
       });
 
       //// Builds project scss dist, with all themes - Long running, build manually
-      grunt.registerTask('build-all', 'Builds complete project dist, with all themes', function () {
-          grunt.task.run('clean');
-          grunt.task.run('build-theme:default,false');
+      grunt.registerTask('themes', 'Builds complete project dist, with all themes', function () {
+          //grunt.task.run('clean');
+          grunt.task.run('buildtheme:default');
           grunt.task.run('swatch');
       });
 
       grunt.registerMultiTask('swatch', 'build all themes', function () {
           var t = this.target;
-          grunt.task.run('build-theme:' + t + ',false');
+          grunt.task.run('buildtheme:' + t);
+      });
+
+      grunt.registerTask('clean-theme', function () {
+          grunt.config('clean.theme.src', 'dist/css/themes/default.*');
+          grunt.task.run('clean:theme');
+      });
+
+      //////////////////////////////////
+      //// deal with the javascript, don't use bundle-minify'
+      grunt.registerTask('js', function () {
+          grunt.task.run('clean:distjs');
+          grunt.task.run('concat:jcore');
+          grunt.task.run('concat:site');
+          grunt.task.run('uglify:wwwroot');
       });
 
         /////////////////////////////////////////
         //
         ////////////////////////////////////////
-      grunt.registerTask('build-theme', 'build a regular theme from scss', function (theme) {
+      grunt.registerTask('buildtheme', 'build a regular theme from scss', function (theme) {
           var theme = theme == undefined ? grunt.config('buildtheme') : theme;
           //var compress = compress == undefined ? true : compress;
           var themedir = '../bootswatch/' + theme;
@@ -129,7 +200,7 @@ module.exports = function(grunt) {
           var files = {};
           var dist = {};
 
-          concatSrc = '../bootswatch/global/build.scss';
+          concatSrc = 'scss/global/build.scss';
           concatDest = '../bootswatch/' + theme + '/build.scss';
 
           if (theme == 'default') 
@@ -137,27 +208,34 @@ module.exports = function(grunt) {
           else
               scssSrc = concatDest;
 
-          scssDest = 'dist/css/themes/' + theme + '/' + theme + '.css';
+          scssDest = 'dist/css/themes/' + theme + '.css';
           
-         
-
-
-          //files = {};
-          //files[scssDest] = scssSrc;
           grunt.log.debug(scssSrc + '\n' + scssDest);
 
-          dist = { src: scssSrc, dest: scssDest };
-          grunt.config('sass.dist', dist);
-          grunt.config('sass.dist.options.precision', 8);
-          grunt.config('sass.dist.options.unix-newlines', true);
+          // clean this theme
+          grunt.config('clean.theme.src', 'dist/css/themes/' + theme + '.*');
+          grunt.task.run('clean:theme')
 
           if (theme != 'default') {
-              dist = { src: concatSrc, dest: concatDest };
-              grunt.config('concat.dist', dist);
+              //dist = { src: concatSrc, dest: concatDest };
+              grunt.config('concat.dist', { src: concatSrc, dest: concatDest });
               grunt.task.run('concat');
           }
 
+          //dist = { src: scssSrc, dest: scssDest };
+          grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
+          grunt.config('sass.dist.options.precision', 10);
+          grunt.config('sass.dist.options.unix-newlines', true);
           grunt.task.run('sass');
+
+          grunt.config('postcss.dist.src', 'dist/css/themes/' + theme + '.css');
+          grunt.task.run('postcss');
+
+          grunt.config('cssmin.dist', {
+              src: 'dist/css/themes/' + theme + '.css',
+              dest: 'dist/css/themes/' + theme + '.css.min'
+          });
+          grunt.task.run('cssmin');
 
           //grunt.task.run(['sass:dist', 'prefix:' + scssDest, 'clean:build',
           //    compress ? 'compress_scss:' + scssDest + ':' + '<%=builddir%>/' + theme + '/' + theme + '.css' : 'none']);

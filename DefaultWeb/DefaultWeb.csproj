@@ -21,12 +21,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot/lib\_site\package - Copy.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\PublishProfiles\Default Settings.pubxml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\css\defaultwebsite.css" />
-    <Content Include="wwwroot\css\defaultwebsite.min.css" />
     <Content Include="wwwroot\fonts\fontawesome-webfont.eot">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -45,16 +47,11 @@
     <Content Include="wwwroot\fonts\FontAwesome.otf">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="wwwroot\fonts\SwartFont.ttf" />
     <Content Include="wwwroot\images\banner.jpg" />
     <Content Include="wwwroot\images\underconstruct.jpg" />
     <Content Include="wwwroot\images\under_construction.gif" />
     <Content Include="wwwroot\js\defaultwebsite.js" />
-    <Content Include="wwwroot\js\defaultwebsite.min.js" />
     <Content Include="wwwroot\lib\bootswatch\3\assets\css\custom.min.css" />
     <Content Include="wwwroot\lib\bootswatch\3\assets\img\bg.jpg" />
     <Content Include="wwwroot\lib\bootswatch\3\assets\img\carboncostume.png" />
@@ -1703,9 +1700,6 @@
     <Content Include="wwwroot\lib\bootswatch\flatly\thumbnail.png" />
     <Content Include="wwwroot\lib\bootswatch\flatly\_bootswatch.scss" />
     <Content Include="wwwroot\lib\bootswatch\flatly\_variables.scss" />
-    <Content Include="wwwroot\lib\bootswatch\global\build.less">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="wwwroot\lib\bootswatch\global\build.scss">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -1804,6 +1798,7 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="wwwroot\lib\_site\Gruntfile.js" />
+    <Content Include="wwwroot\lib\_site\grunt\.jshintrc" />
     <Content Include="wwwroot\lib\_site\grunt\change-version.js">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -1825,11 +1820,22 @@
     <Content Include="wwwroot\lib\_site\grunt\upload-preview.sh">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="wwwroot\lib\_site\js\.jshintrc" />
+    <Content Include="wwwroot\lib\_site\js\actions.js" />
+    <Content Include="wwwroot\lib\_site\js\dispatcher.js" />
+    <Content Include="wwwroot\lib\_site\js\lib\dispatcher.js" />
     <Content Include="wwwroot\lib\_site\js\lib\endless_scroll.js" />
     <Content Include="wwwroot\lib\_site\js\lib\pdfobject.js" />
     <Content Include="wwwroot\lib\_site\js\lib\video.js" />
-    <Content Include="wwwroot\lib\_site\js\site.js" />
+    <Content Include="wwwroot\lib\_site\js\controller.js" />
+    <Content Include="wwwroot\lib\_site\js\models.js" />
+    <Content Include="wwwroot\lib\_site\js\rundowns.js" />
+    <Content Include="wwwroot\lib\_site\js\sandbox.js" />
+    <Content Include="wwwroot\lib\_site\sass\build.scss">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
+    <Content Include="wwwroot\lib\_site\sass\global\build.scss" />
     <Content Include="wwwroot\lib\_site\sass\_docments.scss" />
     <Content Include="wwwroot\lib\_site\sass\_documents.scss" />
     <Content Include="wwwroot\lib\_site\sass\_grids.scss" />
@@ -1879,7 +1885,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="wwwroot\lib\_site\less\" />
     <Folder Include="wwwroot\lib\_site\dist\" />
   </ItemGroup>
 

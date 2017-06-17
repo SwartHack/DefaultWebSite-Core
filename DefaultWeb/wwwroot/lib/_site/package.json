@@ -1,30 +1,69 @@
 {
-  "name": "gruntsassmaster",
+  "name": "defaultwebsite.net",
+  "description": "Build process for site",
   "version": "1.0.0",
-  "description": "A super simple Grunt starter example template with Sass",
-  "author": "Andy Crone <andy@andycrone.com>",
-  "homepage": "https://andycrone.com",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/andycrone/grunt-sass-starter"
-  },
-  "license": "MIT",
-  "engines": {
-    "node": ">= 0.10.0"
-  },
   "keywords": [
-    "grunt, sass"
+    "css",
+    "sass",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "framework",
+    "web"
   ],
+  "homepage": "https://hackinc.net",
+  "author": "SwartHack",
+  "contributors": [
+    "The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)",
+    "Twitter, Inc."
+  ],
+  "theme": "default",
+  "repository": {},
+  "license": "ISC",
+  "dependencies": {
+    "jquery": ">=1.9.1",
+    "tether": "^1.4.0"
+  },
   "devDependencies": {
-    "grunt": "0.4.5",
+    "autoprefixer": "^7.1.1",
+    "clean-css-cli": "^4.1.4",
+    "cssnano": "^3.10.0",
+    "grunt": "^0.4.5",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-jshint": "0.11.3",
-    "grunt-contrib-sass": "0.9.2",
-    "grunt-contrib-uglify": "0.11.0",
-    "grunt-contrib-watch": "0.6.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-exec": "^2.0.0",
     "grunt-log": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
     "load-grunt-tasks": "^3.5.2",
+    "pixrem": "^3.0.2",
+    "postcss-flexbugs-fixes": "^3.0.0",
+    "postcss-loader": "^2.0.6",
     "time-grunt": "^1.4.0"
-  }
+  },
+  "corejs": [
+    "../jquery/dist/jquery.js",
+    "../jquery-ui/jquery-ui.js",
+    "../jquery-tmpl/jquery.tmpl.js",
+    "../jquery-tmpl/jquery.tmplPlus.js",
+    "../jquery-validation/dist/jquery.validate.js",
+    "../jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+    "../jquery-validation/dist/additional-methods.js",
+    "../bootstrap/dist/js/bootstrap.js",
+    "../knockout/dist/knockout.js",
+    "../almond/almond.js"
+  ],
+  "sitejs": [
+    "js/controller.js",
+    "js/models.js",
+    "js/dispatcher.js",
+    "js/actions.js",
+    "js/sandbox.js",
+    "js/lib/*.js"
+  ]
 }

@@ -171,8 +171,8 @@ mso-fareast-font-family:&quot;Times New Roman&quot;">:</span></b><span style="fo
 &quot;Times New Roman&quot;"> Configuration, Entities, Repositories, Security, etc. All of which represent part of The Model. The first and most significant Model element is the Repository. A Repository is the go-between for Controllers and the back-end data source(s). In the case of document archive server…</span><span style="font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span>
 </p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/RepositoryInt.html" , Title = "Repository Class Interface" })
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/RepositoryImp.html" , Title = "Repository Class Implementation" })
+@Html.Partial("~/Views/Rundowns/SnippetTemplate.cshtml", new DefaultWeb.Models.Snippet { Name = "RepositoryInt.html" , Title = "Repository Class Interface" })
+@Html.Partial("~/Views/Rundowns/SnippetTemplate.cshtml", new DefaultWeb.Models.Snippet { Name = "RepositoryImp.html" , Title = "Repository Class Implementation" })
 </p>
 <p class="MsoNormal" style="margin-right:-4.5pt">
     <i style="mso-bidi-font-style:
@@ -200,8 +200,8 @@ line-height:105%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-
 mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span>
 </p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/ArchiveFile.html", Title = "Primary Entities ArchiveFolder and ArchiveFile " })<span style="mso-spacerun:yes">&nbsp;&nbsp; </span><o:p></o:p>
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/CommentEtc.html", Title = "Comment And CodeFile Models" })
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "ArchiveFile.html", Title = "Primary Entities ArchiveFolder and ArchiveFile " })<span style="mso-spacerun:yes">&nbsp;&nbsp; </span><o:p></o:p>
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "CommentEtc.html", Title = "Comment And CodeFile Models" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
@@ -219,13 +219,13 @@ mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span>
     <span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
 &quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/Controller1.html", Title = "Returns a stream depending on file type" })
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "Controller1.html", Title = "Returns a stream depending on file type" })
 </p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/Controller2.html", Title = "Returns a Json response" })
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "Controller2.html", Title = "Returns a Json response" })
 </p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/JsonServer.html", Title = "Where GetJsonFile() is…" })
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "JsonServer.html", Title = "Where GetJsonFile() is…" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
@@ -244,7 +244,7 @@ mso-themecolor:accent4">&amp</span><span style="font-size:12.0pt;font-family:&qu
 mso-fareast-font-family:&quot;Times New Roman&quot;">indicates server-side code. <o:p></o:p></span>
 </p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/RazorView.html", Title = "Main Razor View – calling other partial views " })
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "RazorView.html", Title = "Main Razor View – calling other partial views " })
 </p>
 <p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
 mso-margin-bottom-alt:auto;line-height:normal">
@@ -341,14 +341,14 @@ mso-margin-bottom-alt:auto;line-height:normal">
     <span style="font-size:12.0pt;
 font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">After a page loads, it needs to get information from the server without causing the entire page to reload. Using Ajax and Json is an effective approach. The following shows the client-side request, that the Controller example above responds to. It also shows using the returned “data” variable to populate part of the Knockoutjs model. <o:p></o:p></span>
 </p>
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/JsonClient.html", Title = "Ajax request and deferred response" })
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "JsonClient.html", Title = "Ajax request and deferred response" })
 <p class="MsoNormal" style="mso-margin-top-alt:auto;margin-right:-4.5pt;
 mso-margin-bottom-alt:auto;line-height:normal">
     <b style="mso-bidi-font-weight:
 normal"><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
 mso-fareast-font-family:&quot;Times New Roman&quot;">The MVVM – Using Knockout<i><span style="mso-bidi-font-weight:bold"><o:p></o:p></span></i></span></b></p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/KnockDoc.html", Title = "src and friendly-name are bound to model" })
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "KnockDoc.html", Title = "src and friendly-name are bound to model" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
@@ -358,7 +358,7 @@ mso-fareast-font-family:&quot;Times New Roman&quot;"><br />
     <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal">Anything contained in ${..} refers to a knockout</i></b> variable defined in the model.<o:p></o:p></span>
 </p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/KnockDoc.html", Title = "src and friendly-name are bound to model" })
+@Html.Partial("~/Views/Rundowns/SnipetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "KnockDoc.html", Title = "src and friendly-name are bound to model" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
@@ -370,7 +370,7 @@ mso-fareast-font-family:&quot;Times New Roman&quot;"><br />
 &quot;Times New Roman&quot;"> elements from a template.<span style="mso-spacerun:yes">&nbsp; </span>The for-each indicator defines an iterator to process the model’s thumbnails array… <o:p></o:p></span>
 </p>
 <p class="MsoNormal">
- @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/KnockThumb.html", Title = "Knockout variables" })
+ @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Snippet { Name = "KnockThumb.html", Title = "Knockout variables" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt">
@@ -387,7 +387,7 @@ mso-fareast-font-family:&quot;Times New Roman&quot;"><br />
 mso-fareast-font-family:&quot;Times New Roman&quot;">A Simple Knockout </span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
 &quot;Times New Roman&quot;">Model shows the defined handlers and subscriptions that perform the caching process. This only illustrates a minutia of the full functionality of <i style="mso-bidi-font-style:normal">Knockoutjs</i><o:p></o:p></span></p>
 <p class="MsoNormal">
- @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/model2.html", Title = " Model Events and Subscriptions" })
+ @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Snippet { Name = "model2.html", Title = " Model Events and Subscriptions" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt;line-height:normal">
@@ -417,7 +417,7 @@ font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Time
     <span style="font-size:12.0pt;
 font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;">The integration of Bootstrap takes a different approach than the standard Bootstrap.css and Site.css that overrides and defines the site’s styling. In this case a Site.less imports bootstrap source, as well as other things, to define the top parent of the LESS compile process. This results in a single Site.css, and also makes compiling the Bootswatch themes into the site much easier.<o:p></o:p></span></p>
 <p class="MsoNormal">
-   @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/SiteLess.html", Title = "Site Primary LESS file" })
+   @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Snippet { Name = "SiteLess.html", Title = "Site Primary LESS file" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 6.0pt;margin-left:0in;line-height:normal">

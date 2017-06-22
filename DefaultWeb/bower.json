@@ -9,7 +9,8 @@
     "font-awesome": "Font-Awesome#v4.7.0",
     "almond": "0.3.3",
     "knockout": "v3.4.2",
-    "jquery-tmpl": "vBeta1.0.0"
+    "jquery-tmpl": "vBeta1.0.0",
+    "requirejs": "2.3.3"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha.6"

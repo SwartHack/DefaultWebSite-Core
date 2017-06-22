@@ -13,6 +13,10 @@
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Views\Main\**" />
     <Content Remove="Views\Main\**" />
@@ -49,6 +53,24 @@
     </Content>
     <Content Include="wwwroot\fonts\SwartFont.ttf" />
     <Content Include="wwwroot\images\banner.jpg" />
+    <Content Include="wwwroot\images\ui-icons_444444_256x240.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\images\ui-icons_555555_256x240.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\images\ui-icons_777620_256x240.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\images\ui-icons_777777_256x240.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\images\ui-icons_cc0000_256x240.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\images\ui-icons_ffffff_256x240.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\images\underconstruct.jpg" />
     <Content Include="wwwroot\images\under_construction.gif" />
     <Content Include="wwwroot\js\defaultwebsite.js" />
@@ -1794,9 +1816,6 @@
     <Content Include="wwwroot\lib\bootswatch\yeti\thumbnail.png" />
     <Content Include="wwwroot\lib\bootswatch\yeti\_bootswatch.scss" />
     <Content Include="wwwroot\lib\bootswatch\yeti\_variables.scss" />
-    <Content Include="wwwroot\lib\_site\Gruntfile - Copy.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="wwwroot\lib\_site\Gruntfile.js" />
     <Content Include="wwwroot\lib\_site\grunt\.jshintrc" />
     <Content Include="wwwroot\lib\_site\grunt\change-version.js">
@@ -1820,26 +1839,24 @@
     <Content Include="wwwroot\lib\_site\grunt\upload-preview.sh">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="wwwroot\lib\_site\js\.jshintrc" />
     <Content Include="wwwroot\lib\_site\js\actions.js" />
     <Content Include="wwwroot\lib\_site\js\dispatcher.js" />
+    <Content Include="wwwroot\lib\_site\js\init.js" />
     <Content Include="wwwroot\lib\_site\js\lib\dispatcher.js" />
     <Content Include="wwwroot\lib\_site\js\lib\endless_scroll.js" />
     <Content Include="wwwroot\lib\_site\js\lib\pdfobject.js" />
     <Content Include="wwwroot\lib\_site\js\lib\video.js" />
     <Content Include="wwwroot\lib\_site\js\controller.js" />
     <Content Include="wwwroot\lib\_site\js\models.js" />
-    <Content Include="wwwroot\lib\_site\js\rundowns.js" />
     <Content Include="wwwroot\lib\_site\js\sandbox.js" />
-    <Content Include="wwwroot\lib\_site\sass\build.scss">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
     <Content Include="wwwroot\lib\_site\sass\global\build.scss" />
-    <Content Include="wwwroot\lib\_site\sass\_docments.scss" />
+    <Content Include="wwwroot\lib\_site\sass\_carousel.scss" />
     <Content Include="wwwroot\lib\_site\sass\_documents.scss" />
     <Content Include="wwwroot\lib\_site\sass\_grids.scss" />
+    <Content Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
     <Content Include="wwwroot\lib\_site\sass\_rundowns.scss" />
+    <Content Include="wwwroot\lib\_site\sass\_sandbox.scss" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />

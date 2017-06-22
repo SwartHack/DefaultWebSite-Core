@@ -4,8 +4,13 @@
     "inputFiles": [
       "wwwroot/lib/_site/dist/js/jcore.min.js",
       "wwwroot/lib/_site/dist/js/site.min.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_site/dist/js/defaultwebsite.js",
+    "inputFiles": [
+      "wwwroot/lib/_site/dist/js/jcore.js",
+      "wwwroot/lib/_site/dist/js/site.js"
+    ]
   }
 ]

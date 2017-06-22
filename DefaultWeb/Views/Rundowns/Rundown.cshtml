@@ -1,0 +1,13 @@
+﻿@model DefaultWeb.Models.TargetView
+   
+<div id="target-container" class="card">
+    @if (!String.IsNullOrEmpty(Model.Name))
+    {
+        Html.RenderPartial(Model.Name);
+    }
+    else
+    {
+        Html.RenderPartial("~/Views/Articles/NoContent.cshtml");
+    }
+        
+</div>

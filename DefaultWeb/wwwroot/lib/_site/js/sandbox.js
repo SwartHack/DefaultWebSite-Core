@@ -1,4 +1,4 @@
-﻿define('sandbox', function () {
+﻿define('dws/sandbox', function () {
 
 
 

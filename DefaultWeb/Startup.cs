@@ -100,6 +100,16 @@ namespace DefaultWeb
 
             app.UseMvc(routes =>
             {
+                //routes.MapRoute(
+                //    name: "GetView",
+                //    template: "{controller=Home}/{action=GetView}/{id?}"
+                //    );
+
+                //routes.MapRoute(
+                //    name: "GetRundown",
+                //    template: "{controller=Home}/{action=GetRundown}/{id?}"
+                //    );
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

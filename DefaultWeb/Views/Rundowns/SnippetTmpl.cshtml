@@ -1,0 +1,12 @@
+﻿@model DefaultWeb.Models.Snippet
+@using System.IO;
+<div class="snippet card card-default">
+    <div class="card-header">
+        <div class="card-title">
+            <div class="text">@Model.Title</div>
+        </div>
+    </div>
+    <div class="card-block">
+        @{Html.Raw(File.ReadAllText(String.Format("{0}/Views/Rundowns/Snippets/{1}", Host.WebRootPath, Model.Name))); }
+    </div>
+</div>

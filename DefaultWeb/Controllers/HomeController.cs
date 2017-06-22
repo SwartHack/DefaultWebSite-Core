@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using DefaultWeb.Models;
 namespace DefaultWeb.Controllers
 {
     public class HomeController : Controller
@@ -13,18 +13,23 @@ namespace DefaultWeb.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult GetView(string viewname)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            return PartialView(viewname);
         }
 
-        public IActionResult Contact()
+        public IActionResult GetRundown(string viewname)
         {
-            ViewData["Message"] = "Your contact page.";
+            var model = new TargetView { Name = viewname };
+            return PartialView("~/Views/Rundowns/Rundown.cshtml", model);
+        }
 
-            return View();
+        public IActionResult Talk(string message)
+        {
+            if (message == "Hello Server")
+                return Content("<div title='Server Says...'> Hello...</div>");
+            else
+                return Content("Huh?");
         }
 
         public IActionResult Error()

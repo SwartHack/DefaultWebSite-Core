@@ -1,21 +1,33 @@
 ﻿/// Main controller for event declarations, etc.
-define('controller', function () {
-    
-    $(function () {
+define('dws/controller', ['dws/komodel', 'dws/dispatcher'],
+function (viewModel, Dispatch) {
 
-        $(document).on('click', '#btn-blog', function (e) {
-            e.preventDefault();
-            $('#blog-text').toggleClass('hidden');
-            $('#blog-content').toggleClass('hidden');
-        });
+    function test() {
+        var settings = {
+            url: "/Home/Talk?message=Hello Server",
+            cache: false,
+            dataType: 'html'
+        }
+        viewModel.target(null);
+        Dispatch.ajaxRequest(settings);
+    }
 
-    });
+   
+    function sendMessage(settings, target) {
+        viewModel.target(target);
+        Dispatch.ajaxRequest(settings);
 
-    $('input:checkbox').change(function () {
+    }
 
-    })
+    function initKO() {
+        ko.applyBindings(viewModel);
+    }
 
-    $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 40, mousestop: true });
 
+    return {
+        initKO: initKO,
+        test: test,
+        sendMessage: sendMessage
+    }
     
 });

@@ -46,7 +46,7 @@ line-height:105%;font-family:&quot;Times New Roman&quot;,serif"><strong><em>Also
 line-height:105%;font-family:&quot;Times New Roman&quot;,serif"><strong><em>Once we get into a ASP.NET Core Web Application (.NET Core)</em></strong> project template, we notice some big differences. One being that the MvcApplication and IAppBuilder classes are gone! And the global.asax file!! As well as just about anything familiar with the MVC5 startup and configuration. ASP.NET Core uses a simple program.cs, just like a console or forms application.</span> <o:p></o:p>
 </p>
 <p class="MsoNormal">
- @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/ProgramCS.html" , Title = ".NET Core program.cs" })
+ @Html.Partial("~/Views/Rundowns/SnippetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "ProgramCS.html" , Title = ".NET Core program.cs" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt">
@@ -54,12 +54,12 @@ line-height:105%;font-family:&quot;Times New Roman&quot;,serif"><strong><em>Once
 105%;font-family:&quot;Times New Roman&quot;,serif">The MVC App_Start program folder has</span></i></b><span style="font-size:12.0pt;line-height:105%;font-family:&quot;Times New Roman&quot;,serif"> been replaced with the single Startup.cs. <o:p></o:p></span>
 </p>
 <p class="MsoNormal">
-@Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/StartUpCS.html" , Title = "New Startup class" })
+@Html.Partial("~/Views/Rundowns/SnippetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "StartUpCS.html" , Title = "New Startup class" })
 </p>
 <p class="auto-style1" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt"><strong><em>Client-side compiling, minification and bundling can be done manually</em></strong> with “Grunt” and Task Runner or in the new bundleconfig.json and compilerconfig.json files<em><strong>.</strong></em></p>
 <p class="MsoNormal">
-    @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/JsonConfig.html" , Title = "The bundleconfig.json configuration file" })
+    @Html.Partial("~/Views/Rundowns/SnippetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "JsonConfig.html" , Title = "The bundleconfig.json configuration file" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt">
@@ -67,14 +67,14 @@ line-height:105%;font-family:&quot;Times New Roman&quot;,serif"><strong><em>Once
 105%;font-family:&quot;Times New Roman&quot;,serif">Framework container services defined in</span></i></b><span style="font-size:12.0pt;line-height:105%;font-family:
 &quot;Times New Roman&quot;,serif"> Startup.ConfigureServices() provide global access and can now be “Injected” into Views.<o:p></o:p></span></p>
 <p class="MsoNormal">
-    @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/Inject.html" , Title = "View Service Injection" })
+    @Html.Partial("~/Views/Rundowns/SnippetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "Inject.html" , Title = "View Service Injection" })
 </p>
 <p class="MsoNormal" style="margin-top:0in;margin-right:-4.5pt;margin-bottom:
 0in;margin-left:0in;margin-bottom:.0001pt">
     <span style="font-size:12.0pt;
 line-height:105%;font-family:&quot;Times New Roman&quot;,serif"><strong><em>User Management is now much more efficien</em></strong>t as illustrated by the new _LoginPartial.cshtml<o:p></o:p></span></p>
 <p class="MsoNormal">
-    @Html.Partial("~/Views/Home/CodeTemplate.cshtml", new DefaultWeb.Models.Entities.CodeFile { Name = "~/Html/Inject2.html" , Title = "View Service Injection" })
+    @Html.Partial("~/Views/Rundowns/SnippetTmpl.cshtml", new DefaultWeb.Models.Snippet { Name = "Inject2.html" , Title = "View Service Injection" })
 <span style="font-size:12.0pt;
 line-height:105%;font-family:&quot;Times New Roman&quot;,serif">
     <o:p>&nbsp;</o:p></span></p>

@@ -134,14 +134,8 @@ module.exports = function(grunt) {
 
       grunt.registerTask('build', function () {
           grunt.task.run('theme');
-          grunt.task.run('copy:css')
           grunt.task.run('js');
 
-      });
-      //// Build project scss source, with only default theme
-      grunt.registerTask('theme-default', 'Builds dist/css, with only default theme', function () {
-          //grunt.task.run('clean');
-          grunt.task.run('buildtheme:default');
       });
 
       /// Builds default bootstrap and cerulean themes
@@ -149,6 +143,22 @@ module.exports = function(grunt) {
           //grunt.task.run('clean');
           grunt.task.run('buildtheme:default');
           grunt.task.run('buildtheme:cerulean');
+          grunt.task.run('copy:css')
+      });
+
+      //////////////////////////////////
+      //// deal with the javascript, don't use bundle-minify'
+      grunt.registerTask('js', function () {
+          grunt.task.run('clean:distjs');
+          grunt.task.run('concat:jcore');
+          grunt.task.run('concat:site');
+          //grunt.task.run('uglify:wwwroot');
+      });
+
+      //// Build project scss source, with only default theme
+      grunt.registerTask('theme-default', 'Builds dist/css, with only default theme', function () {
+          //grunt.task.run('clean');
+          grunt.task.run('buildtheme:default');
       });
 
       //// Builds project scss dist, with all themes - Long running, build manually
@@ -156,6 +166,7 @@ module.exports = function(grunt) {
           //grunt.task.run('clean');
           grunt.task.run('buildtheme:default');
           grunt.task.run('swatch');
+          grunt.task.run('copy:css')
       });
 
       grunt.registerMultiTask('swatch', 'build all themes', function () {
@@ -168,14 +179,7 @@ module.exports = function(grunt) {
           grunt.task.run('clean:theme');
       });
 
-      //////////////////////////////////
-      //// deal with the javascript, don't use bundle-minify'
-      grunt.registerTask('js', function () {
-          grunt.task.run('clean:distjs');
-          grunt.task.run('concat:jcore');
-          grunt.task.run('concat:site');
-          grunt.task.run('uglify:wwwroot');
-      });
+     
 
         /////////////////////////////////////////
         //
@@ -233,7 +237,7 @@ module.exports = function(grunt) {
 
           grunt.config('cssmin.dist', {
               src: 'dist/css/themes/' + theme + '.css',
-              dest: 'dist/css/themes/' + theme + '.css.min'
+              dest: 'dist/css/themes/' + theme + '.min.css'
           });
           grunt.task.run('cssmin');
 

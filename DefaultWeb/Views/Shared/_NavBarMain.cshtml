@@ -1,22 +1,33 @@
-﻿<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-    <div class="navbar-header">
-        <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-brand pull-right">
-            <a href="/"><span class="h1"><i class="glyphicon glyphicon-globe" style="padding-top:.15em;padding-right:.20em"></i>Default WebSite</span><span class="text-left" style="font-size:1em">.net</span></a>
-        </div>
-    </div>
-    <div class="navbar-collapse collapse" id="navbarCollapse">
-        <ul class="nav navbar-nav navbar-right mr-auto">
-            <li id="siteseal">
+﻿@using System.IO;
+<nav id="navbar-main" class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse clearfix">
+    <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/"><i class="fa fa-globe mr-3"></i>Default WebSite<span class="text-left">.net</span></a>
+    
+    <div class="collapse navbar-collapse mr-4" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+            @*<li id="siteseal">
                 <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qsbIQ45pBjOhL4IIkKzVOfkTX6u3TjXNVOLgjS2im95qBeEDn91SQoNo6aBC"></script>
+            </li>*@
+            <li class="nav-item"><a class="nav-link" href="/" data-target-view="About">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/" data-target-view="Contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="/" data-target-view="Blog">Discussion</a></li>
+            <li class="nav-item"><a class="nav-link" href="/" data-target-view="Sandbox">Sandbox</a></li>
+            <li class="nav-item"><a class="nav-link" href="/" data-target-view="Ack">Acknowledgements</a></li>
+            <li class="nav-item dropdown" id="theme-dropdown-item">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">@ViewData["Theme"]Default</a>
+                <div id="theme-switcher" class="dropdown-menu ">
+                    @foreach (var file in Directory.GetFiles(Host.WebRootPath + "/css/themes","*.css,!*.min.css"))
+                    {
+                        var name = System.IO.Path.GetFileNameWithoutExtension(file);
+                        //name = name.Substring(0, name.IndexOf("."));
+                        <a class="dropdown-item" href="/settheme?theme=@name">@name</a>
+                    }
+
+                  
+                </div>
             </li>
-            <li><a class="nav-link" href="/" data-target-view="About">About</a></li>
-            <li><a class="nav-link" href="/" data-target-view="Contact">Contact</a></li>
-            <li><a class="nav-link" href="/" data-target-view="Blog">Discussion</a></li>
-            <li><a class="nav-link" href="/" data-target-view="Sandbox">Sandbox</a></li>
-            <li><a class="nav-link" href="/" data-target-view="Ack">Acknowledgements</a></li>
         </ul>
     </div>
 </nav>

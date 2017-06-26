@@ -1,58 +1,107 @@
-﻿body {
-    height: 100%;
-    min-height: 75rem;
-    padding-top: 4.5rem;
+﻿/// <reference path="defaultwebsite.scss" />
+body {
+    //min-height: 75rem;
+    padding-top: 3.125rem;
+    //padding-bottom: 1.25rem;
+    background: linear-gradient(circle, steelblue, lightsteelblue);
 }
 
 html {
-    height: 100%;
+    padding:0;
+    margin:0;
     background-color: black;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.card {
+    border-radius: 0;
 }
 
 #row-main {
-    height: 100%;
     background-color: black;
-    overflow: auto;
+    padding: 0;
+    margin: 0;
 
-    #col-main {
-        height: 100%;
-        background-color: darkgray;
+    #col-1 {
+        padding: 0;
+        margin: 0;
         border-radius: 0px;
-        margin-bottom: 0px;
-        border: 2px solid black;
-
-        #row1-main {
-            height: auto;
+        background-color: darkgray;
+        border: 10px solid #e6e6e6;
+        border-right: none;
+        //border: 2px solid black;
+        #top {
+            padding: 0;
+            margin: 0;
 
             #col-rundowns {
+                padding: 0;
+                margin: 0;
                 border-radius: 0px;
-                border: 2px solid black;
                 background-color: steelblue;
+                height: 60%;
+                //overflow-y: auto;
             }
         }
 
-        #row2-main {
-            height: auto;
+        #bottom {
+            padding: 0;
+            margin: 0;
 
             #col-carousel {
-                background-color: red;
-                border: 2px solid black;
+                padding: 0;
+                margin: 0;
+                border-radius: 0px;
+                background: linear-gradient(to right, red, yellow);
+                height: 36.5%;
             }
         }
 
         #footer-scroll {
+            height: 3%;
         }
     }
 
-    #col-target-area {
-        background-color: antiquewhite;
-        border: 2px solid black;
+
+    #col-main {
+        padding: 0;
+        margin: 0;
+
+        .element {
+            border: 10px solid #e6e6e6;
+            border-left: none;
+
+            .inner {
+                padding: 0;
+                margin: 0;
+
+                #target-area {
+                    background-color: antiquewhite;
+                    overflow-y: auto;
+
+                    .card {
+                        padding: 0;
+                        margin: 0;
+                        border-radius: 0;
+
+                        .card-block {
+                        }
+                    }
+                }
+            }
+        }
     }
 }

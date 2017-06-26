@@ -28,25 +28,22 @@
         <link rel="stylesheet" href="~/css/font-awesome.css" />
         <link rel="stylesheet" href="~/css/jquery-ui/jquery-ui.css" />
         <link rel="stylesheet" href="~/css/themes/default.min.css" asp-append-version="true" />
-    </environment>
-    
+    </environment>  
 }
 
-
-<div class="row" id="row-main">
-
-    <div id="col-main" class="col-md-5 well well-lg">
-
-        <div id="row1-main" class="row">
-            <div id="col-rundowns" class="col-xs-12">
-
-              @{ Html.RenderPartial("~/Views/Rundowns/Rundowns.cshtml");}
+<div class="row no-gutters" id="row-main">
+    
+    <div id="col-1" class="col-5 h-100">
+      
+        <div id="top" class="row no-gutters">
+            <div id="col-rundowns" class="col-12">
+                @{ Html.RenderPartial("~/Views/Rundowns/Rundowns.cshtml");}
             </div>
         </div>
 
-        <div id="row2-main" class="row">
-            <div id="col-carousel" class="col-xs-12">
-               @{ Html.RenderPartial("~/Views/Shared/_Carousel.cshtml");}
+        <div id="bottom" class="row no-gutters">
+            <div id="col-carousel" class="col-12">
+                @{ Html.RenderPartial("~/Views/Shared/_Carousel.cshtml");}
             </div>
         </div>
 
@@ -55,13 +52,20 @@
         </div>
     </div>
 
-    <div id="col-target-area" class="col-md-7 well well-lg">
-        @{Html.RenderPartial("~/Views/Home/Welcome.cshtml"); }
+    <div id="col-main" class="col-7 h-100">
+        <div class="element d-flex h-100 flex-column justify-content-between">
+            <div class="inner d-flex h-100 flex-column align-items-center justify-content-center">
+                <div id="target-area" class="card card-block">
+                    @{Html.RenderPartial("~/Views/Home/Welcome.cshtml"); }
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 <environment names="Development">
     <script src="~/lib/_site/dist/js/defaultwebsite.js" asp-append-version="true"></script>
-    
+
 </environment>
 <environment names="Staging,Production">
     <script src="~/js/defaultwebsite.min.js" asp-append-version="true"></script>
@@ -70,7 +74,7 @@
 @section JS
 {
     <script>
-        
+
         require(['dws/controller'],
             function (control) {
 
@@ -80,5 +84,5 @@
             });
 
     </script>
-    
+
 }

@@ -7,6 +7,6 @@
         </div>
     </div>
     <div class="card-block">
-        @{Html.Raw(File.ReadAllText(String.Format("{0}/Views/Rundowns/Snippets/{1}", Host.WebRootPath, Model.Name))); }
+        @{Html.Raw(File.ReadAllText(String.Format("{0}/Views/Rundowns/Snippets/{1}", Host.ContentRootPath, Model.Name))); }
     </div>
 </div>

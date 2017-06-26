@@ -259,3 +259,9 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/DefaultWeb/wwwroot/lib/bootstrap/docs
+/DefaultWeb/wwwroot/lib/jquery-ui
+/DefaultWeb/wwwroot/lib/bootstrap/docs
+/DefaultWeb/wwwroot/lib/jquery-ui
+/DefaultWeb/wwwroot/lib/requirejs
+/DefaultWeb/wwwroot/lib/_site/fonts

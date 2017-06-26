@@ -1,8 +1,73 @@
-﻿#myCarousel {
+﻿/// <reference path="defaultwebsite.scss" />
+#myCarousel {
 
-    .carousel-inner .item img {
-        width: 100%;
+    .carousel-inner {
+
+        #carousel-item1 {
+
+            div.text-center {
+                font-size: 1.5rem;
+                color: whitesmoke;
+            }
+
+            img {
+                height: 85%;
+            }
+
+            &.active {
+                display: block !important;
+            }
+        }
+
+        #carousel-item2 {
+
+            &.active {
+                display: block !important;
+
+                div.text-center {
+                    font-size: 1.5rem;
+                    color: whitesmoke;
+                }
+
+                a {
+                    i {
+                        height: 85%;
+                        font-size: 30vh;
+                        display: block;
+                        text-align: center;
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+
+        #carousel-item3 {
+
+            &.active {
+                display: block !important;
+
+                div.text-center {
+                    font-size: 1rem;
+                    color: whitesmoke;
+                }
+
+                a {
+
+                    i {
+                        height: 85%;
+                        font-size: 30vh;
+                        display: block;
+                        text-align: center;
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
     }
 }
-
-

@@ -2,10 +2,39 @@
 @import "../../bootstrap/scss/bootstrap-grid.scss";
 @import "../../bootstrap/scss/bootstrap-reboot.scss";
 
+@font-face {
+    font-family: 'SwartFont';
+    src: url('/fonts/SwartFont.ttf?v=4.7.0') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.swart {
+    display: inline-block;
+    font: normal normal normal 16px/1 SwartFont;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.swart-icon 
+{
+    &:before {
+        content: "\53";
+    }
+}
+
+/*.swart-icon:before {
+    content: "\53";
+}*/
+
 @import "grids.scss";
 @import "navbarmain.scss";
 @import "rundowns.scss";
 @import "documents.scss";
+@import "carousel.scss";
+@import "sandbox.scss";
 
 
 #siteseal img {

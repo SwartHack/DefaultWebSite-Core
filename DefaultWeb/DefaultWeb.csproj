@@ -26,6 +26,10 @@
 
   <ItemGroup>
     <Content Remove="tsconfig.json" />
+    <Content Remove="wwwroot/data\~%24artling,Eric-Resume.xml" />
+    <Content Remove="wwwroot/js\defaultwebsite.min.js.map" />
+    <Content Remove="wwwroot/lib\_site\dist\js\defaultwebsite.js" />
+    <Content Remove="wwwroot/lib\_site\dist\js\defaultwebsite.min.js" />
     <Content Remove="wwwroot/lib\_site\package - Copy.json" />
   </ItemGroup>
 
@@ -34,6 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\data\Swartling,Eric-Resume.docx" />
+    <Content Include="wwwroot\data\Swartling,Eric-Resume.xml" />
     <Content Include="wwwroot\fonts\fontawesome-webfont.eot">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -74,7 +80,6 @@
     </Content>
     <Content Include="wwwroot\images\underconstruct.jpg" />
     <Content Include="wwwroot\images\under_construction.gif" />
-    <Content Include="wwwroot\js\defaultwebsite.js" />
     <Content Include="wwwroot\lib\bootswatch\3\assets\css\custom.min.css" />
     <Content Include="wwwroot\lib\bootswatch\3\assets\img\bg.jpg" />
     <Content Include="wwwroot\lib\bootswatch\3\assets\img\carboncostume.png" />
@@ -1873,9 +1878,12 @@
     <Content Include="wwwroot\lib\_site\js\sandbox.js" />
     <Content Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
     <Content Include="wwwroot\lib\_site\sass\global\build.scss" />
+    <Content Include="wwwroot\lib\_site\sass\lib\notepad.scss" />
+    <Content Include="wwwroot\lib\_site\sass\lib\video-js.scss" />
     <Content Include="wwwroot\lib\_site\sass\_carousel.scss" />
     <Content Include="wwwroot\lib\_site\sass\_documents.scss" />
     <Content Include="wwwroot\lib\_site\sass\_grids.scss" />
+    <Content Include="wwwroot\lib\_site\sass\_keyframes.scss" />
     <Content Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
     <Content Include="wwwroot\lib\_site\sass\_rundowns.scss" />
     <Content Include="wwwroot\lib\_site\sass\_sandbox.scss" />
@@ -1924,7 +1932,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\_site\dist\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

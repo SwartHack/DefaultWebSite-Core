@@ -1,13 +1,6 @@
 [
   {
-    "outputFileName": "wwwroot/js/defaultwebsite.min.js",
-    "inputFiles": [
-      "wwwroot/lib/_site/dist/js/jcore.min.js",
-      "wwwroot/lib/_site/dist/js/site.min.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/lib/_site/dist/js/defaultwebsite.js",
+    "outputFileName": "wwwroot/js/defaultwebsite.js",
     "inputFiles": [
       "wwwroot/lib/_site/dist/js/jcore.js",
       "wwwroot/lib/_site/dist/js/site.js"

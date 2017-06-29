@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="~/css/jquery-ui/jquery-ui.css" />
         <link rel="stylesheet" href="~/css/themes/default.min.css" asp-append-version="true" />
     </environment>  
+    <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
 }
 
 <div class="row no-gutters" id="row-main">
@@ -48,7 +49,11 @@
         </div>
 
         <div id="footer-scroll">
-            <span>&copy; @DateTime.Now.Year - Eric Swartling <a href="term-conditions.html">Terms and Condtions of Use </a>  <a href="conduct.html">Code of Conduct Policy</a>  <a href="privacy.html">Privacy Policy</a></span>
+            <span> &copy; Eric K. Swartling  @DateTime.Now.Year &mdash; 
+                <a href="term-conditions.html">Terms and Condtions of Use </a> &mdash; 
+                <a href="conduct.html">Code of Conduct Policy</a> &mdash; 
+                <a href="privacy.html">Privacy Policy</a> &mdash; 
+            </span>
         </div>
     </div>
 
@@ -64,8 +69,8 @@
 </div>
 
 <environment names="Development">
-    <script src="~/lib/_site/dist/js/defaultwebsite.js" asp-append-version="true"></script>
-
+    <script src="~/lib/_site/dist/js/jcore.js" asp-append-version="true"></script>
+    <script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>
 </environment>
 <environment names="Staging,Production">
     <script src="~/js/defaultwebsite.min.js" asp-append-version="true"></script>
@@ -79,7 +84,7 @@
             function (control) {
 
                 $(document).ready(function () {
-                    control.test();
+                    //control.test();
                 });
             });
 

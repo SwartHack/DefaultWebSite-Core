@@ -46752,20 +46752,14 @@ define('dws/komodel', function () {
     viewModel.data.subscribe(function (newdata) {
 
         if (viewModel.target())
-            $(viewmodel.target()).html(newdata);
+            $(viewModel.target()).html(newdata);
         else
             $(newdata).dialog();
     });
 
-
-
     return viewModel;
 });
 define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
-
-  
-
-
 
     function xhrRequest(url) {
             
@@ -46780,7 +46774,6 @@ define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
                 alert("Message not found!" + this.readyState + ":" + this.status + "-" + this.responseText);
             }
         }
-
         //Pass the value to a web page on server as query string using XMLHttpObject.    
         xmlHttp.open("GET", url, true);
         xmlHttp.send();
@@ -46801,12 +46794,8 @@ define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
         });
     }
 
-    function ajaxRequestDefer(url, cache, dataType, deferred) {
-        $.ajax({
-            url: url,
-            cache: cache,
-            dataType: dataType
-        })
+    function ajaxRequestDefer(settings, deferred) {
+        $.ajax(settings)
         .done(function (data) {
             deferred.resolve(data); //ok, fires deferred callback
         })
@@ -46816,7 +46805,6 @@ define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
         .always(function () {
 
         });
-
     }
 
     function waitEffects(status) {
@@ -46837,10 +46825,9 @@ define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
 
     return {
         xhrRequest: xhrRequest,
-        ajaxRequest: ajaxRequest
+        ajaxRequest: ajaxRequest,
+        ajaxRequestDefer: ajaxRequestDefer
     }
-    
-
 });
 define('dws/actions', ['dws/controller'],
 function (Control) {
@@ -46862,10 +46849,11 @@ function (Control) {
 
         $(document).on("shown.bs.collapse", "#doc-resume", function (e) {
             //$('#col-doc').scrollTop(this.offsetTop);
+            //$(this).find('.open-document').css('height:100%');
             $('#target-area').animate({ scrollTop: $(this).offset().top }, 800);
-            if ($('#doc-cv').hasClass('in')) {
-                $('#doc-cv').removeClass('in');
-                $('[data-target="#doc-cv"]').toggleClass('collapsed');
+            if ($('#doc-cv').hasClass('show')) {
+                $('#doc-cv').removeClass('show');
+                //$('[data-target="#doc-cv"]').toggleClass('collapsed');
             }
 
         });
@@ -46873,9 +46861,9 @@ function (Control) {
         $(document).on("shown.bs.collapse", "#doc-cv", function (e) {
             //$('#col-doc').scrollTop(this.offsetTop);
             $('#target-area').animate({ scrollTop: $(this).offset().top }, 800);
-            if ($('#doc-resume').hasClass('in')) {
-                $('#doc-resume').removeClass('in');
-                $('[data-target="#doc-resume"]').toggleClass('collapsed');
+            if ($('#doc-resume').hasClass('show')) {
+                $('#doc-resume').removeClass('show');
+                //$('[data-target="#doc-resume"]').toggleClass('collapsed');
             }
         });
 
@@ -46893,20 +46881,16 @@ function (Control) {
             Control.sendMessage(settings, '#target-area');
         });
 
-        $(document).on('click', '.nav-link', function (e) {
+        $('.nav-link').on('click', function (e) {
             e.preventDefault();
-            var url = "/Home/GetView?viewname=" + $link.attr('data-target-view');
+            var settings = {
+                url: "/Home/GetView?viewname=" + $(this).attr('data-target-view'),
+                cache: false,
+                dataType: 'html'
+            }
 
-            var deferred = new $.Deferred();
-            deferred.done($("#target-area").html(data))
-            .fail(function (error) {
-                if (error !== 'aborted') {
-                    alert('Error processing request');
-                }
-            }).always(function () {
-               
-            });
-            Dispatch.ajaxRequestDefer(url, false, 'html', deferred);
+            
+            Control.sendMessageDefer(settings, '#target-area');
         });
 
         $(document).on('click', '#btn-blog', function (e) {
@@ -46914,7 +46898,6 @@ function (Control) {
             $('#blog-text').toggleClass('hidden');
             $('#blog-content').toggleClass('hidden');
         });
-
 
         $('input:checkbox').change(function () {
 
@@ -46927,9 +46910,7 @@ function (Control) {
     return {
         showContentArea: showContentArea,
         hideAllContent: hideAllContent
-
     };
-
 });
 
 define('dws/sandbox', function () {
@@ -46952,10 +46933,28 @@ function (viewModel, Dispatch) {
         Dispatch.ajaxRequest(settings);
     }
 
-   
     function sendMessage(settings, target) {
         viewModel.target(target);
         Dispatch.ajaxRequest(settings);
+       
+    }
+
+    function sendMessageDefer(settings, target) {
+        var deferred = new $.Deferred();
+        deferred.done(function (data) {
+            if (!data) {
+                alert('invalid data from server');
+            }
+            else {
+                // or return deferred to calling action
+                viewModel.data(data);
+            }
+        }).fail(function (error) {
+            alert(error);
+        });
+
+        viewModel.target(target);
+        Dispatch.ajaxRequestDefer(settings, deferred);
 
     }
 
@@ -46963,13 +46962,12 @@ function (viewModel, Dispatch) {
         ko.applyBindings(viewModel);
     }
 
-
     return {
         initKO: initKO,
         test: test,
-        sendMessage: sendMessage
+        sendMessage: sendMessage,
+        sendMessageDefer: sendMessageDefer
     }
-    
 });
 
 require(['dws/actions']);

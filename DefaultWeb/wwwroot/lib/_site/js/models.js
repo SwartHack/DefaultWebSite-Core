@@ -17,12 +17,10 @@
     viewModel.data.subscribe(function (newdata) {
 
         if (viewModel.target())
-            $(viewmodel.target()).html(newdata);
+            $(viewModel.target()).html(newdata);
         else
             $(newdata).dialog();
     });
-
-
 
     return viewModel;
 });

@@ -3,18 +3,19 @@
     <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/"><i class="fa fa-globe mr-3"></i>Default WebSite<span class="text-left">.net</span></a>
-    
+    <a class="navbar-brand" href="/"><i class="fa fa-globe"></i>Default WebSite<span class="text-left">.net</span></a>
+    <div class="ml-5">
+        <span id="siteseal">
+            <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qsbIQ45pBjOhL4IIkKzVOfkTX6u3TjXNVOLgjS2im95qBeEDn91SQoNo6aBC"></script>
+       </span>
+    </div>
     <div class="collapse navbar-collapse mr-4" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
-            @*<li id="siteseal">
-                <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qsbIQ45pBjOhL4IIkKzVOfkTX6u3TjXNVOLgjS2im95qBeEDn91SQoNo6aBC"></script>
-            </li>*@
-            <li class="nav-item"><a class="nav-link" href="/" data-target-view="About">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="/" data-target-view="Contact">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="/" data-target-view="Blog">Discussion</a></li>
-            <li class="nav-item"><a class="nav-link" href="/" data-target-view="Sandbox">Sandbox</a></li>
-            <li class="nav-item"><a class="nav-link" href="/" data-target-view="Ack">Acknowledgements</a></li>
+            <li><a id="nav-item" class="nav-link" href="" data-target-view="About">About</a></li>
+            <li><a id="nav-item" class="nav-link" href="" data-target-view="Contact">Contact</a></li>
+            <li><a id="nav-item" class="nav-link" href="" data-target-view="Comments">Comments</a></li>
+            <li><a id="nav-item" class="nav-link" href="" data-target-view="Sandbox">Sandbox</a></li>
+            <li><a id="nav-item" class="nav-link" href="" data-target-view="Ack">Acknowledgements</a></li>
             <li class="nav-item dropdown" id="theme-dropdown-item">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">@ViewData["Theme"]Default</a>
                 <div id="theme-switcher" class="dropdown-menu ">

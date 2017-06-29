@@ -1,9 +1,5 @@
 ﻿define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
 
-  
-
-
-
     function xhrRequest(url) {
             
         var xmlHttp = new XMLHttpRequest();
@@ -17,7 +13,6 @@
                 alert("Message not found!" + this.readyState + ":" + this.status + "-" + this.responseText);
             }
         }
-
         //Pass the value to a web page on server as query string using XMLHttpObject.    
         xmlHttp.open("GET", url, true);
         xmlHttp.send();
@@ -38,12 +33,8 @@
         });
     }
 
-    function ajaxRequestDefer(url, cache, dataType, deferred) {
-        $.ajax({
-            url: url,
-            cache: cache,
-            dataType: dataType
-        })
+    function ajaxRequestDefer(settings, deferred) {
+        $.ajax(settings)
         .done(function (data) {
             deferred.resolve(data); //ok, fires deferred callback
         })
@@ -53,7 +44,6 @@
         .always(function () {
 
         });
-
     }
 
     function waitEffects(status) {
@@ -74,8 +64,7 @@
 
     return {
         xhrRequest: xhrRequest,
-        ajaxRequest: ajaxRequest
+        ajaxRequest: ajaxRequest,
+        ajaxRequestDefer: ajaxRequestDefer
     }
-    
-
 });

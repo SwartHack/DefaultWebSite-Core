@@ -12,10 +12,28 @@ function (viewModel, Dispatch) {
         Dispatch.ajaxRequest(settings);
     }
 
-   
     function sendMessage(settings, target) {
         viewModel.target(target);
         Dispatch.ajaxRequest(settings);
+       
+    }
+
+    function sendMessageDefer(settings, target) {
+        var deferred = new $.Deferred();
+        deferred.done(function (data) {
+            if (!data) {
+                alert('invalid data from server');
+            }
+            else {
+                // or return deferred to calling action
+                viewModel.data(data);
+            }
+        }).fail(function (error) {
+            alert(error);
+        });
+
+        viewModel.target(target);
+        Dispatch.ajaxRequestDefer(settings, deferred);
 
     }
 
@@ -23,11 +41,10 @@ function (viewModel, Dispatch) {
         ko.applyBindings(viewModel);
     }
 
-
     return {
         initKO: initKO,
         test: test,
-        sendMessage: sendMessage
+        sendMessage: sendMessage,
+        sendMessageDefer: sendMessageDefer
     }
-    
 });

@@ -18,10 +18,11 @@ function (Control) {
 
         $(document).on("shown.bs.collapse", "#doc-resume", function (e) {
             //$('#col-doc').scrollTop(this.offsetTop);
+            //$(this).find('.open-document').css('height:100%');
             $('#target-area').animate({ scrollTop: $(this).offset().top }, 800);
-            if ($('#doc-cv').hasClass('in')) {
-                $('#doc-cv').removeClass('in');
-                $('[data-target="#doc-cv"]').toggleClass('collapsed');
+            if ($('#doc-cv').hasClass('show')) {
+                $('#doc-cv').removeClass('show');
+                //$('[data-target="#doc-cv"]').toggleClass('collapsed');
             }
 
         });
@@ -29,9 +30,9 @@ function (Control) {
         $(document).on("shown.bs.collapse", "#doc-cv", function (e) {
             //$('#col-doc').scrollTop(this.offsetTop);
             $('#target-area').animate({ scrollTop: $(this).offset().top }, 800);
-            if ($('#doc-resume').hasClass('in')) {
-                $('#doc-resume').removeClass('in');
-                $('[data-target="#doc-resume"]').toggleClass('collapsed');
+            if ($('#doc-resume').hasClass('show')) {
+                $('#doc-resume').removeClass('show');
+                //$('[data-target="#doc-resume"]').toggleClass('collapsed');
             }
         });
 
@@ -49,20 +50,16 @@ function (Control) {
             Control.sendMessage(settings, '#target-area');
         });
 
-        $(document).on('click', '.nav-link', function (e) {
+        $('.nav-link').on('click', function (e) {
             e.preventDefault();
-            var url = "/Home/GetView?viewname=" + $link.attr('data-target-view');
+            var settings = {
+                url: "/Home/GetView?viewname=" + $(this).attr('data-target-view'),
+                cache: false,
+                dataType: 'html'
+            }
 
-            var deferred = new $.Deferred();
-            deferred.done($("#target-area").html(data))
-            .fail(function (error) {
-                if (error !== 'aborted') {
-                    alert('Error processing request');
-                }
-            }).always(function () {
-               
-            });
-            Dispatch.ajaxRequestDefer(url, false, 'html', deferred);
+            
+            Control.sendMessageDefer(settings, '#target-area');
         });
 
         $(document).on('click', '#btn-blog', function (e) {
@@ -70,7 +67,6 @@ function (Control) {
             $('#blog-text').toggleClass('hidden');
             $('#blog-content').toggleClass('hidden');
         });
-
 
         $('input:checkbox').change(function () {
 
@@ -83,7 +79,5 @@ function (Control) {
     return {
         showContentArea: showContentArea,
         hideAllContent: hideAllContent
-
     };
-
 });

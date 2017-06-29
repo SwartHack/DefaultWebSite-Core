@@ -2,8 +2,8 @@
 body {
     //min-height: 75rem;
     padding-top: 3.125rem;
-    //padding-bottom: 1.25rem;
-    background: linear-gradient(circle, steelblue, lightsteelblue);
+    padding-bottom: 1.5rem;
+    
 }
 
 html {
@@ -17,6 +17,7 @@ html {
 .body-content {
     /*padding-left: 15px;
     padding-right: 15px;*/
+    //background: linear-gradient(circle, steelblue, hotpink);
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
@@ -26,22 +27,23 @@ textarea {
     max-width: 280px;
 }
 
-.card {
+
+.card, .card-block {
     border-radius: 0;
+    border:none;
 }
 
 #row-main {
-    background-color: black;
     padding: 0;
     margin: 0;
+    border-radius: 0px;
+    background-color: black;
+    border: 0.625rem solid #e6e6e6;
 
     #col-1 {
         padding: 0;
         margin: 0;
-        border-radius: 0px;
         background-color: darkgray;
-        border: 10px solid #e6e6e6;
-        border-right: none;
         //border: 2px solid black;
         #top {
             padding: 0;
@@ -72,6 +74,8 @@ textarea {
 
         #footer-scroll {
             height: 3%;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
     }
 
@@ -81,27 +85,13 @@ textarea {
         margin: 0;
 
         .element {
-            border: 10px solid #e6e6e6;
-            border-left: none;
-
             .inner {
-                padding: 0;
-                margin: 0;
-
-                #target-area {
-                    background-color: antiquewhite;
-                    overflow-y: auto;
-
-                    .card {
-                        padding: 0;
-                        margin: 0;
-                        border-radius: 0;
-
-                        .card-block {
-                        }
-                    }
-                }
+                //padding: 0.625rem;
+                border-width: 0.625rem;
+                border-style: inset;
+                border-color: lightslategray;
             }
         }
     }
 }
+

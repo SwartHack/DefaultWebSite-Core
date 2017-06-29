@@ -15,7 +15,7 @@ namespace DefaultWeb.Controllers
 
         public IActionResult GetView(string viewname)
         {
-            return PartialView(viewname);
+            return PartialView(String.Format("~/Views/Home/{0}.cshtml", viewname));
         }
 
         public IActionResult GetRundown(string viewname)

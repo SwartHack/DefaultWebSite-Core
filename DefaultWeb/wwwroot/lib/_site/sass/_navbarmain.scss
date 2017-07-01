@@ -1,25 +1,52 @@
 ﻿/// <reference path="defaultwebsite.scss" />
 #navbar-main {
-    padding: 0 .20rem;
+    //padding: 0 .20rem;
+    //max-height: 3rem;
+    //position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 0 $navbar-padding-x;
 
     button {
         padding: 0;
     }
 
-    a.navbar-brand {
+    #myNavHeader {
+        display: inline-block;
         padding-bottom: 0;
         padding-top: 0;
-        font-size: 2rem;
-
+        font-size: x-large;
+        line-height: inherit;
+        white-space: nowrap;
+        //max-height:3rem;
         i {
-            font-size: 2rem;
-            margin-left: 2rem;
-            margin-right:1rem;
+            //margin-top:.5rem;
+            //margin-left: 2rem;
+            //margin-right: 1rem;
+            color: crimson;
+            font-size: 3rem;
+            display: inline;
         }
 
-        span {
-            font-size: .5rem;
+        a {
+            display: inline;
+            vertical-align: super;
+
+
+            #nav-span1 {
+                font-size: 1rem;
+                display: inline;
+            }
         }
+
+        #nav-span2 {
+            display: inline;
+            font-size: 1.5rem;
+            color: crimson;
+            margin-left: .25rem;
+            vertical-align: super;
+        }
+
 
         @include hover-focus {
             //background-color: $brand-primary;
@@ -28,8 +55,9 @@
     }
 
     #siteseal img {
-        width: 100%;
-        margin-top: .25em;
+        //@extend .img-fluid;
+        /*width: 100%;
+        margin-top: .25em;*/
     }
 
 

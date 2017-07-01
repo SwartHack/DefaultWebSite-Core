@@ -3063,10 +3063,10 @@ tbody.collapse.show {
 .card-link + .card-link {
   margin-left: 1.25rem; }
 
-.card > .list-group:first-child .list-group-item:first-child {
+.card > .list-group:first-child .list-group-item:first-child, div#target-area.card.card-block .ack .card > ul:first-child .list-group-item:first-child {
   border-top-right-radius: 0.25rem;
   border-top-left-radius: 0.25rem; }
-.card > .list-group:last-child .list-group-item:last-child {
+.card > .list-group:last-child .list-group-item:last-child, div#target-area.card.card-block .ack .card > ul:last-child .list-group-item:last-child {
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem; }
 
@@ -3494,7 +3494,7 @@ a.badge:focus, a.badge:hover {
 .media-body {
   flex: 1; }
 
-.list-group {
+.list-group, div#target-area.card.card-block .ack ul {
   display: flex;
   flex-direction: column;
   padding-left: 0;
@@ -3538,7 +3538,7 @@ a.badge:focus, a.badge:hover {
     background-color: #fff; }
     .list-group-item.disabled .list-group-item-heading, .list-group-item:disabled .list-group-item-heading {
       color: inherit; }
-    .list-group-item.disabled .list-group-item-text, .list-group-item:disabled .list-group-item-text {
+    .list-group-item.disabled .list-group-item-text, .list-group-item.disabled div#target-area.card.card-block .ack ul li, div#target-area.card.card-block .ack ul .list-group-item.disabled li, .list-group-item:disabled .list-group-item-text, .list-group-item:disabled div#target-area.card.card-block .ack ul li, div#target-area.card.card-block .ack ul .list-group-item:disabled li {
       color: #636c72; }
   .list-group-item.active {
     z-index: 2;
@@ -3549,7 +3549,7 @@ a.badge:focus, a.badge:hover {
     .list-group-item.active .list-group-item-heading > small,
     .list-group-item.active .list-group-item-heading > .small {
       color: inherit; }
-    .list-group-item.active .list-group-item-text {
+    .list-group-item.active .list-group-item-text, .list-group-item.active div#target-area.card.card-block .ack ul li, div#target-area.card.card-block .ack ul .list-group-item.active li {
       color: #daeeff; }
 
 .list-group-flush .list-group-item {
@@ -6535,10 +6535,10 @@ a.bg-inverse:focus, a.bg-inverse:hover {
 a.text-muted:focus, a.text-muted:hover {
   color: #4b5257 !important; }
 
-.text-primary, #navbar-main a.navbar-brand:focus, #navbar-main a.navbar-brand:hover, #navbar-main #navbarCollapse ul li a:focus, #navbar-main #navbarCollapse ul li a:hover {
+.text-primary, #navbar-main #myNavHeader:focus, #navbar-main #myNavHeader:hover, #navbar-main #navbarCollapse ul li a:focus, #navbar-main #navbarCollapse ul li a:hover {
   color: #0275d8 !important; }
 
-a.text-primary:focus, #navbar-main a.navbar-brand:focus, #navbar-main #navbarCollapse ul li a:focus, a.text-primary:hover, #navbar-main a.navbar-brand:hover, #navbar-main #navbarCollapse ul li a:hover {
+a.text-primary:focus, #navbar-main a#myNavHeader:focus, #navbar-main #navbarCollapse ul li a:focus, a.text-primary:hover, #navbar-main a#myNavHeader:hover, #navbar-main #navbarCollapse ul li a:hover {
   color: #025aa5 !important; }
 
 .text-success {
@@ -8051,22 +8051,37 @@ textarea {
       border-color: lightslategray; }
 
 #navbar-main {
-  padding: 0 .20rem; }
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem; }
   #navbar-main button {
     padding: 0; }
-  #navbar-main a.navbar-brand {
+  #navbar-main #myNavHeader {
+    display: inline-block;
     padding-bottom: 0;
     padding-top: 0;
-    font-size: 2rem; }
-    #navbar-main a.navbar-brand i {
-      font-size: 2rem;
-      margin-left: 2rem;
-      margin-right: 1rem; }
-    #navbar-main a.navbar-brand span {
-      font-size: .5rem; }
+    font-size: x-large;
+    line-height: inherit;
+    white-space: nowrap; }
+    #navbar-main #myNavHeader i {
+      color: crimson;
+      font-size: 3rem;
+      display: inline; }
+    #navbar-main #myNavHeader a {
+      display: inline;
+      vertical-align: super; }
+      #navbar-main #myNavHeader a #nav-span1 {
+        font-size: 1rem;
+        display: inline; }
+    #navbar-main #myNavHeader #nav-span2 {
+      display: inline;
+      font-size: 1.5rem;
+      color: crimson;
+      margin-left: .25rem;
+      vertical-align: super; }
   #navbar-main #siteseal img {
-    width: 100%;
-    margin-top: .25em; }
+    /*width: 100%;
+    margin-top: .25em;*/ }
   #navbar-main #navbarCollapse ul li a {
     font-size: 1.25em; }
 
@@ -8087,7 +8102,7 @@ textarea {
     border-radius: 0px;
     background-color: steelblue;
     overflow-y: auto; }
-    #rundowns .card .card-block ul#rundown-content.list-group {
+    #rundowns .card .card-block ul#rundown-content.list-group, #rundowns div#target-area.card.card-block .card-block .ack ul#rundown-content, #rundowns div#target-area.card.card-block .ack .card-block ul#rundown-content {
       margin: 0;
       padding: 0;
       border-radius: 0px;
@@ -8149,18 +8164,20 @@ div#target-area.card.card-block {
   div#target-area.card.card-block .about {
     background-color: firebrick;
     color: ghostwhite; }
-    div#target-area.card.card-block .about ul#about-content.list-group {
+    div#target-area.card.card-block .about ul#about-content.list-group, div#target-area.card.card-block .about .ack ul#about-content, div#target-area.card.card-block .ack .about ul#about-content {
       list-style: none; }
-      div#target-area.card.card-block .about ul#about-content.list-group li.list-group-item {
+      div#target-area.card.card-block .about ul#about-content.list-group li.list-group-item, div#target-area.card.card-block .about .ack ul#about-content li.list-group-item, div#target-area.card.card-block .ack .about ul#about-content li.list-group-item {
         background-color: transparent;
         border: none; }
-  div#target-area.card.card-block .contact div#doc-resume.collapse.show card.card-block .document, div#target-area.card.card-block .contact div#doc-cv.collapse.show card.card-block .document {
-    height: 100%; }
+  div#target-area.card.card-block .contact div#doc-resume.collapse.show .card.card-block .document, div#target-area.card.card-block .contact div#doc-cv.collapse.show .card.card-block .document {
+    height: 90%; }
   div#target-area.card.card-block .sandbox {
     background-color: aliceblue; }
   div#target-area.card.card-block .ack {
     background-color: silver;
-    color: goldenrod; }
+    color: royalblue; }
+    div#target-area.card.card-block .ack ul {
+      list-style: none; }
   div#target-area.card.card-block .comments {
     background-color: hotpink;
     color: chartreuse; }
@@ -8484,4 +8501,7 @@ div#target-area.card.card-block {
   -moz-osx-font-smoothing: grayscale; }
 
 .swart-icon:before {
-  content: "\53"; }
+  content: "\54"; }
+
+.core-icon:before {
+  content: "\55"; }

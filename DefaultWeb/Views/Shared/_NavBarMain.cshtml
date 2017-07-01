@@ -1,13 +1,17 @@
 ﻿@using System.IO;
-<nav id="navbar-main" class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse clearfix">
+<nav id="navbar-main" class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+   
     <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/"><i class="fa fa-globe"></i>Default WebSite<span class="text-left">.net</span></a>
-    <div class="ml-5">
-        <span id="siteseal">
-            <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qsbIQ45pBjOhL4IIkKzVOfkTX6u3TjXNVOLgjS2im95qBeEDn91SQoNo6aBC"></script>
-       </span>
+    <span id="myNavHeader">
+        <i class="swart core-icon"></i>
+        <a href="/">Default WebSite<span id="nav-span1" class="text-left">.net</span></a>
+        <span id="nav-span2" class="text-left navbar-text"><em>Core</em></span>
+
+    </span>
+    <div id="siteseal" class="ml-5"> 
+        <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qsbIQ45pBjOhL4IIkKzVOfkTX6u3TjXNVOLgjS2im95qBeEDn91SQoNo6aBC"></script>
     </div>
     <div class="collapse navbar-collapse mr-4" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
@@ -19,14 +23,12 @@
             <li class="nav-item dropdown" id="theme-dropdown-item">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">@ViewData["Theme"]Default</a>
                 <div id="theme-switcher" class="dropdown-menu ">
-                    @foreach (var file in Directory.GetFiles(Host.WebRootPath + "/css/themes","*.css,!*.min.css"))
+                    @foreach (var file in Directory.GetFiles(Host.WebRootPath + "/css/themes", "*.css,!*.min.css"))
                     {
                         var name = System.IO.Path.GetFileNameWithoutExtension(file);
                         //name = name.Substring(0, name.IndexOf("."));
                         <a class="dropdown-item" href="/settheme?theme=@name">@name</a>
                     }
-
-                  
                 </div>
             </li>
         </ul>

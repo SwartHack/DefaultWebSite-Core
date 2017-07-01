@@ -60,6 +60,9 @@
     </Content>
     <Content Include="wwwroot\fonts\SwartFont.ttf" />
     <Content Include="wwwroot\images\banner.jpg" />
+    <Content Include="wwwroot\images\core.png" />
+    <Content Include="wwwroot\images\core2.png" />
+    <Content Include="wwwroot\images\core3.png" />
     <Content Include="wwwroot\images\ui-icons_444444_256x240.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

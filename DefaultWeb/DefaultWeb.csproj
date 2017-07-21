@@ -10,7 +10,10 @@
 
   <PropertyGroup>
     <UserSecretsId>aspnet-DefaultWeb-b0de96d5-927e-4ae9-b0d1-caf9e43b3b8e</UserSecretsId>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <!-- Makes the TypeScript compilation task a no-op -->
+    <TypeScriptCompileBlocked Condition="'$(TypeScriptCompileBlocked)' == ''">true</TypeScriptCompileBlocked>
+    <PreBuildEvent>
+</PreBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,13 +22,24 @@
 
   <ItemGroup>
     <Compile Remove="Views\Main\**" />
+    <Compile Remove="wwwroot\lib\jquery-tmpl\**" />
+    <Compile Remove="wwwroot\lib\_site\dist\etc\**" />
+    <Compile Remove="wwwroot\lib\_site\etc\**" />
     <Content Remove="Views\Main\**" />
+    <Content Remove="wwwroot\lib\jquery-tmpl\**" />
+    <Content Remove="wwwroot\lib\_site\dist\etc\**" />
+    <Content Remove="wwwroot\lib\_site\etc\**" />
     <EmbeddedResource Remove="Views\Main\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-tmpl\**" />
+    <EmbeddedResource Remove="wwwroot\lib\_site\dist\etc\**" />
+    <EmbeddedResource Remove="wwwroot\lib\_site\etc\**" />
     <None Remove="Views\Main\**" />
+    <None Remove="wwwroot\lib\jquery-tmpl\**" />
+    <None Remove="wwwroot\lib\_site\dist\etc\**" />
+    <None Remove="wwwroot\lib\_site\etc\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="tsconfig.json" />
     <Content Remove="wwwroot/data\~%24artling,Eric-Resume.xml" />
     <Content Remove="wwwroot/js\defaultwebsite.min.js.map" />
     <Content Remove="wwwroot/lib\_site\dist\js\defaultwebsite.js" />
@@ -1877,8 +1891,10 @@
     <Content Include="wwwroot\lib\_site\js\lib\pdfobject.js" />
     <Content Include="wwwroot\lib\_site\js\lib\video.js" />
     <Content Include="wwwroot\lib\_site\js\controller.js" />
+    <Content Include="wwwroot\lib\_site\js\model-actions.js" />
     <Content Include="wwwroot\lib\_site\js\models.js" />
     <Content Include="wwwroot\lib\_site\js\sandbox.js" />
+    <Content Include="wwwroot\lib\_site\js\comments.js" />
     <Content Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
     <Content Include="wwwroot\lib\_site\sass\global\build.scss" />
     <Content Include="wwwroot\lib\_site\sass\lib\notepad.scss" />
@@ -1889,6 +1905,7 @@
     <Content Include="wwwroot\lib\_site\sass\_keyframes.scss" />
     <Content Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
     <Content Include="wwwroot\lib\_site\sass\_rundowns.scss" />
+    <Content Include="wwwroot\lib\_site\sass\_comments.scss" />
     <Content Include="wwwroot\lib\_site\sass\_sandbox.scss" />
   </ItemGroup>
   <ItemGroup>
@@ -1934,9 +1951,12 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\Repositories\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="wwwroot\css\themes\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\_site\dist\" />
+    <Folder Include="wwwroot\lib\_site\dist\css\themes\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

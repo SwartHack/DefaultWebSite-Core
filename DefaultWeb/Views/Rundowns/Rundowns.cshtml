@@ -1,15 +1,33 @@
 <div id="rundowns">
+    <div id ="rundowns-header" class="card-title">
+        <div class="text-primary">Featured Run-downs </div>
+        <a id="rundown-info" class="btn btn-small" data-toggle="popover" role="button"><i class="fa fa-info-circle" ></i></a>
+    </div>
     <div class="card">
-        <div class="card-header">
-            <div class="text-primary">Featured Rundowns <i class="fa fa-info-circle"></i></div>
-        </div>
-        <div class="card-block">
-            <ul id="rundown-content" class="list-group">
-                <li id="rundown" class="list-group-item" data-target-view="~/Views/Rundowns/AspNet.cshtml">Scalable Document Archive Web Server using ASP.NET 4.6 MVC5</li>
-                <li id="rundown" class="list-group-item" data-target-view="~/Views/Rundowns/NetCore.cshtml"> Migrating Document Archive Web Server to ASP.NET Core </li>
-                <li id="rundown" class="list-group-item" data-target-view="~/Views/Rundowns/WinForms.cshtml"><i class="fa fa-github" style="font-size:1.5rem"></i> Windows Forms Still Matter!!! </li>
-                <li id="rundown" class="list-group-item" data-target-view="~/Views/Rundowns/SchrameWorks.cshtml">Frameworks? Schrameworks! </li>
-            </ul>
+        <div id="rundown-wrapper">
+            <div class="card-block list-group">
+                <div id="rundown" class="card" data-target="#target-area" data-target-controller="Home" data-target-action="GetRundown" data-target-id="A-DefaultWebSite">
+                    <div class="card-title">A Default Web Site</div>
+                    <div class="card-subtitle text-muted">Pattern and Practices...</div>
+                </div>
+                <div id="rundown" class="card" data-target="#target-area" data-target-controller="Home" data-target-action="GetRundown" data-target-id="AspNet">
+                    <div class="card-title">Scalable Asynchronous Document Archive Web Server</div>
+                    <div class="card-subtitle">Using ASP.NET 4.6 & MVC 5...</div>
+                </div>
+                <div id="rundown" class="card" data-target="#target-area" data-target-controller="Home" data-target-action="GetRundown" data-target-id="NetCore">
+                    <div class="card-title">Scalable Asynchronous Document Archive Web Server</div>
+                    <div class="card-subtitle">Migrating to to ASP.NET Core!!!...</div>
+                </div>
+                <div id="rundown" class="card" data-target="#target-area" data-target-controller="Home" data-target-action="GetRundown" data-target-id="WinForms">
+                    <a href="https:github.com/SwartHack"><i class="fa fa-github-square"></i></a>
+                    <div class="card-title">Do Windows&trade; Forms still matter?!? First</div>
+                    <div class="card-subtitle">A different view of Windows&trade; Services using System.ServiceProcess.ServiceControl...</div>
+                </div>
+                <div id="rundown" class="card" data-target="#target-area" data-target-controller="Home" data-target-action="GetRundown" data-target-id="FrameWorks">
+                    <div class="card-title">Frameworks?!?...Schrameworks!!!</div>
+                    <div class="card-subtitle">Do we need so many and what actually is one???...</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

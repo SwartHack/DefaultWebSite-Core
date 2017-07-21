@@ -8,6 +8,9 @@ using DefaultWeb.Models;
 
 namespace DefaultWeb.Data
 {
+    /// <summary>
+    /// /
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -23,4 +26,9 @@ namespace DefaultWeb.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    
 }

@@ -3,7 +3,8 @@
 div#target-area.card.card-block {
     padding: 0;
     border-radius: 0;
-    overflow-y: auto;
+    //overflow-y: auto;
+    width:100%;
 
     .dws-page {
         padding: 5%;
@@ -51,9 +52,10 @@ div#target-area.card.card-block {
 
     }
 
-    .sandbox {
+    #sandbox {
         @extend .dws-page;
         background-color: aliceblue;
+        
     }
 
     .ack {

@@ -15,19 +15,19 @@
     </div>
     <div class="collapse navbar-collapse mr-4" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
-            <li><a id="nav-item" class="nav-link" href="" data-target-view="About">About</a></li>
-            <li><a id="nav-item" class="nav-link" href="" data-target-view="Contact">Contact</a></li>
-            <li><a id="nav-item" class="nav-link" href="" data-target-view="Comments">Comments</a></li>
-            <li><a id="nav-item" class="nav-link" href="" data-target-view="Sandbox">Sandbox</a></li>
-            <li><a id="nav-item" class="nav-link" href="" data-target-view="Ack">Acknowledgements</a></li>
+            <li><a class="nav-link" href="" data-target="#target-area" data-target-id="About">About</a></li>
+            <li><a class="nav-link" href="" data-target="#target-area" data-target-id="Contact">Contact</a></li>
+            <li><a class="nav-link" href="" data-target="#target-area" data-target-id="Comments">Comments</a></li>
+            <li><a class="nav-link" href="" data-target="#target-area" data-target-controller="Sandbox" data-target-action="Main">Sandbox</a></li>
+            <li><a class="nav-link" href="" data-target="#target-area" data-target-id="Ack">Acknowledgements</a></li>
             <li class="nav-item dropdown" id="theme-dropdown-item">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">@ViewData["Theme"]Default</a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">@ViewData["ThemeName"]</a>
                 <div id="theme-switcher" class="dropdown-menu ">
                     @foreach (var file in Directory.GetFiles(Host.WebRootPath + "/css/themes", "*.css,!*.min.css"))
                     {
                         var name = System.IO.Path.GetFileNameWithoutExtension(file);
                         //name = name.Substring(0, name.IndexOf("."));
-                        <a class="dropdown-item" href="/settheme?theme=@name">@name</a>
+                        <a class="dropdown-item" href="/Home/SetTheme?name=@name">@name</a>
                     }
                 </div>
             </li>

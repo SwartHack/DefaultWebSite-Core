@@ -43,9 +43,17 @@ namespace DefaultWeb
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            //default project users/identity LocalDb?
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //dws data LocalDb
+            services.AddDbContext<DwsDbContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DwsConnection")));
+
+            //AdWorks data Local Db, and others...
+
+            //enable the Identity/EF linkup
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -57,7 +65,7 @@ namespace DefaultWeb
             });
 
 
-            // Add application services.
+            // Add other provider services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
@@ -78,9 +86,7 @@ namespace DefaultWeb
 
             //var options = new RewriteOptions()
             //.AddRedirectToHttps();
-
-
-
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -110,9 +116,9 @@ namespace DefaultWeb
                 //    template: "{controller=Home}/{action=GetRundown}/{id?}"
                 //    );
 
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute( name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+               
+
             });
         }
     }

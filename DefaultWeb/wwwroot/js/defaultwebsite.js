@@ -46733,20 +46733,55 @@ vjs.plugin = function(name, init){
  * Licensed under ISC
  * Based on Bootstrap
 */
-define('dws/komodel', function () {
+define('dws/model', ['dws/model-actions'], function (ModelActions) {
 
     var viewModel = {
 
         file: ko.observable(''),
-        files: ko.observableArray(),
+        files: ko.observableArray([]),
         data: ko.observable(''),
         dataType: ko.observable(''),
         target: ko.observable(''),
-        error: ko.observable(function (request, error, response) {
+        error: function (request, error, response) {
             alert(response + '\n' + error);
-        }),
-        waitEffects: ko.observable(false)
+        },
+        waiting: ko.observable(false),
 
+        sources: ko.observableArray([]),
+        source: ko.observable(''),
+        sourcesCount: ko.pureComputed(function () { return 'Records: ' + viewModel.sources().length }, this),
+        addSource: function (item) {
+            viewModel.sources.unshift(item);
+        },
+        removeSource: function (item) {
+            viewModel.sources.remove(item);
+        },
+        
+        sourceAdded: function (parent, index, item) {
+            var $parent = $(parent);
+            var $item = $(item);
+            $item.hide().fadeIn('slow');
+            
+            console.log('Source afterAdd... ');
+        },
+        
+        comments: ko.observableArray([]),
+        comment: ko.observable(''),
+        commentsCount: function () { return 'Records: ' + this.comments.length;},
+        addComment: function (item) {
+            viewModel.comments.unshift(item);
+        },
+        removeComment: function (item) {
+            viewModel.comments.remove(item);
+        },
+        commentAdded: function (item) {
+            var $item = $(item);
+            $item.hide().fadeIn('slow');
+            console.log('Comment afterAdd... ');
+        },
+        canAddComment: function () { return this.source === null ? false : true }
+
+        
     };
 
     viewModel.data.subscribe(function (newdata) {
@@ -46757,9 +46792,54 @@ define('dws/komodel', function () {
             $(newdata).dialog();
     });
 
+    viewModel.source.subscribe(function (source) {
+        //$('#sources-table tbody tr').removeClass('active');
+        var index = viewModel.sources.indexOf(source);
+        $($('#sources-table tbody tr')[index]).addClass('active').siblings().removeClass('active');
+
+        if (source.comments) {
+            viewModel.comments(source.comments);
+        }
+
+        console.log('source subscribe:' + source);
+    });
+
+    viewModel.waiting.subscribe(function (wait) {
+
+        if (wait) {
+
+        }
+        else {
+
+        }
+
+        //function waitEffects(status) {
+
+        //    if (status) {
+        //        $('').addClass('waiting')
+        //    }
+
+        //    var completed = $(target)[0].complete;
+        //    if (!completed) {
+        //        $(target)[0].addClass('loading');
+        //        $(target).load(function () {
+        //            $(target).removeClass('loading');
+        //        });
+        //    }
+        //} 
+
+    });
+
+
     return viewModel;
 });
-define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
+define('dws/model-actions', function () {
+
+
+    
+
+})
+define('dws/dispatcher', ['dws/model'], function (ViewModel) {
 
     function xhrRequest(url) {
             
@@ -46783,11 +46863,14 @@ define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
     function ajaxRequest(settings) {
         //waitEffects(true);
         $.ajax(settings)
-        .done(function (data) {
-            viewModel.data(data); 
+            .done(function (data) {
+
+                //based on requested data type
+
+                ViewModel.data(data); 
         })
         .fail(function (request, error) {
-            viewModel.aborted(request, error, this.responseText)
+            ViewModel.aborted(request, error, this.responseText)
         })
         .always(function () {
             //waitEffects(false);
@@ -46807,22 +46890,6 @@ define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
         });
     }
 
-    function waitEffects(status) {
-
-        if (status)
-        {
-            $('').addClass('waiting')
-        }
-
-        var completed = $(target)[0].complete;
-        if (!completed) {
-            $(target)[0].addClass('loading');
-            $(target).load(function () {
-                $(target).removeClass('loading');
-            });
-        }
-    } 
-
     return {
         xhrRequest: xhrRequest,
         ajaxRequest: ajaxRequest,
@@ -46831,22 +46898,51 @@ define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
 });
 define('dws/actions', ['dws/controller'],
 function (Control) {
-
-    function showContentArea(selector)
-    {
-        if (!$(selector).is(':visible')) {
-            hideAllContent();
-            $(selector).show(); // beware that using an animated show (fadeIn, etc) may conflict with the visibility check
-        }
-    }
-
-    function hideAllContent()
-    {
-        $('.content-area').hide();
-    }
-
+    
     $(document).ready(function () {
 
+        
+        /////////////////////////////
+        /// click events
+        ////////////////////////////
+        $('#rundown').on('click',  function (e) {
+            e.preventDefault();
+            var $rundown = $(this);
+            $('li.rundown').removeClass("selected");
+            $rundown.addClass("selected");
+
+            var settings = {
+                url: "/Home/GetRundown?viewname=" + $rundown.attr('data-target-view'),
+                cache: false,
+                dataType: 'html'
+            }
+            Control.sendMessage(settings, '#target-area');
+        });
+
+        $('.nav-link').on('click', function (e) {
+            e.preventDefault();
+            var $item = $(this);
+            Control.sendMessageDefer($item);
+        });
+
+        $(document).on('click', '#sand-link', function (e) {
+            e.preventDefault();
+            var $item = $(e.target);
+            $('#sand-link').removeClass('active');
+            $item.addClass('active');
+            Control.sendMessageDefer($item);
+        });
+
+        $(document).on('click', '#btn-blog', function (e) {
+            e.preventDefault();
+            $('#blog-text').toggleClass('hidden');
+            $('#blog-content').toggleClass('hidden');
+        });
+
+
+        /////////////////////////////
+        /// show/hide events
+        ////////////////////////////
         $(document).on("shown.bs.collapse", "#doc-resume", function (e) {
             e.preventDefault();
             $('#target-area').animate({ scrollTop: $(this).offset().top }, 800);
@@ -46875,38 +46971,19 @@ function (Control) {
             $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
-        $('#rundown').on('click',  function (e) {
-            e.preventDefault();
-            var $rundown = $(this);
-            $('li.rundown').removeClass("selected");
-            $rundown.addClass("selected");
-
+        $('#source-modal').on('hidden.bs.modal', function (e) {
+            // refresh after add, detect cancel
             var settings = {
-                url: "/Home/GetRundown?viewname=" + $rundown.attr('data-target-view'),
-                cache: false,
-                dataType: 'html'
+                url: "/Sources/Main",
+                cache: false
             }
-            Control.sendMessage(settings, '#target-area');
-        });
+            Control.sendMessage(settings, '#sandbox-area');
+        })
 
-        $('.nav-link').on('click', function (e) {
-            e.preventDefault();
-            var settings = {
-                url: "/Home/GetView?viewname=" + $(this).attr('data-target-view'),
-                cache: false,
-                dataType: 'html'
-            }
 
-            
-            Control.sendMessageDefer(settings, '#target-area');
-        });
-
-        $(document).on('click', '#btn-blog', function (e) {
-            e.preventDefault();
-            $('#blog-text').toggleClass('hidden');
-            $('#blog-content').toggleClass('hidden');
-        });
-
+        /////////////////////////////
+        /// oter events
+        ////////////////////////////
         $('input:checkbox').change(function () {
 
         })
@@ -46916,19 +46993,71 @@ function (Control) {
     });
 
     return {
-        showContentArea: showContentArea,
-        hideAllContent: hideAllContent
+     
     };
 });
 
-define('dws/sandbox', function () {
+define('dws/sandbox', ['dws/model'], function (ViewModel) {
 
+    //lets monitor the sand box area for new content and bind accordingly
+    var config = {
+        attributes: true,
+        childList: true,
+        characterData: true
+    };
 
+    var observer = new MutationObserver(function (changes) {
+        changes.forEach(function (change) {
+            
+            if (change.addedNodes.length > 0) {
+                var newNodes = change.addedNodes;
+                var dataNodes = $(newNodes).find('[data-bind]');
+                newNodes.each(function () {
+                    var node = $(this)
+                    if (!ko.dataFor(node[0]))
+                        ko.applyBindings(ViewModel, node[0]);
+                })
+            }
+        });
+    });
 
+    function observe(state) {
+        if (state) {
+            observer.observe(document.getElementById('sandbox-area'), config);
+        }
+        else {
+            observer.disconnect();
+        }
+    }
+    
+    ///
+    ///if we ever need for some reason....
+    ///
+    //function findNode($nodes) {
+    //    $nodes.each(function () {
+    //        var $node = $(this);
+    //        if ($node.children().length() > 0) {
+    //            findNode($node.children());
+    //        }
 
+    //        if ($node.attr('data-bind')) {
+    //            console.log($node.attr('data-bind'));  // the new element	
+    //            try {
+    //                ko.applyBindings(ViewModel, $node);
+    //            } catch (e) {
+    //                alert(e.message);
+    //            }
+    //        }
+
+    //    });
+    //}
+
+    return {
+        observe:observe
+    }
 });
 /// Main controller for event declarations, etc.
-define('dws/controller', ['dws/komodel', 'dws/dispatcher'],
+define('dws/controller', ['dws/model', 'dws/dispatcher'],
 function (viewModel, Dispatch) {
 
     function test() {
@@ -46941,13 +47070,60 @@ function (viewModel, Dispatch) {
         Dispatch.ajaxRequest(settings);
     }
 
+    //////////////////////////////////
+    ///
+    ////////////////////////////////
+    function showContentArea(selector) {
+        if (!$(selector).is(':visible')) {
+            hideAllContent();
+            $(selector).show(); // beware that using an animated show (fadeIn, etc) may conflict with the visibility check
+        }
+    }
+
+    function hideAllContent() {
+        $('.content-area').hide();
+    }
+    
+    //////////////////////////////////
+    ///
+    ////////////////////////////////
+    function parseNavUrl($link) {
+        var url;
+
+        if ($link.attr('data-target-controller') && $link.attr('data-target-action')) {
+            url = "/" + $link.attr('data-target-controller') + "/" + $link.attr('data-target-action');
+        }
+        else {
+            url = "/Home/GetView";
+        }
+
+        if ($link.attr('data-target-id')) {
+            url = url + '?id=' + $link.attr('data-target-id');
+        }
+
+        return url;
+    }
+
+    //////////////////////////////////
+    ///
+    ////////////////////////////////
     function sendMessage(settings, target) {
         viewModel.target(target);
         Dispatch.ajaxRequest(settings);
        
     }
 
-    function sendMessageDefer(settings, target) {
+    //////////////////////////////////
+    ///
+    ////////////////////////////////
+    function sendMessageDefer($item) {
+        var target = $item.attr('data-target')
+        var url = parseNavUrl($item);
+        var settings = {
+            url: url,
+            cache: false
+        }
+        
         var deferred = new $.Deferred();
         deferred.done(function (data) {
             if (!data) {
@@ -46966,6 +47142,9 @@ function (viewModel, Dispatch) {
 
     }
 
+    //////////////////////////////////
+    ///
+    ////////////////////////////////
     function initKO() {
         ko.applyBindings(viewModel);
     }
@@ -46974,15 +47153,144 @@ function (viewModel, Dispatch) {
         initKO: initKO,
         test: test,
         sendMessage: sendMessage,
-        sendMessageDefer: sendMessageDefer
+        sendMessageDefer: sendMessageDefer,
+        showContentArea: showContentArea,
+        hideAllContent: hideAllContent,
+        parseNavUrl: parseNavUrl
     }
 });
 
+define('dws/comments', ['dws/controller', 'dws/model'],
+function (Control, viewModel) {
+
+    function GetSources() {
+        viewModel.sources([]);
+        var settings = {
+            url: "/Comments/GetSources",
+            cache: false,
+            dataType: 'json'
+        }
+
+        //// integrate into dispatcher.js  TODO
+        $.ajax(settings)
+            .done(function (data) {
+                viewModel.sources(data.sources);
+                // this is against my pattern!!!! TODO
+                // model should deal with this, but only first time loading...
+                if (data.sources.length > 0) {
+                    
+                    viewModel.source(data.sources[0]);
+                }
+                
+            })
+            .fail(function (request, error) {
+                viewModel.aborted(request, error, this.responseText)
+            })
+            .always(function () {
+                //waitEffects(false);
+            });
+    }
+
+    $(document).on('submit', 'form#new-source', function (e) {
+
+        e.preventDefault();
+
+        var $form = $(this);
+        var $submitButton = $('.submit', $form);
+        $submitButton.attr("disabled", true);
+
+        //serialize form values to JSON
+        var data = $form.serializeArray();
+       
+        //close the form
+        $form.hide();
+
+        $.ajax({
+            url: '/Comments/CreateSource',
+            dataType: 'json',
+            type: 'POST',
+            data: data
+
+        }).done(function (data, status) {
+            if (!data.source) {
+                alert('Invalid response from server...')
+            }
+            viewModel.addSource(data.Source);
+            
+        }).fail(function (error) {
+            alert('error');
+        }).alway(function () {
+            $('#source-modal').modal('hide');
+        });
+
+    });
+
+    $(document).on('submit', 'form#new-comment', function (e) {
+
+        e.preventDefault();
+
+        var $form = $(this);
+        var $submitButton = $('.submit', $form);
+        $submitButton.attr("disabled", true);
+
+        //serialize form values to JSON
+        var data = $form.serializeArray();
+        var index = data.findIndex((obj => obj.name == 'SourceId'));
+        data[index] = viewModel.source.id;
+
+        //close the form
+        $form.hide();
+
+        $.ajax({
+            url: '/Comments/CreateComment',
+            dataType: 'json',
+            type: 'POST',
+            data: data
+
+        }).done(function (data, status) {
+            if (!data.Comment) {
+                alert('Invalid response from server...')
+            }
+            viewModel.addComment(data.Comment);
+
+        }).fail(function (error) {
+            alert('error');
+        }).alway(function () {
+            $('#source-modal').modal('hide');
+        });
+
+    });
+
+    $(document).on('click', 'div#source-block table tbody tr', function (e) {
+        var $item = $(e.target);
+        var id = $item.attr("id");
+        //$item.addClass('active').siblings().removeClass('active');
+        var source = viewModel.sources(s => s.id == id);
+        viewModel.source(source);
+        
+
+
+    });
+
+    return {
+        GetSources: GetSources
+    }
+});
+
+
+
+
+        
+
+
 require(['dws/actions']);
-require(['dws/controller'],
+require(['dws/comments']);
+require(['dws/sandbox']);
+require(['dws/model-actions']);
+require(['dws/controller']),
 function (control) {
 
     $(document).ready(function () {
         control.initKO();
     });
-});
+}

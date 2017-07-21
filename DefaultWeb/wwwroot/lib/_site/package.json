@@ -28,6 +28,7 @@
     "autoprefixer": "^7.1.1",
     "clean-css-cli": "^4.1.4",
     "cssnano": "^3.10.0",
+    "eslint": "^4.2.0",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-concat": "^1.0.1",
@@ -38,6 +39,7 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^3.0.1",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^20.0.0",
     "grunt-exec": "^2.0.0",
     "grunt-log": "^1.0.0",
     "grunt-postcss": "^0.8.0",
@@ -50,8 +52,6 @@
   "corejs": [
     "../jquery/dist/jquery.js",
     "../jquery-ui/jquery-ui.js",
-    "../jquery-tmpl/jquery.tmpl.js",
-    "../jquery-tmpl/jquery.tmplPlus.js",
     "../jquery-validation/dist/jquery.validate.js",
     "../jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
     "../jquery-validation/dist/additional-methods.js",
@@ -63,10 +63,12 @@
   ],
   "sitejs": [
     "js/models.js",
+    "js/model-actions.js",
     "js/dispatcher.js",
     "js/actions.js",
     "js/sandbox.js",
     "js/controller.js",
+    "js/comments.js",
     "js/init.js"
   ]
 }

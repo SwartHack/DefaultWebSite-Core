@@ -4,18 +4,54 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DefaultWeb.Models;
+using Microsoft.Extensions.Options;
+
 namespace DefaultWeb.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly DwsSettings _settings;
+        private string ThemeName { get; set; }
+
+        public HomeController(IOptions<DwsSettings> settingsOptions)
+        {
+            _settings = settingsOptions.Value;
+
+            // let's check the theme set-up here instead of View
+
+            //get default from config
+            if (String.IsNullOrEmpty(_settings.DefaultTheme))
+            {
+                ThemeName = "Default";
+     
+            }
+            else
+            {
+                var theme = _settings.DefaultTheme;
+                ThemeName = theme;
+            }
+        }
+  
+       
+
         public IActionResult Index()
         {
+            ViewData["ThemeName"] = ThemeName;
+            ViewData["ThemeDevelopment"] = String.Format("~/css/themes/{0}.css", ThemeName.ToLower());
+            ViewData["ThemeProduction"] = String.Format("~/css/themes/{0}.css.min", ThemeName.ToLower());
+
             return View();
         }
 
-        public IActionResult GetView(string viewname)
+        public void SetTheme(string theme)
         {
-            return PartialView(String.Format("~/Views/Home/{0}.cshtml", viewname));
+            ThemeName = theme;
+            Redirect("Index");
+        }
+
+        public IActionResult GetView(string id)
+        {
+            return PartialView(String.Format("~/Views/Home/{0}.cshtml", id));
         }
 
         public IActionResult GetRundown(string viewname)
@@ -36,5 +72,7 @@ namespace DefaultWeb.Controllers
         {
             return View();
         }
+
     }
 }
+

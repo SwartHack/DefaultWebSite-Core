@@ -1,0 +1,308 @@
+﻿/// <reference path="defaultwebsite.scss" />
+////////////////////////////////
+/// goes inside of sandbox-area
+////////////////////////////////
+#comments-mgr {
+    //border: .125rem double steelblue;
+    //padding: 1rem;
+    margin: .5rem;
+    height: 80%;
+
+    .card {
+        display: flex;
+        border: none;
+
+
+        .card-header {
+            //background-color: olive;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+
+            .card-title {
+                //background-color: transparent;
+                font-weight: bold;
+                font-size: 1.25rem;
+                font-style: italic;
+                margin-bottom: 0;
+            }
+        }
+
+        .card-blockquote {
+            padding: .250rem;
+            background-color: lightyellow;
+            display: none;
+            //border: .125rem inset $card-border-color;
+        }
+        /// sources
+        #sources-card.card {
+            flex: 0 0 50%;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            //border: .075rem solid steelblue;
+            table#sources-table {
+                display: flex;
+                width: 100%;
+                flex-flow: column;
+                margin: 0;
+                border-spacing: 0;
+
+
+
+                thead.row.header {
+                    display: inline-block;
+                    margin-right: 0;
+                    margin-left: 0;
+
+                    tr {
+                        display: flex;
+
+                        th.cell {
+                            flex: 1;
+                            //border: .0625rem solid darkgray;
+                            //padding-top: .25rem;
+                            text-align: center;
+                            padding-top: 0;
+                            padding-bottom: 0;
+                            background-color: whitesmoke;
+                            color: $headings-color;
+
+                            #head-description.cell {
+                                border-right: none;
+                            }
+
+                            &.tools.pull-right {
+                                margin: 0;
+                                padding: 0;
+                                border-left: none;
+                                text-align: right;
+
+                                a {
+                                    padding: 0;
+                                    margin: 0;
+                                    border: none;
+                                    cursor: pointer;
+                                    margin-right: .25rem;
+
+
+                                    i {
+                                        font-size: 1.5rem;
+
+                                        &.fa-plus-square-o {
+                                            color: green;
+                                        }
+
+                                        &.fa-trash {
+                                            color: red;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        //th:nth-child(2) {
+                        //    flex: 0 0 20px;
+                        //}
+                    }
+                }
+                //////////////////////////
+                /// flex container for sources
+                //////////////////////////
+                tbody {
+                    display: block;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    cursor: pointer;
+                    border: .15rem solid red;
+                    ///#source
+                    tr:nth-child(even) {
+                        background-color: #DDD;
+                    }
+
+                    tr:nth-child(odd) {
+                        background-color: #FFF
+                    }
+
+                    tr.row {
+                        display: flex;
+                        margin: 0;
+                        //flex-wrap:nowrap;
+                        //background-color: ghostwhite;
+                        //border: .125rem solid black;
+                        td.cell {
+                            flex: 1;
+                            flex-wrap: nowrap;
+                            // display:flex;
+                            // justify-content:flex-start;
+                            padding: .125rem .25rem;
+                        }
+
+                        &:hover {
+                            border: .10rem solid black;
+                            cursor: pointer;
+                        }
+
+                        &.active {
+                            background-color: skyblue;
+                            border: none;
+                        }
+                    }
+                }
+            }
+
+            div.caption {
+                padding: 0;
+                border: .075rem solid lightgray;
+                border-top: none;
+                padding-right: 1rem;
+
+                #sources-count {
+                }
+            }
+        }
+    }
+    ///equiv to table above?
+    #comments-card.card {
+        flex: 0 0 50%;
+        display: flex;
+        margin: 0;
+        padding: 0;
+
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            padding-right: 0;
+
+            .card-title {
+                //border: .075rem solid red;
+                font-weight: bold;
+                font-size: 1rem;
+                font-style: italic;
+            }
+
+            a {
+                padding: 0;
+                padding-right: .5rem;
+                margin: 0;
+                border: none;
+                cursor: pointer;
+                //margin-right: .25rem;
+                i {
+                    color: green;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        ////////////////////////
+        /// flex container for comments
+        ////////////////////////////////
+        #comments-wrapper {
+            display: flex;
+            width: 100%;
+            flex-flow: column;
+            margin: 0;
+            border-spacing: 0;
+
+            #comments.list-group {
+                display: block;
+                overflow-y: auto;
+                overflow-x: hidden;
+                margin: 0;
+                border: .075rem solid purple;
+                ///#comment
+            }
+        }
+
+        #comments-count {
+            padding: 0;
+            border: .075rem solid lightgray;
+            border-top: none;
+            padding-right: 1rem;
+        }
+    }
+    //////////////////////////
+    /// comment card style
+    //////////////////////////
+    #comment {
+        display: flex;
+        margin: 0;
+        /////////////////////////////////
+        /// flex container for a comment's contents
+        ////////////////////////////////
+        .card {
+            flex: 1;
+            border: .1rem solid yellow;
+
+            .card-block {
+                display: flex;
+                flex-direction: row;
+                flex-flow: row;
+
+                .card-title {
+                    display: block;
+                    border: .075rem solid green;
+                }
+
+                .card-subtitle {
+                    display: block;
+                    border: .05rem solid green;
+                }
+
+                .card-text {
+                    display: block;
+                    border: .075rem solid orange;
+                }
+
+                a {
+                    //display: block;
+                }
+            }
+
+            &.active {
+                border: .075rem solid pink;
+            }
+
+            @include hover-focus {
+                border-style: inset;
+            }
+
+            @include hover-focus-active {
+                border-style: inset;
+                background-color: Highlight;
+            }
+        }
+    }
+    //////////////////////////
+    /// new source modal dialog
+    //////////////////////////
+    div#source-new {
+        border: .015rem solid green;
+    }
+
+    form#create-source {
+        border: .015rem solid purple;
+
+        #form-fields.form-group {
+            label {
+            }
+
+            .col-md-6 {
+                max-width: 100%;
+
+                input {
+                }
+            }
+
+            div textarea {
+            }
+        }
+
+        #form-buttons.form-group {
+            border: .015rem solid red;
+        }
+    }
+}
+
+
+

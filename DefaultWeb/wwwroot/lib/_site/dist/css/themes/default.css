@@ -6535,10 +6535,10 @@ a.bg-inverse:focus, a.bg-inverse:hover {
 a.text-muted:focus, a.text-muted:hover {
   color: #4b5257 !important; }
 
-.text-primary, #navbar-main #myNavHeader:focus, #navbar-main #myNavHeader:hover, #navbar-main #navbarCollapse ul li a:focus, #navbar-main #navbarCollapse ul li a:hover {
+.text-primary {
   color: #0275d8 !important; }
 
-a.text-primary:focus, #navbar-main a#myNavHeader:focus, #navbar-main #navbarCollapse ul li a:focus, a.text-primary:hover, #navbar-main a#myNavHeader:hover, #navbar-main #navbarCollapse ul li a:hover {
+a.text-primary:focus, a.text-primary:hover {
   color: #025aa5 !important; }
 
 .text-success {
@@ -7985,235 +7985,6 @@ output {
 [hidden] {
   display: none !important; }
 
-body {
-  padding-top: 3.125rem;
-  padding-bottom: 1.5rem; }
-
-html {
-  padding: 0;
-  margin: 0;
-  background-color: black; }
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-  /*padding-left: 15px;
-  padding-right: 15px;*/ }
-
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-  max-width: 280px; }
-
-.card, .card-block {
-  border-radius: 0;
-  border: none; }
-
-#row-main {
-  padding: 0;
-  margin: 0;
-  border-radius: 0px;
-  background-color: black;
-  border: 0.625rem solid #e6e6e6; }
-  #row-main #col-1 {
-    padding: 0;
-    margin: 0;
-    background-color: darkgray; }
-    #row-main #col-1 #top {
-      padding: 0;
-      margin: 0; }
-      #row-main #col-1 #top #col-rundowns {
-        padding: 0;
-        margin: 0;
-        border-radius: 0px;
-        background-color: steelblue;
-        height: 60%; }
-    #row-main #col-1 #bottom {
-      padding: 0;
-      margin: 0; }
-      #row-main #col-1 #bottom #col-carousel {
-        padding: 0;
-        margin: 0;
-        border-radius: 0px;
-        background: linear-gradient(to right, red, yellow);
-        height: 36.5%; }
-    #row-main #col-1 #footer-scroll {
-      height: 3%;
-      padding-left: 1rem;
-      padding-right: 1rem; }
-  #row-main #col-main {
-    padding: 0;
-    margin: 0; }
-    #row-main #col-main .element .inner {
-      border-width: 0.625rem;
-      border-style: inset;
-      border-color: lightslategray; }
-
-#navbar-main {
-  display: flex;
-  flex-direction: row;
-  padding: 0 1rem; }
-  #navbar-main button {
-    padding: 0; }
-  #navbar-main #myNavHeader {
-    display: inline-block;
-    padding-bottom: 0;
-    padding-top: 0;
-    font-size: x-large;
-    line-height: inherit;
-    white-space: nowrap; }
-    #navbar-main #myNavHeader i {
-      color: crimson;
-      font-size: 3rem;
-      display: inline; }
-    #navbar-main #myNavHeader a {
-      display: inline;
-      vertical-align: super; }
-      #navbar-main #myNavHeader a #nav-span1 {
-        font-size: 1rem;
-        display: inline; }
-    #navbar-main #myNavHeader #nav-span2 {
-      display: inline;
-      font-size: 1.5rem;
-      color: crimson;
-      margin-left: .25rem;
-      vertical-align: super; }
-  #navbar-main #siteseal img {
-    /*width: 100%;
-    margin-top: .25em;*/ }
-  #navbar-main #navbarCollapse ul li a {
-    font-size: 1.25em; }
-
-#rundowns .card {
-  border-radius: 0px;
-  margin: 0;
-  padding: 0; }
-  #rundowns .card .card-header {
-    margin: 0;
-    padding: 0;
-    border-radius: 0px;
-    background-color: lightsteelblue;
-    font-size: 2rem;
-    padding: .25rem; }
-  #rundowns .card .card-block {
-    margin: 0;
-    padding: 0;
-    border-radius: 0px;
-    background-color: steelblue;
-    overflow-y: auto; }
-    #rundowns .card .card-block ul#rundown-content.list-group, #rundowns div#target-area.card.card-block .card-block .ack ul#rundown-content, #rundowns div#target-area.card.card-block .ack .card-block ul#rundown-content {
-      margin: 0;
-      padding: 0;
-      border-radius: 0px;
-      overflow-y: auto;
-      height: 100%;
-      list-style-type: none; }
-#rundowns #rundown {
-  -webkit-transition: -webkit-transform .1s;
-  -moz-transition: -moz-transform .1s;
-  -ms-transition: -ms-transform .1s;
-  -o-transition: -o-transform .1s;
-  transition: transform .05s;
-  text-align: center;
-  border-radius: 0px;
-  display: list-item;
-  list-style-type: none;
-  font-size: 1.1rem;
-  background-color: lightsteelblue;
-  margin-top: .75rem;
-  margin-left: 5%;
-  margin-right: 5%; }
-  #rundowns #rundown:hover {
-    /*-webkit-transform: scale(1.1,1.1);
-        -moz-transform: scale(1.1,1.1);
-        -ms-transform: scale(1.1,1.1);
-        -o-transform: scale(1.1,1.1);
-        transform: scale(1.1,1.1);
-        border: inset 1px 1px 2px 2px;*/
-    box-shadow: 2px 2px 4px 4px;
-    cursor: pointer; }
-  #rundowns #rundown.selected {
-    box-shadow: 1px 1px 4px 4px; }
-  #rundowns #rundown .snippet {
-    max-height: 20rem;
-    margin-left: 5%;
-    margin-right: 5%; }
-    #rundowns #rundown .snippet .card-header .card-title {
-      text-align: center; }
-    #rundowns #rundown .snippet .card-block {
-      overflow: auto;
-      max-height: 15rem;
-      text-align: left; }
-
-div#target-area.card.card-block {
-  padding: 0;
-  border-radius: 0;
-  overflow-y: auto; }
-  div#target-area.card.card-block .dws-page, div#target-area.card.card-block .welcome, div#target-area.card.card-block .about, div#target-area.card.card-block .contact, div#target-area.card.card-block .sandbox, div#target-area.card.card-block .ack, div#target-area.card.card-block .comments {
-    padding: 5%;
-    border-radius: 0; }
-  div#target-area.card.card-block .open-document {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 3px;
-    overflow-y: auto; }
-  div#target-area.card.card-block .welcome {
-    background-color: lightgoldenrodyellow; }
-  div#target-area.card.card-block .about {
-    background-color: firebrick;
-    color: ghostwhite; }
-    div#target-area.card.card-block .about ul#about-content.list-group, div#target-area.card.card-block .about .ack ul#about-content, div#target-area.card.card-block .ack .about ul#about-content {
-      list-style: none; }
-      div#target-area.card.card-block .about ul#about-content.list-group li.list-group-item, div#target-area.card.card-block .about .ack ul#about-content li.list-group-item, div#target-area.card.card-block .ack .about ul#about-content li.list-group-item {
-        background-color: transparent;
-        border: none; }
-  div#target-area.card.card-block .contact div#doc-resume.collapse.show .card.card-block .document, div#target-area.card.card-block .contact div#doc-cv.collapse.show .card.card-block .document {
-    height: 90%; }
-  div#target-area.card.card-block .sandbox {
-    background-color: aliceblue; }
-  div#target-area.card.card-block .ack {
-    background-color: silver;
-    color: royalblue; }
-    div#target-area.card.card-block .ack ul {
-      list-style: none; }
-  div#target-area.card.card-block .comments {
-    background-color: hotpink;
-    color: chartreuse; }
-
-#myCarousel .carousel-inner #carousel-item1 div.text-center {
-  font-size: 1.5rem;
-  color: whitesmoke; }
-#myCarousel .carousel-inner #carousel-item1 img {
-  height: 85%; }
-#myCarousel .carousel-inner #carousel-item1.active {
-  display: block !important; }
-#myCarousel .carousel-inner #carousel-item2.active {
-  display: block !important; }
-  #myCarousel .carousel-inner #carousel-item2.active div.text-center {
-    font-size: 1.5rem;
-    color: whitesmoke; }
-  #myCarousel .carousel-inner #carousel-item2.active a i {
-    height: 85%;
-    font-size: 30vh;
-    display: block;
-    text-align: center; }
-  #myCarousel .carousel-inner #carousel-item2.active a:hover {
-    text-decoration: none; }
-#myCarousel .carousel-inner #carousel-item3.active {
-  display: block !important; }
-  #myCarousel .carousel-inner #carousel-item3.active div.text-center {
-    font-size: 1rem;
-    color: whitesmoke; }
-  #myCarousel .carousel-inner #carousel-item3.active a i {
-    height: 85%;
-    font-size: 30vh;
-    display: block;
-    text-align: center; }
-  #myCarousel .carousel-inner #carousel-item3.active a:hover {
-    text-decoration: none; }
-
 @-webkit-keyframes bounce {
   from, 20%, 53%, 80%, to {
     -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -8417,6 +8188,533 @@ div#target-area.card.card-block {
   to {
     -webkit-transform: rotate3d(0, 0, 1, 0deg);
     transform: rotate3d(0, 0, 1, 0deg); } }
+body {
+  padding-top: 3.125rem;
+  padding-bottom: 1.5rem; }
+
+html {
+  padding: 0;
+  margin: 0;
+  background-color: black; }
+
+#row-main {
+  padding: 0;
+  margin: 0;
+  /*border-radius: 0px;
+  background-color: black;
+  border: 0.625rem solid #e6e6e6;*/ }
+  #row-main #col-1 {
+    padding: 0;
+    margin: 0;
+    background-color: darkgray; }
+    #row-main #col-1 .element .inner {
+      padding: 0.625rem;
+      /*border-width: 0.625rem;
+      border-style: inset;
+      border-color: lightslategray;*/ }
+      #row-main #col-1 .element .inner #top {
+        padding: 0;
+        margin: 0; }
+        #row-main #col-1 .element .inner #top #col-rundowns {
+          padding: 0;
+          margin: 0;
+          border-radius: 0px;
+          background-color: steelblue;
+          height: 60%; }
+      #row-main #col-1 .element .inner #bottom {
+        padding: 0;
+        margin: 0;
+        width: 100%; }
+        #row-main #col-1 .element .inner #bottom #col-carousel {
+          padding: 0;
+          margin: 0;
+          border-radius: 0px;
+          background: linear-gradient(to right, red, yellow);
+          height: 36.5%; }
+      #row-main #col-1 .element .inner #footer-scroll {
+        height: 3%;
+        padding-left: 1rem;
+        padding-right: 1rem; }
+  #row-main #col-main {
+    padding: 0;
+    margin: 0; }
+    #row-main #col-main .element .inner {
+      padding: 0.625rem;
+      /*border-width: 0.625rem;
+      border-style: inset;
+      border-color: lightslategray;*/ }
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+  /*padding-left: 15px;
+  padding-right: 15px;*/ }
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+  max-width: 280px; }
+
+/*div.modal {
+    div.model-dialog {
+        div .modal-content {
+
+                
+
+                
+
+            ///dynamic content
+            
+        }
+    }
+}*/
+div.modal-header {
+  padding: .3rem .75rem; }
+
+div.modal-body {
+  padding: 0; }
+
+#navbar-main {
+  display: flex;
+  flex-direction: row;
+  padding: 0 1rem; }
+  #navbar-main button {
+    padding: 0; }
+  #navbar-main #myNavHeader {
+    display: inline-block;
+    padding-bottom: 0;
+    padding-top: 0;
+    font-size: x-large;
+    line-height: inherit;
+    white-space: nowrap;
+    max-height: 3.125rem; }
+    #navbar-main #myNavHeader i {
+      color: crimson;
+      font-size: 3rem;
+      display: inline; }
+    #navbar-main #myNavHeader a {
+      display: inline;
+      vertical-align: super;
+      text-decoration: none; }
+      #navbar-main #myNavHeader a #nav-span1 {
+        font-size: 1rem;
+        display: inline; }
+      #navbar-main #myNavHeader a:focus, #navbar-main #myNavHeader a:hover {
+        color: crimson; }
+    #navbar-main #myNavHeader #nav-span2 {
+      display: inline;
+      font-size: 1.5rem;
+      color: crimson;
+      margin-left: .1rem;
+      vertical-align: super; }
+  #navbar-main #siteseal img {
+    /*width: 100%;
+    margin-top: .25em;*/ }
+  #navbar-main #navbarCollapse ul li a {
+    font-size: 1.25em; }
+    #navbar-main #navbarCollapse ul li a:focus, #navbar-main #navbarCollapse ul li a:hover {
+      color: crimson; }
+
+#rundowns {
+  margin: 0;
+  flex: 0 0 100%; }
+  #rundowns #rundowns-header.card-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: .25rem;
+    border-radius: 0px;
+    background-color: lightsteelblue; }
+    #rundowns #rundowns-header.card-title .text-primary {
+      padding: 0; }
+    #rundowns #rundowns-header.card-title #rundown-info {
+      padding: 0;
+      font-size: 1.5rem;
+      cursor: pointer; }
+      #rundowns #rundowns-header.card-title #rundown-info:focus, #rundowns #rundowns-header.card-title #rundown-info:hover {
+        color: #fff; }
+  #rundowns .card {
+    display: flex;
+    border-radius: 0px;
+    border: none;
+    margin: 0;
+    padding: 0; }
+    #rundowns .card #rundown-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex-flow: column;
+      margin: 0; }
+      #rundowns .card #rundown-wrapper .card-block.list-group, #rundowns div#target-area.card.card-block #rundown-wrapper .ack ul.card-block, #rundowns div#target-area.card.card-block .ack #rundown-wrapper ul.card-block {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        padding-right: .625rem;
+        padding-left: .5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border: none;
+        background-color: steelblue;
+        border-radius: 0px; }
+  #rundowns #rundown.card {
+    -webkit-transition: -webkit-transform .1s;
+    -moz-transition: -moz-transform .1s;
+    -ms-transition: -ms-transform .1s;
+    -o-transition: -o-transform .1s;
+    transition: transform .05s;
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 0px;
+    background-color: lightsteelblue; }
+    #rundowns #rundown.card a {
+      float: right;
+      font-size: 1.5rem;
+      padding-right: .75rem; }
+    #rundowns #rundown.card .card-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-left: .75rem;
+      margin-right: .75rem;
+      text-wrap: none;
+      margin-bottom: 0;
+      border-bottom: .25rem solid grey; }
+    #rundowns #rundown.card .card-subtitle {
+      font-weight: 500;
+      font-style: italic;
+      font-size: .75rem;
+      padding-left: 1.25rem;
+      margin-top: 0; }
+    #rundowns #rundown.card:hover {
+      /*-webkit-transform: scale(1.1,1.1);
+          -moz-transform: scale(1.1,1.1);
+          -ms-transform: scale(1.1,1.1);
+          -o-transform: scale(1.1,1.1);
+          transform: scale(1.1,1.1);
+          border: inset 1px 1px 2px 2px;*/
+      box-shadow: 2px 2px 4px 4px;
+      cursor: pointer; }
+    #rundowns #rundown.card.selected {
+      box-shadow: 1px 1px 4px 4px; }
+    #rundowns #rundown.card .snippet {
+      max-height: 20rem;
+      margin-left: 5%;
+      margin-right: 5%; }
+      #rundowns #rundown.card .snippet .card-header .card-title {
+        text-align: center; }
+      #rundowns #rundown.card .snippet .card-block {
+        overflow: auto;
+        max-height: 15rem;
+        text-align: left; }
+
+div#target-area.card.card-block {
+  padding: 0;
+  border-radius: 0;
+  width: 100%; }
+  div#target-area.card.card-block .dws-page, div#target-area.card.card-block .welcome, div#target-area.card.card-block .about, div#target-area.card.card-block .contact, div#target-area.card.card-block #sandbox, div#target-area.card.card-block .ack, div#target-area.card.card-block .comments {
+    padding: 5%;
+    border-radius: 0; }
+  div#target-area.card.card-block .open-document {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 3px;
+    overflow-y: auto; }
+  div#target-area.card.card-block .welcome {
+    background-color: lightgoldenrodyellow; }
+  div#target-area.card.card-block .about {
+    background-color: firebrick;
+    color: ghostwhite; }
+    div#target-area.card.card-block .about ul#about-content.list-group, div#target-area.card.card-block .about .ack ul#about-content, div#target-area.card.card-block .ack .about ul#about-content {
+      list-style: none; }
+      div#target-area.card.card-block .about ul#about-content.list-group li.list-group-item, div#target-area.card.card-block .about .ack ul#about-content li.list-group-item, div#target-area.card.card-block .ack .about ul#about-content li.list-group-item {
+        background-color: transparent;
+        border: none; }
+  div#target-area.card.card-block .contact div#doc-resume.collapse.show .card.card-block .document, div#target-area.card.card-block .contact div#doc-cv.collapse.show .card.card-block .document {
+    height: 90%; }
+  div#target-area.card.card-block #sandbox {
+    background-color: aliceblue; }
+  div#target-area.card.card-block .ack {
+    background-color: silver;
+    color: royalblue; }
+    div#target-area.card.card-block .ack ul {
+      list-style: none; }
+  div#target-area.card.card-block .comments {
+    background-color: hotpink;
+    color: chartreuse; }
+
+#theCarousel .carousel-inner #carousel-item1 div.text-center {
+  font-size: 1.5rem;
+  color: whitesmoke; }
+#theCarousel .carousel-inner #carousel-item1 img {
+  height: 85%; }
+#theCarousel .carousel-inner #carousel-item1.active {
+  display: block !important; }
+#theCarousel .carousel-inner #carousel-item2.active {
+  display: block !important; }
+  #theCarousel .carousel-inner #carousel-item2.active div.text-center {
+    font-size: 1.5rem;
+    color: whitesmoke; }
+  #theCarousel .carousel-inner #carousel-item2.active a i {
+    height: 85%;
+    font-size: 30vh;
+    display: block;
+    text-align: center; }
+  #theCarousel .carousel-inner #carousel-item2.active a:hover {
+    text-decoration: none; }
+#theCarousel .carousel-inner #carousel-item3.active {
+  display: block !important; }
+  #theCarousel .carousel-inner #carousel-item3.active div.text-center {
+    font-size: 1rem;
+    color: whitesmoke; }
+  #theCarousel .carousel-inner #carousel-item3.active a i {
+    height: 85%;
+    font-size: 30vh;
+    display: block;
+    text-align: center; }
+  #theCarousel .carousel-inner #carousel-item3.active a:hover {
+    text-decoration: none; }
+
+.sandbox {
+  background-color: burlywood;
+  height: 100%; }
+  .sandbox .text-center {
+    background-color: olive;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    font-weight: bold; }
+  .sandbox .nav {
+    width: 100%;
+    margin-bottom: .125rem;
+    border-bottom: .125rem solid black;
+    flex-wrap: wrap;
+    font-size: 1.25rem; }
+    .sandbox .nav li a {
+      padding: .125rem .5rem .125rem .5rem;
+      font-weight: 500; }
+      .sandbox .nav li a.active {
+        background-color: #0275d8;
+        color: #fff; }
+    .sandbox .nav li:focus, .sandbox .nav li:hover {
+      background-color: khaki;
+      color: #fff; }
+  .sandbox #sandbox-about {
+    background-color: transparent;
+    margin: .5rem;
+    height: 75%; }
+    .sandbox #sandbox-about .card {
+      display: block;
+      border: none; }
+      .sandbox #sandbox-about .card .card-header {
+        background-color: olive;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0; }
+        .sandbox #sandbox-about .card .card-header .card-title {
+          background-color: transparent;
+          font-weight: bold;
+          font-size: 1.25rem;
+          font-style: italic;
+          margin-bottom: 0; }
+      .sandbox #sandbox-about .card #about-wrapper {
+        display: flex;
+        flex-direction: column;
+        flex-flow: column;
+        height: 100%;
+        overflow-y: auto;
+        border: none;
+        padding: 1.25rem;
+        padding-top: 1rem;
+        padding-bottom: 0;
+        background-color: moccasin; }
+        .sandbox #sandbox-about .card #about-wrapper .card {
+          display: block;
+          margin-bottom: 1rem;
+          background-color: burlywood;
+          border-radius: 0.25rem; }
+          .sandbox #sandbox-about .card #about-wrapper .card .card-title {
+            font-size: 1.25rem;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 0;
+            text-align: center; }
+        .sandbox #sandbox-about .card #about-wrapper .card-text {
+          background-color: lemonchiffon; }
+          .sandbox #sandbox-about .card #about-wrapper .card-text p {
+            background-color: transparent;
+            margin-left: .5rem;
+            margin-right: .5rem;
+            margin-bottom: 0; }
+        .sandbox #sandbox-about .card #about-wrapper .card-footer {
+          border: none;
+          padding-top: 0;
+          padding-bottom: 0;
+          background-color: transparent; }
+
+#comments-mgr {
+  margin: .5rem;
+  height: 80%; }
+  #comments-mgr .card {
+    display: flex;
+    border: none; }
+    #comments-mgr .card .card-header {
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-bottom: 0; }
+      #comments-mgr .card .card-header .card-title {
+        font-weight: bold;
+        font-size: 1.25rem;
+        font-style: italic;
+        margin-bottom: 0; }
+    #comments-mgr .card .card-blockquote {
+      padding: .250rem;
+      background-color: lightyellow;
+      display: none; }
+    #comments-mgr .card #sources-card.card {
+      flex: 0 0 50%;
+      display: flex;
+      margin: 0;
+      padding: 0; }
+      #comments-mgr .card #sources-card.card table#sources-table {
+        display: flex;
+        width: 100%;
+        flex-flow: column;
+        margin: 0;
+        border-spacing: 0; }
+        #comments-mgr .card #sources-card.card table#sources-table thead.row.header {
+          display: inline-block;
+          margin-right: 0;
+          margin-left: 0; }
+          #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr {
+            display: flex; }
+            #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell {
+              flex: 1;
+              text-align: center;
+              padding-top: 0;
+              padding-bottom: 0;
+              background-color: whitesmoke;
+              color: inherit; }
+              #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell #head-description.cell {
+                border-right: none; }
+              #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right {
+                margin: 0;
+                padding: 0;
+                border-left: none;
+                text-align: right; }
+                #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right a {
+                  padding: 0;
+                  margin: 0;
+                  border: none;
+                  cursor: pointer;
+                  margin-right: .25rem; }
+                  #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right a i {
+                    font-size: 1.5rem; }
+                    #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right a i.fa-plus-square-o {
+                      color: green; }
+                    #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right a i.fa-trash {
+                      color: red; }
+        #comments-mgr .card #sources-card.card table#sources-table tbody {
+          display: block;
+          overflow-y: auto;
+          overflow-x: hidden;
+          cursor: pointer;
+          border: .15rem solid red; }
+          #comments-mgr .card #sources-card.card table#sources-table tbody tr:nth-child(even) {
+            background-color: #DDD; }
+          #comments-mgr .card #sources-card.card table#sources-table tbody tr:nth-child(odd) {
+            background-color: #FFF; }
+          #comments-mgr .card #sources-card.card table#sources-table tbody tr.row {
+            display: flex;
+            margin: 0; }
+            #comments-mgr .card #sources-card.card table#sources-table tbody tr.row td.cell {
+              flex: 1;
+              flex-wrap: nowrap;
+              padding: .125rem .25rem; }
+            #comments-mgr .card #sources-card.card table#sources-table tbody tr.row:hover {
+              border: .10rem solid black;
+              cursor: pointer; }
+            #comments-mgr .card #sources-card.card table#sources-table tbody tr.row.active {
+              background-color: skyblue;
+              border: none; }
+      #comments-mgr .card #sources-card.card div.caption {
+        padding: 0;
+        border: .075rem solid lightgray;
+        border-top: none;
+        padding-right: 1rem; }
+  #comments-mgr #comments-card.card {
+    flex: 0 0 50%;
+    display: flex;
+    margin: 0;
+    padding: 0; }
+    #comments-mgr #comments-card.card .card-header {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 0; }
+      #comments-mgr #comments-card.card .card-header .card-title {
+        font-weight: bold;
+        font-size: 1rem;
+        font-style: italic; }
+      #comments-mgr #comments-card.card .card-header a {
+        padding: 0;
+        padding-right: .5rem;
+        margin: 0;
+        border: none;
+        cursor: pointer; }
+        #comments-mgr #comments-card.card .card-header a i {
+          color: green;
+          font-size: 1.5rem; }
+    #comments-mgr #comments-card.card #comments-wrapper {
+      display: flex;
+      width: 100%;
+      flex-flow: column;
+      margin: 0;
+      border-spacing: 0; }
+      #comments-mgr #comments-card.card #comments-wrapper #comments.list-group, #comments-mgr #comments-card.card #comments-wrapper div#target-area.card.card-block .ack ul#comments, div#target-area.card.card-block .ack #comments-mgr #comments-card.card #comments-wrapper ul#comments {
+        display: block;
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin: 0;
+        border: .075rem solid purple; }
+    #comments-mgr #comments-card.card #comments-count {
+      padding: 0;
+      border: .075rem solid lightgray;
+      border-top: none;
+      padding-right: 1rem; }
+  #comments-mgr #comment {
+    display: flex;
+    margin: 0; }
+    #comments-mgr #comment .card {
+      flex: 1;
+      border: .1rem solid yellow; }
+      #comments-mgr #comment .card .card-block {
+        display: flex;
+        flex-direction: row;
+        flex-flow: row; }
+        #comments-mgr #comment .card .card-block .card-title {
+          display: block;
+          border: .075rem solid green; }
+        #comments-mgr #comment .card .card-block .card-subtitle {
+          display: block;
+          border: .05rem solid green; }
+        #comments-mgr #comment .card .card-block .card-text {
+          display: block;
+          border: .075rem solid orange; }
+      #comments-mgr #comment .card.active {
+        border: .075rem solid pink; }
+      #comments-mgr #comment .card:focus, #comments-mgr #comment .card:hover {
+        border-style: inset; }
+      #comments-mgr #comment .card:focus, #comments-mgr #comment .card:active, #comments-mgr #comment .card:hover {
+        border-style: inset;
+        background-color: Highlight; }
+  #comments-mgr div#source-new {
+    border: .015rem solid green; }
+  #comments-mgr form#create-source {
+    border: .015rem solid purple; }
+    #comments-mgr form#create-source #form-fields.form-group .col-md-6 {
+      max-width: 100%; }
+    #comments-mgr form#create-source #form-buttons.form-group {
+      border: .015rem solid red; }
+
 .quote-container {
   margin-top: 50px;
   position: relative; }

@@ -1,0 +1,38 @@
+﻿<div class="sandbox">
+    <div class="text-center">The Sandbox</div>
+    <ul class="nav">
+        <li>
+            <a id="sand-link" class="nav-link active" href="" data-target="#sandbox-area" data-target-controller="Sandbox" data-target-action="About">About</a>
+        </li>
+        <li >
+            <a id="sand-link" class="nav-link" href="" data-target="#sandbox-area" data-target-controller="Comments" data-target-action="Main">Comments Manager</a>
+        </li>
+        <li>
+            <a id="sand-link" class="nav-link" href="" data-target="#sandbox-area" data-target-controller="FileOps" data-target-action="FileOps">File Operations</a>
+        </li>
+        <li>
+            <a id="sand-link" class="nav-link" href="" data-target="#sandbox-area" data-target-controller="AWorks" data-target-id="">Adventure Works</a>
+        </li>        
+        <li>
+            <a id="sand-link" class="nav-link" href="" data-target="#sandbox-area" data-target-controller="Mapper" data-target-id=>"Mapping"</a>
+        </li>
+        <li class="nav-item dropdown" id="other-dropdown-item">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Other...</a>
+            <div id="other" class="dropdown-menu ">
+                <a class="dropdown-item" href="">Item 1</a>
+                <a class="dropdown-item" href="">Item 2</a>
+            </div>
+        </li>
+    </ul>
+    <div id="sandbox-area">
+        @{ Html.RenderPartial("About.cshtml");}
+    </div>
+</div>
+
+<script>
+    require(['dws/sandbox'], function (Sandbox) {
+        $(function () {
+            Sandbox.observe(true);
+        });
+    });
+</script>

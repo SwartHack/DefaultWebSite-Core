@@ -2,13 +2,16 @@
 @import "../../bootstrap/scss/bootstrap-grid.scss";
 @import "../../bootstrap/scss/bootstrap-reboot.scss";
 
+
+@import "keyframes.scss";
 @import "grids.scss";
 @import "navbarmain.scss";
 @import "rundowns.scss";
 @import "documents.scss";
 @import "carousel.scss";
 @import "sandbox.scss";
-@import "keyframes.scss";
+@import "comments.scss";
+
 //@import "./lib/video-js.scss";
 @import "./lib/notepad.scss";
 
@@ -43,6 +46,7 @@
         content: "\55";
     }
 }
+
 
 
 

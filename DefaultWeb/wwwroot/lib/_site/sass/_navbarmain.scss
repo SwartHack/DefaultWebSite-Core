@@ -18,7 +18,7 @@
         font-size: x-large;
         line-height: inherit;
         white-space: nowrap;
-        //max-height:3rem;
+        max-height:3.125rem;
         i {
             //margin-top:.5rem;
             //margin-left: 2rem;
@@ -31,11 +31,16 @@
         a {
             display: inline;
             vertical-align: super;
+            text-decoration: none;
 
 
             #nav-span1 {
                 font-size: 1rem;
                 display: inline;
+            }
+
+            @include hover-focus {
+                color: crimson;
             }
         }
 
@@ -43,14 +48,8 @@
             display: inline;
             font-size: 1.5rem;
             color: crimson;
-            margin-left: .25rem;
+            margin-left: .1rem;
             vertical-align: super;
-        }
-
-
-        @include hover-focus {
-            //background-color: $brand-primary;
-            @extend .text-primary;
         }
     }
 
@@ -71,8 +70,9 @@
                     font-size: 1.25em;
 
                     @include hover-focus {
+                        color: crimson;
                         //background-color: $brand-primary;
-                        @extend .text-primary;
+                        //@extend .text-primary;
                     }
                 }
             }

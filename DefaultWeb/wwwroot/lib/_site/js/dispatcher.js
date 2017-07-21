@@ -1,4 +1,4 @@
-﻿define('dws/dispatcher', ['dws/komodel'], function (viewModel) {
+﻿define('dws/dispatcher', ['dws/model'], function (ViewModel) {
 
     function xhrRequest(url) {
             
@@ -22,11 +22,14 @@
     function ajaxRequest(settings) {
         //waitEffects(true);
         $.ajax(settings)
-        .done(function (data) {
-            viewModel.data(data); 
+            .done(function (data) {
+
+                //based on requested data type
+
+                ViewModel.data(data); 
         })
         .fail(function (request, error) {
-            viewModel.aborted(request, error, this.responseText)
+            ViewModel.aborted(request, error, this.responseText)
         })
         .always(function () {
             //waitEffects(false);
@@ -45,22 +48,6 @@
 
         });
     }
-
-    function waitEffects(status) {
-
-        if (status)
-        {
-            $('').addClass('waiting')
-        }
-
-        var completed = $(target)[0].complete;
-        if (!completed) {
-            $(target)[0].addClass('loading');
-            $(target).load(function () {
-                $(target).removeClass('loading');
-            });
-        }
-    } 
 
     return {
         xhrRequest: xhrRequest,

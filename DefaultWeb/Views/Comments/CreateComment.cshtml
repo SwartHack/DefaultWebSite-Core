@@ -1,0 +1,31 @@
+@model DefaultWeb.Models.DefaultWebSite.Comment
+@{
+    <form id="create-comment">
+        <div id="form-fields" class="form-group">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <label asp-for="Content" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <textarea asp-for="Content" class="form-control" />
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="SourceId" />
+                <input type="hidden" asp-for="Datetime" />
+                <input type="hidden" asp-for="Author" />
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+
+}

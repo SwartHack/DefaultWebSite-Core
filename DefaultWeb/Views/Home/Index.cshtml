@@ -21,39 +21,44 @@
         <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
         <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
-        <link rel="stylesheet" href="~/css/themes/default.css" asp-append-version="true"  />
+        <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true"  />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="~/css/tether.css" />
         <link rel="stylesheet" href="~/css/font-awesome.css" />
         <link rel="stylesheet" href="~/css/jquery-ui/jquery-ui.css" />
-        <link rel="stylesheet" href="~/css/themes/default.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
     </environment>  
     <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
 }
 
-<div class="row no-gutters" id="row-main">
+<div class="row" id="row-main">
     
     <div id="col-1" class="col-5 h-100">
-      
-        <div id="top" class="row no-gutters">
-            <div id="col-rundowns" class="col-12">
-                @{ Html.RenderPartial("~/Views/Rundowns/Rundowns.cshtml");}
-            </div>
-        </div>
+        <div class="element d-flex h-100 flex-column justify-content-between">
+            <div class="inner d-flex h-100 flex-column align-items-center justify-content-center">
 
-        <div id="bottom" class="row no-gutters">
-            <div id="col-carousel" class="col-12">
-                @{ Html.RenderPartial("~/Views/Shared/_Carousel.cshtml");}
-            </div>
-        </div>
+                <div id="top" class="row no-gutters">
+                    <div id="col-rundowns" class="col-12">
+                        @{ Html.RenderPartial("~/Views/Rundowns/Rundowns.cshtml");}
+                    </div>
+                </div>
 
-        <div id="footer-scroll">
-            <span> &copy; Eric K. Swartling  @DateTime.Now.Year &mdash; 
-                <a href="term-conditions.html">Terms and Condtions of Use </a> &mdash; 
-                <a href="conduct.html">Code of Conduct Policy</a> &mdash; 
-                <a href="privacy.html">Privacy Policy</a> &mdash; 
-            </span>
+                <div id="bottom" class="row no-gutters">
+                    <div id="col-carousel" class="col-12">
+                        @{ Html.RenderPartial("~/Views/Shared/_Carousel.cshtml");}
+                    </div>
+                </div>
+
+                <div id="footer-scroll">
+                    <span>
+                        &copy; Eric K. Swartling  @DateTime.Now.Year &mdash;
+                        <a href="term-conditions.html">Terms and Condtions of Use </a> &mdash;
+                        <a href="conduct.html">Code of Conduct Policy</a> &mdash;
+                        <a href="privacy.html">Privacy Policy</a> &mdash;
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -68,26 +73,57 @@
     </div>
 </div>
 
-<environment names="Development">
-    <script src="~/lib/_site/dist/js/jcore.js" asp-append-version="true"></script>
-    <script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>
-</environment>
-<environment names="Staging,Production">
-    <script src="~/js/defaultwebsite.min.js" asp-append-version="true"></script>
-</environment>
+        <environment names="Development">
+            <script src="~/lib/_site/dist/js/jcore.js" asp-append-version="true"></script>
+            <script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="~/js/defaultwebsite.min.js" asp-append-version="true"></script>
+        </environment>
 
-@section JS
+        @section JS
 {
-    <script>
+            <script>
 
-        require(['dws/controller'],
-            function (control) {
+                require(['dws/controller'],
+                    function (control) {
 
-                $(document).ready(function () {
-                    //control.test();
-                });
-            });
+                        $(document).ready(function () {
+                            //control.initKO();
+                        });
+                    });
 
-    </script>
+            </script>
 
-}
+        }
+        <script id="sources-template" type="text/html">
+            <tr class="row" data-bind="attr: {id: id}">
+                <td class="cell" data-bind="text: sourceName"></td>
+                <td colspan="0" data-bind="text: description"></td>
+                <td></td>
+            </tr>
+
+        </script>
+
+        <script id="comments-template" type="text/html">
+            <div id="comment" data-bind="attr { id: comment.id }">
+                <div class="card">
+                    <div class="pull right">
+                        <a id="comment-edit" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                        <a id="comment-delete" class="btn btn-default"><i class="fa fa-trash"></i></a>
+                        <a id="comment-details" class="btn btn-default"><i class="fa fa-list" tool-tip="Identity details..."></i></a>
+                    </div>
+                    <div class="card-block">
+                        <div class="card-title" data-bind="text: comment.title">Card title</div>
+                        <div class="card-subtitle mb-2 text-muted" data-bind="text: comment.date">Date <div data-bind="text: comment.author">Author</div></div>
+                        <div class="card-text collapse hide">
+                            <p class="card-text" data-bind="text: comment.content">
+                                Some quick example text to build on the card
+                                title and make up the bulk of the card's content.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </script>

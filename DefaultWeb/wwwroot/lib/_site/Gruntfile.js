@@ -44,6 +44,9 @@ module.exports = function(grunt) {
                 dest: 'dist/js/site.js'
             }
         },
+        eslint: {
+            src: ['dist/js/site.js']
+        },
         sass: {
           dist: {
               options: {
@@ -128,7 +131,7 @@ module.exports = function(grunt) {
       grunt.registerTask('build-all', function () {
           grunt.task.run('themes');
           grunt.task.run('js');
-          grunt.task.run('copy:deploy');
+          //grunt.task.run('copy:deploy');
 
       });
 
@@ -152,7 +155,7 @@ module.exports = function(grunt) {
           grunt.task.run('clean:distjs');
           grunt.task.run('concat:jcore');
           grunt.task.run('concat:site');
-          //grunt.task.run('uglify:wwwroot');
+          grunt.task.run('eslint');
       });
 
       //// Build project scss source, with only default theme
@@ -204,8 +207,8 @@ module.exports = function(grunt) {
           var files = {};
           var dist = {};
 
-          concatSrc = 'scss/global/build.scss';
-          concatDest = '../bootswatch/' + theme + '/build.scss';
+          concatSrc = './sass/global/build.scss';
+          concatDest = themedir + '/build.scss';
 
           if (theme == 'default') 
               scssSrc = 'sass/defaultwebsite.scss';
@@ -232,7 +235,7 @@ module.exports = function(grunt) {
           grunt.config('sass.dist.options.unix-newlines', true);
           grunt.task.run('sass');
 
-          grunt.config('postcss.dist.src', 'dist/css/themes/' + theme + '.css');
+          grunt.config('postcss.dist.src', scssDest);
           grunt.task.run('postcss');
 
           grunt.config('cssmin.dist', {

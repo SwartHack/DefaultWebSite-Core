@@ -1,1 +1,129 @@
-﻿
+﻿/// <reference path="defaultwebsite.scss" />
+.sandbox {
+    background-color: burlywood;
+    height: 100%;
+
+    .text-center {
+        background-color: olive;
+        margin-bottom: 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .nav {
+        width: 100%;
+        margin-bottom: .125rem;
+        border-bottom: .125rem solid black;
+        flex-wrap: wrap;
+        font-size: 1.25rem;
+
+
+        li {
+
+            a {
+                padding: .125rem .5rem .125rem .5rem;
+                font-weight: 500;
+
+                &.active {
+                    background-color: $brand-primary;
+                    color: $white;
+                }
+            }
+
+            @include hover-focus {
+                background-color: khaki;
+                color: $white;
+            }
+        }
+    }
+
+    ///  main content container
+    #sandbox-area {
+        
+    }
+
+    /////////////////////////////
+    /// goes inside sandbox-area
+    ////////////////////////////
+    #sandbox-about {
+        background-color: transparent;
+        margin: .5rem;
+        //border: .125rem solid black;
+        //display: flex;
+        //flex-direction: column;
+        height: 75%;
+
+        .card {
+            display: block;
+            border: none;
+
+            .card-header {
+                background-color: olive;
+                padding-top: 0;
+                padding-bottom: 0;
+                margin-bottom: 0;
+
+                .card-title {
+                    background-color: transparent;
+                    font-weight: bold;
+                    font-size: 1.25rem;
+                    font-style: italic;
+                    margin-bottom: 0;
+                }
+            }
+
+            #about-wrapper {
+                display: flex;
+                flex-direction: column;
+                flex-flow: column;
+                height: 100%;
+                overflow-y: auto;
+                border: none;
+                padding: 1.25rem;
+                padding-top: 1rem;
+                padding-bottom: 0;
+                background-color: moccasin;
+
+                .card {
+                    display: block;
+                    margin-bottom: 1rem;
+                    background-color: burlywood;
+                    border-radius: $card-border-radius;
+
+
+                    .card-title {
+                        //border-bottom: .125rem solid black;
+                        font-size: 1.25rem;
+                        font-style: italic;
+                        font-weight: 400;
+                        margin-bottom: 0;
+                        text-align: center;
+                    }
+                }
+
+                .card-text {
+                    background-color: lemonchiffon;
+
+                    p {
+                        background-color: transparent;
+                        margin-left: .5rem;
+                        margin-right: .5rem;
+                        margin-bottom: 0;
+                    }
+                }
+
+
+                .card-footer {
+                    border: none;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                    background-color: transparent;
+                }
+            }
+
+            .card-footer {
+            }
+        }
+    }
+}
+

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DefaultWeb.Models;
 using Microsoft.Extensions.Options;
+using System.Web;
 
 namespace DefaultWeb.Controllers
 {
@@ -54,9 +55,9 @@ namespace DefaultWeb.Controllers
             return PartialView(String.Format("~/Views/Home/{0}.cshtml", id));
         }
 
-        public IActionResult GetRundown(string viewname)
+        public IActionResult GetRundown(string id)
         {
-            var model = new TargetView { Name = viewname };
+            var model = new TargetView { Name = id + ".cshtml"};
             return PartialView("~/Views/Rundowns/Rundown.cshtml", model);
         }
 

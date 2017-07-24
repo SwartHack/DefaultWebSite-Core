@@ -60,7 +60,7 @@
         }
     }
 
-    #rundown.card {
+    .rundown.card {
         -webkit-transition: -webkit-transform .1s;
         -moz-transition: -moz-transform .1s;
         -ms-transition: -ms-transform .1s;
@@ -112,27 +112,8 @@
             cursor: pointer;
         }
 
-        &.selected {
+        .selected {
             box-shadow: 1px 1px 4px 4px;
-        }
-
-        .snippet {
-            max-height: 20rem;
-            margin-left: 5%;
-            margin-right: 5%;
-
-            .card-header {
-
-                .card-title {
-                    text-align: center;
-                }
-            }
-
-            .card-block {
-                overflow: auto;
-                max-height: 15rem;
-                text-align: left;
-            }
         }
     }
 }

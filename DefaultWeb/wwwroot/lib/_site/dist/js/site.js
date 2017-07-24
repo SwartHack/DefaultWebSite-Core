@@ -197,10 +197,10 @@ function (Control) {
         /////////////////////////////
         /// click events
         ////////////////////////////
-        $('#rundown').on('click',  function (e) {
+        $('.rundown').on('click',  function (e) {
             e.preventDefault();
             var $rundown = $(this);
-            $('#rundown').removeClass("selected");
+            $('.rundown').removeClass("selected");
             $rundown.addClass("selected");
 
             Control.sendMessage($rundown);

@@ -1,13 +1,12 @@
 ﻿@model DefaultWeb.Models.TargetView
-   
-<div id="target-container" class="card">
+ <div class="rundown-document paper-wrapper">
     @if (!String.IsNullOrEmpty(Model.Name))
     {
-        Html.RenderPartial(Model.Name);
+        Html.RenderPartial(String.Format("~/Views/Rundowns/{0}", Model.Name));
     }
     else
     {
-        Html.RenderPartial("~/Views/Articles/NoContent.cshtml");
+        Html.RenderPartial("~/Views/Shared/_NoContent.cshtml");
     }
         
 </div>

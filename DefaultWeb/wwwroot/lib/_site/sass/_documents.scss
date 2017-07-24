@@ -4,11 +4,44 @@ div#target-area.card.card-block {
     padding: 0;
     border-radius: 0;
     //overflow-y: auto;
-    width:100%;
+    width: 100%;
 
     .dws-page {
         padding: 5%;
         border-radius: 0;
+    }
+
+    .rundown-document {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 3px;
+        overflow-y: auto;
+        padding: 1rem .75rem;
+
+      
+
+        .snippet.card {
+            max-height: 20rem;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin-bottom: .75rem;
+
+            .card-header {
+                padding: 0;
+
+                .card-title {
+                    text-align: center;
+                    margin-bottom: 0;
+                }
+            }
+
+            .card-block {
+                overflow: auto;
+                max-height: 15rem;
+                text-align: left;
+            }
+        }
     }
 
     .open-document {
@@ -21,7 +54,7 @@ div#target-area.card.card-block {
 
     .welcome {
         @extend .dws-page;
-        background-color: lightgoldenrodyellow;
+        background-color: skyblue;
     }
 
     .about {
@@ -49,35 +82,32 @@ div#target-area.card.card-block {
                 }
             }
         }
-
     }
 
     #sandbox {
         @extend .dws-page;
         background-color: aliceblue;
-        
     }
 
     .ack {
         @extend .dws-page;
         background-color: silver;
-        color:royalblue;
+        color: royalblue;
 
         ul {
             @extend .list-group;
-            list-style:none;
-           
+            list-style: none;
+
 
             li {
                 @extend .list-group-item-text;
             }
-
         }
     }
 
     .comments {
         @extend .dws-page;
         background-color: hotpink;
-        color:chartreuse;
+        color: chartreuse;
     }
 }

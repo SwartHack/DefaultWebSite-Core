@@ -3063,10 +3063,10 @@ tbody.collapse.show {
 .card-link + .card-link {
   margin-left: 1.25rem; }
 
-.card > .list-group:first-child .list-group-item:first-child, div#target-area.card.card-block .ack .card > ul:first-child .list-group-item:first-child {
+.card > .list-group:first-child .list-group-item:first-child, div#target-area .ack.card .card-block .card > ul:first-child .list-group-item:first-child {
   border-top-right-radius: 0.25rem;
   border-top-left-radius: 0.25rem; }
-.card > .list-group:last-child .list-group-item:last-child, div#target-area.card.card-block .ack .card > ul:last-child .list-group-item:last-child {
+.card > .list-group:last-child .list-group-item:last-child, div#target-area .ack.card .card-block .card > ul:last-child .list-group-item:last-child {
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem; }
 
@@ -3494,7 +3494,7 @@ a.badge:focus, a.badge:hover {
 .media-body {
   flex: 1; }
 
-.list-group, div#target-area.card.card-block .ack ul {
+.list-group, div#target-area .ack.card .card-block ul {
   display: flex;
   flex-direction: column;
   padding-left: 0;
@@ -3538,7 +3538,7 @@ a.badge:focus, a.badge:hover {
     background-color: #fff; }
     .list-group-item.disabled .list-group-item-heading, .list-group-item:disabled .list-group-item-heading {
       color: inherit; }
-    .list-group-item.disabled .list-group-item-text, .list-group-item.disabled div#target-area.card.card-block .ack ul li, div#target-area.card.card-block .ack ul .list-group-item.disabled li, .list-group-item:disabled .list-group-item-text, .list-group-item:disabled div#target-area.card.card-block .ack ul li, div#target-area.card.card-block .ack ul .list-group-item:disabled li {
+    .list-group-item.disabled .list-group-item-text, .list-group-item.disabled div#target-area .ack.card .card-block ul li, div#target-area .ack.card .card-block ul .list-group-item.disabled li, .list-group-item:disabled .list-group-item-text, .list-group-item:disabled div#target-area .ack.card .card-block ul li, div#target-area .ack.card .card-block ul .list-group-item:disabled li {
       color: #636c72; }
   .list-group-item.active {
     z-index: 2;
@@ -3549,7 +3549,7 @@ a.badge:focus, a.badge:hover {
     .list-group-item.active .list-group-item-heading > small,
     .list-group-item.active .list-group-item-heading > .small {
       color: inherit; }
-    .list-group-item.active .list-group-item-text, .list-group-item.active div#target-area.card.card-block .ack ul li, div#target-area.card.card-block .ack ul .list-group-item.active li {
+    .list-group-item.active .list-group-item-text, .list-group-item.active div#target-area .ack.card .card-block ul li, div#target-area .ack.card .card-block ul .list-group-item.active li {
       color: #daeeff; }
 
 .list-group-flush .list-group-item {
@@ -8237,7 +8237,8 @@ html {
         padding-right: 1rem; }
   #row-main #col-main {
     padding: 0;
-    margin: 0; }
+    margin: 0;
+    background-color: steelblue; }
     #row-main #col-main .element .inner {
       padding: 0.625rem;
       /*border-width: 0.625rem;
@@ -8347,7 +8348,7 @@ div.modal-body {
       flex-direction: column;
       flex-flow: column;
       margin: 0; }
-      #rundowns .card #rundown-wrapper .card-block.list-group, #rundowns div#target-area.card.card-block #rundown-wrapper .ack ul.card-block, #rundowns div#target-area.card.card-block .ack #rundown-wrapper ul.card-block {
+      #rundowns .card #rundown-wrapper .card-block.list-group, #rundowns div#target-area .ack.card #rundown-wrapper .card-block ul.card-block, div#target-area #rundowns .ack.card #rundown-wrapper .card-block ul.card-block, #rundowns div#target-area .ack.card .card-block #rundown-wrapper ul.card-block, div#target-area #rundowns .ack.card .card-block #rundown-wrapper ul.card-block {
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
         padding-right: .625rem;
@@ -8397,98 +8398,130 @@ div.modal-body {
     #rundowns .rundown.card .selected {
       box-shadow: 1px 1px 4px 4px; }
 
-div#target-area.card.card-block {
+div#target-area {
+  height: 100%;
+  width: 100%;
   padding: 0;
+  margin: 0;
   border-radius: 0;
-  width: 100%; }
-  div#target-area.card.card-block .dws-page, div#target-area.card.card-block .welcome, div#target-area.card.card-block .about, div#target-area.card.card-block .contact, div#target-area.card.card-block #sandbox, div#target-area.card.card-block .ack, div#target-area.card.card-block .comments {
+  background-color: skyblue; }
+  div#target-area .dws-page, div#target-area .welcome.card, div#target-area .about.card, div#target-area #contact.card, div#target-area .comments, div#target-area #sandbox, div#target-area .ack.card {
+    height: 100%;
     padding: 5%;
+    margin: 0;
     border-radius: 0; }
-  div#target-area.card.card-block .rundown-document {
+  div#target-area .welcome.card {
+    background-color: skyblue;
+    overflow-y: auto; }
+    div#target-area .welcome.card .card-block {
+      display: block;
+      padding: 0;
+      margin: 0;
+      background-color: transparent; }
+  div#target-area .about.card {
+    background-color: firebrick;
+    color: ghostwhite;
+    overflow: auto; }
+    div#target-area .about.card ul#about-content.list-group, div#target-area .about.card .ack.card .card-block ul#about-content, div#target-area .ack.card .card-block .about.card ul#about-content {
+      list-style: none;
+      background-color: transparent; }
+      div#target-area .about.card ul#about-content.list-group li.list-group-item, div#target-area .about.card .ack.card .card-block ul#about-content li.list-group-item, div#target-area .ack.card .card-block .about.card ul#about-content li.list-group-item {
+        background-color: transparent;
+        border: none; }
+  div#target-area #contact.card {
+    overflow: auto; }
+    div#target-area #contact.card .card-block {
+      display: block;
+      padding: 0;
+      margin: 0;
+      background-color: transparent; }
+    div#target-area #contact.card div#doc-resume.collapse.show .card.card-block .open-document, div#target-area #contact.card div#doc-cv.collapse.show .card.card-block .open-document {
+      height: 90%; }
+  div#target-area .comments {
+    background-color: hotpink;
+    color: chartreuse; }
+  div#target-area #sandbox {
+    background-color: aliceblue; }
+  div#target-area .ack.card {
+    background-color: silver;
+    color: royalblue;
+    padding: 0;
+    overflow-y: auto; }
+    div#target-area .ack.card .card-block {
+      display: block;
+      margin: 0;
+      background-color: transparent; }
+      div#target-area .ack.card .card-block ul {
+        list-style: none; }
+  div#target-area .rundown-document {
     position: relative;
     width: 100%;
     height: 100%;
-    margin-bottom: 3px;
-    overflow-y: auto;
-    padding: 1rem .75rem; }
-    div#target-area.card.card-block .rundown-document .snippet.card {
+    margin-bottom: 3px; }
+    div#target-area .rundown-document .snippet.card {
       max-height: 20rem;
       margin-left: 5%;
       margin-right: 5%;
       margin-bottom: .75rem; }
-      div#target-area.card.card-block .rundown-document .snippet.card .card-header {
+      div#target-area .rundown-document .snippet.card .card-header {
         padding: 0; }
-        div#target-area.card.card-block .rundown-document .snippet.card .card-header .card-title {
+        div#target-area .rundown-document .snippet.card .card-header .card-title {
           text-align: center;
           margin-bottom: 0; }
-      div#target-area.card.card-block .rundown-document .snippet.card .card-block {
+      div#target-area .rundown-document .snippet.card .card-block {
         overflow: auto;
         max-height: 15rem;
         text-align: left; }
-  div#target-area.card.card-block .open-document {
+  div#target-area .open-document {
     position: relative;
     width: 100%;
     height: 100%;
     margin-bottom: 3px;
     overflow-y: auto; }
-  div#target-area.card.card-block .welcome {
-    background-color: skyblue; }
-  div#target-area.card.card-block .about {
-    background-color: firebrick;
-    color: ghostwhite; }
-    div#target-area.card.card-block .about ul#about-content.list-group, div#target-area.card.card-block .about .ack ul#about-content, div#target-area.card.card-block .ack .about ul#about-content {
-      list-style: none; }
-      div#target-area.card.card-block .about ul#about-content.list-group li.list-group-item, div#target-area.card.card-block .about .ack ul#about-content li.list-group-item, div#target-area.card.card-block .ack .about ul#about-content li.list-group-item {
-        background-color: transparent;
-        border: none; }
-  div#target-area.card.card-block .contact div#doc-resume.collapse.show .card.card-block .document, div#target-area.card.card-block .contact div#doc-cv.collapse.show .card.card-block .document {
-    height: 90%; }
-  div#target-area.card.card-block #sandbox {
-    background-color: aliceblue; }
-  div#target-area.card.card-block .ack {
-    background-color: silver;
-    color: royalblue; }
-    div#target-area.card.card-block .ack ul {
-      list-style: none; }
-  div#target-area.card.card-block .comments {
-    background-color: hotpink;
-    color: chartreuse; }
 
-#theCarousel .carousel-inner #carousel-item1 div.text-center {
+#theCarousel .carousel-inner #carousel-item-1 div.text-center {
   font-size: 1.5rem;
   color: whitesmoke; }
-#theCarousel .carousel-inner #carousel-item1 img {
+#theCarousel .carousel-inner #carousel-item-1 img {
   height: 85%; }
-#theCarousel .carousel-inner #carousel-item1.active {
+#theCarousel .carousel-inner #carousel-item-1.active {
   display: block !important; }
-#theCarousel .carousel-inner #carousel-item2.active {
+#theCarousel .carousel-inner #carousel-item-2 div.text-center {
+  font-size: 1.5rem;
+  color: whitesmoke; }
+#theCarousel .carousel-inner #carousel-item-2 a i {
+  height: 85%;
+  font-size: 30vh;
+  display: block;
+  text-align: center; }
+#theCarousel .carousel-inner #carousel-item-2 a:hover {
+  text-decoration: none; }
+#theCarousel .carousel-inner #carousel-item-2 div.caption {
+  text-align: center; }
+#theCarousel .carousel-inner #carousel-item-2.active {
   display: block !important; }
-  #theCarousel .carousel-inner #carousel-item2.active div.text-center {
-    font-size: 1.5rem;
-    color: whitesmoke; }
-  #theCarousel .carousel-inner #carousel-item2.active a i {
-    height: 85%;
-    font-size: 30vh;
-    display: block;
-    text-align: center; }
-  #theCarousel .carousel-inner #carousel-item2.active a:hover {
-    text-decoration: none; }
-#theCarousel .carousel-inner #carousel-item3.active {
+#theCarousel .carousel-inner #carousel-item-3 div.text-center {
+  font-size: 1rem;
+  color: whitesmoke; }
+#theCarousel .carousel-inner #carousel-item-3 a i {
+  height: 85%;
+  font-size: 30vh;
+  display: block;
+  text-align: center; }
+#theCarousel .carousel-inner #carousel-item-3 a:hover {
+  text-decoration: none; }
+#theCarousel .carousel-inner #carousel-item-3 div.caption {
+  text-align: center; }
+#theCarousel .carousel-inner #carousel-item-3.active {
   display: block !important; }
-  #theCarousel .carousel-inner #carousel-item3.active div.text-center {
-    font-size: 1rem;
-    color: whitesmoke; }
-  #theCarousel .carousel-inner #carousel-item3.active a i {
-    height: 85%;
-    font-size: 30vh;
-    display: block;
-    text-align: center; }
-  #theCarousel .carousel-inner #carousel-item3.active a:hover {
-    text-decoration: none; }
 
 .sandbox {
-  background-color: burlywood;
-  height: 100%; }
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  background-color: burlywood; }
   .sandbox .text-center {
     background-color: olive;
     margin-bottom: 0;
@@ -8499,7 +8532,8 @@ div#target-area.card.card-block {
     margin-bottom: .125rem;
     border-bottom: .125rem solid black;
     flex-wrap: wrap;
-    font-size: 1.25rem; }
+    font-size: 1.25rem;
+    cursor: pointer; }
     .sandbox .nav li a {
       padding: .125rem .5rem .125rem .5rem;
       font-weight: 500; }
@@ -8509,54 +8543,52 @@ div#target-area.card.card-block {
     .sandbox .nav li:focus, .sandbox .nav li:hover {
       background-color: khaki;
       color: #fff; }
-  .sandbox #sandbox-about {
+  .sandbox #sandbox-area #sandbox-about {
     background-color: transparent;
     margin: .5rem;
-    height: 75%; }
-    .sandbox #sandbox-about .card {
+    margin-bottom: 0; }
+    .sandbox #sandbox-area #sandbox-about .card {
       display: block;
       border: none; }
-      .sandbox #sandbox-about .card .card-header {
+      .sandbox #sandbox-area #sandbox-about .card .card-header {
         background-color: olive;
         padding-top: 0;
         padding-bottom: 0;
         margin-bottom: 0; }
-        .sandbox #sandbox-about .card .card-header .card-title {
+        .sandbox #sandbox-area #sandbox-about .card .card-header .card-title {
           background-color: transparent;
           font-weight: bold;
           font-size: 1.25rem;
           font-style: italic;
           margin-bottom: 0; }
-      .sandbox #sandbox-about .card #about-wrapper {
-        display: flex;
-        flex-direction: column;
-        flex-flow: column;
-        height: 100%;
+      .sandbox #sandbox-area #sandbox-about .card #about-wrapper {
+        display: block;
+        height: 75%;
         overflow-y: auto;
         border: none;
         padding: 1.25rem;
         padding-top: 1rem;
         padding-bottom: 0;
         background-color: moccasin; }
-        .sandbox #sandbox-about .card #about-wrapper .card {
+        .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card {
           display: block;
           margin-bottom: 1rem;
           background-color: burlywood;
           border-radius: 0.25rem; }
-          .sandbox #sandbox-about .card #about-wrapper .card .card-title {
+          .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card .card-title {
             font-size: 1.25rem;
             font-style: italic;
             font-weight: 400;
             margin-bottom: 0;
             text-align: center; }
-        .sandbox #sandbox-about .card #about-wrapper .card-text {
+        .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card-text {
           background-color: lemonchiffon; }
-          .sandbox #sandbox-about .card #about-wrapper .card-text p {
+          .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card-text p {
             background-color: transparent;
             margin-left: .5rem;
             margin-right: .5rem;
             margin-bottom: 0; }
-        .sandbox #sandbox-about .card #about-wrapper .card-footer {
+        .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card-footer {
           border: none;
           padding-top: 0;
           padding-bottom: 0;
@@ -8680,7 +8712,7 @@ div#target-area.card.card-block {
       flex-flow: column;
       margin: 0;
       border-spacing: 0; }
-      #comments-mgr #comments-card.card #comments-wrapper #comments.list-group, #comments-mgr #comments-card.card #comments-wrapper div#target-area.card.card-block .ack ul#comments, div#target-area.card.card-block .ack #comments-mgr #comments-card.card #comments-wrapper ul#comments {
+      #comments-mgr #comments-card.card #comments-wrapper #comments.list-group, #comments-mgr #comments-card.card #comments-wrapper div#target-area .ack.card .card-block ul#comments, div#target-area .ack.card .card-block #comments-mgr #comments-card.card #comments-wrapper ul#comments {
         display: block;
         overflow-y: auto;
         overflow-x: hidden;
@@ -8810,8 +8842,9 @@ div#target-area.card.card-block {
   display: flex;
   flex-direction: column;
   padding-left: 5.5%;
-  padding-top: 0;
-  padding-right: 5.5%; }
+  padding-right: 5.5%;
+  height: 100%;
+  overflow-y: auto; }
   .paper-wrapper .paper {
     margin: 0;
     display: block;
@@ -8822,7 +8855,7 @@ div#target-area.card.card-block {
       padding-top: 2rem;
       margin-bottom: 0px; }
     .paper-wrapper .paper blockquote.blockquote {
-      font-size: .075rem;
+      font-size: .75rem;
       margin-bottom: 0px;
       padding-top: 0px;
       margin-top: 8px;

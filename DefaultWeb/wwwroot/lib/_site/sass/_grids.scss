@@ -72,13 +72,17 @@ html {
     #col-main {
         padding: 0;
         margin: 0;
+        background-color:steelblue;
 
         .element {
+
             .inner {
                 padding: 0.625rem;
                 /*border-width: 0.625rem;
                 border-style: inset;
                 border-color: lightslategray;*/
+
+                //#target-area
             }
         }
     }

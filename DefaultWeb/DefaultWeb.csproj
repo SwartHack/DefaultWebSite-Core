@@ -14,6 +14,23 @@
     <TypeScriptCompileBlocked Condition="'$(TypeScriptCompileBlocked)' == ''">true</TypeScriptCompileBlocked>
     <PreBuildEvent>
 </PreBuildEvent>
+    <PackageId>DefaultWebSite</PackageId>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
+    <Version>1.0.1</Version>
+    <Company>New Amsterdam Ltd.</Company>
+    <Authors>HackInc.net LLC</Authors>
+    <Description>Default WebSite ASP.NET Core</Description>
+    <Copyright>Eric Swartling</Copyright>
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.None.None.Increment</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.None.None.None</AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>None.None.None.None</AssemblyInfoVersionSettings>
+    <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -23,9 +23,7 @@
         //waitEffects(true);
         $.ajax(settings)
             .done(function (data) {
-
                 //based on requested data type
-
                 ViewModel.data(data); 
         })
         .fail(function (request, error) {

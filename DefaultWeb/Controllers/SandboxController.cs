@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using DefaultWeb.Models;
 
 namespace DefaultWeb.Controllers
 {
@@ -20,13 +21,21 @@ namespace DefaultWeb.Controllers
             return PartialView();
         }
 
-        public IActionResult GetView(string viewname)
+        public IActionResult GetView(string id)
         {
 
-            if ( viewname == "Sources")
+            if ( id == "Sources")
                 return PartialView(String.Format("~/Views/Sources/Index.cshtml", "Index"));
             else
-                return PartialView(String.Format("~/Views/Sandbox/{0}.cshtml", viewname));
+                return PartialView(String.Format("~/Views/Sandbox/{0}.cshtml", id));
         }
+
+        public IActionResult UnderConstruction (string id)
+        {
+            return PartialView("~/Views/Shared/_UnderCons.cshtml");
+        }
+
     }
+
+
 }

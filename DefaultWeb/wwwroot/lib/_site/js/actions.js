@@ -22,10 +22,10 @@ function (Control) {
             Control.sendMessageDefer($item);
         });
 
-        $(document).on('click', '#sand-link', function (e) {
+        $(document).on('click','.sand-link', function (e) {
             e.preventDefault();
             var $item = $(e.target);
-            $('#sand-link').removeClass('active');
+            $('.sand-link').removeClass('active');
             $item.addClass('active');
             Control.sendMessageDefer($item);
         });
@@ -42,7 +42,7 @@ function (Control) {
         ////////////////////////////
         $(document).on("shown.bs.collapse", "#doc-resume", function (e) {
             e.preventDefault();
-            $('#target-area').animate({ scrollTop: $(this).offset().top }, 800);
+            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
             $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
             if ($('#doc-cv').hasClass('show')) {
@@ -56,7 +56,7 @@ function (Control) {
 
         $(document).on('hide.shown.bs.collapse', '#doc-cv', function (e) {
             e.preventDefault();
-            $('#target-area').animate({ scrollTop: $(this).offset().top }, 800);
+            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
             $('[data-target="#doc-cv"] button h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
             if ($('#doc-resume').hasClass('show')) {

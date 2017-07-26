@@ -3,7 +3,7 @@
     //border: .075rem solid black;
     .carousel-inner {
 
-        #carousel-item1 {
+        #carousel-item-1 {
 
             div.text-center {
                 font-size: 1.5rem;
@@ -19,54 +19,62 @@
             }
         }
 
-        #carousel-item2 {
+        #carousel-item-2 {
+
+            div.text-center {
+                font-size: 1.5rem;
+                color: whitesmoke;
+            }
+
+            a {
+                i {
+                    height: 85%;
+                    font-size: 30vh;
+                    display: block;
+                    text-align: center;
+                }
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            div.caption {
+                text-align: center
+            }
 
             &.active {
                 display: block !important;
-
-                div.text-center {
-                    font-size: 1.5rem;
-                    color: whitesmoke;
-                }
-
-                a {
-                    i {
-                        height: 85%;
-                        font-size: 30vh;
-                        display: block;
-                        text-align: center;
-                    }
-
-                    &:hover {
-                        text-decoration: none;
-                    }
-                }
             }
         }
 
-        #carousel-item3 {
+        #carousel-item-3 {
+
+            div.text-center {
+                font-size: 1rem;
+                color: whitesmoke;
+            }
+
+            a {
+
+                i {
+                    height: 85%;
+                    font-size: 30vh;
+                    display: block;
+                    text-align: center;
+                }
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            div.caption {
+                text-align: center
+            }
 
             &.active {
                 display: block !important;
-
-                div.text-center {
-                    font-size: 1rem;
-                    color: whitesmoke;
-                }
-
-                a {
-
-                    i {
-                        height: 85%;
-                        font-size: 30vh;
-                        display: block;
-                        text-align: center;
-                    }
-
-                    &:hover {
-                        text-decoration: none;
-                    }
-                }
             }
         }
     }

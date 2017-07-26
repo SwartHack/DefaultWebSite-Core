@@ -1,14 +1,106 @@
 ﻿/// <reference path="defaultwebsite.scss" />
 
-div#target-area.card.card-block {
-    padding: 0;
-    border-radius: 0;
-    //overflow-y: auto;
+div#target-area {
+    //flex: 0 0 100%;
+    height: 100%;
     width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background-color: skyblue;
+
 
     .dws-page {
+        height: 100%;
         padding: 5%;
+        margin: 0;
         border-radius: 0;
+    }
+
+    .welcome.card {
+        @extend .dws-page;
+        background-color: skyblue;
+        overflow-y: auto;
+
+        .card-block {
+            display: block;
+            padding: 0;
+            margin: 0;
+            background-color: transparent;
+        }
+    }
+
+
+    .about.card {
+        @extend .dws-page;
+        background-color: firebrick;
+        color: ghostwhite;
+        overflow: auto;
+
+        ul#about-content.list-group {
+            list-style: none;
+            background-color: transparent;
+
+            li.list-group-item {
+                background-color: transparent;
+                border: none;
+            }
+        }
+    }
+
+    #contact.card {
+        @extend .dws-page;
+        overflow: auto;
+
+        .card-block {
+            display: block;
+            padding: 0;
+            margin: 0;
+            background-color: transparent;
+        }
+
+        div#doc-resume.collapse.show, div#doc-cv.collapse.show {
+            .card.card-block {
+                .open-document {
+                    height: 90%;
+                }
+            }
+        }
+    }
+
+    .comments {
+        @extend .dws-page;
+        background-color: hotpink;
+        color: chartreuse;
+    }
+
+    #sandbox {
+        @extend .dws-page;
+        background-color: aliceblue;
+    }
+
+    .ack.card {
+        @extend .dws-page;
+        background-color: silver;
+        color: royalblue;
+        padding:0;
+        overflow-y: auto;
+
+        .card-block {
+            display: block;
+            //padding: 0;
+            margin: 0;
+            background-color: transparent;
+
+            ul {
+                @extend .list-group;
+                list-style: none;
+
+                li {
+                    @extend .list-group-item-text;
+                }
+            }
+        }
     }
 
     .rundown-document {
@@ -16,11 +108,8 @@ div#target-area.card.card-block {
         width: 100%;
         height: 100%;
         margin-bottom: 3px;
-        overflow-y: auto;
-        padding: 1rem .75rem;
-
-      
-
+        //overflow-y: auto;
+        //padding: 1rem .75rem;
         .snippet.card {
             max-height: 20rem;
             margin-left: 5%;
@@ -50,64 +139,5 @@ div#target-area.card.card-block {
         height: 100%;
         margin-bottom: 3px;
         overflow-y: auto;
-    }
-
-    .welcome {
-        @extend .dws-page;
-        background-color: skyblue;
-    }
-
-    .about {
-        @extend .dws-page;
-        background-color: firebrick;
-        color: ghostwhite;
-
-        ul#about-content.list-group {
-            list-style: none;
-
-            li.list-group-item {
-                background-color: transparent;
-                border: none;
-            }
-        }
-    }
-
-    .contact {
-        @extend .dws-page;
-
-        div#doc-resume.collapse.show, div#doc-cv.collapse.show {
-            .card.card-block {
-                .document {
-                    height: 90%;
-                }
-            }
-        }
-    }
-
-    #sandbox {
-        @extend .dws-page;
-        background-color: aliceblue;
-    }
-
-    .ack {
-        @extend .dws-page;
-        background-color: silver;
-        color: royalblue;
-
-        ul {
-            @extend .list-group;
-            list-style: none;
-
-
-            li {
-                @extend .list-group-item-text;
-            }
-        }
-    }
-
-    .comments {
-        @extend .dws-page;
-        background-color: hotpink;
-        color: chartreuse;
     }
 }

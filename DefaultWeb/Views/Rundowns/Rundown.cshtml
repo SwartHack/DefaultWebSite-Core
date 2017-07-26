@@ -1,5 +1,5 @@
 ﻿@model DefaultWeb.Models.TargetView
- <div class="rundown-document paper-wrapper">
+ <div class="rundown-document">
     @if (!String.IsNullOrEmpty(Model.Name))
     {
         Html.RenderPartial(String.Format("~/Views/Rundowns/{0}", Model.Name));

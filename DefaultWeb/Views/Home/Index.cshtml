@@ -21,13 +21,12 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
         <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
-        <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
+        @*<link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />*@
         <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true"  />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="~/css/tether.css" />
         <link rel="stylesheet" href="~/css/font-awesome.css" />
-        <link rel="stylesheet" href="~/css/jquery-ui/jquery-ui.css" />
         <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
     </environment>  
     <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>

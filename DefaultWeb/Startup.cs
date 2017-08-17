@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,8 +7,8 @@ using Microsoft.Extensions.Logging;
 using DefaultWeb.Data;
 using DefaultWeb.Models;
 using DefaultWeb.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace DefaultWeb
 {
@@ -52,17 +47,25 @@ namespace DefaultWeb
                 options.UseSqlServer(Configuration.GetConnectionString("DwsConnection")));
 
             //AdWorks data Local Db, and others...
-
-            //enable the Identity/EF linkup
+            
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddAuthentication();
+
+            
 
             services.AddMvc(options =>
             {
                 //options.SslPort = 44311;
                 //options.Filters.Add(new RequireHttpsAttribute());
+            })
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.DateFormatString = "MM/dd/yyyy hh:mm tt";
             });
+            
 
 
             // Add other provider services.
@@ -100,7 +103,12 @@ namespace DefaultWeb
 
             app.UseStaticFiles();
 
-            app.UseIdentity();
+            // .Net Core 1.1
+            // app.UseIdentity();
+            /// https://docs.microsoft.com/en-us/aspnet/core/migration/1x-to-2x/identity-2x
+            /// .Net Core 2.0 Identity changes
+            /// 
+            app.UseAuthentication();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 

@@ -92,14 +92,6 @@ div#target-area {
             margin: 0;
             background-color: transparent;
 
-            ul {
-                @extend .list-group;
-                list-style: none;
-
-                li {
-                    @extend .list-group-item-text;
-                }
-            }
         }
     }
 

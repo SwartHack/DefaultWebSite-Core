@@ -14,27 +14,33 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
         data: ko.observable(''),
         dataType: ko.observable(''),
         target: ko.observable(''),
-        error: function (request, error, response) {
-            alert(response + '\n' + error);
+        abort: function (xhr, textStatus, data) {
+            ModelActions.callAborted(xhr, textStatus, data);
         },
         waiting: ko.observable(false),
+        waitingTarget:ko.observable(''),
 
-        sources: ko.observableArray([]).sort(),
-
+        sources: ko.observableArray([]).extend( { deffer: true }),
         source: ko.observable(''),
         sourceId: function (sid) {
             var index = viewModel.sources().findIndex(s => s.id == sid);
+            viewModel.sourceIndex(index);
             viewModel.source(viewModel.sources()[index]);
+            return viewModel.source();
         },
         sourceIndex: ko.observable(''),
         sourcesCount: ko.pureComputed(function () { return 'Records: ' + viewModel.sources().length }, this),
-        addSource: function (item) {
-            viewModel.sources.unshift(item);
+        addSource: function (source) {
+            viewModel.sources.unshift(source);
+            viewModel.sourceId(source.id);
         },
-        removeSource: function (item) {
-            viewModel.sources.remove(item);
+        canDeleteSource: function () { return viewModel.sources().length > 0 },
+        removeSource: function (sid) {
+            var index = viewModel.sources().findIndex(s => s.id == sid);
+            var source = viewModel.sources()[viewModel.sourceIndex()];
+            viewModel.sources.remove(source);
+            viewModel.source(undefined);
         },
-        
         sourceAdded: function (parent, index, item) {
             var $parent = $(parent);
             var $item = $(item);
@@ -42,33 +48,43 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
             //viewModel.sources.sort();
             $item.hide().fadeIn('slow');
 
-            //scroll to view TODO
-            console.log('Source afterAdd... ');
+            // sort and scroll to view TODO
+           console.log('Source afterAdd... ');
         },
-        //sourceRemoving: function (parent, index, item) {
-        //    var $item = $(item);
-        //    var $next = $item.closest('tr');
-        //    var id = $next.attr('id');
-        //    viewModel.sourceId(id);
-
-        //},
-        comments: ko.observableArray([]),
+        comments: ko.observableArray([]).extend({ deffer: true }),
         comment: ko.observable(''),
-        commentsCount: ko.pureComputed(function () { return 'Records: ' + viewModel.comments().length }, this),
-        addComment: function (item) {
-            viewModel.comments.unshift(item);
+        commentId: function (cid) {
+            var index = viewModel.comments().findIndex(c => c.id == cid);
+            viewModel.commentIndex(index);
+            viewModel.comment(viewModel.comments()[index]);
+            return viewModel.comment();
         },
-        removeComment: function (item) {
-            viewModel.comments.remove(item);
+        commentIndex: ko.observable(''),
+        commentsCount: ko.pureComputed(function () { return 'Records: ' + viewModel.comments().length }, this),
+        commentTitle: ko.pureComputed(function () { return 'Ima a stupid title!'}, this),
+        addComment: function (comment) {
+            viewModel.comments.unshift(comment);
+            viewModel.commentId(comment.id);
+        },
+        removeComment: function (cid) {
+            var index = viewModel.comments().findIndex(c => c.id == cid);
+            var comment = viewModel.comments()[viewModel.commentIndex()];
+            viewModel.comments.remove(comment);
+            viewModel.comment(undefined);
         },
         commentAdded: function (item) {
             var $item = $(item);
             $item.hide().fadeIn('slow');
             console.log('Comment afterAdd... ');
         },
-        canAddComment: function () { return this.source === null ? false : true }
-
-        
+        canAddComment: function () { return viewModel.sources().length === 0 ? false : true }
+        //canDeleteComment: function () {
+        //    var list = $('#comments.list-group').children();
+        //    var $element = $(list[viewModel.commentIndex()]);
+        //    var isClass = $element.hasClass('active')
+        //    return isClass;
+        //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
+        //}
     };
 
     viewModel.data.subscribe(function (newdata) {
@@ -80,46 +96,61 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
     });
 
     viewModel.source.subscribe(function (source) {
-        //$('#sources-table tbody tr').removeClass('active');
-        //var index = viewModel.sources.indexOf(source);
-        //$($('#sources-table tbody tr')[index]).addClass('active').siblings().removeClass('active');
-
-        if (source === null) {
+       
+        if (source == undefined) {
+            var prev = viewModel.sourceIndex() - 1;
+            if (prev >= 0)
+            {
+                source = viewModel.sources()[prev];
+                viewModel.sourceId(source.id);
+            }
+            return;
             //when the source has just been removed?!???
+            //select the one above
+            // if its the last one
+        }
+        else
+        {
+            //var index = viewModel.sources.indexOf(source);
+            $($('#sources-table tbody tr')[viewModel.sourceIndex()]).addClass('active').siblings().removeClass('active');
+            //re-set comments
+            //viewModel.comments([]);
+            viewModel.comments(source.comments == null ? [] : source.comments);
+            if (viewModel.comments().length > 0) {
+                viewModel.commentId(viewModel.comments()[0].id);
+            }
+            console.log('source subscribe:' + source.sourceName);
         }
 
-
-        if (source != null && source.comments != null) {
-            viewModel.comments(source.comments);
-        }
-
-        console.log('source subscribe:' + source);
+        
     });
+
+    viewModel.comment.subscribe(function (comment) {
+
+        if (comment == undefined) {
+            var prev = viewModel.commentIndex() - 1;
+            if (prev >= 0) {
+                comment = viewModel.comments()[prev];
+                viewModel.commentId(comment.id);
+            }
+        }
+        else
+        {
+            //var index = viewModel.comments.indexOf(comment);
+            //$($('#comments.list-group').children()[viewModel.commentIndex()]).addClass('active').siblings().removeClass('active');
+            var list = $('#comments.list-group').children();
+            var $element = $(list[viewModel.commentIndex()]);
+            $element.addClass('active').siblings().removeClass('active');
+            $('.comment.card a#comment-delete').addClass('disabled');
+            $element.find('a#comment-delete').removeClass('disabled');
+            console.log('comment subscribe:' + comment.id);
+        }
+    });
+
 
     viewModel.waiting.subscribe(function (wait) {
 
-        if (wait) {
-
-        }
-        else {
-
-        }
-
-        //function waitEffects(status) {
-
-        //    if (status) {
-        //        $('').addClass('waiting')
-        //    }
-
-        //    var completed = $(target)[0].complete;
-        //    if (!completed) {
-        //        $(target)[0].addClass('loading');
-        //        $(target).load(function () {
-        //            $(target).removeClass('loading');
-        //        });
-        //    }
-        //} 
-
+        ModelActions.waitStatus(wait, viewModel.waitingTarget());
     });
 
 
@@ -127,8 +158,43 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
 });
 define('dws/model-actions', function () {
 
+    function callAborted(xhr, textStatus, data) {
 
+    }
+
+    ///////////////////////////////////////
+    /// this is for asynch calls to server
+    //////////////////////////////////////
+    function waitStatus(status, target) {
+
+        if (status) {
+            $(target).addClass('waiting')
+        }
+        else
+        {
+            $(target).removeClass('waiting')
+        }
+    } 
     
+    ///////////////////////////////////////
+    /// this is for actual DOM element loading
+    ///////////////////////////////////////
+    function loadingStatus(status, target)
+    {
+        var completed = $(target)[0].complete;
+        if (!completed) {
+            $(target)[0].addClass('loading');
+            $(target).load(function () {
+                $(target).removeClass('loading');
+            });
+        }
+    }
+
+
+    return {
+        waitStatus: waitStatus,
+        loadingStatus: loadingStatus
+    }
 
 })
 define('dws/dispatcher', ['dws/model'], function (ViewModel) {
@@ -253,16 +319,31 @@ function (Control) {
         });
 
         $(document).on('bs.collapse','#doc-cv', function (e) {
+            e.preventDefault();
             $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
-        $('#source-modal').on('hidden.bs.modal', function (e) {
-            // refresh after add, detect cancel
-            var settings = {
-                url: "/Sources/Main",
-                cache: false
-            }
-            Control.sendMessage(settings, '#sandbox-area');
+        //$('#modal-action-template').on('show.bs.modal', function (e) {
+        //    e.preventDefault();
+        //    // get event source
+        //    var $item = $(e.relatedTarget());
+        //    Control.sendMessage($item, '#target-modal');
+        //})
+
+        $(document).on('show.bs.modal', '#modal-action-template', function (e) {
+            //e.preventDefault();
+            // get event source
+            var $item = $(e.relatedTarget);
+            var $modal = $(this);
+            $modal.find('.modal-title').text('Add New ' + $item.attr('data-target-id'));
+            Control.sendMessage($item, '#target-modal');
+        })
+
+        $(document).on('shown.bs.modal', '#modal-action-template', function (e) {
+            //e.preventDefault();
+            // get modal 
+            var $item = $(e.target);
+            $item.find('input:visible').first().focus();
         })
 
         /////////////////////////////
@@ -441,8 +522,9 @@ function (viewModel, Dispatch) {
     //////////////////////////////////
     ///
     ////////////////////////////////
-    function sendMessage($item) {
-        var target = $item.attr('data-target')
+    function sendMessage($item, target) {
+        if (!target)
+            target = $item.attr('data-target');
         var url = parseNavUrl($item);
         var settings = {
             url: url,
@@ -515,12 +597,12 @@ function (Control, viewModel) {
         $.ajax(settings)
             .done(function (data) {
                 viewModel.sources([]);
-                viewModel.sources(data.sources);
+                viewModel.sources(data);
                 // this is against my pattern!!!! TODO
                 // model should deal with this, but only first time loading...
-                if (data.sources.length > 0) {
-                    $('#sources-table tbody tr:first').addClass('active');
-                    viewModel.source(data.sources[0]);
+                if (data.length > 0) {
+                 //$('#sources-table tbody tr:first').addClass('active');
+                    viewModel.sourceId(data[0].id);
                 }
                 
             })
@@ -532,31 +614,52 @@ function (Control, viewModel) {
             });
     }
 
+    $(document).on('click', '#sources-table tbody tr', function (e) {
+        var $item = $(e.currentTarget);
+        var id = $item.attr("id");
+        //$item.addClass('active').siblings().removeClass('active');
+        viewModel.sourceId(id);
+
+    });
+
+    $(document).on('click', '.comment.card', function (e) {
+        e.preventDefault();
+        var $item = $(e.currentTarget);
+        var id = $item.attr("id");
+        //$item.addClass('active').siblings().removeClass('active');
+        viewModel.commentId(id);
+
+    });
+
+    $('#modal-action-template').on('show.bs.modal', function (e) {
+        //e.preventDefault();
+        var $item = $(e.relatedTarget);
+        Control.sendMessage($item, '#modal-action-template');
+    });
+
     $(document).on('submit', 'form#create-source', function (e) {
 
         e.preventDefault();
-
         var $form = $(this);
-        var $submitButton = $('.submit', $form);
-        $submitButton.attr("disabled", true);
+        //var $submitButton = $('.submit', $form);
+        //$submitButton.attr("disabled", true);
+        $form.attr('disabled', true);
 
         //serialize form values to JSON
-        var data = $form.serializeArray();
-       
-        //close the form
-        $form.parent().hide();
+        var formvals = $form.serializeArray();
 
         $.ajax({
             url: '/Comments/CreateSource',
-            dataType: 'json',
             type: 'POST',
-            data: data
-
-        }).done(function (data, status) {
-            if (!status == 'ok') {
-                alert('Invalid response from server...')
+            data: formvals
+        }).done(function (data, textStatus, xhr) {
+            if (xhr.status == 200) {
+                $form.closest('#modal-action-template').modal('hide');
+                viewModel.addSource(data.source);
             }
-            viewModel.addSource(data.source);
+            else {
+                $('#target-modal').html(data);
+            }
         }).fail(function (error) {
             alert('error');
         });
@@ -566,83 +669,104 @@ function (Control, viewModel) {
     $(document).on('submit', 'form#create-comment', function (e) {
 
         e.preventDefault();
-
         var $form = $(this);
-        var $submitButton = $('.submit', $form);
-        $submitButton.attr("disabled", true);
+        //var $submitButton = $('.submit', $form);
+        //$submitButton.attr("disabled", true);
+        $form.attr('disabled', true);
 
+        // populate SourceId
+        $('input#SourceId.form-control', $form).val(viewModel.source().id);
         //serialize form values to JSON
-        var data = $form.serializeArray();
-        var index = data.findIndex(obj => obj.name == 'SourceId');
-        data[index] = viewModel.source.id;
-
-        //close the form
-        $form.parent().close();
-
+        var formvals = $form.serializeArray();
+        
+        viewModel.waitingTarget('.modal-header');
+        viewModel.waiting(true);
         $.ajax({
             url: '/Comments/CreateComment',
-            dataType: 'json',
             type: 'POST',
-            data: data
-        }).done(function (data, status) {
-            if (!data.Comment) {
-                alert('Invalid response from server...')
+            data: formvals
+        }).done(function (data, textStatus, xhr) {
+            if (xhr.status == 200) {
+                $form.closest('#modal-action-template').modal('hide');
+                viewModel.addComment(data.comment);
             }
-            viewModel.addComment(data.Comment);
-        }).fail(function (error) {
-            alert('error');
+            else {
+                $('#target-modal').html(data);
+            }
+            
+        }).fail(function (xhr, textStatus, error) {
+            $form.closest('#modal-action-template').modal('hide');
+            viewModel.abort(xhr, textStatus, error);
+        }).always(function (data, textStatus, xhr) {
+            viewModel.waiting(false);
+
         });
 
     });
 
-    $(document).on('click', '#sources-table tbody tr', function (e) {
-        var $item = $(e.currentTarget);
-        var id = $item.attr("id");
-        $item.addClass('active').siblings().removeClass('active');
-        viewModel.sourceId(id);
-
-    });
-
-    $('#modal-action-template').on('show.bs.modal', function (e) {
-       
-        e.preventDefault();
-        var $item = $(this);
-        var type = $item.attr('data-type');
-        var action = $item.attr('data-action');
-        
-        var settings = {
-            url: "/Comments/GetModalContent?datatype=" + type + '&action=' + action,
-            cache: false,
-            dataType: 'html'
-        }
-        Control.sendMessage(settings, '#modal-action-template');
-
-    });
+   
 
     $(document).on('click', 'a#source-delete', function (e) {
         e.preventDefault();
-        
+
+        if (viewModel.comments().length > 0) {
+            
+            $.confirm({
+                title: 'Cascade Delete Source and Comments?',
+                content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
+                buttons: {
+                    confirm: function () { deleteSource(); },
+                    cancel: function () { return; }
+                }
+            });
+        }
+        else {
+            deleteSource();
+        }
+    });
+
+    function deleteSource() {
+
         $.ajax({
-            url: '/Comments/DeleteSource?id=' + viewModel.source().id,
-            dataType: 'json'
-        }).done(function (status) {
-            if (!status == 'ok') {
-                alert('Invalid response from server...')
+            url: '/Comments/DeleteSource',
+            cache: false,
+            data: viewModel.sourceId()
+        }).done(function (data, textStatus, xhr) {
+            if (xhr.status == 200) {
+                viewModel.removeSource(data);
             }
-            viewModel.removeSource(viewModel.source().id);
-        }).fail(function (error) {
-            alert(error);
+
+        }).fail(function (xhr, textStatus, error) {
+            viewModel.abort(xhr, textStatus, error);
         });
-        
+    }
+
+    $(document).on('click', 'a#comment-delete', function (e) {
+        e.preventDefault();
+       
+        $.confirm({
+            title: 'Delete Comment(s)?',
+            content: 'This action can not be undone!!!',
+            buttons: {
+                confirm: function () { deleteComment(); },
+                cancel: function () { return; }
+            }
+        });
     });
 
-    $(document).on('click', '#comment', function (e) {
-        var $item = $(e.currentTarget);
-        var id = $item.attr("id");
-        $item.addClass('active').siblings().removeClass('active');
-        viewModel.sourceId(id);
-
-    });
+    function deleteComment() {
+        $.ajax({
+            url: '/Comments/DeleteComment?id=' + viewModel.comment().id,
+            cache: false,
+            data: viewModel.commentId()
+        }).done(function (data, textStatus, xhr) {
+            if (xhr.status == 200) {
+                viewModel.removeComment(data);
+            }
+        }).fail(function (xhr, textStatus, error) {
+            viewModel.abort(xhr, textStatus, error);
+        });
+    }
 
     return {
         GetSources: GetSources

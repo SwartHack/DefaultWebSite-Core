@@ -107,28 +107,15 @@ textarea {
     max-width: 280px;
 }
 
-/*div.modal {
-    div.model-dialog {
-        div .modal-content {
-
-                
-
-                
-
-            ///dynamic content
-            
-        }
-    }
-}*/
-
-div.mobile-content{
-    //flex:none;
-
-}
 div.modal-header {
     padding: .3rem .75rem;
 
     button {
+    }
+
+    &.waiting {
+        -webkit-animation: dws-waiting 500ms infinite;
+        animation: dws-waiting 500ms infinite;
     }
 }
 div.modal-title {

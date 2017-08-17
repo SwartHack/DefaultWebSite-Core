@@ -2,8 +2,8 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "bootstrap": "v4.0.0-alpha.6",
-    "jquery": "2.2.0",
+    "bootstrap": "v4.0.0-beta",
+    "jquery": "3.2.1",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "font-awesome": "Font-Awesome#v4.7.0",
@@ -12,12 +12,15 @@
     "requirejs": "2.3.3",
     "arcgis-js-api": "arcgis#4.4.0",
     "esri-leaflet": "v2.0.8",
-    "esri-leaflet-geocoder": "v2.2.4"
+    "esri-leaflet-geocoder": "v2.2.4",
+    "popper.js": "https://unpkg.com/popper.js"
   },
   "resolutions": {
-    "bootstrap": "v4.0.0-alpha.6",
+    "bootstrap": "v4.0.0-beta",
     "dojo": ">=1.8.9",
     "dijit": "1.12.2",
-    "dojox": "1.12.2"
+    "dojox": "1.12.2",
+    "jquery": "3.2.1",
+    "popper.js": "^1.11.0"
   }
 }

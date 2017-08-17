@@ -1,5 +1,21 @@
 ﻿/// <reference path="defaultwebsite.scss" />
 
+////////////////////////////////////
+/// DefaultWebSite animations
+//////////////////////////////////////
+
+@-webkit-keyframes dws-waiting {
+    0% { @include gradient-x-three-colors(black, white, 75%, crimson); }
+    100% { @include gradient-x-three-colors(crimson, white, 75%, &black ); }
+}
+
+@keyframes dws-waiting {
+    0% { @include gradient-x-three-colors(black, steelblue, 75%, crimson); }
+    100% { @include gradient-x-three-colors(crimson, steelblue, 75%, black); }
+}
+
+
+////the following were provided by?
 @-webkit-keyframes bounce {
     from, 20%, 53%, 80%, to {
         -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);

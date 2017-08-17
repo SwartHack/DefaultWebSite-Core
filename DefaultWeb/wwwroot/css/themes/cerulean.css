@@ -8627,41 +8627,47 @@ div#target-area {
       padding: 0; }
       #comments-mgr .card #sources-card.card table#sources-table {
         display: flex;
-        width: 100%;
-        flex-flow: column;
+        flex-flow: column nowrap;
+        flex: 1 1 auto;
         margin: 0;
         border-spacing: 0; }
-        #comments-mgr .card #sources-card.card table#sources-table thead.row.header {
-          display: inline-block;
+        #comments-mgr .card #sources-card.card table#sources-table thead.header {
+          display: block;
           margin-right: 0;
           margin-left: 0; }
-          #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr {
-            display: flex; }
-            #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell {
+          #comments-mgr .card #sources-card.card table#sources-table thead.header tr {
+            display: flex;
+            margin: 0; }
+            #comments-mgr .card #sources-card.card table#sources-table thead.header tr :nth-child(1) {
+              flex: 0 1 30%;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis; }
+            #comments-mgr .card #sources-card.card table#sources-table thead.header tr th {
               flex: 1;
               text-align: center;
               padding-top: 0;
               padding-bottom: 0;
               background-color: whitesmoke;
               color: #2FA4E7; }
-              #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell #head-description.cell {
+              #comments-mgr .card #sources-card.card table#sources-table thead.header tr th #head-description {
                 border-right: none; }
-              #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right {
+              #comments-mgr .card #sources-card.card table#sources-table thead.header tr th.tools.pull-right {
                 margin: 0;
                 padding: 0;
                 border-left: none;
                 text-align: right; }
-                #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right a {
+                #comments-mgr .card #sources-card.card table#sources-table thead.header tr th.tools.pull-right a {
                   padding: 0;
                   margin: 0;
                   border: none;
                   cursor: pointer;
                   margin-right: .25rem; }
-                  #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right a i {
+                  #comments-mgr .card #sources-card.card table#sources-table thead.header tr th.tools.pull-right a i {
                     font-size: 1.5rem; }
-                    #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right a i.fa-plus-square-o {
+                    #comments-mgr .card #sources-card.card table#sources-table thead.header tr th.tools.pull-right a i.fa-plus-square-o {
                       color: green; }
-                    #comments-mgr .card #sources-card.card table#sources-table thead.row.header tr th.cell.tools.pull-right a i.fa-trash {
+                    #comments-mgr .card #sources-card.card table#sources-table thead.header tr th.tools.pull-right a i.fa-trash {
                       color: red; }
         #comments-mgr .card #sources-card.card table#sources-table tbody {
           display: block;
@@ -8673,17 +8679,27 @@ div#target-area {
             background-color: #DDD; }
           #comments-mgr .card #sources-card.card table#sources-table tbody tr:nth-child(odd) {
             background-color: #FFF; }
-          #comments-mgr .card #sources-card.card table#sources-table tbody tr.row {
-            display: flex;
-            margin: 0; }
-            #comments-mgr .card #sources-card.card table#sources-table tbody tr.row td.cell {
+          #comments-mgr .card #sources-card.card table#sources-table tbody tr {
+            display: flex; }
+            #comments-mgr .card #sources-card.card table#sources-table tbody tr td {
               flex: 1;
+              text-align: left;
               flex-wrap: nowrap;
-              padding: .125rem .25rem; }
-            #comments-mgr .card #sources-card.card table#sources-table tbody tr.row:hover {
+              display: table-cell;
+              padding: 0 .25rem .2rem .25rem; }
+            #comments-mgr .card #sources-card.card table#sources-table tbody tr :nth-child(1) {
+              flex: 0 1 30%;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis; }
+            #comments-mgr .card #sources-card.card table#sources-table tbody tr :nth-child(2) {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis; }
+            #comments-mgr .card #sources-card.card table#sources-table tbody tr:hover {
               border: .10rem solid black;
               cursor: pointer; }
-            #comments-mgr .card #sources-card.card table#sources-table tbody tr.row.active {
+            #comments-mgr .card #sources-card.card table#sources-table tbody tr.active {
               background-color: skyblue;
               border: none; }
       #comments-mgr .card #sources-card.card div.caption {
@@ -8758,12 +8774,13 @@ div#target-area {
         background-color: Highlight; }
   #comments-mgr div#source-new {
     border: .015rem solid green; }
-  #comments-mgr form#create-source {
-    border: .015rem solid purple; }
-    #comments-mgr form#create-source #form-fields.form-group .col-md-6 {
-      max-width: 100%; }
-    #comments-mgr form#create-source #form-buttons.form-group {
-      border: .015rem solid red; }
+
+form#create-source {
+  border: .015rem solid purple; }
+  form#create-source #form-fields.form-group .col-md-6 {
+    max-width: 100%; }
+  form#create-source #form-buttons.form-group {
+    border: .015rem solid red; }
 
 .quote-container {
   margin-top: 50px;

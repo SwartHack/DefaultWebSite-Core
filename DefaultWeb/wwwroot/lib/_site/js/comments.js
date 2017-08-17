@@ -13,12 +13,12 @@ function (Control, viewModel) {
         $.ajax(settings)
             .done(function (data) {
                 viewModel.sources([]);
-                viewModel.sources(data.sources);
+                viewModel.sources(data);
                 // this is against my pattern!!!! TODO
                 // model should deal with this, but only first time loading...
-                if (data.sources.length > 0) {
-                    $('#sources-table tbody tr:first').addClass('active');
-                    viewModel.source(data.sources[0]);
+                if (data.length > 0) {
+                 //$('#sources-table tbody tr:first').addClass('active');
+                    viewModel.sourceId(data[0].id);
                 }
                 
             })
@@ -30,31 +30,52 @@ function (Control, viewModel) {
             });
     }
 
+    $(document).on('click', '#sources-table tbody tr', function (e) {
+        var $item = $(e.currentTarget);
+        var id = $item.attr("id");
+        //$item.addClass('active').siblings().removeClass('active');
+        viewModel.sourceId(id);
+
+    });
+
+    $(document).on('click', '.comment.card', function (e) {
+        e.preventDefault();
+        var $item = $(e.currentTarget);
+        var id = $item.attr("id");
+        //$item.addClass('active').siblings().removeClass('active');
+        viewModel.commentId(id);
+
+    });
+
+    $('#modal-action-template').on('show.bs.modal', function (e) {
+        //e.preventDefault();
+        var $item = $(e.relatedTarget);
+        Control.sendMessage($item, '#modal-action-template');
+    });
+
     $(document).on('submit', 'form#create-source', function (e) {
 
         e.preventDefault();
-
         var $form = $(this);
-        var $submitButton = $('.submit', $form);
-        $submitButton.attr("disabled", true);
+        //var $submitButton = $('.submit', $form);
+        //$submitButton.attr("disabled", true);
+        $form.attr('disabled', true);
 
         //serialize form values to JSON
-        var data = $form.serializeArray();
-       
-        //close the form
-        $form.parent().hide();
+        var formvals = $form.serializeArray();
 
         $.ajax({
             url: '/Comments/CreateSource',
-            dataType: 'json',
             type: 'POST',
-            data: data
-
-        }).done(function (data, status) {
-            if (!status == 'ok') {
-                alert('Invalid response from server...')
+            data: formvals
+        }).done(function (data, textStatus, xhr) {
+            if (xhr.status == 200) {
+                $form.closest('#modal-action-template').modal('hide');
+                viewModel.addSource(data.source);
             }
-            viewModel.addSource(data.source);
+            else {
+                $('#target-modal').html(data);
+            }
         }).fail(function (error) {
             alert('error');
         });
@@ -64,83 +85,104 @@ function (Control, viewModel) {
     $(document).on('submit', 'form#create-comment', function (e) {
 
         e.preventDefault();
-
         var $form = $(this);
-        var $submitButton = $('.submit', $form);
-        $submitButton.attr("disabled", true);
+        //var $submitButton = $('.submit', $form);
+        //$submitButton.attr("disabled", true);
+        $form.attr('disabled', true);
 
+        // populate SourceId
+        $('input#SourceId.form-control', $form).val(viewModel.source().id);
         //serialize form values to JSON
-        var data = $form.serializeArray();
-        var index = data.findIndex(obj => obj.name == 'SourceId');
-        data[index] = viewModel.source.id;
-
-        //close the form
-        $form.parent().close();
-
+        var formvals = $form.serializeArray();
+        
+        viewModel.waitingTarget('.modal-header');
+        viewModel.waiting(true);
         $.ajax({
             url: '/Comments/CreateComment',
-            dataType: 'json',
             type: 'POST',
-            data: data
-        }).done(function (data, status) {
-            if (!data.Comment) {
-                alert('Invalid response from server...')
+            data: formvals
+        }).done(function (data, textStatus, xhr) {
+            if (xhr.status == 200) {
+                $form.closest('#modal-action-template').modal('hide');
+                viewModel.addComment(data.comment);
             }
-            viewModel.addComment(data.Comment);
-        }).fail(function (error) {
-            alert('error');
+            else {
+                $('#target-modal').html(data);
+            }
+            
+        }).fail(function (xhr, textStatus, error) {
+            $form.closest('#modal-action-template').modal('hide');
+            viewModel.abort(xhr, textStatus, error);
+        }).always(function (data, textStatus, xhr) {
+            viewModel.waiting(false);
+
         });
 
     });
 
-    $(document).on('click', '#sources-table tbody tr', function (e) {
-        var $item = $(e.currentTarget);
-        var id = $item.attr("id");
-        $item.addClass('active').siblings().removeClass('active');
-        viewModel.sourceId(id);
-
-    });
-
-    $('#modal-action-template').on('show.bs.modal', function (e) {
-       
-        e.preventDefault();
-        var $item = $(this);
-        var type = $item.attr('data-type');
-        var action = $item.attr('data-action');
-        
-        var settings = {
-            url: "/Comments/GetModalContent?datatype=" + type + '&action=' + action,
-            cache: false,
-            dataType: 'html'
-        }
-        Control.sendMessage(settings, '#modal-action-template');
-
-    });
+   
 
     $(document).on('click', 'a#source-delete', function (e) {
         e.preventDefault();
-        
+
+        if (viewModel.comments().length > 0) {
+            
+            $.confirm({
+                title: 'Cascade Delete Source and Comments?',
+                content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
+                buttons: {
+                    confirm: function () { deleteSource(); },
+                    cancel: function () { return; }
+                }
+            });
+        }
+        else {
+            deleteSource();
+        }
+    });
+
+    function deleteSource() {
+
         $.ajax({
-            url: '/Comments/DeleteSource?id=' + viewModel.source().id,
-            dataType: 'json'
-        }).done(function (status) {
-            if (!status == 'ok') {
-                alert('Invalid response from server...')
+            url: '/Comments/DeleteSource',
+            cache: false,
+            data: viewModel.sourceId()
+        }).done(function (data, textStatus, xhr) {
+            if (xhr.status == 200) {
+                viewModel.removeSource(data);
             }
-            viewModel.removeSource(viewModel.source().id);
-        }).fail(function (error) {
-            alert(error);
+
+        }).fail(function (xhr, textStatus, error) {
+            viewModel.abort(xhr, textStatus, error);
         });
-        
+    }
+
+    $(document).on('click', 'a#comment-delete', function (e) {
+        e.preventDefault();
+       
+        $.confirm({
+            title: 'Delete Comment(s)?',
+            content: 'This action can not be undone!!!',
+            buttons: {
+                confirm: function () { deleteComment(); },
+                cancel: function () { return; }
+            }
+        });
     });
 
-    $(document).on('click', '#comment', function (e) {
-        var $item = $(e.currentTarget);
-        var id = $item.attr("id");
-        $item.addClass('active').siblings().removeClass('active');
-        viewModel.sourceId(id);
-
-    });
+    function deleteComment() {
+        $.ajax({
+            url: '/Comments/DeleteComment?id=' + viewModel.comment().id,
+            cache: false,
+            data: viewModel.commentId()
+        }).done(function (data, textStatus, xhr) {
+            if (xhr.status == 200) {
+                viewModel.removeComment(data);
+            }
+        }).fail(function (xhr, textStatus, error) {
+            viewModel.abort(xhr, textStatus, error);
+        });
+    }
 
     return {
         GetSources: GetSources

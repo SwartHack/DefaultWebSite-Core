@@ -1,87 +1,53 @@
 
-@using System.Collections.Generic;
-@*
-    This is inserted inside sandbox-area on Sandbox/Main.cshtml
-*@
 <div id="comments-mgr"> 
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Comments Manager Tool</div>
-        </div>
-        <div id="blurb-comments" class="card-blockquote">
-            <span class="card-text">
-                Allows easy single-point management of "ALL" site "comment"s for any source type: Page, File or Db object!
-                Simply add a "Source" record and name it with a single word description. Then use the name to tag the Source object accordingly. (See code.)
-            </span>
+            <div class="card-title">Comments Manager Tool - Powered by <a href="http://knockoutjs.com/index.html">KnockoutJs</a></div>
         </div>
 
-        <div id="sources-card" class="card">
-
-            <table id="sources-table" class="table" >
-                <thead class="row header">
-                    <tr>
-                        <th class="cell">Source Name</th>
-                        <th class="cell" id="head-description">Description</th>
-                        <th class="cell tools pull-right">
-                            <a class="btn btn-default" data-toggle="modal" data-type="Source" data-action="create">
-                                <i class="fa fa-plus-square-o"></i>
-                            </a>
-                            <a class="btn btn-default" data-toggle="modal" data-type="Source" data-action="edit">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <a id="source-delete" class="btn btn-default">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </th>
-                    </tr>
-                </thead>
-          
-
-                @*sources inline  binding template*@
-                <tbody class="tbody" id="sources" data-bind="template: { name: 'sources-template', foreach: sources, afterAdd: sourceAdded }">
-                    
-                </tbody>
-
-             
-            </table>
-      
-            <div id="sources-count" class="caption text-right" data-bind="text: sourcesCount"></div>
-           
-        </div>
-
-        @*comments inline binding template*@
-        <div id="comments-card" class="card">
-            <div class="card-header">
-                <div class="card-title text-left">Comments for Source &rArr; <span data-bind="text: source.sourceName">---</span></div> 
-                <a   class="btn btn-default" data-toggle="modal" data-action="create" data-type="Comment">
-                    <i class="fa fa-plus-square-o"></i>
-                </a>
+        <div class="comments-mgr-wrapper">
+            <div id="sources-card" class="card">
+                <table id="sources-table" class="table">
+                    <thead class="header">
+                        <tr>
+                            <th>Source Name</th>
+                            <th id="head-description">Description</th>
+                            <th class="tools">
+                                <a class="btn" data-toggle="modal" data-target="#modal-action-template" data-target-controller="Comments" data-target-action="GetModalContent" data-target-id="Source">
+                                    <i class="fa fa-plus-square-o"></i>
+                                </a>
+                                <a class="btn disabled" disabled data-toggle="modal" data-type="Source" data-action="edit">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a id="source-delete disabled" class="btn" data-bind="enabled: canDeleteSource()">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    @*sources inline  binding template*@
+                    <tbody class="tbody" id="sources" data-bind="template: { name: 'sources-template', foreach: sources, afterAdd: sourceAdded }"></tbody>
+                </table>
+                <div id="sources-count" class="caption text-right" data-bind="text: sourcesCount"></div>
             </div>
-            <div id="comments-wrapper">
-                <div id="comments" class="list-group" data-bind=" template: { name: 'comments-template', foreach: comments, as: comment }"></div>
-                
+
+            @*comments inline binding template*@
+            <div id="comments-card" class="card">
+                <div class="card-header">
+                    <div class="card-title">Comments for Source &rArr; <span class="caption" data-bind="text: source().sourceName"></span></div>
+                    <a class="btn btn-default" data-toggle="modal" data-target="#modal-action-template" data-target-controller="Comments" data-target-action="GetModalContent" data-target-id="Comment">
+                        <i class="fa fa-plus-square-o"></i>
+                    </a>
+                </div>
+                <div id="comments-wrapper">
+                    <div id="comments" class="list-group" data-bind=" template: { name: 'comments-template', foreach: comments}"></div>
+                </div>
+                <div id="comments-count" class="text-right" data-bind="text: commentsCount"></div>
             </div>
-            <div id="comments-count" class="text-right" data-bind="text: commentsCount"></div>
+
         </div>
-      
     </div> 
-
-    <div id="modal-action-template" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title">Create New Comment Source</div>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div id="target-modal" class="modal-body">
-                    @{Html.RenderPartial("CreateSource.cshtml");}
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
 <script>
@@ -96,22 +62,3 @@
 
 </script>
 
-
-
-
-
-<div id="comment-new" class="modal fade" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Create New Comment</div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div id="target-modal" class="modal-body">
-                @{Html.RenderPartial("CreateComment.cshtml");}
-            </div>
-        </div>
-    </div>
-</div>

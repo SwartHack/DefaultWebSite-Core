@@ -7,6 +7,16 @@
     flex-direction: row;
     padding: 0 $navbar-padding-x;
 
+    &.loading {
+
+    }
+
+    &.waiting {
+        -webkit-animation: dws-waiting 100ms infinite;
+        animation: dws-waiting 100ms infinite;
+    }
+
+
     button {
         padding: 0;
     }

@@ -1,0 +1,44 @@
+<script id="sources-template" type="text/html">
+    <tr data-bind="attr: {id: id}">
+        <td data-bind="text: sourceName"></td>
+        <td data-bind="text: description"></td>
+    </tr>
+</script>
+
+<script id="comments-template" type="text/html">
+    <div class="comment card" data-bind="attr: { id: id }">
+        <div id="tools" class="card-header">
+            <a id="comment-edit" class="btn disabled"><i class="fa fa-edit"></i></a>
+            <a id="comment-delete" class="btn disabled"><i class="fa fa-trash"></i></a>
+            <a id="comment-details" class="btn disabled"><i class="fa fa-list"></i></a>
+        </div>
+
+        <div id="comment-context" class="card-block">
+            <div class="card-title" data-bind="text: title"></div>
+            <div class="card-text-wrapper">
+                <div class="card-text" data-bind="text: content"></div>
+            </div>
+        </div>
+
+        <div id="comment-info" class="card-header" >
+            <div class="author"><span data-bind="text: author"></span></div>
+            <img id="gravatar" class="img-fluid" src="~/images/bot1.jpg">
+            <div id="datetime"><span data-bind="text: datetime"></span></div>
+        </div>
+    </div>
+</script>
+
+<div id="modal-action-template" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="target-modal" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

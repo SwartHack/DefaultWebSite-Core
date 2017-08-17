@@ -7,27 +7,33 @@
         data: ko.observable(''),
         dataType: ko.observable(''),
         target: ko.observable(''),
-        error: function (request, error, response) {
-            alert(response + '\n' + error);
+        abort: function (xhr, textStatus, data) {
+            ModelActions.callAborted(xhr, textStatus, data);
         },
         waiting: ko.observable(false),
+        waitingTarget:ko.observable(''),
 
-        sources: ko.observableArray([]).sort(),
-
+        sources: ko.observableArray([]).extend( { deffer: true }),
         source: ko.observable(''),
         sourceId: function (sid) {
             var index = viewModel.sources().findIndex(s => s.id == sid);
+            viewModel.sourceIndex(index);
             viewModel.source(viewModel.sources()[index]);
+            return viewModel.source();
         },
         sourceIndex: ko.observable(''),
         sourcesCount: ko.pureComputed(function () { return 'Records: ' + viewModel.sources().length }, this),
-        addSource: function (item) {
-            viewModel.sources.unshift(item);
+        addSource: function (source) {
+            viewModel.sources.unshift(source);
+            viewModel.sourceId(source.id);
         },
-        removeSource: function (item) {
-            viewModel.sources.remove(item);
+        canDeleteSource: function () { return viewModel.sources().length > 0 },
+        removeSource: function (sid) {
+            var index = viewModel.sources().findIndex(s => s.id == sid);
+            var source = viewModel.sources()[viewModel.sourceIndex()];
+            viewModel.sources.remove(source);
+            viewModel.source(undefined);
         },
-        
         sourceAdded: function (parent, index, item) {
             var $parent = $(parent);
             var $item = $(item);
@@ -35,33 +41,43 @@
             //viewModel.sources.sort();
             $item.hide().fadeIn('slow');
 
-            //scroll to view TODO
-            console.log('Source afterAdd... ');
+            // sort and scroll to view TODO
+           console.log('Source afterAdd... ');
         },
-        //sourceRemoving: function (parent, index, item) {
-        //    var $item = $(item);
-        //    var $next = $item.closest('tr');
-        //    var id = $next.attr('id');
-        //    viewModel.sourceId(id);
-
-        //},
-        comments: ko.observableArray([]),
+        comments: ko.observableArray([]).extend({ deffer: true }),
         comment: ko.observable(''),
-        commentsCount: ko.pureComputed(function () { return 'Records: ' + viewModel.comments().length }, this),
-        addComment: function (item) {
-            viewModel.comments.unshift(item);
+        commentId: function (cid) {
+            var index = viewModel.comments().findIndex(c => c.id == cid);
+            viewModel.commentIndex(index);
+            viewModel.comment(viewModel.comments()[index]);
+            return viewModel.comment();
         },
-        removeComment: function (item) {
-            viewModel.comments.remove(item);
+        commentIndex: ko.observable(''),
+        commentsCount: ko.pureComputed(function () { return 'Records: ' + viewModel.comments().length }, this),
+        commentTitle: ko.pureComputed(function () { return 'Ima a stupid title!'}, this),
+        addComment: function (comment) {
+            viewModel.comments.unshift(comment);
+            viewModel.commentId(comment.id);
+        },
+        removeComment: function (cid) {
+            var index = viewModel.comments().findIndex(c => c.id == cid);
+            var comment = viewModel.comments()[viewModel.commentIndex()];
+            viewModel.comments.remove(comment);
+            viewModel.comment(undefined);
         },
         commentAdded: function (item) {
             var $item = $(item);
             $item.hide().fadeIn('slow');
             console.log('Comment afterAdd... ');
         },
-        canAddComment: function () { return this.source === null ? false : true }
-
-        
+        canAddComment: function () { return viewModel.sources().length === 0 ? false : true }
+        //canDeleteComment: function () {
+        //    var list = $('#comments.list-group').children();
+        //    var $element = $(list[viewModel.commentIndex()]);
+        //    var isClass = $element.hasClass('active')
+        //    return isClass;
+        //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
+        //}
     };
 
     viewModel.data.subscribe(function (newdata) {
@@ -73,46 +89,61 @@
     });
 
     viewModel.source.subscribe(function (source) {
-        //$('#sources-table tbody tr').removeClass('active');
-        //var index = viewModel.sources.indexOf(source);
-        //$($('#sources-table tbody tr')[index]).addClass('active').siblings().removeClass('active');
-
-        if (source === null) {
+       
+        if (source == undefined) {
+            var prev = viewModel.sourceIndex() - 1;
+            if (prev >= 0)
+            {
+                source = viewModel.sources()[prev];
+                viewModel.sourceId(source.id);
+            }
+            return;
             //when the source has just been removed?!???
+            //select the one above
+            // if its the last one
+        }
+        else
+        {
+            //var index = viewModel.sources.indexOf(source);
+            $($('#sources-table tbody tr')[viewModel.sourceIndex()]).addClass('active').siblings().removeClass('active');
+            //re-set comments
+            //viewModel.comments([]);
+            viewModel.comments(source.comments == null ? [] : source.comments);
+            if (viewModel.comments().length > 0) {
+                viewModel.commentId(viewModel.comments()[0].id);
+            }
+            console.log('source subscribe:' + source.sourceName);
         }
 
-
-        if (source != null && source.comments != null) {
-            viewModel.comments(source.comments);
-        }
-
-        console.log('source subscribe:' + source);
+        
     });
+
+    viewModel.comment.subscribe(function (comment) {
+
+        if (comment == undefined) {
+            var prev = viewModel.commentIndex() - 1;
+            if (prev >= 0) {
+                comment = viewModel.comments()[prev];
+                viewModel.commentId(comment.id);
+            }
+        }
+        else
+        {
+            //var index = viewModel.comments.indexOf(comment);
+            //$($('#comments.list-group').children()[viewModel.commentIndex()]).addClass('active').siblings().removeClass('active');
+            var list = $('#comments.list-group').children();
+            var $element = $(list[viewModel.commentIndex()]);
+            $element.addClass('active').siblings().removeClass('active');
+            $('.comment.card a#comment-delete').addClass('disabled');
+            $element.find('a#comment-delete').removeClass('disabled');
+            console.log('comment subscribe:' + comment.id);
+        }
+    });
+
 
     viewModel.waiting.subscribe(function (wait) {
 
-        if (wait) {
-
-        }
-        else {
-
-        }
-
-        //function waitEffects(status) {
-
-        //    if (status) {
-        //        $('').addClass('waiting')
-        //    }
-
-        //    var completed = $(target)[0].complete;
-        //    if (!completed) {
-        //        $(target)[0].addClass('loading');
-        //        $(target).load(function () {
-        //            $(target).removeClass('loading');
-        //        });
-        //    }
-        //} 
-
+        ModelActions.waitStatus(wait, viewModel.waitingTarget());
     });
 
 

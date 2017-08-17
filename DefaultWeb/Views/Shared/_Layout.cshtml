@@ -1,13 +1,37 @@
 ﻿<html>
 <head>
-    @RenderSection("header", false)
+    @RenderSection("header", true)
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" />
+        <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/tether.min.css" />
+        <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
+        <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
+        <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+    </environment>
 </head>
 <body>
     @{Html.RenderPartial("_NavBarMain.cshtml"); }
     <div class="container body-content">
         @RenderBody()
+        @{Html.RenderPartial("_Templates.cshtml");}
     </div>
-    @{Html.RenderPartial("_Modals.cshtml");}
+
+   
+
+    <environment names="Development">
+        <script src="~/lib/_site/dist/js/jcore.js" asp-append-version="true"></script>
+        <script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/defaultwebsite.min.js" asp-append-version="true"></script>
+    </environment>
+
     @RenderSection("JS", required: true)
 </body>
 </html>

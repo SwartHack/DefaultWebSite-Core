@@ -49,8 +49,9 @@ function (viewModel, Dispatch) {
     //////////////////////////////////
     ///
     ////////////////////////////////
-    function sendMessage($item) {
-        var target = $item.attr('data-target')
+    function sendMessage($item, target) {
+        if (!target)
+            target = $item.attr('data-target');
         var url = parseNavUrl($item);
         var settings = {
             url: url,

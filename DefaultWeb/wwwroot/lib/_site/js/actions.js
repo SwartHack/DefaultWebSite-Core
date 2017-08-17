@@ -65,16 +65,31 @@ function (Control) {
         });
 
         $(document).on('bs.collapse','#doc-cv', function (e) {
+            e.preventDefault();
             $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
-        $('#source-modal').on('hidden.bs.modal', function (e) {
-            // refresh after add, detect cancel
-            var settings = {
-                url: "/Sources/Main",
-                cache: false
-            }
-            Control.sendMessage(settings, '#sandbox-area');
+        //$('#modal-action-template').on('show.bs.modal', function (e) {
+        //    e.preventDefault();
+        //    // get event source
+        //    var $item = $(e.relatedTarget());
+        //    Control.sendMessage($item, '#target-modal');
+        //})
+
+        $(document).on('show.bs.modal', '#modal-action-template', function (e) {
+            //e.preventDefault();
+            // get event source
+            var $item = $(e.relatedTarget);
+            var $modal = $(this);
+            $modal.find('.modal-title').text('Add New ' + $item.attr('data-target-id'));
+            Control.sendMessage($item, '#target-modal');
+        })
+
+        $(document).on('shown.bs.modal', '#modal-action-template', function (e) {
+            //e.preventDefault();
+            // get modal 
+            var $item = $(e.target);
+            $item.find('input:visible').first().focus();
         })
 
         /////////////////////////////

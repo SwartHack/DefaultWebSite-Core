@@ -145,7 +145,7 @@ module.exports = function(grunt) {
       grunt.registerTask('theme', 'Build default and cerulean theme', function () {
           //grunt.task.run('clean');
           grunt.task.run('buildtheme:default');
-          grunt.task.run('buildtheme:cerulean');
+          //grunt.task.run('buildtheme:cerulean');
           grunt.task.run('copy:css')
       });
 

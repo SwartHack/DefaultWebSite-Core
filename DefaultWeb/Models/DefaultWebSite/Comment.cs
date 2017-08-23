@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DefaultWeb.Models.DefaultWebSite
+namespace DefaultWeb2.Models.DefaultWebSite
 {
     public class Comment
     {

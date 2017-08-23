@@ -12,15 +12,11 @@
     "requirejs": "2.3.3",
     "arcgis-js-api": "arcgis#4.4.0",
     "esri-leaflet": "v2.0.8",
-    "esri-leaflet-geocoder": "v2.2.4",
-    "popper.js": "https://unpkg.com/popper.js"
+    "esri-leaflet-geocoder": "v2.2.4"
   },
   "resolutions": {
-    "bootstrap": "v4.0.0-beta",
     "dojo": ">=1.8.9",
     "dijit": "1.12.2",
-    "dojox": "1.12.2",
-    "jquery": "3.2.1",
-    "popper.js": "^1.11.0"
+    "dojox": "1.12.2"
   }
 }

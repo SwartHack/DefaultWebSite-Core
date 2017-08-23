@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DefaultWeb.Models.DefaultWebSite
+namespace DefaultWeb2.Models.DefaultWebSite
 {
     public class ServerError
     {

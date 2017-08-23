@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using DefaultWeb.Models;
 
-namespace DefaultWeb.Controllers
+namespace DefaultWeb2.Controllers
 {
     public class SandboxController : Controller
     {

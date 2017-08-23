@@ -156,6 +156,7 @@ module.exports = function(grunt) {
           grunt.task.run('concat:jcore');
           grunt.task.run('concat:site');
           grunt.task.run('eslint');
+          //grunt.task.run('uglify:wwwroot')
       });
 
       //// Build project scss source, with only default theme

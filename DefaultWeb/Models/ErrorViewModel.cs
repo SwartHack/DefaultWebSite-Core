@@ -1,6 +1,6 @@
 using System;
 
-namespace WebSiteCore20.Models
+namespace DefaultWeb2.Models
 {
     public class ErrorViewModel
     {

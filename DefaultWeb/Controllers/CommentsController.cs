@@ -1,17 +1,11 @@
 using System;
-using System.Net;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DefaultWeb.Data;
-using DefaultWeb.Models.DefaultWebSite;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Http;
+using DefaultWeb2.Data;
+using DefaultWeb2.Models.DefaultWebSite;
 
-namespace DefaultWeb.Controllers
+namespace DefaultWeb2.Controllers
 {
     public class CommentsController : Controller
     {

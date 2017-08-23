@@ -55,7 +55,7 @@
     "../jquery-validation/dist/jquery.validate.js",
     "../jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
     "../jquery-validation/dist/additional-methods.js",
-    "../",
+    "../jquery-ui/jquery-ui.js",
     "../bootstrap/dist/js/bootstrap.js",
     "../knockout/dist/knockout.js",
     "../almond/almond.js",

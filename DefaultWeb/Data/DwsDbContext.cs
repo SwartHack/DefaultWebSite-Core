@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DefaultWeb.Models.DefaultWebSite;
+using DefaultWeb2.Models.DefaultWebSite;
 
-namespace DefaultWeb.Data
+namespace DefaultWeb2.Data
 {
     public class DwsDbContext : DbContext
     {

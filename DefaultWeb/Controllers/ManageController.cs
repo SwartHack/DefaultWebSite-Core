@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using DefaultWeb.Models;
-using DefaultWeb.Models.ManageViewModels;
-using DefaultWeb.Services;
+using DefaultWeb2.Models;
+using DefaultWeb2.Models.ManageViewModels;
+using DefaultWeb2.Services;
 
-namespace DefaultWeb.Controllers
+namespace DefaultWeb2.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -495,7 +495,7 @@ namespace DefaultWeb.Controllers
         {
             return string.Format(
                 AuthenicatorUriFormat,
-                _urlEncoder.Encode("DefaultWeb"),
+                _urlEncoder.Encode("DefaultWeb2"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

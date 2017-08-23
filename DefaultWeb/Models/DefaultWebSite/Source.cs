@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DefaultWeb.Models.DefaultWebSite
+namespace DefaultWeb2.Models.DefaultWebSite
 {
     public class Source
     {

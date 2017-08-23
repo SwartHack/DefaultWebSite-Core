@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace WebSiteCore20.Views.Manage
+namespace DefaultWeb2.Views.Manage
 {
     public static class ManageNavPages
     {

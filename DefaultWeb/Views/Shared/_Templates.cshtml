@@ -28,6 +28,17 @@
     </div>
 </script>
 
+<script id="xhr-errors" type="text/html">
+    <li data-bind="value: property"></li>
+</script>
+
+<div id="ajax-error" title="Communication Breakdown!">
+    <div class="card-header" data-bind='text: errorMsg'>This is an error message</div>
+    <div class="card-title" data-bind='text: errorStatus'>I am the status</div>
+    <div class="card-block" data-bind='text: errorXhr'>I am the xhr</div>
+    <ul class="list-group" data-bind="template: { foreach: errorXhr, as: 'property'}"></ul>
+</div>
+
 <div id="modal-action-template" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">

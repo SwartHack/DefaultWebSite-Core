@@ -1,8 +1,8 @@
-@model DefaultWeb2.Models.DefaultWebSite.Comment
+@model DefaultWeb.Models.DefaultWebSite.Comment
 @{
     <form id="create-comment">
         <div id="form-fields" class="form-group">
-            @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken();
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <label asp-for="Title" class="col-md-2 control-label"></label>
             <div class="col-md-10">

@@ -4,11 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using DefaultWeb2.Data;
-using DefaultWeb2.Services;
+using DefaultWeb.Data;
+using DefaultWeb.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using DefaultWeb2.Models;
+using DefaultWeb.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace DefaultWeb2
 {
@@ -34,13 +38,17 @@ namespace DefaultWeb2
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //dws data 
+            //dws specic configuration 
             services.AddDbContext<DwsDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DwsConnection")));
 
@@ -50,15 +58,20 @@ namespace DefaultWeb2
 
             services.AddMvc(options =>
             {
+                //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 //options.SslPort = 44311;
                 //options.Filters.Add(new RequireHttpsAttribute());
             })
-             .AddJsonOptions(options =>
+            .AddJsonOptions(options =>
              {
                  options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                  options.SerializerSettings.DateFormatString = "MM/dd/yyyy hh:mm tt";
              });
 
+            services.AddAntiforgery(options =>
+            {
+
+            });
 
             // Add other provider services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -73,7 +86,15 @@ namespace DefaultWeb2
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="loggerFactory"></param>
+        /// <param name="antiforgery"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -93,6 +114,22 @@ namespace DefaultWeb2
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+
+            //app.Use(next => context =>
+            //{
+            //    string path = context.Request.Path.Value;
+            //    if (string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) || string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase))
+            //    {
+            //        //We can send the request token as a JavaScript - readable cookie, 
+            //         //and JQuery  will use it by default.
+                        //antiforgery.GetAndStoreTokens(context);
+            //        context.Response.Cookies.Append("RequestVerificationToken", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
+            //    }
+
+               //return next(context);
+            //});
+
 
             app.UseMvc(routes =>
             {

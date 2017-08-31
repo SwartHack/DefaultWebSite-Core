@@ -1,4 +1,7 @@
-﻿define('dws/comments', ['dws/controller', 'dws/model'],
+﻿//////////////////////////////////////////////////////////////////////
+/// comments module
+//////////////////////////////////////////////////////////////////////
+define('dws/comments', ['dws/controller', 'dws/model'],
 function (Control, viewModel) {
 
     function GetSources() {
@@ -63,23 +66,28 @@ function (Control, viewModel) {
 
         //serialize form values to JSON
         var formvals = $form.serializeArray();
-
-        $.ajax({
+        //var csrfToken = $("input[name='__RequestVerificationToken']").val();
+        var settings = {
             url: '/Comments/CreateSource',
             type: 'POST',
+            dataType: 'json',
             data: formvals
-        }).done(function (data, textStatus, xhr) {
-            if (xhr.status == 200) {
-                $form.closest('#modal-action-template').modal('hide');
-                viewModel.addSource(data.source);
-            }
-            else {
-                $('#target-modal').html(data);
-            }
-        }).fail(function (error) {
-            alert('error');
-        });
+        }
 
+        $.ajax(settings)
+            .done(function (data, textStatus, xhr) {
+                if (xhr.status == 200) {
+                    $form.closest('#modal-action-template').modal('hide');
+                    viewModel.addSource(data.source);
+                }
+                else {
+                    $('#target-modal').html(data);
+                }
+            })
+            .fail(function (xhr, textStatus, error) {
+                $form.closest('#modal-action-template').modal('hide');
+                viewModel.abort(xhr, textStatus, error);
+            });
     });
 
     $(document).on('submit', 'form#create-comment', function (e) {
@@ -100,6 +108,7 @@ function (Control, viewModel) {
         $.ajax({
             url: '/Comments/CreateComment',
             type: 'POST',
+            dataType: 'json',
             data: formvals
         }).done(function (data, textStatus, xhr) {
             if (xhr.status == 200) {
@@ -120,10 +129,7 @@ function (Control, viewModel) {
 
     });
 
-   
-
     $(document).on('click', 'a#source-delete', function (e) {
-        e.preventDefault();
 
         if (viewModel.comments().length > 0) {
             
@@ -144,9 +150,10 @@ function (Control, viewModel) {
     function deleteSource() {
 
         $.ajax({
-            url: '/Comments/DeleteSource',
-            cache: false,
-            data: viewModel.sourceId()
+            url: '/Comments/DeleteSource?sid=' + viewModel.source().id,
+            type: 'POST',
+            headers: { 'RequestVerificationToken': viewModel.xsrfToken() }
+
         }).done(function (data, textStatus, xhr) {
             if (xhr.status == 200) {
                 viewModel.removeSource(data);
@@ -158,7 +165,6 @@ function (Control, viewModel) {
     }
 
     $(document).on('click', 'a#comment-delete', function (e) {
-        e.preventDefault();
        
         $.confirm({
             title: 'Delete Comment(s)?',
@@ -172,9 +178,9 @@ function (Control, viewModel) {
 
     function deleteComment() {
         $.ajax({
-            url: '/Comments/DeleteComment?id=' + viewModel.comment().id,
-            cache: false,
-            data: viewModel.commentId()
+            url: '/Comments/DeleteComment?cid=' + viewModel.comment().id,
+            type: 'POST',
+            headers: { 'RequestVerificationToken': viewModel.xsrfToken() }
         }).done(function (data, textStatus, xhr) {
             if (xhr.status == 200) {
                 viewModel.removeComment(data);

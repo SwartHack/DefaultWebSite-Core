@@ -11,7 +11,9 @@
 @import "carousel.scss";
 @import "sandbox.scss";
 @import "comments.scss";
+@import "comment.scss";
 @import "_errors.scss";
+
 
 //@import "./lib/video-js.scss";
 @import "./lib/notepad.scss";
@@ -49,6 +51,78 @@
     }
 }
 
+
+////////////////////////
+/// global over-rides
+///////////////////////
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+    //background: linear-gradient(circle, steelblue, hotpink);
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+div.modal-header {
+    padding: .3rem .75rem;
+
+    button {
+    }
+
+    &.waiting {
+        -webkit-animation: dws-waiting 500ms infinite;
+        animation: dws-waiting 500ms infinite;
+    }
+}
+
+div.modal-title {
+}
+
+
+div.modal-body {
+    padding: 0;
+}
+
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575px) {
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) {
+    #navbar-main {
+        display: none;
+    }
+
+    #navbar-mobile {
+        display: block;
+    }
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) {
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199px) {
+    .container {
+        max-width: none;
+        width: 100%;
+        padding: 0;
+    }
+
+    #siteseal {
+        display: none;
+    }
+}
 
 
 

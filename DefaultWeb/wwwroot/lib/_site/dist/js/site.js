@@ -5,8 +5,11 @@
  * Licensed under ISC
  * Based on Bootstrap
 */
-define('dws/model', ['dws/model-actions'], function (ModelActions) {
-
+//////////////////////////////////////////////////////////////////////
+/// KO View Model module
+//////////////////////////////////////////////////////////////////////
+define('dws/model', ['dws/model-utils'], function (ModelUtils) {
+    
     var viewModel = {
 
         file: ko.observable(''),
@@ -14,18 +17,24 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
         data: ko.observable(''),
         dataType: ko.observable(''),
         target: ko.observable(''),
-        abort: function (xhr, textStatus, data) {
-            ModelActions.callAborted(xhr, textStatus, data);
+        abort: function (xhr, status, error) {
+            viewModel.errorXhr(xhr);
+            viewModel.errorStatus(status);
+            viewModel.errorMsg(error);
         },
+        errorXhr: ko.observableArray([]),
+        errorStatus: ko.observable(''),
+        errorMsg: ko.observableArray(''),
         waiting: ko.observable(false),
-        waitingTarget:ko.observable(''),
-
-        sources: ko.observableArray([]).extend( { deffer: true }),
+        waitingTarget: ko.observable(''),
+        xsrfToken: ko.observable(''),
+        sources: ko.observableArray([]),
         source: ko.observable(''),
         sourceId: function (sid) {
             var index = viewModel.sources().findIndex(s => s.id == sid);
             viewModel.sourceIndex(index);
-            viewModel.source(viewModel.sources()[index]);
+            var source = viewModel.sources()[index];
+            viewModel.source(source);
             return viewModel.source();
         },
         sourceIndex: ko.observable(''),
@@ -34,7 +43,7 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
             viewModel.sources.unshift(source);
             viewModel.sourceId(source.id);
         },
-        canDeleteSource: function () { return viewModel.sources().length > 0 },
+        //canDeleteSource: function () { return viewModel.sources().length > 0 },
         removeSource: function (sid) {
             var index = viewModel.sources().findIndex(s => s.id == sid);
             var source = viewModel.sources()[viewModel.sourceIndex()];
@@ -42,16 +51,12 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
             viewModel.source(undefined);
         },
         sourceAdded: function (parent, index, item) {
-            var $parent = $(parent);
+            var $parent = $(parent); 
             var $item = $(item);
-
             //viewModel.sources.sort();
             $item.hide().fadeIn('slow');
-
-            // sort and scroll to view TODO
-           console.log('Source afterAdd... ');
         },
-        comments: ko.observableArray([]).extend({ deffer: true }),
+        comments: ko.observableArray([]),
         comment: ko.observable(''),
         commentId: function (cid) {
             var index = viewModel.comments().findIndex(c => c.id == cid);
@@ -87,6 +92,35 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
         //}
     };
 
+
+    ////////////////////////////////////////
+    /// model events/actions
+    /// TODO - move to model-utils module
+    ///////////////////////////////////////
+
+    
+
+    ////////////////////////////////////////
+    /// model events/actions
+    ///////////////////////////////////////
+    // subscribe to any ajax errors
+    viewModel.errorMsg.subscribe(function (error) {
+        if (error != undefined)
+        {
+            if (!ko.dataFor($('#ajax-error')[0])) { ko.applyBindings(viewModel, $('#ajax-error')[0]) }
+            $('#ajax-error').dialog({
+                autoOpen: true,
+                modal: true,
+                buttons: {
+                    OK: function () { $(this).dialog("close"); }
+                }
+            });
+        }
+    });
+
+    ////////////////////////////////////////
+    /// model events/actions
+    ///////////////////////////////////////
     viewModel.data.subscribe(function (newdata) {
 
         if (viewModel.target())
@@ -95,6 +129,9 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
             $(newdata).dialog();
     });
 
+    ////////////////////////////////////////
+    /// Source subscribe events/actions
+    ///////////////////////////////////////
     viewModel.source.subscribe(function (source) {
        
         if (source == undefined) {
@@ -105,60 +142,107 @@ define('dws/model', ['dws/model-actions'], function (ModelActions) {
                 viewModel.sourceId(source.id);
             }
             return;
-            //when the source has just been removed?!???
-            //select the one above
-            // if its the last one
         }
-        else
-        {
-            //var index = viewModel.sources.indexOf(source);
-            $($('#sources-table tbody tr')[viewModel.sourceIndex()]).addClass('active').siblings().removeClass('active');
-            //re-set comments
-            //viewModel.comments([]);
-            viewModel.comments(source.comments == null ? [] : source.comments);
-            if (viewModel.comments().length > 0) {
-                viewModel.commentId(viewModel.comments()[0].id);
-            }
-            console.log('source subscribe:' + source.sourceName);
-        }
+       
+        ///TODO
+        /// this should all be done with a class binding
+        var $element = $($('#sources-table tbody tr')[viewModel.sourceIndex()])
+        $element.addClass('active').siblings().removeClass('active');
+        //re-set comments
+        //viewModel.comments([]);
+        viewModel.comments(source.comments == null ? [] : source.comments);
+        if ( viewModel.comments().length > 0 ) {
+            viewModel.commentId(viewModel.comments()[0].id);
+        }  
 
-        
+        viewModel.sources.sortByName('sourceName', 'asc')
+        // scroll to visible if necessary
+        $element.scrollToTop();
+        //console.log('source subscribe:' + source.sourceName);
     });
 
+    ////////////////////////////////////////
+    /// Comment subscribe events/actions
+    ///////////////////////////////////////
     viewModel.comment.subscribe(function (comment) {
 
-        if (comment == undefined) {
+        if ( comment == undefined ) {
             var prev = viewModel.commentIndex() - 1;
-            if (prev >= 0) {
+            if ( prev >= 0 ) {
                 comment = viewModel.comments()[prev];
                 viewModel.commentId(comment.id);
             }
+            return;
         }
-        else
-        {
-            //var index = viewModel.comments.indexOf(comment);
-            //$($('#comments.list-group').children()[viewModel.commentIndex()]).addClass('active').siblings().removeClass('active');
-            var list = $('#comments.list-group').children();
-            var $element = $(list[viewModel.commentIndex()]);
-            $element.addClass('active').siblings().removeClass('active');
-            $('.comment.card a#comment-delete').addClass('disabled');
-            $element.find('a#comment-delete').removeClass('disabled');
-            console.log('comment subscribe:' + comment.id);
-        }
+      
+        ///TODO
+        /// this should all be done with a class binding
+        var list = $('#comments.list-group').children();
+        var $element = $(list[viewModel.commentIndex()]);
+        $element.addClass('active').siblings().removeClass('active');
+        $('.comment.card a#comment-delete').addClass('disabled');
+        $element.find('a#comment-delete').removeClass('disabled');
+        
+
+         // sort here ? We souldn't have too?
+         // TODO -Always adds on top, need to animate nicely, offer asc/desc
+        viewModel.comments.sortByDateTime('datetime', 'desc');
+
+        //console.log('comment subscribe:' + comment.id);
     });
 
 
+    ////////////////////////////////////////
+    /// Waiting subscribe events/actions
+    ///////////////////////////////////////
     viewModel.waiting.subscribe(function (wait) {
 
-        ModelActions.waitStatus(wait, viewModel.waitingTarget());
+        ModelUtils.waitStatus(wait, viewModel.waitingTarget());
     });
 
+    ////////////////////////////////////////
+    /// observableArray DateTime sort extension
+    ///////////////////////////////////////
+    ko.observableArray.fn.sortByDateTime = function (property, direction) {
+
+        return this.sort(function (a, b) {
+            var dateA = new Date(a[property]);
+            var dateB = new Date(b[property]);
+            if (direction == 'asc') {
+                return (Date.parse(dateA) == Date.parse(dateB) ? 0 :
+                    (Date.parse(dateA) > Date.parse(dateB) ? -1 : 1))
+                //return dateA.getTime() - dateB.getTime();
+            }
+            return (Date.parse(dateA) == Date.parse(dateB) ? 0 :
+                (Date.parse(dateA) < Date.parse(dateB) ? -1 : 1))
+            //return dateB.getTime() - dateA.getTime();
+        });
+    };
+
+    ko.observable.fn.sortByName = function (property, direction) {
+        return this.sort(function (a, b) {
+            var textA = a[property];
+            var textB = b[property];
+            if (direction == 'asc') {
+                return textA == textB ? 0 : (textA < textB ? -1 : 1);
+            }
+            return textA == textB ? 0 : (textA > textB ? -1 : 1);
+        });
+
+    };
 
     return viewModel;
 });
-define('dws/model-actions', function () {
+//////////////////////////////////////////////////////////////////////
+/// KO viewModel extensions module
+//////////////////////////////////////////////////////////////////////
+define('dws/model-utils', function () {
 
-    function callAborted(xhr, textStatus, data) {
+    function callAborted(xhr, textStatus, error) {
+
+
+
+
 
     }
 
@@ -193,10 +277,14 @@ define('dws/model-actions', function () {
 
     return {
         waitStatus: waitStatus,
-        loadingStatus: loadingStatus
+        loadingStatus: loadingStatus,
+        callAborted: callAborted
     }
 
 })
+//////////////////////////////////////////////////////////////////////
+/// message dispatcher module
+//////////////////////////////////////////////////////////////////////
 define('dws/dispatcher', ['dws/model'], function (ViewModel) {
 
     function xhrRequest(url) {
@@ -221,29 +309,30 @@ define('dws/dispatcher', ['dws/model'], function (ViewModel) {
     function ajaxRequest(settings) {
         //waitEffects(true);
         $.ajax(settings)
-            .done(function (data) {
-                //based on requested data type
-                ViewModel.data(data); 
+        .done(function (data, textStatus, xhr) {
+            //based on requested data type
+            ViewModel.data(data); 
         })
-        .fail(function (request, error) {
-            ViewModel.aborted(request, error, this.responseText)
+        .fail(function (xhr, textStatus, error) {
+            ViewModel.aborted(xhr, textStatus, error)
         })
         .always(function () {
-            //waitEffects(false);
+        //waitEffects(false);
         });
     }
 
+
     function ajaxRequestDefer(settings, deferred) {
         $.ajax(settings)
-        .done(function (data) {
-            deferred.resolve(data); //ok, fires deferred callback
-        })
-        .fail(function (request, error) {
-            deferred.reject(this.responseText + '\n' + error)
-        })
-        .always(function () {
-
-        });
+            .done(function (data, textStatus, xhr) {
+                deferred.resolve(data); //ok, fires deferred callback
+            })
+            .fail(function (xhr, textStatus, error) {
+                deferred.reject(this.responseText + '\n' + error)
+            })
+            .always(function () {
+        
+            });
     }
 
     return {
@@ -252,6 +341,9 @@ define('dws/dispatcher', ['dws/model'], function (ViewModel) {
         ajaxRequestDefer: ajaxRequestDefer
     }
 });
+//////////////////////////////////////////////////////////////////////
+/// actions module
+//////////////////////////////////////////////////////////////////////
 define('dws/actions', ['dws/controller'],
 function (Control) {
     
@@ -293,34 +385,61 @@ function (Control) {
 
         /////////////////////////////
         /// show/hide events
+        /// TODO - optimize these events...
         ////////////////////////////
         $(document).on("shown.bs.collapse", "#doc-resume", function (e) {
-            e.preventDefault();
             $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
             $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
             if ($('#doc-cv').hasClass('show')) {
                 $('#doc-cv').removeClass('show');
+                $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
             }
+            if ($('#doc-masters').hasClass('show')) {
+                $('#doc-masters').removeClass('show');
+                $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            } 
         });
 
         $(document).on("hide.bs.collapse", "#doc-resume", function (e) {
             $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
-        $(document).on('hide.shown.bs.collapse', '#doc-cv', function (e) {
-            e.preventDefault();
+        $(document).on('shown.bs.collapse', '#doc-cv', function (e) {
             $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
-            $('[data-target="#doc-cv"] button h4 i').switchClass('fa-eye', 'fa-eye-slash');
+            $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
             if ($('#doc-resume').hasClass('show')) {
                 $('#doc-resume').removeClass('show');
+                $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            }
+            if ($('#doc-masters').hasClass('show')) {
+                $('#doc-masters').removeClass('show');
+                $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            } 
+        });
+
+        $(document).on('hide.bs.collapse','#doc-cv', function (e) {
+            $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+        });
+
+        $(document).on('shown.bs.collapse', '#doc-masters', function (e) {
+            e.preventDefault();
+            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
+            $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
+
+            if ($('#doc-resume').hasClass('show')) {
+                $('#doc-resume').removeClass('show');
+                $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            }
+            if ($('#doc-cv').hasClass('show')) {
+                $('#doc-cv').removeClass('show');
+                $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
             }
         });
 
-        $(document).on('bs.collapse','#doc-cv', function (e) {
-            e.preventDefault();
-            $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+        $(document).on('hide.bs.collapse', '#doc-masters', function (e) {
+            $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
         //$('#modal-action-template').on('show.bs.modal', function (e) {
@@ -398,6 +517,9 @@ function (Control) {
     };
 });
 
+//////////////////////////////////////////////////////////////////////
+/// sandbox module - MutationObserver Here!!!
+//////////////////////////////////////////////////////////////////////
 define('dws/sandbox', ['dws/model'], function (ViewModel) {
 
     //lets monitor the sand box area for new content and bind accordingly
@@ -567,8 +689,13 @@ function (viewModel, Dispatch) {
     //////////////////////////////////
     ///
     ////////////////////////////////
-    function initKO() {
+    function initKO(xsrf) {
         ko.applyBindings(viewModel);
+        
+    }
+
+    function setXsrf(xsrf) {
+        viewModel.xsrfToken(xsrf);
     }
 
     return {
@@ -578,10 +705,14 @@ function (viewModel, Dispatch) {
         sendMessageDefer: sendMessageDefer,
         showContentArea: showContentArea,
         hideAllContent: hideAllContent,
-        parseNavUrl: parseNavUrl
+        parseNavUrl: parseNavUrl,
+        setXsrf: setXsrf
     }
 });
 
+//////////////////////////////////////////////////////////////////////
+/// comments module
+//////////////////////////////////////////////////////////////////////
 define('dws/comments', ['dws/controller', 'dws/model'],
 function (Control, viewModel) {
 
@@ -647,23 +778,28 @@ function (Control, viewModel) {
 
         //serialize form values to JSON
         var formvals = $form.serializeArray();
-
-        $.ajax({
+        //var csrfToken = $("input[name='__RequestVerificationToken']").val();
+        var settings = {
             url: '/Comments/CreateSource',
             type: 'POST',
+            dataType: 'json',
             data: formvals
-        }).done(function (data, textStatus, xhr) {
-            if (xhr.status == 200) {
-                $form.closest('#modal-action-template').modal('hide');
-                viewModel.addSource(data.source);
-            }
-            else {
-                $('#target-modal').html(data);
-            }
-        }).fail(function (error) {
-            alert('error');
-        });
+        }
 
+        $.ajax(settings)
+            .done(function (data, textStatus, xhr) {
+                if (xhr.status == 200) {
+                    $form.closest('#modal-action-template').modal('hide');
+                    viewModel.addSource(data.source);
+                }
+                else {
+                    $('#target-modal').html(data);
+                }
+            })
+            .fail(function (xhr, textStatus, error) {
+                $form.closest('#modal-action-template').modal('hide');
+                viewModel.abort(xhr, textStatus, error);
+            });
     });
 
     $(document).on('submit', 'form#create-comment', function (e) {
@@ -684,6 +820,7 @@ function (Control, viewModel) {
         $.ajax({
             url: '/Comments/CreateComment',
             type: 'POST',
+            dataType: 'json',
             data: formvals
         }).done(function (data, textStatus, xhr) {
             if (xhr.status == 200) {
@@ -704,10 +841,7 @@ function (Control, viewModel) {
 
     });
 
-   
-
     $(document).on('click', 'a#source-delete', function (e) {
-        e.preventDefault();
 
         if (viewModel.comments().length > 0) {
             
@@ -728,9 +862,10 @@ function (Control, viewModel) {
     function deleteSource() {
 
         $.ajax({
-            url: '/Comments/DeleteSource',
-            cache: false,
-            data: viewModel.sourceId()
+            url: '/Comments/DeleteSource?sid=' + viewModel.source().id,
+            type: 'POST',
+            headers: { 'RequestVerificationToken': viewModel.xsrfToken() }
+
         }).done(function (data, textStatus, xhr) {
             if (xhr.status == 200) {
                 viewModel.removeSource(data);
@@ -742,7 +877,6 @@ function (Control, viewModel) {
     }
 
     $(document).on('click', 'a#comment-delete', function (e) {
-        e.preventDefault();
        
         $.confirm({
             title: 'Delete Comment(s)?',
@@ -756,9 +890,9 @@ function (Control, viewModel) {
 
     function deleteComment() {
         $.ajax({
-            url: '/Comments/DeleteComment?id=' + viewModel.comment().id,
-            cache: false,
-            data: viewModel.commentId()
+            url: '/Comments/DeleteComment?cid=' + viewModel.comment().id,
+            type: 'POST',
+            headers: { 'RequestVerificationToken': viewModel.xsrfToken() }
         }).done(function (data, textStatus, xhr) {
             if (xhr.status == 200) {
                 viewModel.removeComment(data);
@@ -779,10 +913,13 @@ function (Control, viewModel) {
         
 
 
+//////////////////////////////////////////////////////////////////////
+/// init module - TODO eliminate redundant requires, control initiates all
+//////////////////////////////////////////////////////////////////////
 require(['dws/actions']);
 require(['dws/comments']);
 require(['dws/sandbox']);
-require(['dws/model-actions']);
+require(['dws/model-utils']);
 require(['dws/controller']),
 function (control) {
 
@@ -790,3 +927,55 @@ function (control) {
         control.initKO();
     });
 }
+
+//////////////////////////////////////////////////////////////////////
+/// globals go here
+//////////////////////////////////////////////////////////////////////
+
+/// This just deals with X,Y in a scrolling list
+////////////////////////////////////////////////////////////////////////
+$.fn.scrollToTop = function () {
+
+    var $element = this;
+    var $parent = $element.scrollParent() ? $element.scrollParent() : $(window);
+
+    var viewport = {
+        top: $parent.scrollTop(),
+        bottom: $parent.height()
+    };
+
+    console.log('parent viewport: top ' + viewport.top + ', left ' + viewport.left + ', bottom ' + viewport.bottom + ', right ' + viewport.right);
+
+    console.log('viewport parent bottom: ' + viewport.bottom);
+    var position = $element.position();
+    position.bottom = position.top + $element.height();
+    position.right = position.left + $element.width();
+
+    console.log('element position top ' + position.top + ', left ' + position.left + ', bottom ' + position.bottom + ', right ' + position.right);
+
+    // above or below = !in-between
+    if ((position.bottom < viewport.top) || (position.top > viewport.bottom)) {
+        $parent.animate({ scrollTop: position.top }, 800);
+    }
+};
+
+$.fn.isWithinParent = function () {
+    var $element = this;
+    var $parent = $element.scrollParent() ? $element.scrollParent() : $(window);
+
+    var viewport = {
+        top: $parent.scrollTop(),
+        left: $parent.scrollLeft()
+    };
+    viewport.right = viewport.left + $parent.width();
+    viewport.bottom = viewport.top + $parent.height();
+
+    
+    var bounds = $element.offset();
+    bounds.right = bounds.left + $element.outerWidth();
+    bounds.bottom = bounds.top + $element.outerHeight();
+
+    
+    //return ((viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+
+};

@@ -1,4 +1,4 @@
-﻿@model DefaultWeb2.Models.DefaultWebSite.ServerError
+﻿@model DefaultWeb.Models.DefaultWebSite.ServerError
 <div id="server-error" class="card">
     <div class="card-header">What Did You DO!!!!!!!!!!</div>
     <div class="card-title text-info">Whatever it was, you broke the server...</div>
@@ -13,6 +13,32 @@
         <div class="card-title text-danger">@Model.DbException.Source</div>
         <div class="card-text-wrapper">
             <div class="card-text"> @Model.DbException.InnerException</div>
+        </div>
+    </div>
+
+    <div id="base-exception" class="card-block">
+        <div class="card-title text-danger">@Model.AppException.Message</div>
+        <div class="card-text-wrapper">
+            <div class="card-text"> @Model.AppException.GetBaseException()</div>
+        </div>
+    </div>
+    <div id="inner-exception" class="card-block">
+        <div class="card-title text-danger">@Model.AppException.Source</div>
+        <div class="card-text-wrapper">
+            <div class="card-text"> @Model.AppException.InnerException</div>
+        </div>
+    </div>
+
+    <div id="base-exception" class="card-block">
+        <div class="card-title text-danger">@Model.MiscException.Message</div>
+        <div class="card-text-wrapper">
+            <div class="card-text"> @Model.MiscException.GetBaseException()</div>
+        </div>
+    </div>
+    <div id="inner-exception" class="card-block">
+        <div class="card-title text-danger">@Model.MiscException.Source</div>
+        <div class="card-text-wrapper">
+            <div class="card-text"> @Model.MiscException.InnerException</div>
         </div>
     </div>
 </div>

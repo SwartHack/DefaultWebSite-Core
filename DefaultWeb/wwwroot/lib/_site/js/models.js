@@ -1,5 +1,8 @@
-﻿define('dws/model', ['dws/model-actions'], function (ModelActions) {
-
+﻿//////////////////////////////////////////////////////////////////////
+/// KO View Model module
+//////////////////////////////////////////////////////////////////////
+define('dws/model', ['dws/model-utils'], function (ModelUtils) {
+    
     var viewModel = {
 
         file: ko.observable(''),
@@ -7,18 +10,24 @@
         data: ko.observable(''),
         dataType: ko.observable(''),
         target: ko.observable(''),
-        abort: function (xhr, textStatus, data) {
-            ModelActions.callAborted(xhr, textStatus, data);
+        abort: function (xhr, status, error) {
+            viewModel.errorXhr(xhr);
+            viewModel.errorStatus(status);
+            viewModel.errorMsg(error);
         },
+        errorXhr: ko.observableArray([]),
+        errorStatus: ko.observable(''),
+        errorMsg: ko.observableArray(''),
         waiting: ko.observable(false),
-        waitingTarget:ko.observable(''),
-
-        sources: ko.observableArray([]).extend( { deffer: true }),
+        waitingTarget: ko.observable(''),
+        xsrfToken: ko.observable(''),
+        sources: ko.observableArray([]),
         source: ko.observable(''),
         sourceId: function (sid) {
             var index = viewModel.sources().findIndex(s => s.id == sid);
             viewModel.sourceIndex(index);
-            viewModel.source(viewModel.sources()[index]);
+            var source = viewModel.sources()[index];
+            viewModel.source(source);
             return viewModel.source();
         },
         sourceIndex: ko.observable(''),
@@ -27,7 +36,7 @@
             viewModel.sources.unshift(source);
             viewModel.sourceId(source.id);
         },
-        canDeleteSource: function () { return viewModel.sources().length > 0 },
+        //canDeleteSource: function () { return viewModel.sources().length > 0 },
         removeSource: function (sid) {
             var index = viewModel.sources().findIndex(s => s.id == sid);
             var source = viewModel.sources()[viewModel.sourceIndex()];
@@ -35,16 +44,12 @@
             viewModel.source(undefined);
         },
         sourceAdded: function (parent, index, item) {
-            var $parent = $(parent);
+            var $parent = $(parent); 
             var $item = $(item);
-
             //viewModel.sources.sort();
             $item.hide().fadeIn('slow');
-
-            // sort and scroll to view TODO
-           console.log('Source afterAdd... ');
         },
-        comments: ko.observableArray([]).extend({ deffer: true }),
+        comments: ko.observableArray([]),
         comment: ko.observable(''),
         commentId: function (cid) {
             var index = viewModel.comments().findIndex(c => c.id == cid);
@@ -80,6 +85,35 @@
         //}
     };
 
+
+    ////////////////////////////////////////
+    /// model events/actions
+    /// TODO - move to model-utils module
+    ///////////////////////////////////////
+
+    
+
+    ////////////////////////////////////////
+    /// model events/actions
+    ///////////////////////////////////////
+    // subscribe to any ajax errors
+    viewModel.errorMsg.subscribe(function (error) {
+        if (error != undefined)
+        {
+            if (!ko.dataFor($('#ajax-error')[0])) { ko.applyBindings(viewModel, $('#ajax-error')[0]) }
+            $('#ajax-error').dialog({
+                autoOpen: true,
+                modal: true,
+                buttons: {
+                    OK: function () { $(this).dialog("close"); }
+                }
+            });
+        }
+    });
+
+    ////////////////////////////////////////
+    /// model events/actions
+    ///////////////////////////////////////
     viewModel.data.subscribe(function (newdata) {
 
         if (viewModel.target())
@@ -88,6 +122,9 @@
             $(newdata).dialog();
     });
 
+    ////////////////////////////////////////
+    /// Source subscribe events/actions
+    ///////////////////////////////////////
     viewModel.source.subscribe(function (source) {
        
         if (source == undefined) {
@@ -98,54 +135,94 @@
                 viewModel.sourceId(source.id);
             }
             return;
-            //when the source has just been removed?!???
-            //select the one above
-            // if its the last one
         }
-        else
-        {
-            //var index = viewModel.sources.indexOf(source);
-            $($('#sources-table tbody tr')[viewModel.sourceIndex()]).addClass('active').siblings().removeClass('active');
-            //re-set comments
-            //viewModel.comments([]);
-            viewModel.comments(source.comments == null ? [] : source.comments);
-            if (viewModel.comments().length > 0) {
-                viewModel.commentId(viewModel.comments()[0].id);
-            }
-            console.log('source subscribe:' + source.sourceName);
-        }
+       
+        ///TODO
+        /// this should all be done with a class binding
+        var $element = $($('#sources-table tbody tr')[viewModel.sourceIndex()])
+        $element.addClass('active').siblings().removeClass('active');
+        //re-set comments
+        //viewModel.comments([]);
+        viewModel.comments(source.comments == null ? [] : source.comments);
+        if ( viewModel.comments().length > 0 ) {
+            viewModel.commentId(viewModel.comments()[0].id);
+        }  
 
-        
+        viewModel.sources.sortByName('sourceName', 'asc')
+        // scroll to visible if necessary
+        $element.scrollToTop();
+        //console.log('source subscribe:' + source.sourceName);
     });
 
+    ////////////////////////////////////////
+    /// Comment subscribe events/actions
+    ///////////////////////////////////////
     viewModel.comment.subscribe(function (comment) {
 
-        if (comment == undefined) {
+        if ( comment == undefined ) {
             var prev = viewModel.commentIndex() - 1;
-            if (prev >= 0) {
+            if ( prev >= 0 ) {
                 comment = viewModel.comments()[prev];
                 viewModel.commentId(comment.id);
             }
+            return;
         }
-        else
-        {
-            //var index = viewModel.comments.indexOf(comment);
-            //$($('#comments.list-group').children()[viewModel.commentIndex()]).addClass('active').siblings().removeClass('active');
-            var list = $('#comments.list-group').children();
-            var $element = $(list[viewModel.commentIndex()]);
-            $element.addClass('active').siblings().removeClass('active');
-            $('.comment.card a#comment-delete').addClass('disabled');
-            $element.find('a#comment-delete').removeClass('disabled');
-            console.log('comment subscribe:' + comment.id);
-        }
+      
+        ///TODO
+        /// this should all be done with a class binding
+        var list = $('#comments.list-group').children();
+        var $element = $(list[viewModel.commentIndex()]);
+        $element.addClass('active').siblings().removeClass('active');
+        $('.comment.card a#comment-delete').addClass('disabled');
+        $element.find('a#comment-delete').removeClass('disabled');
+        
+
+         // sort here ? We souldn't have too?
+         // TODO -Always adds on top, need to animate nicely, offer asc/desc
+        viewModel.comments.sortByDateTime('datetime', 'desc');
+
+        //console.log('comment subscribe:' + comment.id);
     });
 
 
+    ////////////////////////////////////////
+    /// Waiting subscribe events/actions
+    ///////////////////////////////////////
     viewModel.waiting.subscribe(function (wait) {
 
-        ModelActions.waitStatus(wait, viewModel.waitingTarget());
+        ModelUtils.waitStatus(wait, viewModel.waitingTarget());
     });
 
+    ////////////////////////////////////////
+    /// observableArray DateTime sort extension
+    ///////////////////////////////////////
+    ko.observableArray.fn.sortByDateTime = function (property, direction) {
+
+        return this.sort(function (a, b) {
+            var dateA = new Date(a[property]);
+            var dateB = new Date(b[property]);
+            if (direction == 'asc') {
+                return (Date.parse(dateA) == Date.parse(dateB) ? 0 :
+                    (Date.parse(dateA) > Date.parse(dateB) ? -1 : 1))
+                //return dateA.getTime() - dateB.getTime();
+            }
+            return (Date.parse(dateA) == Date.parse(dateB) ? 0 :
+                (Date.parse(dateA) < Date.parse(dateB) ? -1 : 1))
+            //return dateB.getTime() - dateA.getTime();
+        });
+    };
+
+    ko.observable.fn.sortByName = function (property, direction) {
+        return this.sort(function (a, b) {
+            var textA = a[property];
+            var textB = b[property];
+            if (direction == 'asc') {
+                return textA == textB ? 0 : (textA < textB ? -1 : 1);
+            }
+            return textA == textB ? 0 : (textA > textB ? -1 : 1);
+        });
+
+    };
 
     return viewModel;
 });

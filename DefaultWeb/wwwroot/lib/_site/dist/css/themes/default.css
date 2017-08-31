@@ -7680,7 +7680,9 @@ template {
     transform: rotate3d(0, 0, 1, 0deg); } }
 body {
   padding-top: 3.125rem;
-  padding-bottom: 1.5rem; }
+  padding-bottom: 1.5rem;
+  background-image: linear-gradient(to right, steelblue 0%, darkgray 100%);
+  background-repeat: repeat-x; }
 
 html {
   padding: 0;
@@ -7735,27 +7737,6 @@ html {
       border-style: inset;
       border-color: lightslategray;*/ }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-  /*padding-left: 15px;
-  padding-right: 15px;*/ }
-
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-  max-width: 280px; }
-
-div.modal-header {
-  padding: .3rem .75rem; }
-  div.modal-header.waiting {
-    -webkit-animation: dws-waiting 500ms infinite;
-    animation: dws-waiting 500ms infinite; }
-
-div.modal-body {
-  padding: 0; }
-
 #navbar-main {
   display: flex;
   flex-direction: row;
@@ -7792,13 +7773,14 @@ div.modal-body {
       color: crimson;
       margin-left: .1rem;
       vertical-align: super; }
-  #navbar-main #siteseal img {
-    /*width: 100%;
-    margin-top: .25em;*/ }
-  #navbar-main #navbarCollapse ul li a {
-    font-size: 1.25em; }
-    #navbar-main #navbarCollapse ul li a:focus, #navbar-main #navbarCollapse ul li a:hover {
-      color: crimson; }
+  #navbar-main #siteseal {
+    margin-left: 1rem; }
+  #navbar-main #navbarCollapse {
+    margin-right: 1rem; }
+    #navbar-main #navbarCollapse ul li a {
+      font-size: 1.25em; }
+      #navbar-main #navbarCollapse ul li a:focus, #navbar-main #navbarCollapse ul li a:hover {
+        color: crimson; }
 
 #rundowns {
   margin: 0;
@@ -7916,7 +7898,28 @@ div#target-area {
       padding: 0;
       margin: 0;
       background-color: transparent; }
-    div#target-area #contact.card div#doc-resume.collapse.show .card.card-block .open-document, div#target-area #contact.card div#doc-cv.collapse.show .card.card-block .open-document {
+      div#target-area #contact.card .card-block address {
+        box-shadow: inset;
+        padding: .5em;
+        margin-bottom: 0; }
+      div#target-area #contact.card .card-block .quote-container {
+        margin-bottom: 1rem; }
+        div#target-area #contact.card .card-block .quote-container .note.yellow {
+          width: auto;
+          margin-left: 5%;
+          margin-right: 5%;
+          margin-bottom: 2rem;
+          font-size: 1em;
+          font-style: italic; }
+      div#target-area #contact.card .card-block #doc-buttons.card {
+        flex-direction: row;
+        justify-content: space-between;
+        border: none;
+        margin-top: 2rem;
+        margin-bottom: 1rem; }
+        div#target-area #contact.card .card-block #doc-buttons.card button {
+          padding-left: 2em; }
+    div#target-area #contact.card div#doc-resume.collapse.show .card.card-block .open-document, div#target-area #contact.card div#doc-cv.collapse.show .card.card-block .open-document, div#target-area #contact.card div#doc-masters.collapse.show .card.card-block .open-document {
       height: 90%; }
   div#target-area .comments {
     background-color: hotpink;
@@ -8098,8 +8101,10 @@ div#target-area {
       flex-direction: column;
       padding: 1rem; }
       #comments-mgr .card .comments-mgr-wrapper #sources-card.card {
+        flex: 0 0 30%;
+        max-height: 30%;
+        min-height: 10%;
         display: flex;
-        flex: 0 1 auto;
         margin: 0;
         margin-bottom: 1rem;
         padding: 0;
@@ -8194,6 +8199,9 @@ div#target-area {
           border-top: none;
           padding-right: 1rem; }
       #comments-mgr .card .comments-mgr-wrapper #comments-card.card {
+        flex: 0 0 auto;
+        max-height: 47.5%;
+        min-height: 20%;
         display: flex;
         margin: 0;
         padding: 0;
@@ -8219,19 +8227,20 @@ div#target-area {
               color: green;
               font-size: 1.5rem; }
         #comments-mgr .card .comments-mgr-wrapper #comments-card.card #comments-wrapper {
-          flex: 1 1 auto;
-          display: block;
+          display: flex;
+          flex-flow: column;
           width: 100%;
-          overflow-y: auto;
-          overflow-x: hidden;
           margin: 0;
-          border-left: .075rem solid lightgray;
-          border-right: .075rem solid lightgray; }
+          border-spacing: 0; }
           #comments-mgr .card .comments-mgr-wrapper #comments-card.card #comments-wrapper #comments.list-group {
-            flex: 1 1 auto;
             display: block;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
             cursor: pointer;
-            margin: 0; }
+            margin: 0;
+            border-left: .075rem solid lightgray;
+            border-right: .075rem solid lightgray; }
         #comments-mgr .card .comments-mgr-wrapper #comments-card.card #comments-count {
           padding: 0;
           border: .075rem solid lightgray;
@@ -8248,37 +8257,107 @@ form#create-source {
   form#create-source #form-buttons.form-group {
     border: .015rem solid red; }
 
-#server-error {
+.comment.card {
+  display: flex !important;
+  flex: 1 !important;
+  flex-direction: row-reverse !important;
+  padding: 0 !important;
+  margin: .5rem .75rem .375rem .5rem !important; }
+  .comment.card div#tools.card-header {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-around !important;
+    align-content: center !important;
+    padding: 0 !important;
+    border: none !important; }
+    .comment.card div#tools.card-header a {
+      padding: 0 !important;
+      margin: 0 !important;
+      padding-right: 0 !important;
+      border: none !important;
+      cursor: pointer !important;
+      display: flex !important; }
+      .comment.card div#tools.card-header a.btn.disabled {
+        cursor: not-allowed !important;
+        pointer-events: all !important; }
+      .comment.card div#tools.card-header a i.fa-plus-square-o {
+        color: green !important; }
+      .comment.card div#tools.card-header a i.fa-trash {
+        color: red !important; }
+  .comment.card #comment-context.card-block {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1;
+    padding: .5rem !important;
+    border: none !important; }
+    .comment.card #comment-context.card-block .card-title {
+      display: flex !important;
+      border: .05rem solid darkgray !important; }
+    .comment.card #comment-context.card-block .card-text-wrapper {
+      display: flex !important;
+      flex-direction: column !important;
+      flex-flow: column !important;
+      overflow-y: auto;
+      min-height: 5rem;
+      max-height: 5rem;
+      border: .075rem inset darkgray;
+      padding: .025rem; }
+      .comment.card #comment-context.card-block .card-text-wrapper .card-text {
+        display: block;
+        overflow-y: auto; }
+  .comment.card #comment-info.card-header {
+    flex: 0 20% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 0;
+    border: none;
+    padding: .25rem; }
+    .comment.card #comment-info.card-header .author {
+      text-align: center;
+      font-size: .75rem;
+      font-weight: 700; }
+    .comment.card #comment-info.card-header div#datetime {
+      text-align: center;
+      font-size: .5rem;
+      font-weight: 600; }
+  .comment.card.active {
+    box-shadow: 0px 0px 4px 2px lightsteelblue;
+    border: none; }
+
+#server-error.card {
   display: flex;
   margin: 0;
   padding: 1rem;
   flex: 1 1 auto; }
-  #server-error .card-header {
+  #server-error.card .card-header {
     display: flex;
     flex-direction: column;
     align-content: center;
     border: .1rem solid gray; }
-  #server-error .card-title {
+  #server-error.card .card-title {
     border: .1rem solid green; }
-  #server-error .card-image {
+  #server-error.card .card-image {
     border: .1rem solid indigo; }
-  #server-error #base-exception, #server-error #inner-exception {
+  #server-error.card #base-exception, #server-error.card #inner-exception {
     display: flex;
     flex-direction: column;
     padding: .5rem; }
-    #server-error #base-exception .card-title, #server-error #inner-exception .card-title {
+    #server-error.card #base-exception .card-title, #server-error.card #inner-exception .card-title {
       display: flex; }
-    #server-error #base-exception .card-text-wrapper, #server-error #inner-exception .card-text-wrapper {
+    #server-error.card #base-exception .card-text-wrapper, #server-error.card #inner-exception .card-text-wrapper {
       display: flex;
       flex-direction: column;
       flex-flow: column;
       overflow-y: auto;
       max-height: 2.5rem;
       border: .1rem solid violet; }
-      #server-error #base-exception .card-text-wrapper .card-text, #server-error #inner-exception .card-text-wrapper .card-text {
+      #server-error.card #base-exception .card-text-wrapper .card-text, #server-error.card #inner-exception .card-text-wrapper .card-text {
         display: block;
         overflow-y: auto;
         border: .075rem solid red; }
+
+#ajax-error {
+  display: none; }
 
 .quote-container {
   margin-top: 50px;
@@ -8421,3 +8500,39 @@ form#create-source {
 
 .core-icon:before {
   content: "\55"; }
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+  /*padding-left: 15px;
+  padding-right: 15px;*/ }
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+  max-width: 280px; }
+
+div.modal-header {
+  padding: .3rem .75rem; }
+  div.modal-header.waiting {
+    -webkit-animation: dws-waiting 500ms infinite;
+    animation: dws-waiting 500ms infinite; }
+
+div.modal-body {
+  padding: 0; }
+
+@media (max-width: 767px) {
+  #navbar-main {
+    display: none; }
+
+  #navbar-mobile {
+    display: block; } }
+@media (max-width: 1199px) {
+  .container {
+    max-width: none;
+    width: 100%;
+    padding: 0; }
+
+  #siteseal {
+    display: none; } }

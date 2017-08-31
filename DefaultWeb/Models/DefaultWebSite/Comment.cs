@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DefaultWeb2.Models.DefaultWebSite
+namespace DefaultWeb.Models.DefaultWebSite
 {
     public class Comment
     {
@@ -14,7 +14,7 @@ namespace DefaultWeb2.Models.DefaultWebSite
         public Comment()
         {
             Datetime = DateTime.Now;
-            Author = "Unknown";
+            Author = "System Bot";
         }
 
         public int Id { get; set; }
@@ -31,7 +31,7 @@ namespace DefaultWeb2.Models.DefaultWebSite
         public string Author { set; get; }
         [Required]
         [DataType(DataType.MultilineText)]
-        [StringLength(1000), MinLength(10, ErrorMessage = "You can do better than that..."),]
+        [StringLength(2000), MinLength(10, ErrorMessage = "You can do better than that..."),]
         public string Content { get; set; }
 
         public int SourceId { get; set; }

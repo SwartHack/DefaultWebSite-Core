@@ -3,11 +3,49 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-DefaultWeb2-2D179D1C-83C3-477A-A8C0-EA1F6BF216CF</UserSecretsId>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="wwwroot\lib\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Remove="bower.json" />
     <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\lib\_site\.eslintrc.json" />
+    <Content Include="wwwroot\lib\_site\dist\css\jquery-ui.css" />
+    <Content Include="wwwroot\lib\_site\dist\css\jquery-ui.min.css" />
+    <Content Include="wwwroot\lib\_site\dist\css\themes\default.css" />
+    <Content Include="wwwroot\lib\_site\dist\css\themes\default.min.css" />
+    <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.eot" />
+    <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.ttf" />
+    <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.woff" />
+    <Content Include="wwwroot\lib\_site\fonts\FontAwesome.otf" />
+    <Content Include="wwwroot\lib\_site\fonts\SwartFont.ttf" />
+    <Content Include="wwwroot\lib\_site\images\banner.jpg" />
+    <Content Include="wwwroot\lib\_site\images\bot1.jpg" />
+    <Content Include="wwwroot\lib\_site\images\core.png" />
+    <Content Include="wwwroot\lib\_site\images\core2.png" />
+    <Content Include="wwwroot\lib\_site\images\core3.png" />
+    <Content Include="wwwroot\lib\_site\images\cornholio2.jpg" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_444444_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_555555_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_777620_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_777777_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\underconstruct.jpg" />
+    <Content Include="wwwroot\lib\_site\images\under_construction.gif" />
+    <Content Include="wwwroot\lib\_site\package.json" />
   </ItemGroup>
 
 
@@ -24,13 +62,51 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\css\jquery-ui\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="bower.json" />
     <None Include="bundleconfig.json" />
+    <None Include="wwwroot\lib\_site\dist\css\themes\default.css.map" />
+    <None Include="wwwroot\lib\_site\dist\css\themes\default.min.css.map" />
+    <None Include="wwwroot\lib\_site\dist\js\jcore.js" />
+    <None Include="wwwroot\lib\_site\dist\js\site.js" />
+    <None Include="wwwroot\lib\_site\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\lib\_site\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\lib\_site\Gruntfile.js" />
+    <None Include="wwwroot\lib\_site\images\banner1.svg" />
+    <None Include="wwwroot\lib\_site\images\banner2.svg" />
+    <None Include="wwwroot\lib\_site\images\banner3.svg" />
+    <None Include="wwwroot\lib\_site\images\banner4.svg" />
+    <None Include="wwwroot\lib\_site\js\actions.js" />
+    <None Include="wwwroot\lib\_site\js\comments.js" />
+    <None Include="wwwroot\lib\_site\js\controller.js" />
+    <None Include="wwwroot\lib\_site\js\dispatcher.js" />
+    <None Include="wwwroot\lib\_site\js\init.js" />
+    <None Include="wwwroot\lib\_site\js\lib\endless_scroll.js" />
+    <None Include="wwwroot\lib\_site\js\lib\pdfobject.js" />
+    <None Include="wwwroot\lib\_site\js\lib\video.js" />
+    <None Include="wwwroot\lib\_site\js\model-utils.js" />
+    <None Include="wwwroot\lib\_site\js\models.js" />
+    <None Include="wwwroot\lib\_site\js\sandbox.js" />
+    <None Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
+    <None Include="wwwroot\lib\_site\sass\global\build.scss" />
+    <None Include="wwwroot\lib\_site\sass\lib\notepad.scss" />
+    <None Include="wwwroot\lib\_site\sass\lib\Paper.scss" />
+    <None Include="wwwroot\lib\_site\sass\lib\video-js.scss" />
+    <None Include="wwwroot\lib\_site\sass\_carousel.scss" />
+    <None Include="wwwroot\lib\_site\sass\_comment-source.scss" />
+    <None Include="wwwroot\lib\_site\sass\_comment.scss" />
+    <None Include="wwwroot\lib\_site\sass\_comments.scss" />
+    <None Include="wwwroot\lib\_site\sass\_documents.scss" />
+    <None Include="wwwroot\lib\_site\sass\_errors.scss" />
+    <None Include="wwwroot\lib\_site\sass\_grids.scss" />
+    <None Include="wwwroot\lib\_site\sass\_keyframes.scss" />
+    <None Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
+    <None Include="wwwroot\lib\_site\sass\_rundowns.scss" />
+    <None Include="wwwroot\lib\_site\sass\_sandbox.scss" />
   </ItemGroup>
 
 </Project>

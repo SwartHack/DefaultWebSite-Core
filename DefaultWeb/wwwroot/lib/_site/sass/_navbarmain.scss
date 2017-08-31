@@ -8,7 +8,6 @@
     padding: 0 $navbar-padding-x;
 
     &.loading {
-
     }
 
     &.waiting {
@@ -28,7 +27,8 @@
         font-size: x-large;
         line-height: inherit;
         white-space: nowrap;
-        max-height:3.125rem;
+        max-height: 3.125rem;
+
         i {
             //margin-top:.5rem;
             //margin-left: 2rem;
@@ -63,15 +63,18 @@
         }
     }
 
-    #siteseal img {
-        //@extend .img-fluid;
-        /*width: 100%;
-        margin-top: .25em;*/
+    #siteseal {
+        margin-left: 1rem;
+
+        img {
+        }
     }
 
 
     #navbarCollapse {
+        margin-right: 1rem;
 
+        // nav nav-bar
         ul {
 
             li {

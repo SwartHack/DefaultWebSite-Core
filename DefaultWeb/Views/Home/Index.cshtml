@@ -1,4 +1,8 @@
 ﻿@using System.Reflection;
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    var _ajaxRequestToken = antiforgery.GetAndStoreTokens(Context).RequestToken;
+}
 @section Header
 {
     
@@ -69,17 +73,19 @@
 </div>
 
 
-
 @section JS
 {
+
     <script>
         require(['dws/controller'],
-            function (control) {
+            function (Controller) {
 
                 $(document).ready(function () {
-                    //control.initKO();
+                    Controller.setXsrf(@Json.Serialize(_ajaxRequestToken));
+                    
                 });
             });
-    </script>
 
+    </script>
+        
 }

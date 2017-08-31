@@ -1,4 +1,7 @@
-﻿define('dws/sandbox', ['dws/model'], function (ViewModel) {
+﻿//////////////////////////////////////////////////////////////////////
+/// sandbox module - MutationObserver Here!!!
+//////////////////////////////////////////////////////////////////////
+define('dws/sandbox', ['dws/model'], function (ViewModel) {
 
     //lets monitor the sand box area for new content and bind accordingly
     var config = {

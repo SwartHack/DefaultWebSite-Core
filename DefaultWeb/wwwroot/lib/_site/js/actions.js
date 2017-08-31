@@ -1,4 +1,7 @@
-﻿define('dws/actions', ['dws/controller'],
+﻿//////////////////////////////////////////////////////////////////////
+/// actions module
+//////////////////////////////////////////////////////////////////////
+define('dws/actions', ['dws/controller'],
 function (Control) {
     
     $(document).ready(function () {
@@ -39,34 +42,61 @@ function (Control) {
 
         /////////////////////////////
         /// show/hide events
+        /// TODO - optimize these events...
         ////////////////////////////
         $(document).on("shown.bs.collapse", "#doc-resume", function (e) {
-            e.preventDefault();
             $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
             $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
             if ($('#doc-cv').hasClass('show')) {
                 $('#doc-cv').removeClass('show');
+                $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
             }
+            if ($('#doc-masters').hasClass('show')) {
+                $('#doc-masters').removeClass('show');
+                $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            } 
         });
 
         $(document).on("hide.bs.collapse", "#doc-resume", function (e) {
             $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
-        $(document).on('hide.shown.bs.collapse', '#doc-cv', function (e) {
-            e.preventDefault();
+        $(document).on('shown.bs.collapse', '#doc-cv', function (e) {
             $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
-            $('[data-target="#doc-cv"] button h4 i').switchClass('fa-eye', 'fa-eye-slash');
+            $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
             if ($('#doc-resume').hasClass('show')) {
                 $('#doc-resume').removeClass('show');
+                $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            }
+            if ($('#doc-masters').hasClass('show')) {
+                $('#doc-masters').removeClass('show');
+                $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            } 
+        });
+
+        $(document).on('hide.bs.collapse','#doc-cv', function (e) {
+            $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+        });
+
+        $(document).on('shown.bs.collapse', '#doc-masters', function (e) {
+            e.preventDefault();
+            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
+            $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
+
+            if ($('#doc-resume').hasClass('show')) {
+                $('#doc-resume').removeClass('show');
+                $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            }
+            if ($('#doc-cv').hasClass('show')) {
+                $('#doc-cv').removeClass('show');
+                $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
             }
         });
 
-        $(document).on('bs.collapse','#doc-cv', function (e) {
-            e.preventDefault();
-            $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+        $(document).on('hide.bs.collapse', '#doc-masters', function (e) {
+            $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
         //$('#modal-action-template').on('show.bs.modal', function (e) {

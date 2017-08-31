@@ -1,8 +1,8 @@
-@model DefaultWeb2.Models.DefaultWebSite.Source
+@model DefaultWeb.Models.DefaultWebSite.Source
 @{
     <form id="create-source">
+        @Html.AntiForgeryToken();
         <div id="form-fields" class="form-group">
-            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <label class="col-md-2 control-label" asp-for="SourceName"></label>
             <div class="col-md-6">

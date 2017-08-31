@@ -57,9 +57,40 @@ div#target-area {
             padding: 0;
             margin: 0;
             background-color: transparent;
+
+            address {
+                box-shadow: inset;
+                padding: .5em;
+                margin-bottom: 0;
+            }
+
+            .quote-container {
+                margin-bottom: 1rem;
+
+                .note.yellow {
+                    width: auto;
+                    margin-left: 5%;
+                    margin-right: 5%;
+                    margin-bottom: 2rem;
+                    font-size: 1em;
+                    font-style: italic;
+                }
+            }
+
+            #doc-buttons.card {
+                flex-direction: row;
+                justify-content: space-between;
+                border: none;
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+
+                button {
+                    padding-left: 2em
+                }
+            }
         }
 
-        div#doc-resume.collapse.show, div#doc-cv.collapse.show {
+        div#doc-resume.collapse.show, div#doc-cv.collapse.show, div#doc-masters.collapse.show {
             .card.card-block {
                 .open-document {
                     height: 90%;
@@ -83,7 +114,7 @@ div#target-area {
         @extend .dws-page;
         background-color: silver;
         color: royalblue;
-        padding:0;
+        padding: 0;
         overflow-y: auto;
 
         .card-block {
@@ -91,7 +122,6 @@ div#target-area {
             //padding: 0;
             margin: 0;
             background-color: transparent;
-
         }
     }
 

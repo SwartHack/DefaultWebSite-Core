@@ -2,28 +2,25 @@
 <head>
     @RenderSection("header", true)
     <environment names="Development">
-        <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
         <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
-        <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" />
-        <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true" />
+        <link rel="stylesheet" href="@ViewData["JqueryUiThemeDevelopment"]" />
+        <link rel="stylesheet" href="~/lib/jquery-confirm/css/jquery-confirm.css" />
+        <link rel="stylesheet" href="@ViewData["BootstrapThemeDevelopment"]" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/css/tether.min.css" />
         <link rel="stylesheet" href="~/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
-        <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
+        <link rel="stylesheet" href="@ViewData["JqueryUiThemeDevelopment"]" />
+        <link rel="stylesheet" href="~/css/jquery-confirm.min.css" />
+        <link rel="stylesheet" href="@ViewData["BootstrapThemeProduction"]" asp-append-version="true" />
         <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
     </environment>
 </head>
 <body>
     @{Html.RenderPartial("_NavBarMain.cshtml"); }
-    <div class="container body-content">
+    <div  id="mainContainer" class="container">
         @RenderBody()
-        @{Html.RenderPartial("_Templates.cshtml");}
     </div>
-
-   
-
+   @{Html.RenderPartial("_Templates.cshtml");}
     <environment names="Development">
         <script src="~/lib/_site/dist/js/jcore.js" asp-append-version="true"></script>
         <script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>

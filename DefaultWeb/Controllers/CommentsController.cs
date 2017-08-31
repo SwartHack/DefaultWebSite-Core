@@ -2,18 +2,35 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DefaultWeb2.Data;
-using DefaultWeb2.Models.DefaultWebSite;
+using DefaultWeb.Data;
+using DefaultWeb.Models.DefaultWebSite;
+using Microsoft.EntityFrameworkCore.Storage;
 
-namespace DefaultWeb2.Controllers
+namespace DefaultWeb.Controllers
 {
+    /// <summary>
+    /// no repository example,
+    /// TODO make db action type independent, see adventure works respository...
+    /// </summary>
     public class CommentsController : Controller
     {
         private readonly DwsDbContext _context;
+        private readonly IDbContextTransaction _transaction;
 
         public CommentsController(DwsDbContext context)
         {
-            _context = context;    
+            _context = context;
+            //_transaction = _context.Database.BeginTransaction();
+        }
+
+        /// <summary>
+        /// try this for transaction rollback, or try session based....
+        /// </summary>
+        ~ CommentsController()
+        {
+            //_transaction.Commit();
+            //_transaction.Dispose();
+            _context.Dispose();
         }
 
         public IActionResult Main()
@@ -21,25 +38,37 @@ namespace DefaultWeb2.Controllers
             return PartialView();
         }
 
-        // GET: Sources
+        
+        /// <summary>
+        /// Retun list off Sources 
+        /// </summary>
+        /// <returns></returns>
         public JsonResult GetSources()
         {
             var commentContext = _context.Sources.Include(c => c.Comments);
             Response.StatusCode = 200;
             return Json(commentContext.ToArray());
-                
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult GetModalContent(string id)
         {  
                 string viewname = String.Format("~/Views/Comments/Create{0}.cshtml", id);
                 return PartialView(viewname);
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public dynamic CreateSource([FromForm] Source source)
+        public IActionResult CreateSource([Bind("SourceName,Description")] Source source)
         {
             try
             {
@@ -47,8 +76,11 @@ namespace DefaultWeb2.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    _context.Add(source);
-                    _context.SaveChanges();
+                    using (var context = _context) ///does this matter still
+                    {
+                        context.Add(source);
+                        context.SaveChanges();
+                    }
                     Response.StatusCode = 200;
                     return Json(new { Source = source });
                 }
@@ -58,28 +90,35 @@ namespace DefaultWeb2.Controllers
                     return PartialView("~/Views/Comments/CreateSource.cshtml", source);
                 }
             }
-            catch (DbUpdateException dbx)
+            catch (Exception ex)
             {
-                var serverError = new ServerError() { DbException = dbx };
+                var serverError = new ServerError() { MiscException = ex };
                 Response.StatusCode = 400;
                 return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverError);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="comment"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public dynamic CreateComment([FromForm] Comment comment)
+        public IActionResult CreateComment([Bind("Title,Content,SourceId")] Comment comment)
         {
-            
             try
             {
                 TryValidateModel(comment);
 
                 if (ModelState.IsValid)
                 {
-                    
-                    _context.Add(comment);
-                    _context.SaveChanges();
+                    using (var context = _context)
+                    {
+                        context.Add(comment);
+                        context.SaveChanges();
+                    }
+
                     Response.StatusCode = 200;
                     return Json(new { Comment = comment });
                 }
@@ -89,31 +128,35 @@ namespace DefaultWeb2.Controllers
                     return PartialView("~/Views/Comments/CreateComment.cshtml", comment);
                 }
             }
-            catch (DbUpdateException dbx)
+            catch ( Exception ex  )
             {
-                var serverError = new ServerError() { DbException = dbx };
+                var serverError = new ServerError() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverError);
+                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverError);
             }
         }
 
-        //[ValidateAntiForgeryToken]
-        //[HttpPost]
-        public dynamic DeleteSource(int id)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteSource(int sid)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    var source = _context.Sources.Include(s => s.Comments).First(s => s.Id == sid);
 
-                    var source = _context.Sources.Include(s => s.Comments).First(s => s.Id == id);
-                  
                     if (source != null)
                     {
                         _context.Sources.Remove(source);
                         _context.SaveChanges();
                         Response.StatusCode = 200;
-                        return Json(id);
+                        return Json(sid);
                     }
                     else
                     {
@@ -125,33 +168,34 @@ namespace DefaultWeb2.Controllers
                     throw new DbUpdateException("Model State Invalid!", new Exception("Delete transaction cancelled."));
                 }
             }
-            catch (DbUpdateException dbx)
+            catch (Exception ex)
             {
-                var serverError = new ServerError() { DbException = dbx };
+                var serverError = new ServerError() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverError);
+                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverError);
             }
-
-            
         }
 
-        //[ValidateAntiForgeryToken]
-        //[HttpPost]
-        public dynamic DeleteComment(int id)
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public dynamic DeleteComment(int cid)
         {
-            
             try
             {
                 if (ModelState.IsValid)
                 {
-
-                    var comment = _context.Comments.First(c => c.Id == id);
+                    var comment = _context.Comments.First(c => c.Id == cid);
                     if (comment != null)
                     {
                         _context.Comments.Remove(comment);
                         _context.SaveChanges();
                         Response.StatusCode = 200;
-                        return Json(comment);
+                        return Json(cid);
                     }
                     else
                     {
@@ -163,30 +207,19 @@ namespace DefaultWeb2.Controllers
                     throw new DbUpdateException("Model State Invalid!", new Exception("Delete transaction cancelled."));
                 }
             }
-            catch (DbUpdateException dbx)
+            catch (Exception ex)
             {
-                var serverError = new ServerError() { DbException = dbx };
+                var serverError = new ServerError() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverError);
+                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverError);
             }
-
         }
 
-        // GET: Sources/Details/5
-        public  IActionResult Details(int id)
-        {
-           
-
-            var source = _context.Sources.Single(m => m.Id == id);
-            if (source == null)
-            {
-                return NotFound();
-            }
-
-            return PartialView(source);
-        }
-
-
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool SourceExists(int id)
         {
             return _context.Sources.Any(e => e.Id == id);

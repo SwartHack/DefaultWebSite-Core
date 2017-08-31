@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DefaultWeb2.Controllers
+namespace DefaultWeb.Controllers
 {
     public class SandboxController : Controller
     {

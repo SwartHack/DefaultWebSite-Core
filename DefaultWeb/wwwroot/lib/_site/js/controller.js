@@ -94,8 +94,13 @@ function (viewModel, Dispatch) {
     //////////////////////////////////
     ///
     ////////////////////////////////
-    function initKO() {
+    function initKO(xsrf) {
         ko.applyBindings(viewModel);
+        
+    }
+
+    function setXsrf(xsrf) {
+        viewModel.xsrfToken(xsrf);
     }
 
     return {
@@ -105,6 +110,7 @@ function (viewModel, Dispatch) {
         sendMessageDefer: sendMessageDefer,
         showContentArea: showContentArea,
         hideAllContent: hideAllContent,
-        parseNavUrl: parseNavUrl
+        parseNavUrl: parseNavUrl,
+        setXsrf: setXsrf
     }
 });

@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using DefaultWeb2.Models;
-using DefaultWeb2.Models.ManageViewModels;
-using DefaultWeb2.Services;
+using DefaultWeb.Models;
+using DefaultWeb.Models.ManageViewModels;
+using DefaultWeb.Services;
 
-namespace DefaultWeb2.Controllers
+namespace DefaultWeb.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

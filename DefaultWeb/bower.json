@@ -17,6 +17,10 @@
   "resolutions": {
     "dojo": ">=1.8.9",
     "dijit": "1.12.2",
-    "dojox": "1.12.2"
+    "dojox": "1.12.2",
+    "bootstrap": "v4.0.0-beta"
+  },
+  "devDependencies": {
+    "jquery-confirm": "craftpip/jquery-confirm#^3.3.2"
   }
 }

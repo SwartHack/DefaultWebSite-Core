@@ -1,6 +1,6 @@
 ﻿<div id="contact" class="card">
     <div class="card-block">
-        <address style="box-shadow:inset;padding:.5em;margin-bottom:0">
+        <address>
             <a class="h4 text-left" href="mailto:swart@hackinc.net" target="_blank"><i class="fa fa-globe fa-2x mr-2 ml-1"></i>Default WebSite.net Core</a><br />
             Salt Lake City, Utah 84121<br />
             <strong>IT Craftsmen -</strong> <a href="https://hackinc.net target=" _blank""> at Hack Inc.</a><br />
@@ -14,35 +14,46 @@
             <a class="pl-2" href="https://github/Swarthack" target="_blank"><i class="fa fa-4x fa-github-square"></i></a>
         </div>
 
-        <div class="quote-container mb-5">
+        <div class="quote-container">
             <i class="pin"></i>
-            <blockquote class="note yellow" style="width:auto;margin-left:5%;margin-right:5%;margin-bottom:2rem;font-size:1em;font-style:italic;">
+            <blockquote class="note yellow">
                 <em>Like what you see???</em> I am currently available for hire. Have been free-lance for a few years and am looking for
                 steady W2 employment. This web-site illustrates just a small sampling of the "skill sets" I offer; as per the purpose of it's inception.
                 Please download my resume and/or CV below, and feel free to contact me directly with any questions. Thanks!
                 <cite class="author" style="margin-top:.1em;margin-right: 20%;">EKS</cite>
             </blockquote>
         </div>
-        <div style="margin-top: 2rem; margin-bottom:1rem">
-            <button class="btn btn-default" data-toggle="collapse" data-target="#doc-resume" style="margin-left:2em">
+        <div id="doc-buttons" class="card">
+            <button class="btn btn-default" data-toggle="collapse" data-target="#doc-resume">
                 <h4><i class="fa fa-eye"></i> Resume</h4>
             </button>
 
-            <button class="btn btn-default pull-right" data-toggle="collapse" data-target="#doc-cv" style="margin-right:2em">
+            <button class="btn btn-default " data-toggle="collapse" data-target="#doc-cv">
                 <h4><i class="fa fa-eye"></i> CV</h4>
+            </button>
+
+            <button class="btn btn-default" data-toggle="collapse" data-target="#doc-masters">
+                <h4><i class="fa fa-eye"></i> Master's Thesis</h4>
             </button>
         </div>
     </div>
 
+
     <div id="doc-resume" class="collapse">
         <div class="card card-block">
-            <embed class="open-document" src="~/data/Swartling,Eric-Resume.pdf" type="application/pdf" />
+            <embed class="open-document" src="~/images/Swartling,Eric-Resume.pdf" type="application/pdf" />
         </div>
     </div>
 
     <div id="doc-cv" class="collapse">
         <div class="card card-block">
-            <embed class="open-document" src="~/App_Data/Eric-Kennedy-Swartling.pdf" type="application/pdf" />
+            <embed class="open-document" src="~/images/Eric-Kennedy-Swartling.pdf" type="application/pdf" />
+        </div>
+    </div>
+
+    <div id="doc-masters" class="collapse">
+        <div class="card card-block">
+            <embed class="open-document" src="~/images/masters.pdf" type="application/pdf" />
         </div>
     </div>
 </div>

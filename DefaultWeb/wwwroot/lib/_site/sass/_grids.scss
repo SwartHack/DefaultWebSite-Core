@@ -3,7 +3,7 @@ body {
     //min-height: 75rem;
     padding-top: 3.125rem;
     padding-bottom: 1.5rem;
-    
+    @include gradient-x(steelblue, darkgray);
 }
 
 html {
@@ -88,41 +88,3 @@ html {
     }
 }
 
-////////////////////////
-/// global over-rides
-///////////////////////
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    /*padding-left: 15px;
-    padding-right: 15px;*/
-    //background: linear-gradient(circle, steelblue, hotpink);
-}
-
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-div.modal-header {
-    padding: .3rem .75rem;
-
-    button {
-    }
-
-    &.waiting {
-        -webkit-animation: dws-waiting 500ms infinite;
-        animation: dws-waiting 500ms infinite;
-    }
-}
-div.modal-title {
-
-}
-
-
-div.modal-body {
-    padding:0;
-}

@@ -1,4 +1,7 @@
-﻿define('dws/dispatcher', ['dws/model'], function (ViewModel) {
+﻿//////////////////////////////////////////////////////////////////////
+/// message dispatcher module
+//////////////////////////////////////////////////////////////////////
+define('dws/dispatcher', ['dws/model'], function (ViewModel) {
 
     function xhrRequest(url) {
             
@@ -22,29 +25,30 @@
     function ajaxRequest(settings) {
         //waitEffects(true);
         $.ajax(settings)
-            .done(function (data) {
-                //based on requested data type
-                ViewModel.data(data); 
+        .done(function (data, textStatus, xhr) {
+            //based on requested data type
+            ViewModel.data(data); 
         })
-        .fail(function (request, error) {
-            ViewModel.aborted(request, error, this.responseText)
+        .fail(function (xhr, textStatus, error) {
+            ViewModel.aborted(xhr, textStatus, error)
         })
         .always(function () {
-            //waitEffects(false);
+        //waitEffects(false);
         });
     }
 
+
     function ajaxRequestDefer(settings, deferred) {
         $.ajax(settings)
-        .done(function (data) {
-            deferred.resolve(data); //ok, fires deferred callback
-        })
-        .fail(function (request, error) {
-            deferred.reject(this.responseText + '\n' + error)
-        })
-        .always(function () {
-
-        });
+            .done(function (data, textStatus, xhr) {
+                deferred.resolve(data); //ok, fires deferred callback
+            })
+            .fail(function (xhr, textStatus, error) {
+                deferred.reject(this.responseText + '\n' + error)
+            })
+            .always(function () {
+        
+            });
     }
 
     return {

@@ -1,0 +1,40 @@
+﻿<p>
+    This is a proto-type idea the will get eventually get integrated as an extension to the project's User Account Management. 
+    The idea is to manage user comments by "source". Anything you could make a comment on. An entire page, a document, a file, 
+    a page element, a widget. Basically be able to attach "Comment" functionality anywhere. More to be revealed when Comments are enabled...
+</p>
+<p>
+    The original intent of the Comments Manager was to illustrate an asynchronous Razor View MVC implementation of a simple One-&gt;Many 
+    record browser in an embedded container. I quickly ran into some MVC issues with using any IEnumerable model collections.
+</p>
+<p>snippet</p>
+<p>
+    Since the foundation of the site's primary asynchronous navigation is based on a KnockoutJs MVVM model, I decided to move forward using 
+    Partial Razor Views with only the model defined and to extend the ViewModel to deal with the collections.
+</p>
+<p>
+    It definitely turned out interesting. Especially the flex-box behavior. And I learned a number of things in the process. 
+    The ViewModel could use some optimization, but going forward with it for now. See "/wwwroot/lib/_site/models.js"
+/p>
+<p>
+    You will notice the use of pop-up dialogs for adding new records. This is not the preferred approach, but it is an experiment in 
+    unobtrusive validation functionality that has dogged me for some time. Look for different types of pop-ups...
+</p>
+<ol>
+    <li>How can I validate a form when not directly submitting the form via "Submit". &nbsp;But using a Json serialized collection of 
+        form values and Ajax. I know I can write the validation checks myself, like I have seen so many Web Api examples. But then what 
+        good are the model class validation decorations???
+    </li>
+    <li>And not only validate the form, but return the validation messages to the calling modal form. That's what Comments Manager is doing!!!</li>
+</ol>
+<a href="https://GitHub.com/SwartHack" target="_blank"><i class="fa fa-github"></i>  Dig into the code</a>
+<p>/Controllers/Comments, /Views/Comments, /wwroot/lib/_site/js</p>
+<p>-Notes-</p>
+<p>
+    The Comments Manager MVC components do not utilize a repository. In this case mostly due to the simplicity of dealing with two tables. 
+    Also the use of a repository is not necessarily the best choice. See DefaultWebSite.net "Patterns &amp; Practices" Rundown for more on this...
+</p>
+<p>
+    Also in question is the &#64;using" statement with DbContext manipulation. Most all MS .Net Core tutorials I have seen are using try {} catch {}, 
+    as the default nature of the DBContext is a global assessor for any MVC EF Controller. More on this...
+</p>

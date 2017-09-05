@@ -247,16 +247,16 @@ define('dws/model-utils', function () {
     }
 
     ///////////////////////////////////////
-    /// this is for asynch calls to server
+    /// this is for async ajax calls to server
     //////////////////////////////////////
     function waitStatus(status, target) {
 
         if (status) {
-            $(target).addClass('waiting')
+            $(target).addClass('waiting');
         }
         else
         {
-            $(target).removeClass('waiting')
+            $(target).removeClass('waiting');
         }
     } 
     
@@ -368,20 +368,7 @@ function (Control) {
             Control.sendMessageDefer($item);
         });
 
-        $(document).on('click','.sand-link', function (e) {
-            e.preventDefault();
-            var $item = $(e.target);
-            $('.sand-link').removeClass('active');
-            $item.addClass('active');
-            Control.sendMessageDefer($item);
-        });
-
-        $(document).on('click', '#btn-blog', function (e) {
-            e.preventDefault();
-            $('#blog-text').toggleClass('hidden');
-            $('#blog-content').toggleClass('hidden');
-        });
-
+        
 
         /////////////////////////////
         /// show/hide events
@@ -456,14 +443,14 @@ function (Control) {
             var $modal = $(this);
             $modal.find('.modal-title').text('Add New ' + $item.attr('data-target-id'));
             Control.sendMessage($item, '#target-modal');
-        })
+        });
 
         $(document).on('shown.bs.modal', '#modal-action-template', function (e) {
             //e.preventDefault();
             // get modal 
             var $item = $(e.target);
             $item.find('input:visible').first().focus();
-        })
+        });
 
         /////////////////////////////
         /// popover init
@@ -473,6 +460,7 @@ function (Control) {
             trigger: 'click',
             title: 'What is a Run-down???',
             content: 'A Run-down is a casual non-authoritative white-paper. In my words and IMHO...',
+            footer: 'I am a Bootstrap popover...',
             placement: 'bottom',
             delay: { "show": 200, "hide": 100 }
 
@@ -484,31 +472,42 @@ function (Control) {
         //    $(this).popover('toggle');
         //})
 
-        ////////////////////////////////
-        // stupid re-size events..
-        ///////////////////////////////
-        //$(window).resize( function () {
-        //    var $rd = $('#rundowns');
-        //    var $colrd = $('#col-rundowns');
-        //    var $hdrd = $('#rundowns-header')
-        //    $rd.height( $colrd.height() - $hdrd.innerHeight() );
-        //})
-
-        //$(window).load(function () {
-        //    var $rd = $('#rundowns');
-        //    var $colrd = $('#col-rundowns');
-        //    var $hdrd = $('#rundowns-header')
-        //    $rd.height( $colrd.height() - $hdrd.innerHeight() );
-        //})
+        
 
         /////////////////////////////
-        /// other events
+        /// Sandbox events
         ////////////////////////////
 
 
+        $(document).on('click', '.nav-item', function (e) {
+            e.preventDefault();
+            var $item = $(e.target);
+            $('.nav-item').removeClass('active');
+            $item.closest('.nav-item').addClass('active');
+            Control.sendMessage($item);
+        });
+
+        $(document).on('click', 'a.sandbox-toggle-text', function (e) {
+            e.preventDefault();
+            var $link = $(e.target);
+            var $text = $link.parent().siblings('.card-text.expand');
+
+            if ($text.length == 1) {
+                $text.removeClass('expand');
+                $link.text('More...');
+            }
+            else {
+
+                $('.sandbox-wrapper').find('.sandbox-item').children('.card-text.expand').removeClass('expand');
+                $('.sandbox-wrapper').find('.sandbox-toggle-text').text('More...');
+                $link.parent().siblings('.card-text').addClass('expand');
+                $link.text('Less...');
+            }
+        });
+
      
 
-        $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 40, mousestop: true });
+        $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 30, mousestop: true });
 
     });
 
@@ -529,7 +528,7 @@ define('dws/sandbox', ['dws/model'], function (ViewModel) {
         characterData: true
     };
 
-    var observer = new MutationObserver(function (changes) {
+    var observerKo = new MutationObserver(function (changes) {
         changes.forEach(function (change) {
             
             if (change.addedNodes.length > 0) {
@@ -542,31 +541,44 @@ define('dws/sandbox', ['dws/model'], function (ViewModel) {
                         console.log("ko re-bind exception....")
                     }
                 })
-
-                //ko.applyBindings(ViewModel, document.getElementById('sandbox-area'));
-                //var newNodes = change.addedNodes;
-                //var i;
-                //for (i = 0; i < newNodes.length; i++) {
-                //    if (!ko.dataFor(newNodes[i])) { ko.applyBindings(ViewModel, newNodes[i]); }
-                //}
-
-                //change.addedNodes.forEach(function (item, index) {
-                //    if (!ko.dataFor(item))
-                //        ko.applyBindings(ViewModel, item);
-                //})
             }
         });
     });
 
-    function observe(state) {
+    function observeKo(state) {
         if (state) {
-            observer.observe(document.getElementById('sandbox-area'), config);
+            observerKo.observe(document.getElementById('sandbox-area'), config);
         }
         else {
-            observer.disconnect();
+            observerKo.disconnect();
         }
     }
-    
+
+    //var observerSandItems = new MutationObserver(function (changes) {
+    //    changes.forEach(function (change) {
+
+    //        if (change.changedNodes.length > 0) {
+    //            var $dataNodes = $(change.addedNodes).find('[data-bind]');
+    //            $dataNodes.each(function () {
+    //                var $node = $(this);
+    //                try {
+    //                    if (!ko.dataFor($node[0])) { ko.applyBindings(ViewModel, $node[0]) }
+    //                } catch (e) {
+    //                    console.log("ko re-bind exception....")
+    //                }
+    //            })
+    //        }
+    //    });
+    //});
+
+    //function observeSandItems(state) {
+    //    if (state) {
+    //        observerSandItems.observe(document.getElementById('sandbox-items'), config);
+    //    }
+    //    else {
+    //        observerSandItems.disconnect();
+    //    }
+    //}
     ///
     ///if we ever need for some reason....
     ///
@@ -590,7 +602,7 @@ define('dws/sandbox', ['dws/model'], function (ViewModel) {
     //}
 
     return {
-        observe:observe
+        observeKo: observeKo
     }
 });
 /// Main controller for event declarations, etc.
@@ -723,7 +735,8 @@ function (Control, viewModel) {
             cache: false,
             dataType: 'json'
         }
-
+        viewModel.waitingTarget('#navbar-main');
+        viewModel.waiting(true);
         //// integrate into dispatcher.js  TODO
         $.ajax(settings)
             .done(function (data) {
@@ -737,11 +750,12 @@ function (Control, viewModel) {
                 }
                 
             })
-            .fail(function (request, error) {
-                viewModel.aborted(request, error, this.responseText)
+            .fail(function (xhr, textStatus, error) {
+                viewModel.abort(xhr, textStatus, error);
             })
-            .always(function () {
-                //waitEffects(false);
+            .always(function (data, textStatus, xhr) {
+                viewModel.waiting(false);
+
             });
     }
 

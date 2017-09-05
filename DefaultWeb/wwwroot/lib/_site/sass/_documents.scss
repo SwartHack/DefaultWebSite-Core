@@ -7,159 +7,228 @@ div#target-area {
     padding: 0;
     margin: 0;
     border-radius: 0;
-    background-color: skyblue;
+ }
 
 
-    .dws-page {
-        height: 100%;
-        padding: 5%;
-        margin: 0;
-        border-radius: 0;
+.dws-page {
+    height: 100%;
+    padding: 5%;
+    margin: 0;
+    border-radius: 0;
+}
+
+.dws-brand {
+    font-style: italic;
+    font-weight:700;
+
+    #title {
+        font-size: 2rem;
     }
-
-    .welcome.card {
-        @extend .dws-page;
-        background-color: skyblue;
-        overflow-y: auto;
-
-        .card-block {
-            display: block;
-            padding: 0;
-            margin: 0;
-            background-color: transparent;
-        }
+    #net {
+        font-size: .75rem;
     }
-
-
-    .about.card {
-        @extend .dws-page;
-        background-color: firebrick;
-        color: ghostwhite;
-        overflow: auto;
-
-        ul#about-content.list-group {
-            list-style: none;
-            background-color: transparent;
-
-            li.list-group-item {
-                background-color: transparent;
-                border: none;
-            }
-        }
-    }
-
-    #contact.card {
-        @extend .dws-page;
-        overflow: auto;
-
-        .card-block {
-            display: block;
-            padding: 0;
-            margin: 0;
-            background-color: transparent;
-
-            address {
-                box-shadow: inset;
-                padding: .5em;
-                margin-bottom: 0;
-            }
-
-            .quote-container {
-                margin-bottom: 1rem;
-
-                .note.yellow {
-                    width: auto;
-                    margin-left: 5%;
-                    margin-right: 5%;
-                    margin-bottom: 2rem;
-                    font-size: 1em;
-                    font-style: italic;
-                }
-            }
-
-            #doc-buttons.card {
-                flex-direction: row;
-                justify-content: space-between;
-                border: none;
-                margin-top: 2rem;
-                margin-bottom: 1rem;
-
-                button {
-                    padding-left: 2em
-                }
-            }
-        }
-
-        div#doc-resume.collapse.show, div#doc-cv.collapse.show, div#doc-masters.collapse.show {
-            .card.card-block {
-                .open-document {
-                    height: 90%;
-                }
-            }
-        }
-    }
-
-    .comments {
-        @extend .dws-page;
-        background-color: hotpink;
-        color: chartreuse;
-    }
-
-    #sandbox {
-        @extend .dws-page;
-        background-color: aliceblue;
-    }
-
-    .ack.card {
-        @extend .dws-page;
-        background-color: silver;
-        color: royalblue;
-        padding: 0;
-        overflow-y: auto;
-
-        .card-block {
-            display: block;
-            //padding: 0;
-            margin: 0;
-            background-color: transparent;
-        }
-    }
-
-    .rundown-document {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin-bottom: 3px;
-        //overflow-y: auto;
-        //padding: 1rem .75rem;
-        .snippet.card {
-            max-height: 20rem;
-            margin-left: 5%;
-            margin-right: 5%;
-            margin-bottom: .75rem;
-
-            .card-header {
-                padding: 0;
-
-                .card-title {
-                    text-align: center;
-                    margin-bottom: 0;
-                }
-            }
-
-            .card-block {
-                overflow: auto;
-                max-height: 15rem;
-                text-align: left;
-            }
-        }
-    }
-
-    .open-document {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        margin-bottom: 3px;
-        overflow-y: auto;
+    #core {
+        color: crimson;
+        font-size: 2rem;
+        font-style: italic;
     }
 }
+
+.dws-text {
+    //font-size: inherit;
+    font-style: italic;
+    font-weight: 700;
+
+    #title {
+        //font-size: 2rem;
+    }
+
+    #net {
+        font-size: smaller;
+    }
+
+    #core {
+        color: crimson;
+        font-size: inherit;
+        font-style: italic;
+    }
+}
+
+.side-note {
+    text-align:justify;
+    border:.25rem inset lightsteelblue;
+    margin: 1rem 2rem 1rem 2rem;
+    padding:.75rem;
+    font-weight:500;
+
+}
+
+.exclamation {
+    text-align: center !important;
+    font-style: italic;
+    font-weight:700;
+}
+
+.mussing {
+    text-align: center;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.paper-wrapper {
+
+    .paper {
+
+    }
+}
+
+#welcome.card {
+    @extend .dws-page;
+    background-color: skyblue;
+    overflow-y: auto;
+    margin-top:.5rem;
+    padding:0;
+
+    .card-header {
+        
+
+    }
+
+    .card-block {
+        display: block;
+        padding: .5rem;
+        margin: 0;
+        background-color: transparent;
+    }
+}
+
+
+.about.card {
+    @extend .dws-page;
+    background-color: firebrick;
+    color: ghostwhite;
+    overflow: auto;
+
+    ul#about-content.list-group {
+        list-style: none;
+        background-color: transparent;
+
+        li.list-group-item {
+            background-color: transparent;
+            border: none;
+        }
+    }
+}
+
+#contact.card {
+    @extend .dws-page;
+    overflow: auto;
+
+    .card-block {
+        display: block;
+        padding: .5rem;
+        margin: 0;
+        background-color: transparent;
+
+        address {
+            box-shadow: inset;
+            padding: .5em;
+            margin-bottom: 0;
+        }
+
+        .quote-container {
+            margin-bottom: 1rem;
+
+            .note.yellow {
+                width: auto;
+                margin-left: 5%;
+                margin-right: 5%;
+                margin-bottom: 2rem;
+                font-size: 1em;
+                font-style: italic;
+            }
+        }
+
+        #doc-buttons.card {
+            flex-direction: row;
+            justify-content: space-between;
+            border: none;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+
+            button {
+                padding-left: 2em
+            }
+        }
+    }
+
+    div#doc-resume.collapse.show, div#doc-cv.collapse.show, div#doc-masters.collapse.show {
+        .card.card-block {
+            .open-document {
+                height: 90%;
+            }
+        }
+    }
+}
+
+.open-document {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 3px;
+    overflow-y: auto;
+}
+
+.comments {
+    @extend .dws-page;
+    background-color: hotpink;
+    color: chartreuse;
+}
+
+
+.ack.card {
+    @extend .dws-page;
+    background-color: silver;
+    color: royalblue;
+    padding: 0;
+    overflow-y: auto;
+
+    .card-block {
+        display: block;
+        //padding: 0;
+        margin: 0;
+        background-color: transparent;
+    }
+}
+
+.rundown-document {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 3px;
+    //overflow-y: auto;
+    //padding: 1rem .75rem;
+    .snippet.card {
+        max-height: 20rem;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: .75rem;
+
+        .card-header {
+            padding: 0;
+
+            .card-title {
+                text-align: center;
+                margin-bottom: 0;
+            }
+        }
+
+        .card-block {
+            overflow: auto;
+            max-height: 15rem;
+            text-align: left;
+        }
+    }
+}
+

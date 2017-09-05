@@ -13,6 +13,7 @@
     &.waiting {
         -webkit-animation: dws-waiting 100ms infinite;
         animation: dws-waiting 100ms infinite;
+        cursor:wait;
     }
 
 
@@ -73,7 +74,6 @@
 
     #navbarCollapse {
         margin-right: 1rem;
-
         // nav nav-bar
         ul {
 

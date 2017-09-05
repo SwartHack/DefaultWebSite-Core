@@ -25,20 +25,7 @@ function (Control) {
             Control.sendMessageDefer($item);
         });
 
-        $(document).on('click','.sand-link', function (e) {
-            e.preventDefault();
-            var $item = $(e.target);
-            $('.sand-link').removeClass('active');
-            $item.addClass('active');
-            Control.sendMessageDefer($item);
-        });
-
-        $(document).on('click', '#btn-blog', function (e) {
-            e.preventDefault();
-            $('#blog-text').toggleClass('hidden');
-            $('#blog-content').toggleClass('hidden');
-        });
-
+        
 
         /////////////////////////////
         /// show/hide events
@@ -113,14 +100,14 @@ function (Control) {
             var $modal = $(this);
             $modal.find('.modal-title').text('Add New ' + $item.attr('data-target-id'));
             Control.sendMessage($item, '#target-modal');
-        })
+        });
 
         $(document).on('shown.bs.modal', '#modal-action-template', function (e) {
             //e.preventDefault();
             // get modal 
             var $item = $(e.target);
             $item.find('input:visible').first().focus();
-        })
+        });
 
         /////////////////////////////
         /// popover init
@@ -130,6 +117,7 @@ function (Control) {
             trigger: 'click',
             title: 'What is a Run-down???',
             content: 'A Run-down is a casual non-authoritative white-paper. In my words and IMHO...',
+            footer: 'I am a Bootstrap popover...',
             placement: 'bottom',
             delay: { "show": 200, "hide": 100 }
 
@@ -141,31 +129,42 @@ function (Control) {
         //    $(this).popover('toggle');
         //})
 
-        ////////////////////////////////
-        // stupid re-size events..
-        ///////////////////////////////
-        //$(window).resize( function () {
-        //    var $rd = $('#rundowns');
-        //    var $colrd = $('#col-rundowns');
-        //    var $hdrd = $('#rundowns-header')
-        //    $rd.height( $colrd.height() - $hdrd.innerHeight() );
-        //})
-
-        //$(window).load(function () {
-        //    var $rd = $('#rundowns');
-        //    var $colrd = $('#col-rundowns');
-        //    var $hdrd = $('#rundowns-header')
-        //    $rd.height( $colrd.height() - $hdrd.innerHeight() );
-        //})
+        
 
         /////////////////////////////
-        /// other events
+        /// Sandbox events
         ////////////////////////////
 
 
+        $(document).on('click', '.nav-item', function (e) {
+            e.preventDefault();
+            var $item = $(e.target);
+            $('.nav-item').removeClass('active');
+            $item.closest('.nav-item').addClass('active');
+            Control.sendMessage($item);
+        });
+
+        $(document).on('click', 'a.sandbox-toggle-text', function (e) {
+            e.preventDefault();
+            var $link = $(e.target);
+            var $text = $link.parent().siblings('.card-text.expand');
+
+            if ($text.length == 1) {
+                $text.removeClass('expand');
+                $link.text('More...');
+            }
+            else {
+
+                $('.sandbox-wrapper').find('.sandbox-item').children('.card-text.expand').removeClass('expand');
+                $('.sandbox-wrapper').find('.sandbox-toggle-text').text('More...');
+                $link.parent().siblings('.card-text').addClass('expand');
+                $link.text('Less...');
+            }
+        });
+
      
 
-        $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 40, mousestop: true });
+        $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 30, mousestop: true });
 
     });
 

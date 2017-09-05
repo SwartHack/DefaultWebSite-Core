@@ -52,6 +52,11 @@ namespace DefaultWeb.Controllers
             return View();
         }
 
+        public IActionResult Error()
+        {
+            return View();
+        }
+
         public void SetTheme(string theme)
         {
             BootStrapThemeName = theme;
@@ -69,17 +74,13 @@ namespace DefaultWeb.Controllers
             return PartialView("~/Views/Rundowns/Rundown.cshtml", model);
         }
 
+
         public IActionResult Talk(string message)
         {
             if (message == "Hello Server")
                 return Content("<div title='Server Says...'> Hello...</div>");
             else
                 return Content("Huh?");
-        }
-
-        public IActionResult Error()
-        {
-            return View();
         }
 
     }

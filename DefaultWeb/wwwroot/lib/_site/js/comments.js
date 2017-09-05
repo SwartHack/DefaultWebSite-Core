@@ -11,7 +11,8 @@ function (Control, viewModel) {
             cache: false,
             dataType: 'json'
         }
-
+        viewModel.waitingTarget('#navbar-main');
+        viewModel.waiting(true);
         //// integrate into dispatcher.js  TODO
         $.ajax(settings)
             .done(function (data) {
@@ -25,11 +26,12 @@ function (Control, viewModel) {
                 }
                 
             })
-            .fail(function (request, error) {
-                viewModel.aborted(request, error, this.responseText)
+            .fail(function (xhr, textStatus, error) {
+                viewModel.abort(xhr, textStatus, error);
             })
-            .always(function () {
-                //waitEffects(false);
+            .always(function (data, textStatus, xhr) {
+                viewModel.waiting(false);
+
             });
     }
 

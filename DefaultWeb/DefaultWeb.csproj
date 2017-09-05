@@ -21,6 +21,97 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\Rundowns\Snippets\ArchiveFile.html" />
+    <None Remove="Views\Rundowns\Snippets\CommentEtc.html" />
+    <None Remove="Views\Rundowns\Snippets\Controller1.html" />
+    <None Remove="Views\Rundowns\Snippets\Controller2.html" />
+    <None Remove="Views\Rundowns\Snippets\edittemp.html" />
+    <None Remove="Views\Rundowns\Snippets\gruntfile.html" />
+    <None Remove="Views\Rundowns\Snippets\Inject.html" />
+    <None Remove="Views\Rundowns\Snippets\Inject2.html" />
+    <None Remove="Views\Rundowns\Snippets\JsonClient.html" />
+    <None Remove="Views\Rundowns\Snippets\JsonConfig.html" />
+    <None Remove="Views\Rundowns\Snippets\JsonServer.html" />
+    <None Remove="Views\Rundowns\Snippets\KnockDoc.html" />
+    <None Remove="Views\Rundowns\Snippets\KnockThumb.html" />
+    <None Remove="Views\Rundowns\Snippets\mainless.html" />
+    <None Remove="Views\Rundowns\Snippets\Model.html" />
+    <None Remove="Views\Rundowns\Snippets\model2.html" />
+    <None Remove="Views\Rundowns\Snippets\ProgramCS.html" />
+    <None Remove="Views\Rundowns\Snippets\RazorVIew.html" />
+    <None Remove="Views\Rundowns\Snippets\RepositoryImp.html" />
+    <None Remove="Views\Rundowns\Snippets\RepositoryInt.html" />
+    <None Remove="Views\Rundowns\Snippets\SiteLess.html" />
+    <None Remove="Views\Rundowns\Snippets\StartUpCS.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Rundowns\Snippets\ArchiveFile.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\CommentEtc.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\Controller1.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\Controller2.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\edittemp.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\gruntfile.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\Inject.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\Inject2.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\JsonClient.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\JsonConfig.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\JsonServer.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\KnockDoc.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\KnockThumb.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\mainless.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\Model.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\model2.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\ProgramCS.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\RazorVIew.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\RepositoryImp.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\RepositoryInt.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\SiteLess.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Rundowns\Snippets\StartUpCS.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="wwwroot\lib\_site\.eslintrc.json" />
     <Content Include="wwwroot\lib\_site\dist\css\jquery-ui.css" />
     <Content Include="wwwroot\lib\_site\dist\css\jquery-ui.min.css" />
@@ -62,6 +153,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Sandbox\Snippets\" />
     <Folder Include="wwwroot\css\jquery-ui\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>

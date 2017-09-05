@@ -7743,7 +7743,8 @@ html {
   padding: 0 1rem; }
   #navbar-main.waiting {
     -webkit-animation: dws-waiting 100ms infinite;
-    animation: dws-waiting 100ms infinite; }
+    animation: dws-waiting 100ms infinite;
+    cursor: wait; }
   #navbar-main button {
     padding: 0; }
   #navbar-main #myNavHeader {
@@ -7866,100 +7867,147 @@ div#target-area {
   width: 100%;
   padding: 0;
   margin: 0;
-  border-radius: 0;
-  background-color: skyblue; }
-  div#target-area .dws-page, div#target-area .welcome.card, div#target-area .about.card, div#target-area #contact.card, div#target-area .comments, div#target-area #sandbox, div#target-area .ack.card {
-    height: 100%;
-    padding: 5%;
+  border-radius: 0; }
+
+.dws-page, #welcome.card, .about.card, #contact.card, .comments, .ack.card {
+  height: 100%;
+  padding: 5%;
+  margin: 0;
+  border-radius: 0; }
+
+.dws-brand {
+  font-style: italic;
+  font-weight: 700; }
+  .dws-brand #title {
+    font-size: 2rem; }
+  .dws-brand #net {
+    font-size: .75rem; }
+  .dws-brand #core {
+    color: crimson;
+    font-size: 2rem;
+    font-style: italic; }
+
+.dws-text {
+  font-style: italic;
+  font-weight: 700; }
+  .dws-text #net {
+    font-size: smaller; }
+  .dws-text #core {
+    color: crimson;
+    font-size: inherit;
+    font-style: italic; }
+
+.side-note {
+  text-align: justify;
+  border: .25rem inset lightsteelblue;
+  margin: 1rem 2rem 1rem 2rem;
+  padding: .75rem;
+  font-weight: 500; }
+
+.exclamation {
+  text-align: center !important;
+  font-style: italic;
+  font-weight: 700; }
+
+.mussing {
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 700; }
+
+#welcome.card {
+  background-color: skyblue;
+  overflow-y: auto;
+  margin-top: .5rem;
+  padding: 0; }
+  #welcome.card .card-block {
+    display: block;
+    padding: .5rem;
     margin: 0;
-    border-radius: 0; }
-  div#target-area .welcome.card {
-    background-color: skyblue;
-    overflow-y: auto; }
-    div#target-area .welcome.card .card-block {
-      display: block;
-      padding: 0;
-      margin: 0;
-      background-color: transparent; }
-  div#target-area .about.card {
-    background-color: firebrick;
-    color: ghostwhite;
-    overflow: auto; }
-    div#target-area .about.card ul#about-content.list-group {
-      list-style: none;
-      background-color: transparent; }
-      div#target-area .about.card ul#about-content.list-group li.list-group-item {
-        background-color: transparent;
-        border: none; }
-  div#target-area #contact.card {
-    overflow: auto; }
-    div#target-area #contact.card .card-block {
-      display: block;
-      padding: 0;
-      margin: 0;
-      background-color: transparent; }
-      div#target-area #contact.card .card-block address {
-        box-shadow: inset;
-        padding: .5em;
+    background-color: transparent; }
+
+.about.card {
+  background-color: firebrick;
+  color: ghostwhite;
+  overflow: auto; }
+  .about.card ul#about-content.list-group {
+    list-style: none;
+    background-color: transparent; }
+    .about.card ul#about-content.list-group li.list-group-item {
+      background-color: transparent;
+      border: none; }
+
+#contact.card {
+  overflow: auto; }
+  #contact.card .card-block {
+    display: block;
+    padding: .5rem;
+    margin: 0;
+    background-color: transparent; }
+    #contact.card .card-block address {
+      box-shadow: inset;
+      padding: .5em;
+      margin-bottom: 0; }
+    #contact.card .card-block .quote-container {
+      margin-bottom: 1rem; }
+      #contact.card .card-block .quote-container .note.yellow {
+        width: auto;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 2rem;
+        font-size: 1em;
+        font-style: italic; }
+    #contact.card .card-block #doc-buttons.card {
+      flex-direction: row;
+      justify-content: space-between;
+      border: none;
+      margin-top: 2rem;
+      margin-bottom: 1rem; }
+      #contact.card .card-block #doc-buttons.card button {
+        padding-left: 2em; }
+  #contact.card div#doc-resume.collapse.show .card.card-block .open-document, #contact.card div#doc-cv.collapse.show .card.card-block .open-document, #contact.card div#doc-masters.collapse.show .card.card-block .open-document {
+    height: 90%; }
+
+.open-document {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 3px;
+  overflow-y: auto; }
+
+.comments {
+  background-color: hotpink;
+  color: chartreuse; }
+
+.ack.card {
+  background-color: silver;
+  color: royalblue;
+  padding: 0;
+  overflow-y: auto; }
+  .ack.card .card-block {
+    display: block;
+    margin: 0;
+    background-color: transparent; }
+
+.rundown-document {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 3px; }
+  .rundown-document .snippet.card {
+    max-height: 20rem;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: .75rem; }
+    .rundown-document .snippet.card .card-header {
+      padding: 0; }
+      .rundown-document .snippet.card .card-header .card-title {
+        text-align: center;
         margin-bottom: 0; }
-      div#target-area #contact.card .card-block .quote-container {
-        margin-bottom: 1rem; }
-        div#target-area #contact.card .card-block .quote-container .note.yellow {
-          width: auto;
-          margin-left: 5%;
-          margin-right: 5%;
-          margin-bottom: 2rem;
-          font-size: 1em;
-          font-style: italic; }
-      div#target-area #contact.card .card-block #doc-buttons.card {
-        flex-direction: row;
-        justify-content: space-between;
-        border: none;
-        margin-top: 2rem;
-        margin-bottom: 1rem; }
-        div#target-area #contact.card .card-block #doc-buttons.card button {
-          padding-left: 2em; }
-    div#target-area #contact.card div#doc-resume.collapse.show .card.card-block .open-document, div#target-area #contact.card div#doc-cv.collapse.show .card.card-block .open-document, div#target-area #contact.card div#doc-masters.collapse.show .card.card-block .open-document {
-      height: 90%; }
-  div#target-area .comments {
-    background-color: hotpink;
-    color: chartreuse; }
-  div#target-area #sandbox {
-    background-color: aliceblue; }
-  div#target-area .ack.card {
-    background-color: silver;
-    color: royalblue;
-    padding: 0;
-    overflow-y: auto; }
-    div#target-area .ack.card .card-block {
-      display: block;
-      margin: 0;
-      background-color: transparent; }
-  div#target-area .rundown-document {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 3px; }
-    div#target-area .rundown-document .snippet.card {
-      max-height: 20rem;
-      margin-left: 5%;
-      margin-right: 5%;
-      margin-bottom: .75rem; }
-      div#target-area .rundown-document .snippet.card .card-header {
-        padding: 0; }
-        div#target-area .rundown-document .snippet.card .card-header .card-title {
-          text-align: center;
-          margin-bottom: 0; }
-      div#target-area .rundown-document .snippet.card .card-block {
-        overflow: auto;
-        max-height: 15rem;
-        text-align: left; }
-  div#target-area .open-document {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 3px;
-    overflow-y: auto; }
+    .rundown-document .snippet.card .card-block {
+      overflow: auto;
+      max-height: 15rem;
+      text-align: left; }
 
 #theCarousel .carousel-inner #carousel-item-1 div.text-center {
   font-size: 1.5rem;
@@ -7997,84 +8045,107 @@ div#target-area {
 #theCarousel .carousel-inner #carousel-item-3.active {
   display: block !important; }
 
-.sandbox {
+#sandbox {
   height: 100%;
   width: 100%;
-  padding: 0;
-  margin: 0;
+  padding: 0 !important;
+  margin: 0 !important;
   border-radius: 0;
-  background-color: burlywood; }
-  .sandbox .text-center {
-    background-color: olive;
+  background-color: burlywood !important; }
+  #sandbox .text-center {
+    background-color: tan !important;
     margin-bottom: 0;
     font-size: 1.5rem;
     font-weight: bold; }
-  .sandbox .nav {
+  #sandbox ul.nav.nav-pills {
     width: 100%;
-    margin-bottom: .125rem;
-    border-bottom: .125rem solid black;
+    padding-bottom: .25rem;
     flex-wrap: wrap;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    background-color: moccasin;
     cursor: pointer; }
-    .sandbox .nav li a {
-      padding: .125rem .5rem .125rem .5rem;
-      font-weight: 500; }
-      .sandbox .nav li a.active {
-        background-color: darkblue;
+    #sandbox ul.nav.nav-pills .nav-item {
+      border-radius: .75rem;
+      margin-top: .25rem;
+      margin-left: .75rem;
+      background-color: tan;
+      /*&.active,
+      .show > & {
+          color: $nav-pills-link-active-color;
+          background-color: $nav-pills-link-active-bg;
+      }*/ }
+      #sandbox ul.nav.nav-pills .nav-item a {
+        padding-left: .5rem;
+        padding-right: .5rem; }
+      #sandbox ul.nav.nav-pills .nav-item.active {
+        background-color: darkkhaki;
         color: #fff; }
-    .sandbox .nav li:focus, .sandbox .nav li:hover {
-      background-color: khaki;
-      color: #fff; }
-  .sandbox #sandbox-area #sandbox-about {
+        #sandbox ul.nav.nav-pills .nav-item.active:hover {
+          background-color: darkkhaki;
+          color: #fff; }
+      #sandbox ul.nav.nav-pills .nav-item:focus, #sandbox ul.nav.nav-pills .nav-item:hover {
+        background-color: khaki;
+        color: #fff; }
+  #sandbox #sandbox-items.card {
+    display: block;
     background-color: transparent;
-    margin: .5rem;
-    margin-bottom: 0; }
-    .sandbox #sandbox-area #sandbox-about .card {
-      display: block;
-      border: none; }
-      .sandbox #sandbox-area #sandbox-about .card .card-header {
-        background-color: olive;
-        padding-top: 0;
-        padding-bottom: 0;
+    margin: 0;
+    margin-bottom: 0;
+    border: none; }
+    #sandbox #sandbox-items.card .card-header {
+      background-color: tan;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-bottom: 0; }
+      #sandbox #sandbox-items.card .card-header .card-title {
+        background-color: transparent;
+        font-weight: bold;
+        font-size: 1.25rem;
+        font-style: italic;
         margin-bottom: 0; }
-        .sandbox #sandbox-area #sandbox-about .card .card-header .card-title {
-          background-color: transparent;
-          font-weight: bold;
-          font-size: 1.25rem;
-          font-style: italic;
-          margin-bottom: 0; }
-      .sandbox #sandbox-area #sandbox-about .card #about-wrapper {
-        display: block;
-        height: 75%;
-        overflow-y: auto;
-        border: none;
-        padding: 1.25rem;
-        padding-top: 1rem;
-        padding-bottom: 0;
-        background-color: moccasin; }
-        .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card {
-          display: block;
-          margin-bottom: 1rem;
-          background-color: burlywood;
-          border-radius: 0.25rem; }
-          .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card .card-title {
-            font-size: 1.25rem;
-            font-style: italic;
-            font-weight: 400;
-            margin-bottom: 0;
-            text-align: center; }
-        .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card-text {
-          background-color: lemonchiffon; }
-          .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card-text p {
-            background-color: transparent;
-            margin-left: .5rem;
-            margin-right: .5rem;
-            margin-bottom: 0; }
-        .sandbox #sandbox-area #sandbox-about .card #about-wrapper .card-footer {
-          border: none;
-          padding-top: 0;
-          padding-bottom: 0;
-          background-color: transparent; }
+    #sandbox #sandbox-items.card .sandbox-wrapper.card-block {
+      display: block;
+      height: 82.5%;
+      overflow-y: auto;
+      border: none;
+      padding: 1.25rem;
+      padding-top: 1rem;
+      padding-bottom: 0;
+      background-color: moccasin; }
+  #sandbox .sandbox-item.card {
+    display: block;
+    margin-bottom: 1rem;
+    background-color: burlywood;
+    border-radius: 0.25rem; }
+    #sandbox .sandbox-item.card .card-title {
+      font-size: 1.25rem;
+      font-style: italic;
+      font-weight: 400;
+      margin-bottom: 0;
+      text-align: center; }
+    #sandbox .sandbox-item.card .card-text {
+      background-color: lemonchiffon;
+      max-height: 5rem;
+      overflow-y: auto;
+      padding: .5rem; }
+      #sandbox .sandbox-item.card .card-text p {
+        background-color: transparent;
+        margin-left: .5rem;
+        margin-right: .5rem;
+        margin-bottom: 0; }
+      #sandbox .sandbox-item.card .card-text.expand {
+        max-height: 50%; }
+    #sandbox .sandbox-item.card .card-footer {
+      border: none;
+      padding-top: 0;
+      padding-bottom: 0;
+      background-color: transparent; }
+      #sandbox .sandbox-item.card .card-footer a.sandbox-toggle-text {
+        text-decoration: none;
+        color: #007bff; }
+        #sandbox .sandbox-item.card .card-footer a.sandbox-toggle-text:focus, #sandbox .sandbox-item.card .card-footer a.sandbox-toggle-text:hover {
+          cursor: pointer; }
 
 #comments-mgr {
   margin: .5rem;

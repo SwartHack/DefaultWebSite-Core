@@ -20,7 +20,7 @@ namespace DefaultWeb.Controllers
         public CommentsController(DwsDbContext context)
         {
             _context = context;
-            //_transaction = _context.Database.BeginTransaction();
+            _transaction = _context.Database.BeginTransaction();
         }
 
         /// <summary>
@@ -29,7 +29,8 @@ namespace DefaultWeb.Controllers
         ~ CommentsController()
         {
             //_transaction.Commit();
-            //_transaction.Dispose();
+            //_transaction.Rollback();
+            _transaction.Dispose();
             _context.Dispose();
         }
 

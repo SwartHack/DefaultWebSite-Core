@@ -11,16 +11,17 @@ using System;
 namespace DefaultWeb.Migrations
 {
     [DbContext(typeof(DwsDbContext))]
-    partial class DwsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170918054509_clobber1")]
+    partial class clobber1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DefaultWeb.Models.DefaultWebSite.Comment", b =>
+            modelBuilder.Entity("DefaultWeb.Models.DefaultWebSite.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -48,7 +49,7 @@ namespace DefaultWeb.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("DefaultWeb.Models.DefaultWebSite.Source", b =>
+            modelBuilder.Entity("DefaultWeb.Models.DefaultWebSite.Entities.Source", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -66,9 +67,31 @@ namespace DefaultWeb.Migrations
                     b.ToTable("Sources");
                 });
 
-            modelBuilder.Entity("DefaultWeb.Models.DefaultWebSite.Comment", b =>
+            modelBuilder.Entity("DefaultWeb.Models.DefaultWebSite.File.DwsFileInfo", b =>
                 {
-                    b.HasOne("DefaultWeb.Models.DefaultWebSite.Source", "Source")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ContentType");
+
+                    b.Property<DateTime>("CreatedTimestamp");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("FileName");
+
+                    b.Property<int>("FileSize");
+
+                    b.Property<DateTime>("UpdatedTimestamp");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DwsFileInfos");
+                });
+
+            modelBuilder.Entity("DefaultWeb.Models.DefaultWebSite.Entities.Comment", b =>
+                {
+                    b.HasOne("DefaultWeb.Models.DefaultWebSite.Entities.Source", "Source")
                         .WithMany("Comments")
                         .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.Cascade);

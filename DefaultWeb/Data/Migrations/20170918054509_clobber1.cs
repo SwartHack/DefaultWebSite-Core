@@ -5,10 +5,28 @@ using System.Collections.Generic;
 
 namespace DefaultWeb.Migrations
 {
-    public partial class publish1 : Migration
+    public partial class clobber1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "DwsFileInfos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedTimestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileSize = table.Column<int>(type: "int", nullable: false),
+                    UpdatedTimestamp = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DwsFileInfos", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Sources",
                 columns: table => new
@@ -56,6 +74,9 @@ namespace DefaultWeb.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "DwsFileInfos");
 
             migrationBuilder.DropTable(
                 name: "Sources");

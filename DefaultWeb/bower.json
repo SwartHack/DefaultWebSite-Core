@@ -12,7 +12,8 @@
     "requirejs": "2.3.3",
     "arcgis-js-api": "arcgis#4.4.0",
     "esri-leaflet": "v2.0.8",
-    "esri-leaflet-geocoder": "v2.2.4"
+    "esri-leaflet-geocoder": "v2.2.4",
+    "blockui": "v2.65"
   },
   "resolutions": {
     "dojo": ">=1.8.9",

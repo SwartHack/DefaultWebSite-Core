@@ -6,6 +6,21 @@
 /// DefaultWebSite animations
 //////////////////////////////////////
 
+@keyframes thumbsLoading {
+    0% { @include gradient-x-three-colors($red, $white, 75%, $blue); }
+    100% { @include gradient-x-three-colors($blue, $white, 75%, $red); }
+}
+@keyframes thumbLoading {
+    from { outline-color: $red; box-shadow: 0 0 0 6px $blue; }
+
+    to { outline-color: $blue; box-shadow: 0 0 0 6px $red; }
+}
+
+@keyframes cacheDocLoading {
+    from { outline-width: 1px; }
+    to { outline-width: 6px; }
+}
+
 @-webkit-keyframes dws-waiting {
     0% { @include gradient-x-three-colors(black, white, 75%, crimson); }
     100% { @include gradient-x-three-colors(crimson, white, 75%, &black ); }

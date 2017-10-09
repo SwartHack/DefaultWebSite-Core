@@ -3,7 +3,7 @@
  * Homepage: https://hackinc.net
  * Copyright 2012-2017 SwartHack
  * Licensed under ISC
- * Based on Bootstrap
+ * Based on...
 */
 //////////////////////////////////////////////////////////////////////
 /// KO View Model module
@@ -12,11 +12,11 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     
     var viewModel = {
 
-        file: ko.observable(''),
-        files: ko.observableArray([]),
         data: ko.observable(''),
-        dataType: ko.observable(''),
         target: ko.observable(''),
+        dataType: ko.observable(''),
+        dataJson: ko.observable(''),
+        targetJson: ko.observable(''),
         abort: function (xhr, status, error) {
             viewModel.errorXhr(xhr);
             viewModel.errorStatus(status);
@@ -82,7 +82,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
             $item.hide().fadeIn('slow');
             console.log('Comment afterAdd... ');
         },
-        canAddComment: function () { return viewModel.sources().length === 0 ? false : true }
+        canAddComment: function () { return viewModel.sources().length === 0 ? false : true },
         //canDeleteComment: function () {
         //    var list = $('#comments.list-group').children();
         //    var $element = $(list[viewModel.commentIndex()]);
@@ -90,6 +90,33 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
         //    return isClass;
         //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
         //}
+        contentCacheQueue: ko.observableArray([]),
+        fileInfo: ko.observableArray([]),
+        clientFiles: ko.observableArray([]),
+        contentViewUrl: ko.observable(),
+        exif: ko.observableArray([]),
+        thumb: ko.observable(),
+        thumbRendered: function (elements, item) {
+            var count = elements.length;
+            console.log('thumbRendered: ' + elements + item);
+        },
+        thumbAdded: function (parent, index, element) {
+            var $image = $(parent).find('img');
+            var rendered = $image[0].complete;
+            console.log('thumbAdded-rendered: ' + $image.attr('class') + rendered);
+            //if (!rendered) {
+            //    console.log('thumbAdded-!rendered: ' + $image.attr('class'));
+            //    $image.on('load', function () {
+            //        finishLoadingThumb($(parent));
+            //    });
+            //}
+            //else {
+            //    console.log('thumbAdded-rendered: ' + $image.attr('class'));
+            //    finishLoadingThumb($(parent));
+            //}
+
+        }
+        
     };
 
 
@@ -505,6 +532,10 @@ function (Control) {
             }
         });
 
+        /////////////////////////////
+        /// File Ops stuff
+        ////////////////////////////
+       
      
 
         $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 30, mousestop: true });
@@ -927,6 +958,391 @@ function (Control, viewModel) {
         
 
 
+define('dws/fileops-client', ['dws/controller', 'dws/model'],
+    function (Control, ViewModel) {
+
+        var selectedFiles;
+        var DataURLFileReader = {
+            read: function (file, callback) {
+                var reader = new FileReader();
+                var fileInfo = {
+                    name: file.name,
+                    type: file.type,
+                    fileContent: null,
+                    size: function () {
+                        var FileSize = 0;
+                        if (file.size > 1048576) {
+                            FileSize = Math.round(file.size * 100 / 1048576) / 100 + " MB";
+                        }
+                        else if (file.size > 1024) {
+                            FileSize = Math.round(file.size * 100 / 1024) / 100 + " KB";
+                        }
+                        else {
+                            FileSize = file.size + " bytes";
+                        }
+                        return FileSize;
+                    }
+                };
+                if (!file.type.match('image.*')) {
+                    callback("file type not allowed", fileInfo);
+                    return;
+                }
+                reader.onload = function () {
+                    fileInfo.fileContent = reader.result;
+                    callback(null, fileInfo);
+                };
+                reader.onerror = function () {
+                    callback(reader.error, fileInfo);
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        function init() {
+            $("#fileInput").change(function (evt) {
+                MultiplefileSelected(evt);
+            });
+            $("form#fileUpload button[id=Cancel_btn]").click(function () {
+                Cancel_btn_handler()
+            });
+            $('a#fileUpload').on('click', function () {
+                $('#file-ops-client').dialog();
+            });
+            
+            var dropZone = document.getElementById('drop_zone');
+            dropZone.addEventListener('dragover', handleDragOver, false);
+            dropZone.addEventListener('drop', MultiplefileSelected, false);
+            dropZone.addEventListener('dragenter', dragenterHandler, false);
+            dropZone.addEventListener('dragleave', dragleaveHandler, false);
+            $.blockUI.defaults.overlayCSS = {
+                backgroundColor: '#000',
+                opacity: 0.6
+            };
+            $.blockUI.defaults.css = {
+                padding: 0,
+                margin: 5,
+                width: '60%',
+                top: '30%',
+                left: '20%',
+                color: '#000',
+                border: '3px solid #aaa',
+                backgroundColor: '#fff'
+            };
+            //$.blockUI({ message: $('#file-ops-client') });
+        }
+
+
+        function MultiplefileSelected(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            $('#drop_zone').removeClass('hover');
+
+            selectedFiles = evt.target.files || evt.dataTransfer.files;
+
+            if (selectedFiles) {
+                //$('#clientFilesList').empty();
+                for (var i = 0; i < selectedFiles.length; i++) {
+                    DataURLFileReader.read(selectedFiles[i], function (err, fileInfo) {
+                        var RowInfo;
+                        if (err != null) {
+                            RowInfo = '<div id="File_' + i + '" class="info"><div class="file-info-container">' +
+                                '<div class="file-error">' + err + '</div>' +
+                                '<div data-name="FileName" class="file-info">' + fileInfo.name + '</div>' +
+                                '<div data-type="FileType" class="file-info">' + fileInfo.type + '</div>' +
+                                '<div data-size="FileSize" class="file-info">' + fileInfo.size() + '</div></div><hr/></div>';
+                            $('#clientFilesList').append(RowInfo);
+                        }
+                        else {
+                            var image = '<img src="' + fileInfo.fileContent + '" class="thumb" title="' + fileInfo.name + '" />';
+                            RowInfo = '<div id="File_' + i + '" class="file-info"><div class="file-info-container">' +
+                                '<div data_img="Imagecontainer">' + image + '</div>' +
+                                '<div data-name="FileName" class="file-info">' + fileInfo.name + '</div>' +
+                                '<div data-type="FileType" class="file-info">' + fileInfo.type + '</div>' +
+                                '<div data-size="FileSize" class="file-info">' + fileInfo.size() + '</div></div><hr/></div>';
+                            $('#clientFilesList').append(RowInfo);
+                        }
+                    });
+                }
+            }
+        }
+
+        $(document).on('submit', 'form#fileUpload', function (e) {
+
+            e.preventDefault();
+            var $form = $(this);
+
+            //disable for once and for all TODO
+            $form.attr('disabled', true); // does not seem to work?!
+
+            var formData = new FormData($form[0]);
+            var settings = {
+                url: '/api/dws/upload',  //Server web api
+                type: 'POST',
+                xhr: function () {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // Check if upload property exists
+                        myXhr.upload.addEventListener('progress', progressHandlingFunction, false); // For handling the progress of the upload
+                    }
+                    return myXhr;
+                },
+                // Form data
+                data: formData,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            };
+
+            $.ajax(settings)
+                .done(function (data, textStatus, xhr) {
+                    if (data.statusCode == 200) {
+                        $('#serverFilesList tr:last').after(data.NewRow);
+                        alert(data.status);
+                    }
+                    else {
+                        alert(data.status);
+                    }
+                })
+                .fail(function (xhr, textStatus, error) {
+                    ViewModel.aborted(xhr, textStatus, error);
+                })
+                .always(function () {
+                    $('#clinet-container').empty();
+                    $('.create-file-link').show();
+                    $.unblockUI();
+                    ViewModel.waitEffects(false);
+                });
+        });
+
+        function progressHandlingFunction(e) {
+            if (e.lengthComputable) {
+                var percentComplete = Math.round(e.loaded * 100 / e.total);
+                $("#fileProgress").css("width", percentComplete + '%').attr('aria-valuenow', percentComplete);
+                $('#fileProgress span').text(percentComplete + "%");
+            }
+            else {
+                $('#fileProgress span').text('unable to compute');
+            }
+        }
+        
+        // Drag and Drop Events
+        function handleDragOver(evt) {
+            evt.preventDefault();
+            evt.dataTransfer.effectAllowed = 'copy';
+            evt.dataTransfer.dropEffect = 'copy';
+        }
+
+        function dragenterHandler() {
+            //$('#drop_zone').removeClass('drop_zone');
+            $('#drop_zone').addClass('hover');
+        }
+
+        function dragleaveHandler() {
+            $('#drop_zone').removeClass('hover');
+        }
+
+        function OnDeleteAttachmentSuccess(data) {
+
+            if (data.ID && data.ID != "") {
+                $('' + data.ID).fadeOut('slow');
+            }
+            else {
+                alert("Unable to Delete");
+                console.log(data.message);
+            }
+        }
+
+        function Cancel_btn_handler() {
+            $('#clinet-container').empty();
+            $('.create-file-link').show();
+            $.unblockUI();
+            ViewModel.waitEffects(false);
+        }
+
+        return {
+            init: init,
+            progressHandlingFunction: progressHandlingFunction,
+            OnDeleteAttachmentSuccess: OnDeleteAttachmentSuccess,
+            Cancel_btn_handler: Cancel_btn_handler
+        }
+    });
+define('dws/fileops-content', ['dws/controller', 'dws/model'],
+    function (Control, viewModel) {
+
+        function init() {
+
+            $('#content-left').on("click", function (e) {
+                contentNext();
+            });
+
+            $('#content-right').on("click", function (e) {
+                contentNext();
+            });
+
+            $('.main-content-area').on("swipeleft", function (e) {
+                contentNext();
+            });
+
+            $('.main-image').on("swiperight", function (e) {
+                contentNext();
+            });
+
+            $(document).on('keydown', '#main-content-area', function (e) {
+                if (!shortcutsEnabled) {
+                    return;
+                }
+
+                if (e.keyCode === 37) { //prev
+                    contentPrev();
+                    return false;
+                }
+
+                if (e.keyCode === 39) { //next
+                    contentNext();
+                    return false;
+                }
+            });
+
+            $(document).on('click', 'ul#thumbnails li a', function (e) {
+                e.preventDefault(); // what defaults?
+                var $link = $(this);
+                if (!$('img', $link).hasClass('selected')) { // if currently selected do nothing
+                    $(document).trigger('thumbnailclicked', $link);
+                    clickThumbnail($link); // will pushstate ???
+                }
+            });
+
+            hideAllContent();
+
+            getContent();
+
+            $('#col-util').hide();
+            $('#col-main').addClass('full-size');
+        }
+
+        var shortcutsEnabled = true;
+
+        function enableShortcuts() {
+            shortcutsEnabled = true;
+        }
+
+        function disableShortcuts() {
+            shortcutsEnabled = false;
+        }
+
+
+        function getContent() {
+
+            var settings = {
+                url: "/api/dws/list",
+                cache: false
+            }
+            viewModel.waitingTarget('#navbar-main');
+            viewModel.waiting(true);
+            //// integrate into dispatcher.js  TODO
+            $.ajax(settings)
+                .done(function (data, textStatus, xhr) {
+                    viewModel.fileInfo([]);
+                    viewModel.fileInfo(data.fileInfo);
+                })
+                .fail(function (xhr, textStatus, error) {
+                    viewModel.abort(xhr, textStatus, error);
+                })
+                .always(function (data, textStatus, xhr) {
+                    viewModel.waiting(false);
+                });
+            
+        }
+
+
+        function showContent(selector) {
+            if (!$(selector).is(':visible')) {
+                hideAllContent();
+                $(selector).show(); // beware that using an animated show (fadeIn, etc) may conflict with the visibility check
+            }
+        }
+
+        function hideAllContent() {
+            $('.content-area').hide();
+        }
+
+        function contentNext() {
+            var linkNext = $('ul#thumbnails li a img.selected').closest('li').next().find(">:first-child").trigger('click');
+            $(linkNext).trigger('click');
+        }
+
+        function contentPrev() {
+            var linkPrev = $('ul#thumbnails li a img.selected').closest('li').prev().find(">:first-child");
+            $(linkPrev).trigger('click');
+        }
+
+        function clickThumbnail($link) {
+            var fileURL = $link.attr('href');
+            var virtualPath = $link.attr('data-virtual-path');
+            var mimeType = $link.attr('data-mime-type');  //added to template!!!
+
+            //learn what this is doing
+            window.history && window.history.pushState && window.history.replaceState({ image: "", virtualPath: "" }, "", "");
+            openFile(virtualPath, mimeType);
+        }
+
+        function openFile(virtualPath, mimeType) {
+            var $thumbnail = $('a[data-virtual-path = "' + virtualPath + '"] img');
+            styleSelectedThumbnail($thumbnail);
+            loadContent(virtualPath, mimeType);
+        }
+
+        function styleSelectedThumbnail($thumbnail) {
+            $('ul#thumbnails li a img').removeClass("selected");
+            $thumbnail.addClass("selected");
+        }
+
+        function empty() {
+            viewModel.thumbnails([]);
+        }
+
+
+        function loadContent() {
+
+            var settings = {
+                url: '/api/dws/view/{id}',  //Server web api
+                type: 'Get',
+                cache: false
+            };
+
+            $.ajax(settings)
+                .done(function (data, textStatus, xhr) {
+                    if (data.statusCode == 200) {
+                        
+                    }
+                    else {
+                        alert(data.status);
+                    }
+                })
+                .fail(function (xhr, textStatus, error) {
+                    viewModel.aborted(xhr, textStatus, error);
+                })
+                .always(function () {
+                    $('#clinet-container').empty();
+                    $('.create-file-link').show();
+                    $.unblockUI();
+                    viewModel.waitEffects(false);
+                });
+
+
+        }
+
+        return {
+            init:init,
+            showContent: showContent,
+            hideAllContent: hideAllContent,
+            contentNext: contentNext,
+            contentPrev: contentPrev,
+            clickThumbnail: clickThumbnail
+           
+        };
+
+    });
 //////////////////////////////////////////////////////////////////////
 /// init module - TODO eliminate redundant requires, control initiates all
 //////////////////////////////////////////////////////////////////////
@@ -934,13 +1350,18 @@ require(['dws/actions']);
 require(['dws/comments']);
 require(['dws/sandbox']);
 require(['dws/model-utils']);
-require(['dws/controller']),
-function (control) {
+require(['dws/controller']);
+require(['dws/fileops-client']);
+require(['dws/fileops-content']);
 
-    $(document).ready(function () {
-        control.initKO();
+
+require(['dws/controller'],
+    function (control) {
+
+        $(document).ready(function () {
+            control.initKO();
+        });
     });
-}
 
 //////////////////////////////////////////////////////////////////////
 /// globals go here
@@ -971,7 +1392,7 @@ $.fn.scrollToTop = function () {
     if ((position.bottom < viewport.top) || (position.top > viewport.bottom)) {
         $parent.animate({ scrollTop: position.top }, 800);
     }
-};
+}
 
 $.fn.isWithinParent = function () {
     var $element = this;
@@ -992,4 +1413,4 @@ $.fn.isWithinParent = function () {
     
     //return ((viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 
-};
+}

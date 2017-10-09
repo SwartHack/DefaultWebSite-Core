@@ -8,13 +8,16 @@ using DefaultWeb.Data;
 using DefaultWeb.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using DefaultWeb.Models;
+using DefaultWeb.Models.DefaultWebSite;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using System;
+using DefaultWeb.Models.DefaultWebSite.Repositories;
+using DefaultWeb.Models.DefaultWebSite.Filters;
+using Microsoft.Extensions.Options;
 
-namespace DefaultWeb2
+namespace DefaultWeb
 {
     public class Startup
     {
@@ -67,6 +70,9 @@ namespace DefaultWeb2
                  options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                  options.SerializerSettings.DateFormatString = "MM/dd/yyyy hh:mm tt";
              });
+
+            services.AddScoped<IFileRepository, FileRepository>();
+            services.AddScoped<ValidateMimeMultipartContentFilter>();
 
             services.AddAntiforgery(options =>
             {

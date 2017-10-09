@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using DefaultWeb.Models;
+using DefaultWeb.Models.DefaultWebSite;
 using Microsoft.Extensions.Options;
 using System.Web;
 
 namespace DefaultWeb.Controllers
 {
+    
+
     public class HomeController : Controller
     {
-        private readonly DwsSettings _settings;
+        public DwsSettings _settings { get; private set; }
         private string BootStrapThemeName { get; set; }
         private string JqueryUiThemeName { get; set; }
 

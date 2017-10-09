@@ -5,13 +5,18 @@ require(['dws/actions']);
 require(['dws/comments']);
 require(['dws/sandbox']);
 require(['dws/model-utils']);
-require(['dws/controller']),
-function (control) {
+require(['dws/controller']);
+require(['dws/fileops-client']);
+require(['dws/fileops-content']);
 
-    $(document).ready(function () {
-        control.initKO();
+
+require(['dws/controller'],
+    function (control) {
+
+        $(document).ready(function () {
+            control.initKO();
+        });
     });
-}
 
 //////////////////////////////////////////////////////////////////////
 /// globals go here
@@ -42,7 +47,7 @@ $.fn.scrollToTop = function () {
     if ((position.bottom < viewport.top) || (position.top > viewport.bottom)) {
         $parent.animate({ scrollTop: position.top }, 800);
     }
-};
+}
 
 $.fn.isWithinParent = function () {
     var $element = this;
@@ -63,4 +68,4 @@ $.fn.isWithinParent = function () {
     
     //return ((viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 
-};
+}

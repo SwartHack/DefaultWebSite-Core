@@ -5,11 +5,11 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     
     var viewModel = {
 
-        file: ko.observable(''),
-        files: ko.observableArray([]),
         data: ko.observable(''),
-        dataType: ko.observable(''),
         target: ko.observable(''),
+        dataType: ko.observable(''),
+        dataJson: ko.observable(''),
+        targetJson: ko.observable(''),
         abort: function (xhr, status, error) {
             viewModel.errorXhr(xhr);
             viewModel.errorStatus(status);
@@ -75,7 +75,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
             $item.hide().fadeIn('slow');
             console.log('Comment afterAdd... ');
         },
-        canAddComment: function () { return viewModel.sources().length === 0 ? false : true }
+        canAddComment: function () { return viewModel.sources().length === 0 ? false : true },
         //canDeleteComment: function () {
         //    var list = $('#comments.list-group').children();
         //    var $element = $(list[viewModel.commentIndex()]);
@@ -83,6 +83,33 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
         //    return isClass;
         //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
         //}
+        contentCacheQueue: ko.observableArray([]),
+        fileInfo: ko.observableArray([]),
+        clientFiles: ko.observableArray([]),
+        contentViewUrl: ko.observable(),
+        exif: ko.observableArray([]),
+        thumb: ko.observable(),
+        thumbRendered: function (elements, item) {
+            var count = elements.length;
+            console.log('thumbRendered: ' + elements + item);
+        },
+        thumbAdded: function (parent, index, element) {
+            var $image = $(parent).find('img');
+            var rendered = $image[0].complete;
+            console.log('thumbAdded-rendered: ' + $image.attr('class') + rendered);
+            //if (!rendered) {
+            //    console.log('thumbAdded-!rendered: ' + $image.attr('class'));
+            //    $image.on('load', function () {
+            //        finishLoadingThumb($(parent));
+            //    });
+            //}
+            //else {
+            //    console.log('thumbAdded-rendered: ' + $image.attr('class'));
+            //    finishLoadingThumb($(parent));
+            //}
+
+        }
+        
     };
 
 

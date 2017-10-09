@@ -3,7 +3,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DefaultWeb.Data;
-using DefaultWeb.Models.DefaultWebSite;
+using DefaultWeb.Models.DefaultWebSite.Repositories;
+using DefaultWeb.Models.DefaultWebSite.Entities;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace DefaultWeb.Controllers
@@ -93,9 +94,9 @@ namespace DefaultWeb.Controllers
             }
             catch (Exception ex)
             {
-                var serverError = new ServerError() { MiscException = ex };
+                var serverEx = new ServerException() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverError);
+                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverEx);
             }
         }
 
@@ -131,9 +132,9 @@ namespace DefaultWeb.Controllers
             }
             catch ( Exception ex  )
             {
-                var serverError = new ServerError() { MiscException = ex };
+                var serverEx = new ServerException() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverError);
+                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverEx);
             }
         }
 
@@ -171,9 +172,9 @@ namespace DefaultWeb.Controllers
             }
             catch (Exception ex)
             {
-                var serverError = new ServerError() { MiscException = ex };
+                var serverEx = new ServerException() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverError);
+                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverEx);
             }
         }
 
@@ -210,9 +211,9 @@ namespace DefaultWeb.Controllers
             }
             catch (Exception ex)
             {
-                var serverError = new ServerError() { MiscException = ex };
+                var serverEx = new ServerException() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverError);
+                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverEx);
             }
         }
 

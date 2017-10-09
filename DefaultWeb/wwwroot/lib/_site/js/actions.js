@@ -162,6 +162,10 @@ function (Control) {
             }
         });
 
+        /////////////////////////////
+        /// File Ops stuff
+        ////////////////////////////
+       
      
 
         $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 30, mousestop: true });

@@ -28,6 +28,30 @@
     </div>
 </script>
 
+<script id='thumbnails-template' type="text/html">
+    <li class="thumbnail loading">
+        <a data-bind="attr: { href: fileUrl}">
+            <img class="thumbnail" data-bind="attr: { src: thumbnailUrl }" />
+            <h6 class="caption" data-bind="text:friendlyName"></h6>
+        </a>
+    </li>
+</script>
+
+<script id="selected-files-template" type="text/html">
+    <div id="" class="info">
+        <div class="file-info-container">
+            <div class="file-error"></div>
+            <div data-name="FileName" class="file-info"></div>
+            <div data-type="FileType" class="file-info"></div>
+            <div data-size="FileSize" class="file-info"></div>
+        </div>
+    </div>
+</script>
+
+<script id='exifTemplate' type="text/html">
+    <li data-bind="text: tag, value: value"></li>
+</script>
+
 <script id="xhr-errors" type="text/html">
     <li data-bind="value: property"></li>
 </script>
@@ -52,4 +76,57 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="modal-image-exif" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">Dismiss</button>
+                <h4 class="modal-title">Image Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="image-exif">
+                    <ul data-bind="template: {name:'exifTemplate', foreach: exif}"></ul>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="file-ops-client" class="card">
+    <form id="fileUpload" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Add files...</span>
+                <input id="fileInput" class="form-control" type="file" name="files" multiple />
+            </span>
+            <button class="btn btn-primary start" type="submit" id="Submit_btn">
+                <i class="glyphicon glyphicon-upload"></i>
+                <span>Start upload</span>
+            </button>
+            <button class="btn btn-warning cancel" type="button" id="Cancel_btn">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+                <span>Close</span>
+            </button>
+
+            <div id="drop_zone" class="drop_zone">Drop images here</div>
+            <div class="progress custom-progress">
+                <div id="fileProgress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    <span></span>
+                </div>
+            </div>
+
+            <textarea rows="2" placeholder="Description" class="form-control" name="description" id="description"></textarea>
+            <div id="clientFilesList"></div>
+        </div>
+    </form>
 </div>

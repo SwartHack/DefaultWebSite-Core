@@ -2,13 +2,11 @@
 <head>
     @RenderSection("header", true)
     <environment names="Development">
-        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="@ViewData["JqueryUiThemeDevelopment"]" />
         <link rel="stylesheet" href="~/lib/jquery-confirm/css/jquery-confirm.css" />
         <link rel="stylesheet" href="@ViewData["BootstrapThemeDevelopment"]" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/css/font-awesome.min.css" />
         <link rel="stylesheet" href="@ViewData["JqueryUiThemeProduction"]" />
         <link rel="stylesheet" href="~/css/jquery-confirm.min.css" />
         <link rel="stylesheet" href="@ViewData["BootstrapThemeProduction"]" asp-append-version="true" />

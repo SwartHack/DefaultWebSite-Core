@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DefaultWeb.Models
+namespace DefaultWeb.Models.DefaultWebSite
 {
     public class DwsSettings
     {
         public string Title { get; set; }
+        public string  ServerFileShare { get; set; }
         public string ArchivePhysicalPath { get; set; }
         public bool UseHardCacheInDisk { get; set; }
         public string CacheFolderPhysicalPath { get; set; }

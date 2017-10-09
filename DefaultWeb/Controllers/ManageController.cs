@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using DefaultWeb.Models;
+using DefaultWeb.Models.DefaultWebSite;
 using DefaultWeb.Models.ManageViewModels;
 using DefaultWeb.Services;
 

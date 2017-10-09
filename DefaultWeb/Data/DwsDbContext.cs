@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DefaultWeb.Models.DefaultWebSite;
+using DefaultWeb.Models.DefaultWebSite.Entities;
+using DefaultWeb.Models.DefaultWebSite.File;
 
 namespace DefaultWeb.Data
 {
@@ -16,6 +13,7 @@ namespace DefaultWeb.Data
 
         public DbSet<Source> Sources { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<DwsFileInfo> DwsFileInfo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +28,10 @@ namespace DefaultWeb.Data
                     .WithMany(c => c.Comments)
                     .HasForeignKey(d => d.SourceId);
             });
+
+            modelBuilder.Entity<DwsFileInfo>().HasKey(m => m.Id);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

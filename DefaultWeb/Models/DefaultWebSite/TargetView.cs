@@ -1,4 +1,4 @@
-﻿namespace DefaultWeb.Models
+﻿namespace DefaultWeb.Models.DefaultWebSite
 {
     public class TargetView
     {

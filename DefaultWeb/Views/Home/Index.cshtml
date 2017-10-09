@@ -26,18 +26,18 @@
 
 <div class="row" id="row-main">
     
-    <div id="col-1" class="col-5 h-100">
+    <div id="col-util" class="col-5 h-100">
         <div class="element d-flex h-100 flex-column justify-content-between">
             <div class="inner d-flex h-100 flex-column align-items-center justify-content-center">
 
-                <div id="top" class="row no-gutters">
-                    <div id="col-rundowns" class="col-12">
+                <div id="row-util" class="row no-gutters">
+                    <div id="col-util-top" class="col-12">
                         @{ Html.RenderPartial("~/Views/Rundowns/Rundowns.cshtml");}
                     </div>
                 </div>
 
-                <div id="bottom" class="row no-gutters">
-                    <div id="col-carousel" class="col-12">
+                <div class="row no-gutters">
+                    <div id="col-util-bottom" class="col-12">
                         @{ Html.RenderPartial("~/Views/Shared/_Carousel.cshtml");}
                     </div>
                 </div>
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <div id="col-main" class="col-7 h-100">
+    <div id="col-main" class="col-7">
         <div class="element d-flex h-100 flex-column justify-content-between">
             <div class="inner d-flex h-100 flex-column align-items-center justify-content-center">
                 <div id="target-area">

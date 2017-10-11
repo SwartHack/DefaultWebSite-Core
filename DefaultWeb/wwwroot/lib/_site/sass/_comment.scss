@@ -1,0 +1,115 @@
+﻿/////////////////////////////////
+/// comment card style list group
+/// flex container for a comment'
+////////////////////////////////
+.comment.card {
+    display: flex !important;
+    flex: 1 !important;
+    flex-direction: row-reverse !important;
+    padding: 0 !important;
+    margin: .5rem .75rem .375rem .5rem !important;
+
+    :nth-child(1) {
+    }
+
+    :last-child {
+    }
+
+    div#tools.card-header {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-around !important;
+        align-content: center !important;
+        padding: 0 !important;
+        border: none !important;
+
+        a {
+            padding: 0 !important;
+            margin: 0 !important;
+            padding-right: 0 !important;
+            border: none !important;
+            cursor: pointer !important;
+            display: flex !important;
+
+            &.btn.disabled {
+                cursor: not-allowed !important;
+                pointer-events: all !important;
+            }
+
+            i {
+                //font-size: 1rem !important;
+
+                &.fa-plus-square-o {
+                    color: green !important;
+                }
+
+                &.fa-trash {
+                    color: red !important;
+                }
+            }
+            //display: block;
+        }
+    }
+
+
+    #comment-context.card-block {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1;
+        padding: .5rem !important;
+        border: none !important;
+
+        .card-title {
+            display: flex !important;
+            border: .05rem solid darkgray !important;
+        }
+
+        .card-text-wrapper {
+            display: flex !important;
+            flex-direction: column !important;
+            flex-flow: column !important;
+            //display: block;
+            overflow-y: auto;
+            min-height: 5rem;
+            max-height: 5rem;
+            border: .075rem inset darkgray;
+            padding: .025rem;
+
+            .card-text {
+                display: block;
+                overflow-y: auto;
+                //border: .075rem solid orange;
+            }
+        }
+    }
+
+    #comment-info.card-header {
+        flex: 0 20% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        margin: 0;
+        border: none;
+        padding: .25rem;
+
+        .author {
+            text-align: center;
+            font-size: .75rem;
+            font-weight: 700;
+        }
+
+        div#gravatar {
+        }
+
+        div#datetime {
+            text-align: center;
+            font-size: .5rem;
+            font-weight: 600;
+        }
+    }
+
+    &.active {
+        box-shadow: 0px 0px 4px 2px lightsteelblue;
+        border: none;
+    }
+}
+

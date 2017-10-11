@@ -1,0 +1,192 @@
+﻿/// <reference path="defaultwebsite.scss" />
+$thumbnailWidth:3em;
+$thumbnailHeight:3em;
+
+$thumbnailWidthMobile: 2em;
+$thumbnailHeightMobile: 2em;
+
+$thumbnailHoverScale : 1.3;
+$thumbnailTransitionSpeed : 0.1s;
+
+// thumbnail mixin, will over-ride bootstrap mixin
+// make sure to override all values, or it will use the bootstrap defaults
+// TODO Provide mixin arguments, extend to entire li element
+@mixin thumbnail() {
+    .thumbnail {
+        padding: 0px;
+        height: $thumbnailHeight;
+        width: $thumbnailWidth;
+        object-fit: contain;
+        border-style: solid;
+        border-width: .0625em;
+        border-color: $gray-400;
+        border-radius: .0625em;
+        margin: 0;
+        -moz-transition: all $thumbnailTransitionSpeed ease;
+        -webkit-transition: all $thumbnailTransitionSpeed ease;
+        -ms-transition: all $thumbnailTransitionSpeed ease;
+        -o-transition: all $thumbnailTransitionSpeed ease;
+        transition: all $thumbnailTransitionSpeed ease;
+    }
+}
+
+@mixin selected($scale) {
+    -moz-transform: scale($scale);
+    -webkit-transform: scale($scale);
+    -o-transform: scale($scale);
+    -ms-transform: scale($scale);
+    transform: scale($scale);
+    z-index: 10;
+}
+
+@mixin opacityTransition($time) {
+    -webkit-transition: opacity $time ease-in-out;
+    -moz-transition: opacity $time ease-in-out;
+    -o-transition: opacity $time ease-in-out;
+    transition: opacity $time ease-in-out;
+}
+
+#thumbnails-container { // this represent loading state of entire card,
+    /*height: 100vh;*/
+    position: relative;
+    width: 100%;
+    margin: .35em 0;
+    margin-top: 1em;
+    flex: 0 0 100%;
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 1.5rem;
+        margin: 0;
+        padding: .25rem;
+        border-radius: 0px;
+
+        .card-title {
+        }
+
+        #fileUpload {
+            padding: 0;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    }
+    //this is the card-body
+    #thumbs-list.card-body {
+        overflow: auto;
+        min-height: 50%;
+
+        ul#thumbnails { // root, only <ul>, all thumbs are <li>'s and children of root <ul>
+            @include opacityTransition(.15s);
+            opacity: 1;
+            text-align: center;
+            list-style-type: none;
+            padding: 0;
+
+            li { // this is the thumb, or thumbnail container
+                display: inline-block;
+                //object-fit:contain;
+                /*height:$thumbnailHeight;
+                width:$thumbnailWidth;*/
+                padding: 0;
+                margin-left: .5em;
+                margin-right: .5em;
+                margin-bottom: 0;
+                line-height: $line-height-base;
+                //border: 1px solid $thumbnail-border;
+                a {
+                    img {
+                        @include thumbnail();
+                    }
+                }
+
+                .caption {
+                    padding: 0;
+                    margin-bottom: 0;
+                    margin-top: .5em;
+                    white-space: pre-line;
+                    color: $figure-caption-color;
+                }
+                /*// this represents loading state of cached doc in data-virtual-path
+                a 
+                {
+                    // this should run until pre-load is done
+                    // but we still need to be able to click and not be blocked by cache queue processing <a>
+                    &.preloading 
+                    {
+                        
+                        animation:cacheDocLoading 1s infinite;
+                    }
+                    
+                    &.preloaded 
+                    {
+                        outline: 3px solid $brand-primary;
+                        box-shadow: 0 0 0 3px $brand-primary;
+                    }
+                }*/
+                //loading state of thumbnail
+                &.loading {
+                    outline: 6px dashed $blue;
+                    box-shadow: 0 0 0 .25em $red;
+                    animation: thumbLoading 1s infinite;
+                }
+
+                &.docloading {
+                    animation: cacheDocLoading 1s infinite;
+                    //outline: 3px solid $brand-warning;
+                    //box-shadow: 0 0 0 3px $brand-danger;
+                }
+
+                &.loaded {
+                    //outline: 3px solid $brand-primary;
+                    //box-shadow: 0 0 0 3px $brand-primary;
+                }
+                //hover on thumbnail
+                &:hover {
+                    @include selected($thumbnailHoverScale);
+                }
+            }
+        }
+    }
+    /// this is the loading of all thumbs
+    /// active until all thumbnail documents are pre-loaded
+    &.loading {
+        div.card-header {
+            -webkit-animation: thumbsLoading 5s infinite; /* Chrome, Safari, Opera */
+            animation: thumbsLoading 0.5s infinite;
+        }
+    }
+    //TODO
+    .admin {
+        #dropZone {
+            margin: 10px;
+            background: $table-bg;
+            border: $gray-500 dashed 2px;
+            padding: 50px;
+            text-align: center;
+            color: $gray-500;
+
+            &.over {
+                background: $gray-300;
+            }
+        }
+    }
+}
+
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) {
+    #thumbnailContainer {
+        .admin {
+            display: none;
+        }
+
+        ul#thumbnails a img {
+            height: $thumbnailHeightMobile !important;
+            width: $thumbnailWidthMobile !important;
+            margin: 2px !important;
+            border-width: 0;
+        }
+    }
+}

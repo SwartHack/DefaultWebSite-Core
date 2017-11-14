@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////////
 /// KO View Model module
 //////////////////////////////////////////////////////////////////////
-define('dws/model', ['dws/model-utils'], function (ModelUtils) {
+define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     
     var viewModel = {
 
@@ -17,17 +17,17 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
         dataType: ko.observable(''),
         dataJson: ko.observable(''),
         targetJson: ko.observable(''),
-        abort: function (xhr, status, error) {
-            viewModel.errorXhr(xhr);
+        abort: function (data, status, error) {
             viewModel.errorStatus(status);
+            viewModel.errorData(data);
             viewModel.errorMsg(error);
         },
-        errorXhr: ko.observableArray([]),
+        errorData: ko.observableArray([]),
         errorStatus: ko.observable(''),
         errorMsg: ko.observableArray(''),
         waiting: ko.observable(false),
         waitingTarget: ko.observable(''),
-        xsrfToken: ko.observable(''),
+        xsrfToken: ko.observable([]),
         sources: ko.observableArray([]),
         source: ko.observable(''),
         sourceId: function (sid) {
@@ -35,10 +35,12 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
             viewModel.sourceIndex(index);
             var source = viewModel.sources()[index];
             viewModel.source(source);
-            return viewModel.source();
+            
         },
         sourceIndex: ko.observable(''),
-        sourcesCount: ko.pureComputed(function () { return 'Records: ' + viewModel.sources().length }, this),
+        sourcesCount: ko.pureComputed(function () {
+            return 'Records: ' + viewModel.sources().length
+        }, this),
         addSource: function (source) {
             viewModel.sources.unshift(source);
             viewModel.sourceId(source.id);
@@ -75,7 +77,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
             var index = viewModel.comments().findIndex(c => c.id == cid);
             var comment = viewModel.comments()[viewModel.commentIndex()];
             viewModel.comments.remove(comment);
-            viewModel.comment(undefined);
+            viewModel.comment('');
         },
         commentAdded: function (item) {
             var $item = $(item);
@@ -90,32 +92,49 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
         //    return isClass;
         //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
         //}
-        contentCacheQueue: ko.observableArray([]),
-        fileInfo: ko.observableArray([]),
-        clientFiles: ko.observableArray([]),
-        contentViewUrl: ko.observable(),
-        exif: ko.observableArray([]),
-        thumb: ko.observable(),
-        thumbRendered: function (elements, item) {
-            var count = elements.length;
-            console.log('thumbRendered: ' + elements + item);
+        contentCacheQueue: ko.observableArray([]), // TODO
+        fileInfo: ko.observable([]),  // ununsed ?
+        uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
+        uploadFiles: ko.observableArray([]), //matching array of IForm files.
+        mimeTypes: ko.observableArray(['image/*', 'application/pdf', '.mp4', '.avi']),
+        uploadFilesCount: ko.pureComputed(function () {
+            return 'Files: ' + viewModel.uploadFiles().length
+        }, this),
+        showFileUpload: ko.pureComputed(function () {
+            return viewModel.uploadFiles().length > 0
+        }, this),
+        uploadFileAdded: function (parent, index, element) {
+            var $parent = $(parent);
+            var $element = $(element);
         },
-        thumbAdded: function (parent, index, element) {
-            var $image = $(parent).find('img');
-            var rendered = $image[0].complete;
-            console.log('thumbAdded-rendered: ' + $image.attr('class') + rendered);
-            //if (!rendered) {
-            //    console.log('thumbAdded-!rendered: ' + $image.attr('class'));
-            //    $image.on('load', function () {
-            //        finishLoadingThumb($(parent));
-            //    });
-            //}
-            //else {
-            //    console.log('thumbAdded-rendered: ' + $image.attr('class'));
-            //    finishLoadingThumb($(parent));
-            //}
+        fileViewApi: ko.observable(''),
+        fileViewTarget: ko.observable(''),
+        imageViewApi: function () { return viewModel.fileViewApi; },
+        docViewApi: function () { return viewModel.fileViewApi; },
+        videoViewApi: function () { return viewModel.fileViewApi; },
+        exif: ko.observableArray([])
 
-        }
+        //thumb: ko.observable(),
+        //thumbRendered: function (elements, item) {
+        //    var count = elements.length;
+        //    console.log('thumbRendered: ' + elements + item);
+        //},
+        //thumbAdded: function (parent, index, element) {
+        //    var $image = $(parent).find('img');
+        //    var rendered = $image[0].complete;
+        //    console.log('thumbAdded-rendered: ' + $image.attr('class') + rendered);
+        //    if (!rendered) {
+        //        console.log('thumbAdded-!rendered: ' + $image.attr('class'));
+        //        $image.on('load', function () {
+        //            finishLoadingThumb($(parent));
+        //        });
+        //    }
+        //    else {
+        //        console.log('thumbAdded-rendered: ' + $image.attr('class'));
+        //        finishLoadingThumb($(parent));
+        //    }
+
+        //}
         
     };
 
@@ -125,16 +144,32 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     /// TODO - move to model-utils module
     ///////////////////////////////////////
 
-    
+    viewModel.fileViewApi.subscribe(function (newFile) {
+
+        // what's my visible content area
+        var $target = $(viewModel.fileViewTarget());
+
+        if (!$target.is(':visible'))
+        {
+            $('.content-area').hide();
+            $target.show();
+        }
+    });
+
 
     ////////////////////////////////////////
     /// model events/actions
     ///////////////////////////////////////
+
+
     // subscribe to any ajax errors
     viewModel.errorMsg.subscribe(function (error) {
-        if (error != undefined)
+        if (error != null)
         {
-            if (!ko.dataFor($('#ajax-error')[0])) { ko.applyBindings(viewModel, $('#ajax-error')[0]) }
+            if (!ko.dataFor($('#ajax-error')[0])) {
+                ko.applyBindings(viewModel, $('#ajax-error')[0])
+            }
+
             $('#ajax-error').dialog({
                 autoOpen: true,
                 modal: true,
@@ -142,6 +177,11 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
                     OK: function () { $(this).dialog("close"); }
                 }
             });
+        }
+        else
+        {
+            $('viewModel.errorData').dialog();
+
         }
     });
 
@@ -157,6 +197,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     });
 
     ////////////////////////////////////////
+    /// Sandbox - Comments Manager
     /// Source subscribe events/actions
     ///////////////////////////////////////
     viewModel.source.subscribe(function (source) {
@@ -189,6 +230,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     });
 
     ////////////////////////////////////////
+    /// Sandbox - Comments Manager
     /// Comment subscribe events/actions
     ///////////////////////////////////////
     viewModel.comment.subscribe(function (comment) {
@@ -219,12 +261,13 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     });
 
 
+
     ////////////////////////////////////////
     /// Waiting subscribe events/actions
     ///////////////////////////////////////
     viewModel.waiting.subscribe(function (wait) {
 
-        ModelUtils.waitStatus(wait, viewModel.waitingTarget());
+        ModelUtil.waitStatus(wait, viewModel.waitingTarget());
     });
 
     ////////////////////////////////////////
@@ -265,13 +308,45 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
 //////////////////////////////////////////////////////////////////////
 define('dws/model-utils', function () {
 
+    //var dataURLFileReader = {
+    //    read: function (file, callback) {
+    //        var reader = new FileReader();
+    //        var fileInfo = {
+    //            name: file.name,
+    //            type: file.type,
+    //            fileContent: null,
+    //            size: function () {
+    //                var FileSize = 0;
+    //                if (file.size > 1048576) {
+    //                    FileSize = Math.round(file.size * 100 / 1048576) / 100 + " MB";
+    //                }
+    //                else if (file.size > 1024) {
+    //                    FileSize = Math.round(file.size * 100 / 1024) / 100 + " KB";
+    //                }
+    //                else {
+    //                    FileSize = file.size + " bytes";
+    //                }
+    //                return FileSize;
+    //            }
+    //        };
+    //        if (!file.type.match('image.*')) {
+    //            callback("file type not allowed", fileInfo);
+    //            return;
+    //        }
+    //        reader.onload = function () {
+    //            fileInfo.fileContent = reader.result;
+    //            callback(null, fileInfo);
+    //        };
+    //        reader.onerror = function () {
+    //            callback(reader.error, fileInfo);
+    //        };
+    //        reader.readAsDataURL(file);
+    //    }
+    //};
+
     function callAborted(xhr, textStatus, error) {
 
-
-
-
-
-    }
+     }
 
     ///////////////////////////////////////
     /// this is for async ajax calls to server
@@ -281,17 +356,15 @@ define('dws/model-utils', function () {
         if (status) {
             $(target).addClass('waiting');
         }
-        else
-        {
+        else {
             $(target).removeClass('waiting');
         }
-    } 
-    
+    }
+
     ///////////////////////////////////////
     /// this is for actual DOM element loading
     ///////////////////////////////////////
-    function loadingStatus(status, target)
-    {
+    function loadingStatus(status, target) {
         var completed = $(target)[0].complete;
         if (!completed) {
             $(target)[0].addClass('loading');
@@ -302,13 +375,16 @@ define('dws/model-utils', function () {
     }
 
 
+
+
     return {
         waitStatus: waitStatus,
         loadingStatus: loadingStatus,
         callAborted: callAborted
+        
     }
 
-})
+});
 //////////////////////////////////////////////////////////////////////
 /// message dispatcher module
 //////////////////////////////////////////////////////////////////////
@@ -550,7 +626,7 @@ function (Control) {
 //////////////////////////////////////////////////////////////////////
 /// sandbox module - MutationObserver Here!!!
 //////////////////////////////////////////////////////////////////////
-define('dws/sandbox', ['dws/model'], function (ViewModel) {
+define('dws/sandbox', ['dws/model'], function (viewModel) {
 
     //lets monitor the sand box area for new content and bind accordingly
     var config = {
@@ -563,11 +639,14 @@ define('dws/sandbox', ['dws/model'], function (ViewModel) {
         changes.forEach(function (change) {
             
             if (change.addedNodes.length > 0) {
+
                 var $dataNodes = $(change.addedNodes).find('[data-bind]');
                 $dataNodes.each(function () {
                     var $node = $(this);
                     try {
-                        if (!ko.dataFor($node[0])) { ko.applyBindings(ViewModel, $node[0]) }
+                        //if (!ko.dataFor($node[0])) {
+                            ko.applyBindings(viewModel, $node[0])
+                        //}
                     } catch (e) {
                         console.log("ko re-bind exception....")
                     }
@@ -578,7 +657,8 @@ define('dws/sandbox', ['dws/model'], function (ViewModel) {
 
     function observeKo(state) {
         if (state) {
-            observerKo.observe(document.getElementById('sandbox-area'), config);
+            observerKo.observe(document.getElementById('sandbox-target-area'), config);
+            //observerKo.observe(document.getElementById('file-ops-client'), config);
         }
         else {
             observerKo.disconnect();
@@ -636,7 +716,9 @@ define('dws/sandbox', ['dws/model'], function (ViewModel) {
         observeKo: observeKo
     }
 });
+//////////////////////////////////////////////////////////////////////
 /// Main controller for event declarations, etc.
+//////////////////////////////////////////////////////////////////////
 define('dws/controller', ['dws/model', 'dws/dispatcher'],
 function (viewModel, Dispatch) {
 
@@ -732,7 +814,7 @@ function (viewModel, Dispatch) {
     //////////////////////////////////
     ///
     ////////////////////////////////
-    function initKO(xsrf) {
+    function initKO() {
         ko.applyBindings(viewModel);
         
     }
@@ -782,7 +864,7 @@ function (Control, viewModel) {
                 
             })
             .fail(function (xhr, textStatus, error) {
-                viewModel.abort(xhr, textStatus, error);
+                viewModel.aborted(xhr, textStatus, error);
             })
             .always(function (data, textStatus, xhr) {
                 viewModel.waiting(false);
@@ -821,13 +903,15 @@ function (Control, viewModel) {
         //$submitButton.attr("disabled", true);
         $form.attr('disabled', true);
 
+        // here one way to do it from form values to JSON data
+        // this works well with unobtrusive validation
+        //
         //serialize form values to JSON
         var formvals = $form.serializeArray();
-        //var csrfToken = $("input[name='__RequestVerificationToken']").val();
+
         var settings = {
             url: '/Comments/CreateSource',
             type: 'POST',
-            dataType: 'json',
             data: formvals
         }
 
@@ -862,12 +946,16 @@ function (Control, viewModel) {
         
         viewModel.waitingTarget('.modal-header');
         viewModel.waiting(true);
-        $.ajax({
+
+        var settings = {
             url: '/Comments/CreateComment',
             type: 'POST',
             dataType: 'json',
             data: formvals
-        }).done(function (data, textStatus, xhr) {
+        };
+
+        $.ajax(settings)
+            .done(function (data, textStatus, xhr) {
             if (xhr.status == 200) {
                 $form.closest('#modal-action-template').modal('hide');
                 viewModel.addComment(data.comment);
@@ -888,20 +976,20 @@ function (Control, viewModel) {
 
     $(document).on('click', 'a#source-delete', function (e) {
 
-        if (viewModel.comments().length > 0) {
+        //if (viewModel.comments().length > 0) {
             
-            $.confirm({
-                title: 'Cascade Delete Source and Comments?',
-                content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
-                buttons: {
-                    confirm: function () { deleteSource(); },
-                    cancel: function () { return; }
-                }
-            });
-        }
-        else {
-            deleteSource();
-        }
+        //    $.confirm({
+        //        title: 'Cascade Delete Source and Comments?',
+        //        content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
+        //        buttons: {
+        //            confirm: function () { deleteSource(); },
+        //            cancel: function () { return; }
+        //        }
+        //    });
+        //}
+        //else {
+        //    deleteSource();
+        //}
     });
 
     function deleteSource() {
@@ -923,14 +1011,14 @@ function (Control, viewModel) {
 
     $(document).on('click', 'a#comment-delete', function (e) {
        
-        $.confirm({
-            title: 'Delete Comment(s)?',
-            content: 'This action can not be undone!!!',
-            buttons: {
-                confirm: function () { deleteComment(); },
-                cancel: function () { return; }
-            }
-        });
+        //$.confirm({
+        //    title: 'Delete Comment(s)?',
+        //    content: 'This action can not be undone!!!',
+        //    buttons: {
+        //        confirm: function () { deleteComment(); },
+        //        cancel: function () { return; }
+        //    }
+        //});
     });
 
     function deleteComment() {
@@ -958,174 +1046,233 @@ function (Control, viewModel) {
         
 
 
+//////////////////////////////////////////////////////////////////////
+/// File ops client module
+//////////////////////////////////////////////////////////////////////
 define('dws/fileops-client', ['dws/controller', 'dws/model'],
-    function (Control, ViewModel) {
+    function (Control, viewModel) {
 
-        var selectedFiles;
-        var DataURLFileReader = {
-            read: function (file, callback) {
-                var reader = new FileReader();
-                var fileInfo = {
-                    name: file.name,
-                    type: file.type,
-                    fileContent: null,
-                    size: function () {
-                        var FileSize = 0;
-                        if (file.size > 1048576) {
-                            FileSize = Math.round(file.size * 100 / 1048576) / 100 + " MB";
-                        }
-                        else if (file.size > 1024) {
-                            FileSize = Math.round(file.size * 100 / 1024) / 100 + " KB";
-                        }
-                        else {
-                            FileSize = file.size + " bytes";
-                        }
-                        return FileSize;
-                    }
-                };
-                if (!file.type.match('image.*')) {
-                    callback("file type not allowed", fileInfo);
-                    return;
-                }
-                reader.onload = function () {
-                    fileInfo.fileContent = reader.result;
-                    callback(null, fileInfo);
-                };
-                reader.onerror = function () {
-                    callback(reader.error, fileInfo);
-                };
-                reader.readAsDataURL(file);
-            }
-        };
-
+        ///////////////////////////////////////////////////////////////////////
+        /// init cause it controls/binds async html content not present at site load
+        /// we could pre-load everything, or lazy/late load like this
+        /// pros and cons....TODO
+        //////////////////////////////////////////////////////////////////////
         function init() {
-            $("#fileInput").change(function (evt) {
-                MultiplefileSelected(evt);
+
+            $('#file-input').change(function (evt) {
+                filesSelected(evt);
             });
-            $("form#fileUpload button[id=Cancel_btn]").click(function () {
-                Cancel_btn_handler()
+            //$("form#file-upload button[id=Cancel_btn]").click(function () {
+            //    Cancel_btn_handler()
+            //});
+            $('a#file-upload-open').on('click', function (e) {
+
+                var options = {
+                    minWidth: 500,
+                    //height: 'auto',
+                    modal: true,
+                    title: 'Upload Files'
+                };
+                $('#file-ops-client').dialog(options);
             });
-            $('a#fileUpload').on('click', function () {
-                $('#file-ops-client').dialog();
+
+            $('#file-ops-client').on('dialogclose', function (event, ui) {
+                var $diag = $(this);
+                $diag.hide(); //animate
+                $diag.empty();
+                $diag.remove();
+            });
+
+            $(document).on('click', '.upload-file-delete', function (e) {
+                e.preventDefault();
+                fileRemove(e);
             });
             
-            var dropZone = document.getElementById('drop_zone');
+            var dropZone = document.getElementById('file-upload-drop');
             dropZone.addEventListener('dragover', handleDragOver, false);
-            dropZone.addEventListener('drop', MultiplefileSelected, false);
+            dropZone.addEventListener('drop', filesSelected, false);
             dropZone.addEventListener('dragenter', dragenterHandler, false);
             dropZone.addEventListener('dragleave', dragleaveHandler, false);
             $.blockUI.defaults.overlayCSS = {
                 backgroundColor: '#000',
                 opacity: 0.6
             };
-            $.blockUI.defaults.css = {
-                padding: 0,
-                margin: 5,
-                width: '60%',
-                top: '30%',
-                left: '20%',
-                color: '#000',
-                border: '3px solid #aaa',
-                backgroundColor: '#fff'
-            };
+
+            //$.blockUI.defaults.css = {
+            //    padding: 0,
+            //    margin: 5,
+            //    width: '60%',
+            //    top: '30%',
+            //    left: '20%',
+            //    color: '#000',
+            //    border: '3px solid #aaa',
+            //    backgroundColor: '#fff'
+            //};
             //$.blockUI({ message: $('#file-ops-client') });
         }
 
+        function isValidMimeType(file) {
+            return true;
+            //for (var i = 0; i < viewModel.mimeTypes.length; i++) {
+            //    if (file.type === viewModel.mimeTypes[i]) {
+            //        return true;
+            //    }
+            //}
+            //return false;
+        }
 
-        function MultiplefileSelected(evt) {
+        ///////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function filesSelected(evt) {
             evt.stopPropagation();
             evt.preventDefault();
-            $('#drop_zone').removeClass('hover');
+            $('#file-upload-drop').removeClass('hover');
 
-            selectedFiles = evt.target.files || evt.dataTransfer.files;
+            var files = (evt.target.files || evt.dataTransfer.files);
+            var filelist = [];
 
-            if (selectedFiles) {
-                //$('#clientFilesList').empty();
-                for (var i = 0; i < selectedFiles.length; i++) {
-                    DataURLFileReader.read(selectedFiles[i], function (err, fileInfo) {
-                        var RowInfo;
-                        if (err != null) {
-                            RowInfo = '<div id="File_' + i + '" class="info"><div class="file-info-container">' +
-                                '<div class="file-error">' + err + '</div>' +
-                                '<div data-name="FileName" class="file-info">' + fileInfo.name + '</div>' +
-                                '<div data-type="FileType" class="file-info">' + fileInfo.type + '</div>' +
-                                '<div data-size="FileSize" class="file-info">' + fileInfo.size() + '</div></div><hr/></div>';
-                            $('#clientFilesList').append(RowInfo);
+            for (var i = 0, f; f = files[i]; i++) {
+
+                if (!isValidMimeType(f)) {
+                    //TODO
+                    // Don't push error file
+                    //viewModel.uploadFiles.push({ name: fileInfo.name, size: fileInfo.size(), type: fileInfo.type, error: error });
+                    //notify ?
+                    continue;
+                }
+                else {
+                    var fname = f.name;
+                    var dups = viewModel.uploadFilesInfo().findIndex(f => f.name == fname);
+                    if (dups > -1) { continue; }
+                    var reader = new FileReader();
+                    reader.onload = (function (file) {
+                        return function (e) {
+                            var fileSize = getFileSize(file.size);
+                            viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: e.target.result });
+                            viewModel.uploadFiles.push(file);
                         }
-                        else {
-                            var image = '<img src="' + fileInfo.fileContent + '" class="thumb" title="' + fileInfo.name + '" />';
-                            RowInfo = '<div id="File_' + i + '" class="file-info"><div class="file-info-container">' +
-                                '<div data_img="Imagecontainer">' + image + '</div>' +
-                                '<div data-name="FileName" class="file-info">' + fileInfo.name + '</div>' +
-                                '<div data-type="FileType" class="file-info">' + fileInfo.type + '</div>' +
-                                '<div data-size="FileSize" class="file-info">' + fileInfo.size() + '</div></div><hr/></div>';
-                            $('#clientFilesList').append(RowInfo);
-                        }
-                    });
+                    })(f);
+
+                    reader.readAsDataURL(f);
                 }
             }
         }
 
-        $(document).on('submit', 'form#fileUpload', function (e) {
+        function getFileSize(size) {
+            var fileSize = 0;
+            if (size > 1048576) {
+                fileSize = Math.round(size * 100 / 1048576) / 100 + " MB";
+            }
+            else if (size > 1024) {
+                fileSize = Math.round(size * 100 / 1024) / 100 + " KB";
+            }
+            else {
+                fileSize = size + " bytes";
+            }
+            return fileSize;
+        }
+
+        function fileRemove(e) {
+            var $item = $(e.originalEvent.target).closest('#file-info-container');
+            var index = $item.index();
+            // remove from viewModel uploadFiles
+            viewModel.uploadFilesInfo.splice(index, 1);
+            viewModel.uploadFiles.splice(index, 1);
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        ///  file upload api async call
+        //////////////////////////////////////////////////////////////////////
+        $(document).on('submit', 'form#file-upload', function (e) {
 
             e.preventDefault();
             var $form = $(this);
+            
+            // we are going to manually client-side validate here before submit
+            // WHY? Well, I'll tell you why....
+            // TODO
+            var desc = $('textarea#description', $form[0]).val();
+            if ( desc == '' || desc.length < 10 ) {
+                $('span#description-validate', $form[0]).text('Description is required, ten(10) character minimum...');
+                return;
+            }
+            $('textarea#description', $form[0]).val(desc);
+            $('textarea#description', $form[0]).text(desc);
 
-            //disable for once and for all TODO
+            //disable for once and for all 
+            // TODO
             $form.attr('disabled', true); // does not seem to work?!
 
+             //var formvals = $form.serializeArray();
+            // here is another way to get form values for JSON data
+            // get the DOM element from Jquery
+            // Have not tested with unobstrusive, but we are not using Model validation here
+            // TODO - can't effectively deal with FormData here, but Controller likes it...
+            
             var formData = new FormData($form[0]);
+            formData.set('files', '');
+
+            //load in the selected files, check for dups? YES!
+            for (var i = 0; i < viewModel.uploadFiles().length; i++) {
+                var file = viewModel.uploadFiles()[i];
+                formData.append('files', file);
+            }
+           
             var settings = {
-                url: '/api/dws/upload',  //Server web api
+                url: '/api/dws/files/upload',  //Server web api
                 type: 'POST',
-                xhr: function () {  // Custom XMLHttpRequest
-                    var myXhr = $.ajaxSettings.xhr();
-                    if (myXhr.upload) { // Check if upload property exists
-                        myXhr.upload.addEventListener('progress', progressHandlingFunction, false); // For handling the progress of the upload
-                    }
-                    return myXhr;
-                },
-                // Form data
                 data: formData,
-                //Options to tell jQuery not to process data or worry about content-type.
-                cache: false,
                 contentType: false,
-                processData: false
+                processData:false
             };
+
+            // TODO
+            // as always we want to dispatch, but need to account for variety of request types and targets.
+            viewModel.waitingTarget('#navbar-main');
+            viewModel.waiting(true);
+            $($form,'.progress.upload-progress').show();
 
             $.ajax(settings)
                 .done(function (data, textStatus, xhr) {
-                    if (data.statusCode == 200) {
-                        $('#serverFilesList tr:last').after(data.NewRow);
-                        alert(data.status);
+                    if (xhr.status == 200) {
+                        viewModel.fileInfo(data);
                     }
                     else {
-                        alert(data.status);
+                        viewModel.abort(data, textStatus, null);
                     }
                 })
                 .fail(function (xhr, textStatus, error) {
-                    ViewModel.aborted(xhr, textStatus, error);
+                    viewModel.abort(xhr, textStatus, error);
                 })
                 .always(function () {
-                    $('#clinet-container').empty();
-                    $('.create-file-link').show();
-                    $.unblockUI();
-                    ViewModel.waitEffects(false);
+                    viewModel.uploadFiles([]);
+                    viewModel.uploadFilesInfo([]);
+                    $('#file-ops-client').dialog('close');
+                    //$('#file-ops-client').find('.progress.upload-progress').hide();
+                    //$('#file-ops-client').remove();
+                    viewModel.waiting(false);
                 });
         });
 
+        ///////////////////////////////////////////////////////////////////////
+        /// update upload progress
+        /// TODO progress per file
+        //////////////////////////////////////////////////////////////////////
         function progressHandlingFunction(e) {
             if (e.lengthComputable) {
                 var percentComplete = Math.round(e.loaded * 100 / e.total);
-                $("#fileProgress").css("width", percentComplete + '%').attr('aria-valuenow', percentComplete);
-                $('#fileProgress span').text(percentComplete + "%");
+                $("#file-progress").css("width", percentComplete + '%').attr('aria-valuenow', percentComplete);
+                $('#file-progress span').text(percentComplete + "%");
             }
             else {
-                $('#fileProgress span').text('unable to compute');
+                $('#file-progress span').text('unable to compute');
             }
         }
         
-        // Drag and Drop Events
+        ///////////////////////////////////////////////////////////////////////
+        /// Drop zone drag and drop stuff
+        //////////////////////////////////////////////////////////////////////
         function handleDragOver(evt) {
             evt.preventDefault();
             evt.dataTransfer.effectAllowed = 'copy';
@@ -1134,11 +1281,11 @@ define('dws/fileops-client', ['dws/controller', 'dws/model'],
 
         function dragenterHandler() {
             //$('#drop_zone').removeClass('drop_zone');
-            $('#drop_zone').addClass('hover');
+            $('#file-upload-drop').addClass('hover');
         }
 
         function dragleaveHandler() {
-            $('#drop_zone').removeClass('hover');
+            $('#file-upload-drop').removeClass('hover');
         }
 
         function OnDeleteAttachmentSuccess(data) {
@@ -1153,26 +1300,31 @@ define('dws/fileops-client', ['dws/controller', 'dws/model'],
         }
 
         function Cancel_btn_handler() {
-            $('#clinet-container').empty();
-            $('.create-file-link').show();
-            $.unblockUI();
-            ViewModel.waitEffects(false);
+            $('#file-upload-list').empty();
+            //$('#file-upload-list').show();
+           // $.unblockUI();
+            viewModel.waitEffects(false);
         }
 
         return {
             init: init,
             progressHandlingFunction: progressHandlingFunction,
-            OnDeleteAttachmentSuccess: OnDeleteAttachmentSuccess,
-            Cancel_btn_handler: Cancel_btn_handler
+            fileRemove: fileRemove
         }
     });
+//////////////////////////////////////////////////////////////////////
+/// File operations content module
+//////////////////////////////////////////////////////////////////////
 define('dws/fileops-content', ['dws/controller', 'dws/model'],
     function (Control, viewModel) {
 
+        /////////////////////////////////////////////////
+        /// late init because we are not present in DOM on site load
+        ////////////////////////////////////////////////
         function init() {
 
             $('#content-left').on("click", function (e) {
-                contentNext();
+                contentPrev();
             });
 
             $('#content-right').on("click", function (e) {
@@ -1180,17 +1332,18 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             });
 
             $('.main-content-area').on("swipeleft", function (e) {
-                contentNext();
+                contentPrev();
             });
 
             $('.main-image').on("swiperight", function (e) {
                 contentNext();
             });
 
+
             $(document).on('keydown', '#main-content-area', function (e) {
-                if (!shortcutsEnabled) {
-                    return;
-                }
+                //if (!shortcutsEnabled) {
+                //    return;
+                //}
 
                 if (e.keyCode === 37) { //prev
                     contentPrev();
@@ -1203,12 +1356,11 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 }
             });
 
-            $(document).on('click', 'ul#thumbnails li a', function (e) {
-                e.preventDefault(); // what defaults?
+            $(document).on('click', 'ul#thumbnails li', function (e) {
+                e.preventDefault(); 
                 var $link = $(this);
-                if (!$('img', $link).hasClass('selected')) { // if currently selected do nothing
-                    $(document).trigger('thumbnailclicked', $link);
-                    clickThumbnail($link); // will pushstate ???
+                if (!$link.hasClass('selected')) { 
+                    openFile($link);
                 }
             });
 
@@ -1216,84 +1368,41 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
             getContent();
 
-            $('#col-util').hide();
-            $('#col-main').addClass('full-size');
-        }
-
-        var shortcutsEnabled = true;
-
-        function enableShortcuts() {
-            shortcutsEnabled = true;
-        }
-
-        function disableShortcuts() {
-            shortcutsEnabled = false;
-        }
-
-
-        function getContent() {
-
-            var settings = {
-                url: "/api/dws/list",
-                cache: false
-            }
-            viewModel.waitingTarget('#navbar-main');
-            viewModel.waiting(true);
-            //// integrate into dispatcher.js  TODO
-            $.ajax(settings)
-                .done(function (data, textStatus, xhr) {
-                    viewModel.fileInfo([]);
-                    viewModel.fileInfo(data.fileInfo);
-                })
-                .fail(function (xhr, textStatus, error) {
-                    viewModel.abort(xhr, textStatus, error);
-                })
-                .always(function (data, textStatus, xhr) {
-                    viewModel.waiting(false);
-                });
-            
-        }
-
-
-        function showContent(selector) {
-            if (!$(selector).is(':visible')) {
-                hideAllContent();
-                $(selector).show(); // beware that using an animated show (fadeIn, etc) may conflict with the visibility check
-            }
-        }
-
-        function hideAllContent() {
-            $('.content-area').hide();
+            //// expand this
+            //$('#col-util').hide();
+            //$('#col-main').addClass('full-size');
         }
 
         function contentNext() {
-            var linkNext = $('ul#thumbnails li a img.selected').closest('li').next().find(">:first-child").trigger('click');
+            var linkNext = $('ul#thumbnails li.selected').next('li');
             $(linkNext).trigger('click');
         }
 
         function contentPrev() {
-            var linkPrev = $('ul#thumbnails li a img.selected').closest('li').prev().find(">:first-child");
+            var linkPrev = $('ul#thumbnails li.selected').closest('li');
             $(linkPrev).trigger('click');
         }
 
-        function clickThumbnail($link) {
-            var fileURL = $link.attr('href');
-            var virtualPath = $link.attr('data-virtual-path');
-            var mimeType = $link.attr('data-mime-type');  //added to template!!!
-
-            //learn what this is doing
-            window.history && window.history.pushState && window.history.replaceState({ image: "", virtualPath: "" }, "", "");
-            openFile(virtualPath, mimeType);
+        // do we really need this???
+        function clickThumbnail($thumbnail) {
+            //figure this latter
+            //window.history && window.history.pushState && window.history.replaceState({ image: "", virtualPath: "" }, "", "");
+            openFile($thumbnail);
         }
 
-        function openFile(virtualPath, mimeType) {
-            var $thumbnail = $('a[data-virtual-path = "' + virtualPath + '"] img');
+        function openFile($thumbnail) {
+            var fileApi = $thumbnail.attr('data-api');
+            var fileTarget = $thumbnail.attr('data-target');
+
             styleSelectedThumbnail($thumbnail);
-            loadContent(virtualPath, mimeType);
+
+            viewModel.fileViewTarget(fileTarget);
+            viewModel.fileViewApi(fileApi);
+
         }
 
         function styleSelectedThumbnail($thumbnail) {
-            $('ul#thumbnails li a img').removeClass("selected");
+            $('ul#thumbnails li').removeClass("selected");
             $thumbnail.addClass("selected");
         }
 
@@ -1301,44 +1410,79 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             viewModel.thumbnails([]);
         }
 
+        function hideAllContent() {
+            $('.content-area').hide();
+        }
 
-        function loadContent() {
-
-            var settings = {
-                url: '/api/dws/view/{id}',  //Server web api
-                type: 'Get',
-                cache: false
-            };
-
-            $.ajax(settings)
-                .done(function (data, textStatus, xhr) {
-                    if (data.statusCode == 200) {
-                        
-                    }
-                    else {
-                        alert(data.status);
-                    }
-                })
-                .fail(function (xhr, textStatus, error) {
-                    viewModel.aborted(xhr, textStatus, error);
-                })
-                .always(function () {
-                    $('#clinet-container').empty();
-                    $('.create-file-link').show();
-                    $.unblockUI();
-                    viewModel.waitEffects(false);
-                });
-
+        function showContent($selector) {
 
         }
 
+        ///////////////////////////////////////////////////////////////////////
+        // TODO - all ajax calls through dispatcher, extend model to deal with it
+        ////////////////////////////////////////////////////////////////////////
+        function getContent() {
+
+            var settings = {
+                url: "/api/dws/files/list",
+                cache: false
+            }
+            viewModel.waitingTarget('#navbar-main');
+            viewModel.waiting(true);
+            $.ajax(settings)
+                .done(function (data, textStatus, xhr) {
+                    viewModel.fileInfo([]);
+                    viewModel.fileInfo(data);
+                })
+                .fail(function (xhr, textStatus, error) {
+                    viewModel.abort(xhr, textStatus, error);
+                })
+                .always(function (data, textStatus, xhr) {
+                    viewModel.waiting(false);
+                });
+
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // TODO - all ajax calls through dispatcher, extend model to deal with it
+        ////////////////////////////////////////////////////////////////////////
+        //function loadContent(fileApi) {
+
+        //    var settings = {
+        //        url: fileApi,  //Server web api
+        //        type: 'Get',
+        //        cache: false
+        //    };
+
+        //    $.ajax(settings)
+        //        .done(function (data, textStatus, xhr) {
+        //            if (data.statusCode == 200) {
+        //                viewModel.
+        //            }
+        //            else {
+                        
+        //            }
+        //        })
+        //        .fail(function (xhr, textStatus, error) {
+        //            viewModel.aborted(xhr, textStatus, error);
+        //        })
+        //        .always(function () {
+        //            //$('#client-container').empty();
+        //            //$('.create-file-link').show();
+        //            //$.unblockUI();
+        //            viewModel.waitEffects(false);
+        //        });
+
+
+        //}
+
         return {
             init:init,
-            showContent: showContent,
-            hideAllContent: hideAllContent,
             contentNext: contentNext,
             contentPrev: contentPrev,
-            clickThumbnail: clickThumbnail
+            clickThumbnail: clickThumbnail,
+            hideAllContent: hideAllContent,
+            showContent: showContent
            
         };
 
@@ -1356,12 +1500,12 @@ require(['dws/fileops-content']);
 
 
 require(['dws/controller'],
-    function (control) {
+function (control) {
 
-        $(document).ready(function () {
-            control.initKO();
-        });
+    $(document).ready(function () {
+        control.initKO();
     });
+});
 
 //////////////////////////////////////////////////////////////////////
 /// globals go here

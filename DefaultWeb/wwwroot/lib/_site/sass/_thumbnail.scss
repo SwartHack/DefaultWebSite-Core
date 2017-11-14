@@ -1,21 +1,64 @@
 ﻿/// <reference path="defaultwebsite.scss" />
-$thumbnailWidth:3em;
-$thumbnailHeight:3em;
+$thumbnailWidth:3rem;
+$thumbnailHeight:3rem;
 
-$thumbnailWidthMobile: 2em;
-$thumbnailHeightMobile: 2em;
+$thumbnailWidthMobile: 2rem;
+$thumbnailHeightMobile: 2rem;
 
-$thumbnailHoverScale : 1.3;
+$thumbnailHoverScale : 1.1;
 $thumbnailTransitionSpeed : 0.1s;
 
 // thumbnail mixin, will over-ride bootstrap mixin
 // make sure to override all values, or it will use the bootstrap defaults
 // TODO Provide mixin arguments, extend to entire li element
-@mixin thumbnail() {
-    .thumbnail {
+@mixin thumbnail( $width: $thumbnailHeight, $height: $thumbnailHeight) {
+    li.thumbnail {
+        // this is the thumb
+        display: inline-block;
+        padding: 0;
+        margin-left: .5rem;
+        margin-right: .5rem;
+        margin-bottom: 0;
+        line-height: $line-height-base;
+        //border: 1px solid $thumbnail-border;
+        @include thumbnail-image($width, $height);
+
+        .caption {
+            padding: 0;
+            margin-bottom: 0;
+            margin-top: .25rem;
+            white-space: pre-line;
+            color: $figure-caption-color;
+        }
+        //loading state of thumbnail
+        &.loading {
+            outline: 6px dashed $blue;
+            box-shadow: 0 0 0 .25em $red;
+            animation: thumbLoading 1s infinite;
+        }
+
+        &.docloading {
+            animation: cacheDocLoading 1s infinite;
+            //outline: 3px solid $brand-warning;
+            //box-shadow: 0 0 0 3px $brand-danger;
+        }
+
+        &.loaded {
+            //outline: 3px solid $brand-primary;
+            //box-shadow: 0 0 0 3px $brand-primary;
+        }
+        //hover on thumbnail
+        &:hover {
+            @include selected($thumbnailHoverScale);
+        }
+    }
+}
+
+@mixin thumbnail-image($width: $thumbnailHeight, $height: $thumbnailHeight) {
+    img {
         padding: 0px;
-        height: $thumbnailHeight;
-        width: $thumbnailWidth;
+        height: $height;
+        width: $width;
         object-fit: contain;
         border-style: solid;
         border-width: .0625em;
@@ -47,12 +90,11 @@ $thumbnailTransitionSpeed : 0.1s;
 }
 
 #thumbnails-container { // this represent loading state of entire card,
-    /*height: 100vh;*/
-    position: relative;
-    width: 100%;
-    margin: .35em 0;
-    margin-top: 1em;
-    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
 
     .card-header {
         display: flex;
@@ -62,91 +104,59 @@ $thumbnailTransitionSpeed : 0.1s;
         margin: 0;
         padding: .25rem;
         border-radius: 0px;
+        background-color: transparent;
 
         .card-title {
+            margin: 0;
+            padding-left: 1rem;
         }
 
-        #fileUpload {
+        a#file-upload-open {
             padding: 0;
             font-size: 1.5rem;
-            cursor: pointer;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.4);
+                z-index: 10;
+            }
         }
     }
     //this is the card-body
-    #thumbs-list.card-body {
-        overflow: auto;
+    #thumbs-list {
+        overflow-y: auto;
+        overflow-x: unset;
         min-height: 50%;
+        max-height: 50%;
+        margin: .5rem;
+        background-color: transparent;
 
         ul#thumbnails { // root, only <ul>, all thumbs are <li>'s and children of root <ul>
-            @include opacityTransition(.15s);
+            //display: flex;
             opacity: 1;
             text-align: center;
             list-style-type: none;
             padding: 0;
+            @include opacityTransition(.15s);
 
-            li { // this is the thumb, or thumbnail container
-                display: inline-block;
-                //object-fit:contain;
-                /*height:$thumbnailHeight;
-                width:$thumbnailWidth;*/
-                padding: 0;
-                margin-left: .5em;
-                margin-right: .5em;
-                margin-bottom: 0;
-                line-height: $line-height-base;
-                //border: 1px solid $thumbnail-border;
-                a {
-                    img {
-                        @include thumbnail();
-                    }
-                }
-
-                .caption {
-                    padding: 0;
-                    margin-bottom: 0;
-                    margin-top: .5em;
-                    white-space: pre-line;
-                    color: $figure-caption-color;
-                }
-                /*// this represents loading state of cached doc in data-virtual-path
-                a 
+            @include thumbnail();
+            /*// this represents loading state of cached doc in data-virtual-path
+            a 
+            {
+                // this should run until pre-load is done
+                // but we still need to be able to click and not be blocked by cache queue processing <a>
+                &.preloading 
                 {
-                    // this should run until pre-load is done
-                    // but we still need to be able to click and not be blocked by cache queue processing <a>
-                    &.preloading 
-                    {
                         
-                        animation:cacheDocLoading 1s infinite;
-                    }
+                    animation:cacheDocLoading 1s infinite;
+                }
                     
-                    &.preloaded 
-                    {
-                        outline: 3px solid $brand-primary;
-                        box-shadow: 0 0 0 3px $brand-primary;
-                    }
-                }*/
-                //loading state of thumbnail
-                &.loading {
-                    outline: 6px dashed $blue;
-                    box-shadow: 0 0 0 .25em $red;
-                    animation: thumbLoading 1s infinite;
+                &.preloaded 
+                {
+                    outline: 3px solid $brand-primary;
+                    box-shadow: 0 0 0 3px $brand-primary;
                 }
-
-                &.docloading {
-                    animation: cacheDocLoading 1s infinite;
-                    //outline: 3px solid $brand-warning;
-                    //box-shadow: 0 0 0 3px $brand-danger;
-                }
-
-                &.loaded {
-                    //outline: 3px solid $brand-primary;
-                    //box-shadow: 0 0 0 3px $brand-primary;
-                }
-                //hover on thumbnail
-                &:hover {
-                    @include selected($thumbnailHoverScale);
-                }
-            }
+            }*/
         }
     }
     /// this is the loading of all thumbs
@@ -167,13 +177,12 @@ $thumbnailTransitionSpeed : 0.1s;
             text-align: center;
             color: $gray-500;
 
-            &.over {
+            &.hover {
                 background: $gray-300;
             }
         }
     }
 }
-
 
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991px) {
@@ -182,7 +191,7 @@ $thumbnailTransitionSpeed : 0.1s;
             display: none;
         }
 
-        ul#thumbnails a img {
+        ul#thumbnails li img {
             height: $thumbnailHeightMobile !important;
             width: $thumbnailWidthMobile !important;
             margin: 2px !important;

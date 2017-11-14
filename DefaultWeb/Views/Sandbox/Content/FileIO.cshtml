@@ -1,1 +1,23 @@
-﻿
+﻿<p>
+    This demo has taken on a life of its own, and continues to grow. It is defining the file operation&rsquo;s backbone for the
+    .NET Core version of A Document Archive Server. The demo derives mostly from these two tutorials:
+    <a href="https://github.com/muhammad-magdy/UploadingFileUsingAjaxAndHTML5">muhammad-magdy/UploadingFileUsingAjaxAndHTML5</a> and
+    <a href="https://github.com/damienbod/AspNetCoreFileUploadFileTable">damienbod/AspNetCoreFileUploadFileTable</a>
+
+</p>
+<p>
+    The biggest excitement here, at first, is using SQl Server&rsquo;s FileTable for server-side file storage.
+    There are a few caveats though and not convinced it is the best approach as it is Not Transactional. Some T-SQL
+    would be in order to keep things orderly. The AdventureWorks demo database includes lots of T-SQL we get into over there.
+    For now, may have to implement a few &ldquo;workarounds&rdquo; for demo&rsquo;s sake&hellip;
+</p>
+<p>
+    Although versed in file operations, A Document Archive Server had concentrated mostly on &ldquo;download/display&rdquo;.
+    This demo takes the next step by providing a &ldquo;File Upload&rdquo; dialog. The goal being to upload and display as many
+    different file types as possible. The challenge being sorting it all out, while avoiding malicious file types&hellip;
+</p>
+<p>Currently we are supporting the following mime types for upload and display:</p>
+<p>image/*, application/pdf, video/*</p>
+<p>Working on these mime types:</p>
+<p>OpenXml types </p>
+<div class="h3 text-center">-Notes-</div>

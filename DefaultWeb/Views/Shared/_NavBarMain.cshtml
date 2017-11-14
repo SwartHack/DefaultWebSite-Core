@@ -14,18 +14,18 @@
     </div>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
-            <li><a class="nav-link" href="" data-target="#target-area" data-target-id="About">About</a></li>
-            <li><a class="nav-link" href="" data-target="#target-area" data-target-id="Contact">Contact</a></li>
-            <li><a class="nav-link" href="" data-target="#target-area" data-target-id="Comments">Comments</a></li>
-            <li><a class="nav-link" href="" data-target="#target-area" data-target-controller="Sandbox" data-target-action="Main">Sandbox</a></li>
-            <li><a class="nav-link" href="" data-target="#target-area" data-target-id="Ack">Acknowledgements</a></li>
-            <li class="nav-item dropdown" id="theme-dropdown-item">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">@ViewData["ThemeName"]</a>
+            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="About">About</a></li>
+            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="Contact">Contact</a></li>
+            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="Comments">Comments</a></li>
+            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-controller="Sandbox" data-target-action="SandboxMain">Sandbox</a></li>
+            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="Ack">Acknowledgements</a></li>
+            <li class="dropdown" id="theme-dropdown-item">
+                <a class="dropdown-toggle" data-toggle="dropdown">@ViewData["ThemeName"]</a>
                 <div id="theme-switcher" class="dropdown-menu ">
-                    @foreach (var file in Directory.GetFiles(Host.WebRootPath + "/css/themes", "*.css,!*.min.css"))
+                    @foreach (var file in Directory.GetFiles(Host.WebRootPath + @"\css\", "*.css"))
                     {
-                        var name = System.IO.Path.GetFileNameWithoutExtension(file);
-                        //name = name.Substring(0, name.IndexOf("."));
+                        var name = System.IO.Path.GetFileName(file);
+                        name = name.Substring(0, name.IndexOf("."));
                         <a class="dropdown-item" href="/Home/SetTheme?name=@name">@name</a>
                     }
                 </div>

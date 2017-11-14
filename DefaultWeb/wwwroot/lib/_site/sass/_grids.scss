@@ -13,11 +13,12 @@ html {
 }
 
 #row-main {
-    padding: 0;
-    margin: 0;
-    /*border-radius: 0px;
-    background-color: black;
-    border: 0.625rem solid #e6e6e6;*/
+    //padding: 0;
+    //margin: 0;
+    //border-radius: 0px;
+    //background-color: black;
+    //border: 0.625rem solid #e6e6e6;
+    
     #col-util {
         padding: 0;
         margin: 0;
@@ -30,16 +31,14 @@ html {
                 border-style: inset;
                 border-color: lightslategray;*/
                 //border: 2px solid black;
-            
                 #col-util-top {
                     padding: 0;
                     margin: 0;
                     border-radius: 0px;
                     background-color: steelblue;
                     height: 60%;
-
                 }
-            
+
                 #col-util-bottom {
                     padding: 0;
                     margin: 0;
@@ -47,7 +46,7 @@ html {
                     background: linear-gradient(to right, red, yellow);
                     height: 36.5%;
                 }
-                
+
 
                 #footer-scroll {
                     height: 3%;
@@ -62,11 +61,11 @@ html {
     #col-main {
         padding: 0;
         margin: 0;
-        background-color:steelblue;
-        height:100%;
+        background-color: steelblue;
+        height: 100%;
 
         &.full-size {
-            flex:0 0 100% !important;
+            flex: 0 0 100% !important;
             max-width: 100% !important;
         }
 
@@ -77,10 +76,18 @@ html {
                 /*border-width: 0.625rem;
                 border-style: inset;
                 border-color: lightslategray;*/
-
-                //#target-area
+                div#main-target-area {
+                    //flex: 0 0 100%;
+                    height: 100%;
+                    width: 100%;
+                    padding: 0;
+                    margin: 0;
+                    border-radius: 0;
+                }
             }
         }
     }
+
 }
+
 

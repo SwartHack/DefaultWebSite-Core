@@ -1,4 +1,6 @@
-﻿/// Main controller for event declarations, etc.
+﻿//////////////////////////////////////////////////////////////////////
+/// Main controller for event declarations, etc.
+//////////////////////////////////////////////////////////////////////
 define('dws/controller', ['dws/model', 'dws/dispatcher'],
 function (viewModel, Dispatch) {
 
@@ -94,7 +96,7 @@ function (viewModel, Dispatch) {
     //////////////////////////////////
     ///
     ////////////////////////////////
-    function initKO(xsrf) {
+    function initKO() {
         ko.applyBindings(viewModel);
         
     }

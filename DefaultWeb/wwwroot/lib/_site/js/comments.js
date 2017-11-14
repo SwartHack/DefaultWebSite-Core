@@ -27,7 +27,7 @@ function (Control, viewModel) {
                 
             })
             .fail(function (xhr, textStatus, error) {
-                viewModel.abort(xhr, textStatus, error);
+                viewModel.aborted(xhr, textStatus, error);
             })
             .always(function (data, textStatus, xhr) {
                 viewModel.waiting(false);
@@ -66,13 +66,15 @@ function (Control, viewModel) {
         //$submitButton.attr("disabled", true);
         $form.attr('disabled', true);
 
+        // here one way to do it from form values to JSON data
+        // this works well with unobtrusive validation
+        //
         //serialize form values to JSON
         var formvals = $form.serializeArray();
-        //var csrfToken = $("input[name='__RequestVerificationToken']").val();
+
         var settings = {
             url: '/Comments/CreateSource',
             type: 'POST',
-            dataType: 'json',
             data: formvals
         }
 
@@ -107,12 +109,16 @@ function (Control, viewModel) {
         
         viewModel.waitingTarget('.modal-header');
         viewModel.waiting(true);
-        $.ajax({
+
+        var settings = {
             url: '/Comments/CreateComment',
             type: 'POST',
             dataType: 'json',
             data: formvals
-        }).done(function (data, textStatus, xhr) {
+        };
+
+        $.ajax(settings)
+            .done(function (data, textStatus, xhr) {
             if (xhr.status == 200) {
                 $form.closest('#modal-action-template').modal('hide');
                 viewModel.addComment(data.comment);
@@ -133,20 +139,20 @@ function (Control, viewModel) {
 
     $(document).on('click', 'a#source-delete', function (e) {
 
-        if (viewModel.comments().length > 0) {
+        //if (viewModel.comments().length > 0) {
             
-            $.confirm({
-                title: 'Cascade Delete Source and Comments?',
-                content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
-                buttons: {
-                    confirm: function () { deleteSource(); },
-                    cancel: function () { return; }
-                }
-            });
-        }
-        else {
-            deleteSource();
-        }
+        //    $.confirm({
+        //        title: 'Cascade Delete Source and Comments?',
+        //        content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
+        //        buttons: {
+        //            confirm: function () { deleteSource(); },
+        //            cancel: function () { return; }
+        //        }
+        //    });
+        //}
+        //else {
+        //    deleteSource();
+        //}
     });
 
     function deleteSource() {
@@ -168,14 +174,14 @@ function (Control, viewModel) {
 
     $(document).on('click', 'a#comment-delete', function (e) {
        
-        $.confirm({
-            title: 'Delete Comment(s)?',
-            content: 'This action can not be undone!!!',
-            buttons: {
-                confirm: function () { deleteComment(); },
-                cancel: function () { return; }
-            }
-        });
+        //$.confirm({
+        //    title: 'Delete Comment(s)?',
+        //    content: 'This action can not be undone!!!',
+        //    buttons: {
+        //        confirm: function () { deleteComment(); },
+        //        cancel: function () { return; }
+        //    }
+        //});
     });
 
     function deleteComment() {

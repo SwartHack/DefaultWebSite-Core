@@ -4,10 +4,13 @@
 define('dws/fileops-content', ['dws/controller', 'dws/model'],
     function (Control, viewModel) {
 
+        /////////////////////////////////////////////////
+        /// late init because we are not present in DOM on site load
+        ////////////////////////////////////////////////
         function init() {
 
             $('#content-left').on("click", function (e) {
-                contentNext();
+                contentPrev();
             });
 
             $('#content-right').on("click", function (e) {
@@ -15,17 +18,18 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             });
 
             $('.main-content-area').on("swipeleft", function (e) {
-                contentNext();
+                contentPrev();
             });
 
             $('.main-image').on("swiperight", function (e) {
                 contentNext();
             });
 
+
             $(document).on('keydown', '#main-content-area', function (e) {
-                if (!shortcutsEnabled) {
-                    return;
-                }
+                //if (!shortcutsEnabled) {
+                //    return;
+                //}
 
                 if (e.keyCode === 37) { //prev
                     contentPrev();
@@ -38,12 +42,11 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 }
             });
 
-            $(document).on('click', 'ul#thumbnails li a', function (e) {
-                e.preventDefault(); // what defaults?
+            $(document).on('click', 'ul#thumbnails li', function (e) {
+                e.preventDefault(); 
                 var $link = $(this);
-                if (!$('img', $link).hasClass('selected')) { // if currently selected do nothing
-                    $(document).trigger('thumbnailclicked', $link);
-                    clickThumbnail($link); // will pushstate ???
+                if (!$link.hasClass('selected')) { 
+                    openFile($link);
                 }
             });
 
@@ -51,84 +54,41 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
             getContent();
 
-            $('#col-util').hide();
-            $('#col-main').addClass('full-size');
-        }
-
-        var shortcutsEnabled = true;
-
-        function enableShortcuts() {
-            shortcutsEnabled = true;
-        }
-
-        function disableShortcuts() {
-            shortcutsEnabled = false;
-        }
-
-
-        function getContent() {
-
-            var settings = {
-                url: "/api/dws/list",
-                cache: false
-            }
-            viewModel.waitingTarget('#navbar-main');
-            viewModel.waiting(true);
-            //// integrate into dispatcher.js  TODO
-            $.ajax(settings)
-                .done(function (data, textStatus, xhr) {
-                    viewModel.fileInfo([]);
-                    viewModel.fileInfo(data.fileInfo);
-                })
-                .fail(function (xhr, textStatus, error) {
-                    viewModel.abort(xhr, textStatus, error);
-                })
-                .always(function (data, textStatus, xhr) {
-                    viewModel.waiting(false);
-                });
-            
-        }
-
-
-        function showContent(selector) {
-            if (!$(selector).is(':visible')) {
-                hideAllContent();
-                $(selector).show(); // beware that using an animated show (fadeIn, etc) may conflict with the visibility check
-            }
-        }
-
-        function hideAllContent() {
-            $('.content-area').hide();
+            //// expand this
+            //$('#col-util').hide();
+            //$('#col-main').addClass('full-size');
         }
 
         function contentNext() {
-            var linkNext = $('ul#thumbnails li a img.selected').closest('li').next().find(">:first-child").trigger('click');
+            var linkNext = $('ul#thumbnails li.selected').next('li');
             $(linkNext).trigger('click');
         }
 
         function contentPrev() {
-            var linkPrev = $('ul#thumbnails li a img.selected').closest('li').prev().find(">:first-child");
+            var linkPrev = $('ul#thumbnails li.selected').closest('li');
             $(linkPrev).trigger('click');
         }
 
-        function clickThumbnail($link) {
-            var fileURL = $link.attr('href');
-            var virtualPath = $link.attr('data-virtual-path');
-            var mimeType = $link.attr('data-mime-type');  //added to template!!!
-
-            //learn what this is doing
-            window.history && window.history.pushState && window.history.replaceState({ image: "", virtualPath: "" }, "", "");
-            openFile(virtualPath, mimeType);
+        // do we really need this???
+        function clickThumbnail($thumbnail) {
+            //figure this latter
+            //window.history && window.history.pushState && window.history.replaceState({ image: "", virtualPath: "" }, "", "");
+            openFile($thumbnail);
         }
 
-        function openFile(virtualPath, mimeType) {
-            var $thumbnail = $('a[data-virtual-path = "' + virtualPath + '"] img');
+        function openFile($thumbnail) {
+            var fileApi = $thumbnail.attr('data-api');
+            var fileTarget = $thumbnail.attr('data-target');
+
             styleSelectedThumbnail($thumbnail);
-            loadContent(virtualPath, mimeType);
+
+            viewModel.fileViewTarget(fileTarget);
+            viewModel.fileViewApi(fileApi);
+
         }
 
         function styleSelectedThumbnail($thumbnail) {
-            $('ul#thumbnails li a img').removeClass("selected");
+            $('ul#thumbnails li').removeClass("selected");
             $thumbnail.addClass("selected");
         }
 
@@ -136,44 +96,79 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             viewModel.thumbnails([]);
         }
 
+        function hideAllContent() {
+            $('.content-area').hide();
+        }
 
-        function loadContent() {
-
-            var settings = {
-                url: '/api/dws/view/{id}',  //Server web api
-                type: 'Get',
-                cache: false
-            };
-
-            $.ajax(settings)
-                .done(function (data, textStatus, xhr) {
-                    if (data.statusCode == 200) {
-                        
-                    }
-                    else {
-                        alert(data.status);
-                    }
-                })
-                .fail(function (xhr, textStatus, error) {
-                    viewModel.aborted(xhr, textStatus, error);
-                })
-                .always(function () {
-                    $('#clinet-container').empty();
-                    $('.create-file-link').show();
-                    $.unblockUI();
-                    viewModel.waitEffects(false);
-                });
-
+        function showContent($selector) {
 
         }
 
+        ///////////////////////////////////////////////////////////////////////
+        // TODO - all ajax calls through dispatcher, extend model to deal with it
+        ////////////////////////////////////////////////////////////////////////
+        function getContent() {
+
+            var settings = {
+                url: "/api/dws/files/list",
+                cache: false
+            }
+            viewModel.waitingTarget('#navbar-main');
+            viewModel.waiting(true);
+            $.ajax(settings)
+                .done(function (data, textStatus, xhr) {
+                    viewModel.fileInfo([]);
+                    viewModel.fileInfo(data);
+                })
+                .fail(function (xhr, textStatus, error) {
+                    viewModel.abort(xhr, textStatus, error);
+                })
+                .always(function (data, textStatus, xhr) {
+                    viewModel.waiting(false);
+                });
+
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // TODO - all ajax calls through dispatcher, extend model to deal with it
+        ////////////////////////////////////////////////////////////////////////
+        //function loadContent(fileApi) {
+
+        //    var settings = {
+        //        url: fileApi,  //Server web api
+        //        type: 'Get',
+        //        cache: false
+        //    };
+
+        //    $.ajax(settings)
+        //        .done(function (data, textStatus, xhr) {
+        //            if (data.statusCode == 200) {
+        //                viewModel.
+        //            }
+        //            else {
+                        
+        //            }
+        //        })
+        //        .fail(function (xhr, textStatus, error) {
+        //            viewModel.aborted(xhr, textStatus, error);
+        //        })
+        //        .always(function () {
+        //            //$('#client-container').empty();
+        //            //$('.create-file-link').show();
+        //            //$.unblockUI();
+        //            viewModel.waitEffects(false);
+        //        });
+
+
+        //}
+
         return {
             init:init,
-            showContent: showContent,
-            hideAllContent: hideAllContent,
             contentNext: contentNext,
             contentPrev: contentPrev,
-            clickThumbnail: clickThumbnail
+            clickThumbnail: clickThumbnail,
+            hideAllContent: hideAllContent,
+            showContent: showContent
            
         };
 

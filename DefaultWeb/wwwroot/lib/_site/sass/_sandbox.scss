@@ -1,171 +1,185 @@
 ﻿/// <reference path="defaultwebsite.scss" />
-#sandbox {
-    height: 100%;
-    width: 100%;
-    padding: 0 !important;
-    margin: 0 !important;
-    border-radius: 0;
-    background-color: burlywood !important;
 
+@mixin sandbox-nav() {
+    #sandbox-nav {
 
-    .text-center {
-        background-color: tan !important;
-        margin-bottom: 0;
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
+        .text-center {
+            background-color: tan !important;
+            margin-bottom: 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
 
-    ul.nav.nav-pills {
-        width: 100%;
-        //margin-bottom: .125rem;
-        padding-bottom: .25rem;
-        flex-wrap: wrap;
-        font-size: 1.15rem;
-        font-weight: 500;
-        //border-bottom: .125rem groove moccasin;
-        background-color: moccasin;
-        cursor: pointer;
+        ul.nav.nav-pills {
+            width: 100%;
+            //margin-bottom: .125rem;
+            padding-bottom: .25rem;
+            flex-wrap: wrap;
+            font-size: 1.15rem;
+            font-weight: 500;
+            //border-bottom: .125rem groove moccasin;
+            background-color: moccasin;
+            cursor: pointer;
 
-        .nav-item {
-            border-radius: .75rem;
-            margin-top: .25rem;
-            margin-left: .75rem;
-            background-color: tan;
-            //border: .075rem outset gray;
-            /*&.active,
-            .show > & {
-                color: $nav-pills-link-active-color;
-                background-color: $nav-pills-link-active-bg;
-            }*/
-            a {
-                //padding: .125rem .5rem .125rem .5rem;
-                padding-left: .5rem;
-                padding-right: .5rem;
-            }
+            .nav-item {
+                border-radius: .75rem;
+                margin-top: .25rem;
+                margin-left: .75rem;
+                background-color: tan;
 
-            &.active {
-                background-color: darkkhaki;
-                color: $white;
+                a {
+                    //padding: .125rem .5rem .125rem .5rem;
+                    padding-left: .5rem;
+                    padding-right: .5rem;
+                }
 
-                &:hover {
+                &.active {
                     background-color: darkkhaki;
+                    color: $white;
+
+                    /*&:hover {
+                        background-color: darkkhaki;
+                        color: $white;
+                    }*/
+                }
+
+                @include hover-focus {
+                    background-color: khaki;
                     color: $white;
                 }
             }
-
-            @include hover-focus {
-                background-color: khaki;
-                color: $white;
-            }
         }
     }
+}
 
+#sandbox.card {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background-color: lemonchiffon;
 
-    #sandbox-items.card {
-        display: block;
-        background-color: transparent;
-        margin: 0;
+    @include sandbox-nav();
+
+    #sandbox-target-area {
+        flex: 0 1 auto;
+        display:flex;
+        height:100%
+    }
+    
+}
+
+#sandbox-docs {
+    display: flex;
+    flex-direction:column;
+    padding: 0;
+    margin: .25rem;
+    background-color: transparent;
+    border: none;
+    
+    //display: flex;
+    //flex-direction: column;
+
+    #sandbox-header.card-header {
+        background-color: tan;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        padding-left: 2.5rem;
         margin-bottom: 0;
-        border: none;
-
-        .card-header {
-            background-color: tan;
-            padding-top: 0;
-            padding-bottom: 0;
-            margin-bottom: 0;
-
-            .card-title {
-                background-color: transparent;
-                font-weight: bold;
-                font-size: 1.25rem;
-                font-style: italic;
-                margin-bottom: 0;
-            }
-        }
-
-        .sandbox-wrapper.card-block {
-            display: block;
-            height: 82.5%;
-            overflow-y: auto;
-            border: none;
-            padding: 1.25rem;
-            padding-top: 1rem;
-            padding-bottom: 0;
-            background-color: moccasin;
-        }
-
-        .card-footer {
-        }
-    }
-    /// generic style for each item
-    ///
-    .sandbox-item.card {
-        display: block;
-        margin-bottom: 1rem;
-        background-color: burlywood;
-        border-radius: $card-border-radius;
 
         .card-title {
-            //border-bottom: .125rem solid black;
+            background-color: transparent;
+            font-weight: bold;
             font-size: 1.25rem;
             font-style: italic;
-            font-weight: 400;
             margin-bottom: 0;
-            text-align: center;
         }
+    }
 
+    .sandbox-wrapper {
+        //height: 85%;
+        display: block;
+        overflow-y: auto;
+        border: none;
+        padding-left: 15%;
+        padding-right: 15%;
+        padding-top: 2rem;
+        padding-bottom: 0;
+        background-color: moccasin;
+    }
 
-        .card-text {
-            background-color: lemonchiffon;
-            max-height: 5rem;
-            overflow-y: auto;
-            padding:.5rem;
+    .card-footer {
+    }
+}
 
-            p {
-                background-color: transparent;
-                margin-left: .5rem;
-                margin-right: .5rem;
-                margin-bottom: 0;
-            }
+/// generic style for each item
+///
+.sandbox-doc.card {
+    display: block;
+    margin-bottom: 1rem;
+    background-color: burlywood;
+    border-radius: $card-border-radius;
 
-            &.expand {
-                max-height: 50%;
-            }
-        }
+    .card-title {
+        //border-bottom: .125rem solid black;
+        font-size: 1.25rem;
+        font-style: italic;
+        font-weight: 400;
+        margin-bottom: 0;
+        text-align: center;
+    }
 
-        .card-footer {
-            border: none;
-            padding-top: 0;
-            padding-bottom: 0;
+    .card-text {
+        background-color: lemonchiffon;
+        //max-height: 5rem;
+        height:20%;
+        overflow-y: auto;
+        padding: .5rem;
+
+        p {
             background-color: transparent;
+            margin-left: .5rem;
+            margin-right: .5rem;
+            margin-bottom: 0;
+        }
 
-            a.sandbox-toggle-text {
-                text-decoration: none;
-                color: $link-color;
-
-                @include hover-focus {
-                    cursor: pointer;
-                }
-            }
+        &.expand {
+            max-height: 50%;
         }
     }
 
+    .card-footer {
+        border: none;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: transparent;
 
-    #sandbox-about {
-    }
+        a.sandbox-toggle-text {
+            text-decoration: none;
+            color: $link-color;
 
-    #sandbox-comments-mgr {
+            @include hover-focus {
+                cursor: pointer;
+            }
+        }
     }
+}
+   
 
-    #sandbox-fileio {
-    }
+#sandbox-about {
+}
 
-    #sandbox-arcgis {
-    }
+#sandbox-comments-mgr {
+}
 
-    #sandbox-advworks {
-    }
+#sandbox-fileio {
+}
 
-    #sandbox-hopper {
-    }
+#sandbox-arcgis {
+}
+
+#sandbox-advworks {
+}
+
+#sandbox-hopper {
 }

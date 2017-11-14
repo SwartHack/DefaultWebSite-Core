@@ -9,13 +9,10 @@ using System.Web;
 
 namespace DefaultWeb.Controllers
 {
-    
-
     public class HomeController : Controller
     {
         public DwsSettings _settings { get; private set; }
-        private string BootStrapThemeName { get; set; }
-        private string JqueryUiThemeName { get; set; }
+        private string ThemeName { get; set; }
 
         public HomeController(IOptions<DwsSettings> settingsOptions)
         {
@@ -23,33 +20,24 @@ namespace DefaultWeb.Controllers
             // let's check the theme set-up here instead of View
 
             //get default from config
-            if (String.IsNullOrEmpty(_settings.DefaultBootstrapTheme) || String.IsNullOrEmpty(_settings.DefaultJqueryUiTheme) )
+            if ( String.IsNullOrEmpty(_settings.DefaultTheme) )
             {
-                BootStrapThemeName = "DefautBootstrapTheme";
-                JqueryUiThemeName = "vader";
-
-
+                ThemeName = "default";
             }
             else
             {
-                var bstheme = _settings.DefaultBootstrapTheme;
-                var jquitheme = _settings.DefaultJqueryUiTheme;
-                BootStrapThemeName = bstheme;
-                JqueryUiThemeName = jquitheme;
+                var bstheme = _settings.DefaultTheme;
+                ThemeName = bstheme;
+               
             }
         }
   
        
-
         public IActionResult Index()
         {
-            ViewData["BootstrapThemeName"] = BootStrapThemeName;
-            ViewData["BootstrapThemeDevelopment"] = String.Format("lib/_site/dist/css/themes/{0}.css", BootStrapThemeName.ToLower());
-            ViewData["BootstrapThemeProduction"] = String.Format("css/themes/{0}.min.css", BootStrapThemeName.ToLower());
-
-            ViewData["JqueryUiThemeName"] = JqueryUiThemeName;
-            ViewData["JqueryUiThemeDevelopment"] = String.Format("lib/jquery-ui/themes/{0}/jquery-ui.css", JqueryUiThemeName.ToLower());
-            ViewData["JqueryUiThemeProduction"] = String.Format("css/jquery-ui/{0}/jquery-ui.min.css", JqueryUiThemeName.ToLower());
+            ViewData["ThemeName"] = ThemeName;
+            ViewData["ThemeDevelopment"] = String.Format("lib/_site/dist/css/{0}.css", ThemeName.ToLower());
+            ViewData["ThemeProduction"] = String.Format("css/{0}.min.css", ThemeName.ToLower());
 
             return View();
         }
@@ -59,10 +47,10 @@ namespace DefaultWeb.Controllers
             return View();
         }
 
-        public void SetTheme(string theme)
+        public void SetTheme(string name)
         {
-            BootStrapThemeName = theme;
-            Redirect("Index");
+            ThemeName = name;
+            RedirectToAction("Index");
         }
 
         public IActionResult GetView(string id)

@@ -7,7 +7,7 @@ namespace DefaultWeb.Controllers
     {
 
 
-        public IActionResult Main()
+        public IActionResult SandboxMain()
         {
             return PartialView();
         }

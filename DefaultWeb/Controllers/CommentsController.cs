@@ -16,12 +16,12 @@ namespace DefaultWeb.Controllers
     public class CommentsController : Controller
     {
         private readonly DwsDbContext _context;
-        private readonly IDbContextTransaction _transaction;
+        //private readonly IDbContextTransaction _transaction;
 
         public CommentsController(DwsDbContext context)
         {
             _context = context;
-            _transaction = _context.Database.BeginTransaction();
+            //_transaction = _context.Database.BeginTransaction();
         }
 
         /// <summary>
@@ -31,11 +31,11 @@ namespace DefaultWeb.Controllers
         {
             //_transaction.Commit();
             //_transaction.Rollback();
-            _transaction.Dispose();
+            //_transaction.Dispose();
             _context.Dispose();
         }
 
-        public IActionResult Main()
+        public IActionResult CommentsMain()
         {
             return PartialView();
         }

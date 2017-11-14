@@ -4,18 +4,22 @@
 @import "../../bootstrap/scss/bootstrap-grid.scss";
 @import "../../bootstrap/scss/bootstrap-reboot.scss";
 @import "../../font-awesome/scss/font-awesome.scss";
+//@import "../../jq-ui-bootstrap/scss/all.scss";
+
+
 
 @import "keyframes.scss";
+@import "documents.scss";
 @import "grids.scss";
 @import "navbarmain.scss";
-@import "rundowns.scss";
-@import "documents.scss";
-@import "carousel.scss";
 @import "sandbox.scss";
+@import "main-content.scss";
+@import "rundowns.scss";
+@import "carousel.scss";
 @import "comments.scss";
 @import "comment.scss";
-@import "fileops-client.scss";
 @import "thumbnail.scss";
+@import "fileops-client.scss";
 @import "fileops-content.scss";
 @import "errors.scss";
 
@@ -68,12 +72,6 @@
     //background: linear-gradient(circle, steelblue, hotpink);
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
 
 div.modal-header {
     padding: .3rem .75rem;
@@ -117,7 +115,7 @@ div.modal-body {
 
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1199px) {
-    .container {
+    .content-area {
         max-width: none;
         width: 100%;
         padding: 0;

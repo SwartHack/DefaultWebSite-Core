@@ -9,6 +9,7 @@ using System.Drawing.Imaging;
 using NReco.VideoConverter;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using DefaultWeb.Models.DefaultWebSite.DwsFile;
 
 namespace DefaultWeb.Controllers.ActionResults
 {
@@ -16,19 +17,18 @@ namespace DefaultWeb.Controllers.ActionResults
     {
         public int Width { get; set; }
         public int Height { get; set; }
-        public string FileNameFull { get; set; }
-        public string MimeType { get; set; }
+        public DwsFileInfo FileInfo { get; set; }
         public ActionContext Context { get; set; }
         public IHostingEnvironment HostEnv { get; set; }
 
         public string DwsFile { get; set; }
 
-        public ThumbnailResult(int width, int height, string fileName, string mimeType)
+        public ThumbnailResult(int width, int height, DwsFileInfo fileInfo)
         {
-            Width = Width;
-            Height = Height;
-            FileNameFull = fileName;
-            MimeType = mimeType;
+            Width = width;
+            Height = height;
+            FileInfo = fileInfo;
+            
         }
 
         //private void SetCache(HttpResponseBase response, int days)
@@ -46,13 +46,10 @@ namespace DefaultWeb.Controllers.ActionResults
         {
             Context = context;
 
-            if (string.IsNullOrEmpty(FileNameFull))
-                throw new NullReferenceException("File name cannot be null or empty");
-
-            if (!File.Exists(FileNameFull))
+            if (!File.Exists(FileInfo.FileFull))
             {
                 //sub Archive Bot for image thumnail
-                FileNameFull = String.Format(@"{0}/8ball32.jpg","~/Images");
+                FileInfo.FileFull = String.Format(@"{0}/8ball32.jpg","~/Images");
             }
 
             // this is on the server!!!!
@@ -67,8 +64,7 @@ namespace DefaultWeb.Controllers.ActionResults
             //}
 
             GetThumbFromFile();
-
-
+            
         }
 
         /// <summary>
@@ -82,24 +78,28 @@ namespace DefaultWeb.Controllers.ActionResults
             {
                 // we need to proceed based on mime type of file
                 Image image = null;
-                var category = MimeType.Substring(0, ( MimeType.IndexOf(@"/") - 1 ));
+                var index = FileInfo.ContentType.IndexOf(@"/");
+                var category =  FileInfo.ContentType.Substring(0, (index));
+                var type = FileInfo.ContentType.Substring(index + 1);
+                //TODO, only process accepted files, but should be filtered before this
+                // Upload should only allowed accepted file types
 
                 switch (category)
                 {
                     case "application":
-                        image = GetThumbFromApp(MimeType, FileNameFull);
+                        image = GetThumbFromApp(FileInfo);
                         break;
 
                     case "audio":
-                        image = GetThumbForAudio(MimeType, FileNameFull);
+                        image = GetThumbForAudio(FileInfo);
                         break;
 
                     case "video":
-                        image = GetThumbFromVideo(MimeType, FileNameFull);
+                        image = GetThumbFromVideo(FileInfo);
                         break;
 
                     case "image":
-                        image = Image.FromFile(FileNameFull);
+                        image = Image.FromFile(FileInfo.FileFull);
                         break;
 
 
@@ -142,17 +142,17 @@ namespace DefaultWeb.Controllers.ActionResults
             image.Save(Context.HttpContext.Response.Body, ImageFormat.Jpeg);
         }
 
-        private Image GetThumbFromVideo(string type, string fileAbsolutePath)
+        private Image GetThumbFromVideo(DwsFileInfo fileInfo)
         {
             var outThumb = new MemoryStream();
 
             var ffMpeg = new FFMpegConverter();
-            ffMpeg.GetVideoThumbnail(fileAbsolutePath, outThumb, 5);
+            ffMpeg.GetVideoThumbnail(fileInfo.FileFull, outThumb, 5);
 
             return Image.FromStream(outThumb);
         }
 
-        private Image GetThumbForAudio(string type, string fileAbsolutePath)
+        private Image GetThumbForAudio(DwsFileInfo fileInfoh)
         {
             throw new NotImplementedException();
         }
@@ -162,15 +162,15 @@ namespace DefaultWeb.Controllers.ActionResults
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private Image GetThumbFromApp(string type, string fileAbsolutePath)
+        private Image GetThumbFromApp(DwsFileInfo fileInfo)
         {
             // parse to see if supported mimetype
             // need a better way to do this!!! TODO
-            if (type == "application/pdf")
+            if (fileInfo.ContentType == "application/pdf")
             {
                 try
                 {
-                    var outThumb = new FileStream(fileAbsolutePath, FileMode.Open, FileAccess.Read);
+                    var outThumb = new FileStream(fileInfo.FileFull, FileMode.Open, FileAccess.Read);
                     return Image.FromStream(outThumb);
                 }
                 catch

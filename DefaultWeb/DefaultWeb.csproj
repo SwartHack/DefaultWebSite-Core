@@ -3,22 +3,34 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-DefaultWeb2-2D179D1C-83C3-477A-A8C0-EA1F6BF216CF</UserSecretsId>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
-    <Version>1.0.1</Version>
+    <AssemblyVersion>100.0.1.0</AssemblyVersion>
+    <FileVersion>100.0.1.0</FileVersion>
+    <Version>100.0.1</Version>
+    <Company>DefaultWeb</Company>
+    <Authors>DefaultWeb</Authors>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\NewFolder\**" />
+    <Compile Remove="wwwroot\css\jquery-ui\**" />
     <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="Views\NewFolder\**" />
+    <Content Remove="wwwroot\css\jquery-ui\**" />
     <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="Views\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\css\jquery-ui\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="Views\NewFolder\**" />
+    <None Remove="wwwroot\css\jquery-ui\**" />
     <None Remove="wwwroot\lib\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="bower.json" />
     <Content Remove="bundleconfig.json" />
-    <Content Remove="Views\FileOps\MultiClient1.cshtml" />
+    <Content Remove="Views\FileOperations\MultiClient1.cshtml" />
+    <Content Remove="wwwroot\css\images\Thumbs.db" />
   </ItemGroup>
 
   <ItemGroup>
@@ -113,20 +125,7 @@
     <Content Include="Views\Rundowns\Snippets\StartUpCS.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\lib\font-awesome\.bower.json" />
-    <Content Include="wwwroot\lib\font-awesome\bower.json" />
-    <Content Include="wwwroot\lib\font-awesome\css\font-awesome.css" />
-    <Content Include="wwwroot\lib\font-awesome\css\font-awesome.min.css" />
-    <Content Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="wwwroot\lib\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="wwwroot\lib\font-awesome\HELP-US-OUT.txt" />
     <Content Include="wwwroot\lib\_site\.eslintrc.json" />
-    <Content Include="wwwroot\lib\_site\dist\css\jquery-ui.css" />
-    <Content Include="wwwroot\lib\_site\dist\css\jquery-ui.min.css" />
-    <Content Include="wwwroot\lib\_site\dist\css\themes\default.css" />
-    <Content Include="wwwroot\lib\_site\dist\css\themes\default.min.css" />
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.eot" />
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.ttf" />
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.woff" />
@@ -145,12 +144,14 @@
 
   <ItemGroup>
     <PackageReference Include="CoreCompat.System.Drawing.v2" Version="5.2.0-preview1-r131" />
-    <PackageReference Include="NETStandard.Library" Version="2.0.0" />
+    <PackageReference Include="EntityFrameworkCore.Triggers" Version="1.1.1" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="NReco.VideoConverter.LT" Version="1.1.2" />
   </ItemGroup>
 
@@ -162,51 +163,17 @@
 
   <ItemGroup>
     <Folder Include="Controllers\ActionFIlters\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Views\GIS\" />
     <Folder Include="Views\Sandbox\Snippets\" />
-    <Folder Include="wwwroot\css\jquery-ui\" />
+    <Folder Include="wwwroot\css\images\" />
     <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\lib\_site\dist\css\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="bower.json" />
     <None Include="bundleconfig.json" />
-    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
-    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
-    <None Include="wwwroot\lib\font-awesome\.gitignore" />
-    <None Include="wwwroot\lib\font-awesome\.npmignore" />
-    <None Include="wwwroot\lib\font-awesome\css\font-awesome.css.map" />
-    <None Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.svg" />
-    <None Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
-    <None Include="wwwroot\lib\font-awesome\less\animated.less" />
-    <None Include="wwwroot\lib\font-awesome\less\bordered-pulled.less" />
-    <None Include="wwwroot\lib\font-awesome\less\core.less" />
-    <None Include="wwwroot\lib\font-awesome\less\fixed-width.less" />
-    <None Include="wwwroot\lib\font-awesome\less\font-awesome.less" />
-    <None Include="wwwroot\lib\font-awesome\less\icons.less" />
-    <None Include="wwwroot\lib\font-awesome\less\larger.less" />
-    <None Include="wwwroot\lib\font-awesome\less\list.less" />
-    <None Include="wwwroot\lib\font-awesome\less\mixins.less" />
-    <None Include="wwwroot\lib\font-awesome\less\path.less" />
-    <None Include="wwwroot\lib\font-awesome\less\rotated-flipped.less" />
-    <None Include="wwwroot\lib\font-awesome\less\screen-reader.less" />
-    <None Include="wwwroot\lib\font-awesome\less\stacked.less" />
-    <None Include="wwwroot\lib\font-awesome\less\variables.less" />
-    <None Include="wwwroot\lib\font-awesome\scss\font-awesome.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_animated.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_bordered-pulled.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_core.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_fixed-width.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_icons.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_larger.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_list.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_mixins.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_path.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_rotated-flipped.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_screen-reader.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_stacked.scss" />
-    <None Include="wwwroot\lib\font-awesome\scss\_variables.scss" />
-    <None Include="wwwroot\lib\_site\dist\css\themes\default.css.map" />
-    <None Include="wwwroot\lib\_site\dist\css\themes\default.min.css.map" />
     <None Include="wwwroot\lib\_site\dist\js\jcore.js" />
     <None Include="wwwroot\lib\_site\dist\js\site.js" />
     <None Include="wwwroot\lib\_site\fonts\fontawesome-webfont.svg" />
@@ -241,6 +208,7 @@
     <None Include="wwwroot\lib\_site\sass\_errors.scss" />
     <None Include="wwwroot\lib\_site\sass\_grids.scss" />
     <None Include="wwwroot\lib\_site\sass\_keyframes.scss" />
+    <None Include="wwwroot\lib\_site\sass\_main-content.scss" />
     <None Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
     <None Include="wwwroot\lib\_site\sass\_rundowns.scss" />
     <None Include="wwwroot\lib\_site\sass\_sandbox.scss" />

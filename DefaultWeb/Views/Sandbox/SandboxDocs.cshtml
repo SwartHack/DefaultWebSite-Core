@@ -1,12 +1,10 @@
-<div id="sandbox-items" class="card">
-
-    <div class="card-header">
+<div id="sandbox-docs" class="card-block">
+    <div id="sandbox-header" class="card-header">
         <div class="card-title">Welcome to the SandBox</div>
     </div>
+    <div class="sandbox-wrapper list-group">
 
-    <div class="sandbox-wrapper card-block list-group">
-
-        <div id="sandbox-about" class="sandbox-item card">
+        <div id="sandbox-about" class="sandbox-doc card">
             <div class="card-title">Playing in the Sandbox</div>
             <div class="card-text expand">
                 @{ Html.RenderPartial("Content/About.cshtml"); }
@@ -14,7 +12,7 @@
             <div class="card-footer text-right"><a class="sandbox-toggle-text">Less...</a></div>
         </div>
 
-        <div id="sandbox-comments-mgr" class="sandbox-item card">
+        <div id="sandbox-comments-mgr" class="sandbox-doc card">
             <div class="card-title">A Comments Manager</div>
             <div class="card-text">
                 @{ Html.RenderPartial("Content/CommentsManager.cshtml"); }
@@ -22,7 +20,7 @@
             <div class="card-footer text-right"><a class="sandbox-toggle-text">More...</a></div>
         </div>
 
-        <div id="sandbox-fileio" class="sandbox-item card">
+        <div id="sandbox-fileio" class="sandbox-doc card">
             <div class="card-title">File Operations</div>
             <div class="card-text">
                 <p>Upload files and display OpenXML</p>
@@ -31,7 +29,7 @@
             <div class="card-footer text-right"><a class="sandbox-toggle-text">More...</a></div>
         </div>
 
-        <div id="sandbox-advworks" class="sandbox-item card">
+        <div id="sandbox-advworks" class="sandbox-doc card">
             <div class="card-title">Adventure Works</div>
             <div class="card-text">
                 <p> Going Data-First with this fairly complex, semi-forgotten dataset!!!</p>
@@ -40,7 +38,7 @@
             <div class="card-footer text-right"><a class="sandbox-toggle-text">More...</a></div>
         </div>
 
-        <div id="sandbox-arcgis" class="sandbox-item card">
+        <div id="sandbox-arcgis" class="sandbox-doc card">
             <div class="card-title">Geographic Information Systems (GIS)</div>
             <div class="card-text">
                 <p> ESRI ArcGis API integrations from the Default WebSite.net ArcGIS Server...</p>
@@ -49,7 +47,7 @@
             <div class="card-footer text-right"><a class="sandbox-toggle-text">More...</a></div>
         </div>
 
-        <div id="sandbox-hopper" class="sandbox-item card">
+        <div id="sandbox-hopper" class="sandbox-doc card">
             <div class="card-title">What's in the Hopper</div>
             <div class="card-text">
                 @{ Html.RenderPartial("Content/Hopper.cshtml"); }

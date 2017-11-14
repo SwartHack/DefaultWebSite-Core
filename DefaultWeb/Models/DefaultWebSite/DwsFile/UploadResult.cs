@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DefaultWeb.Models.DefaultWebSite.File
+namespace DefaultWeb.Models.DefaultWebSite.DwsFile
 {
     public class UploadResult
     {

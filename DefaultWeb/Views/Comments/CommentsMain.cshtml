@@ -1,10 +1,18 @@
-<div id="comments-mgr"> 
-    <div class="card">
+<div id="comments-mgr" class="card">
+
+    <div id="comments-doc" class="card">
+        <div class="card-title">A Comments Manager</div>
+        <div class="card-text">
+            @{ Html.RenderPartial("~/Views/Sandbox/Content/CommentsManager.cshtml"); }
+        </div>
+    </div>
+    
+    <div id="comments-main" class="card">
         <div class="card-header">
             <div class="card-title">Comments Manager Tool - Powered by <a href="http://knockoutjs.com/index.html">KnockoutJs</a></div>
         </div>
+        <div class="comments-mgr-wrapper card-body">
 
-        <div class="comments-mgr-wrapper">
             <div id="sources-card" class="card">
                 <table id="sources-table" class="table">
                     <thead class="header">
@@ -18,17 +26,16 @@
                                 <a class="btn disabled" disabled data-toggle="modal" data-type="Source" data-action="edit">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a id="source-delete" class="btn" >
+                                <a id="source-delete" class="btn">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
                     @*sources inline  binding template*@
                     <tbody class="tbody" id="sources" data-bind="template: { name: 'sources-template', foreach: sources, afterAdd: sourceAdded }"></tbody>
                 </table>
-                <div id="sources-count" class="caption text-right" data-bind="text: sourcesCount"></div>
+                <div id="sources-count" class="caption text-right" data-bind="text: sourcesCount"> -1 </div>
             </div>
 
             @*comments inline binding template*@
@@ -46,8 +53,11 @@
             </div>
 
         </div>
-    </div> 
+    </div>
+    
 </div>
+
+
 
 <script>
 

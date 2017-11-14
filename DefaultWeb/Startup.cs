@@ -69,7 +69,16 @@ namespace DefaultWeb
              {
                  options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                  options.SerializerSettings.DateFormatString = "MM/dd/yyyy hh:mm tt";
-             });
+             })
+             .AddSessionStateTempDataProvider();
+
+            //services.AddDistributedMemoryCache();
+            //services.AddSession(options =>
+            //{
+            //    // Set a short timeout for easy testing.
+            //    options.IdleTimeout = TimeSpan.FromSeconds(10);
+            //    //options.Cookie.HttpOnly = true;
+            //});
 
             services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<ValidateMimeMultipartContentFilter>();
@@ -91,8 +100,6 @@ namespace DefaultWeb
 
             });
         }
-
-
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,8 +125,9 @@ namespace DefaultWeb
             }
 
             app.UseStaticFiles();
-
+            //app.UseSession();
             app.UseAuthentication();
+
 
 
             //app.Use(next => context =>
@@ -129,12 +137,21 @@ namespace DefaultWeb
             //    {
             //        //We can send the request token as a JavaScript - readable cookie, 
             //         //and JQuery  will use it by default.
-                        //antiforgery.GetAndStoreTokens(context);
+            //antiforgery.GetAndStoreTokens(context);
             //        context.Response.Cookies.Append("RequestVerificationToken", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
             //    }
 
-               //return next(context);
+            //return next(context);
             //});
+
+            string guid = Guid.NewGuid().ToString();
+            app.Use(next => context =>
+            {
+                string path = context.Request.Path;
+                context.Response.Cookies.Append("DwsSessionToken",guid , new CookieOptions() { HttpOnly = false });
+                return next(context);
+
+            });
 
 
             app.UseMvc(routes =>

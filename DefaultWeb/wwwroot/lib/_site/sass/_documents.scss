@@ -1,20 +1,15 @@
 ﻿/// <reference path="defaultwebsite.scss" />
 
-div#target-area {
-    //flex: 0 0 100%;
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
- }
-
-
 .dws-page {
     height: 100%;
     padding: 5%;
     margin: 0;
     border-radius: 0;
+}
+
+.card-block {
+
+
 }
 
 .dws-brand {
@@ -39,21 +34,36 @@ div#target-area {
     font-style: italic;
     font-weight: 700;
 
-    #title {
+    .title {
         //font-size: 2rem;
     }
 
-    #net {
+    .net {
         font-size: smaller;
     }
 
-    #core {
+    .core {
         color: crimson;
         font-size: inherit;
         font-style: italic;
     }
 }
 
+.dws-doc.card {
+
+    @extend .dws-page;
+
+    .card-text {
+        font-size: 14px;
+    }
+}
+
+/*p.text {
+    text-align: left;
+    font-size: 1em;
+}*/
+/// these should all be mixins
+// standardize
 .side-note {
     text-align:justify;
     border:.25rem inset lightsteelblue;
@@ -76,99 +86,89 @@ div#target-area {
     font-weight: 700;
 }
 
+.text-heading {
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.text-exclamation {
+    font-size: 1.25em;
+    text-align: left;
+    padding-bottom: .1em;
+    height: auto;
+    margin-top: 0;
+}
+
+.note-box.card {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: .25em;
+    border: .1875em ridge black;
+    border-radius: .1em;
+}
+
+.note-box.card-heading {
+    padding: .15em .15em;
+    border: .05em ridge black;
+    border-radius: 0;
+    text-align: center;
+}
+
+.note-box.card-title {
+    padding: 0;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.note-box.card-body {
+    padding: .15em .15em;
+    border: .05em thin black;
+    border-radius: 0;
+}
+
+.text-emphasis-box {
+    font-size: 1em;
+    text-align: center;
+    padding: .625em;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 1.875em;
+    margin-top: 1.25em;
+    border: .1875em groove black;
+    border-radius: .1em;
+}
+
+.text-emphasis-box-wide {
+    font-size: 1em;
+    text-align: center;
+    padding: .625em;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: .5em;
+    margin-top: 1.25em;
+    border: .1875em groove black;
+    border-radius: .1em;
+}
+
+.html-link {
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.html-link-about {
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .paper-wrapper {
 
     .paper {
 
-    }
-}
-
-#welcome.card {
-    @extend .dws-page;
-    background-color: skyblue;
-    overflow-y: auto;
-    margin-top:.5rem;
-    padding:0;
-
-    .card-header {
-        
-
-    }
-
-    .card-block {
-        display: block;
-        padding: .5rem;
-        margin: 0;
-        background-color: transparent;
-    }
-}
-
-
-.about.card {
-    @extend .dws-page;
-    background-color: firebrick;
-    color: ghostwhite;
-    overflow: auto;
-
-    ul#about-content.list-group {
-        list-style: none;
-        background-color: transparent;
-
-        li.list-group-item {
-            background-color: transparent;
-            border: none;
-        }
-    }
-}
-
-#contact.card {
-    @extend .dws-page;
-    overflow: auto;
-
-    .card-block {
-        display: block;
-        padding: .5rem;
-        margin: 0;
-        background-color: transparent;
-
-        address {
-            box-shadow: inset;
-            padding: .5em;
-            margin-bottom: 0;
-        }
-
-        .quote-container {
-            margin-bottom: 1rem;
-
-            .note.yellow {
-                width: auto;
-                margin-left: 5%;
-                margin-right: 5%;
-                margin-bottom: 2rem;
-                font-size: 1em;
-                font-style: italic;
-            }
-        }
-
-        #doc-buttons.card {
-            flex-direction: row;
-            justify-content: space-between;
-            border: none;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-
-            button {
-                padding-left: 2em
-            }
-        }
-    }
-
-    div#doc-resume.collapse.show, div#doc-cv.collapse.show, div#doc-masters.collapse.show {
-        .card.card-block {
-            .open-document {
-                height: 90%;
-            }
-        }
     }
 }
 
@@ -180,55 +180,4 @@ div#target-area {
     overflow-y: auto;
 }
 
-.comments {
-    @extend .dws-page;
-    background-color: hotpink;
-    color: chartreuse;
-}
-
-
-.ack.card {
-    @extend .dws-page;
-    background-color: silver;
-    color: royalblue;
-    padding: 0;
-    overflow-y: auto;
-
-    .card-block {
-        display: block;
-        //padding: 0;
-        margin: 0;
-        background-color: transparent;
-    }
-}
-
-.rundown-document {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 3px;
-    //overflow-y: auto;
-    //padding: 1rem .75rem;
-    .snippet.card {
-        max-height: 20rem;
-        margin-left: 5%;
-        margin-right: 5%;
-        margin-bottom: .75rem;
-
-        .card-header {
-            padding: 0;
-
-            .card-title {
-                text-align: center;
-                margin-bottom: 0;
-            }
-        }
-
-        .card-block {
-            overflow: auto;
-            max-height: 15rem;
-            text-align: left;
-        }
-    }
-}
 

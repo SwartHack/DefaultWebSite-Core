@@ -11,12 +11,12 @@ require(['dws/fileops-content']);
 
 
 require(['dws/controller'],
-    function (control) {
+function (control) {
 
-        $(document).ready(function () {
-            control.initKO();
-        });
+    $(document).ready(function () {
+        control.initKO();
     });
+});
 
 //////////////////////////////////////////////////////////////////////
 /// globals go here

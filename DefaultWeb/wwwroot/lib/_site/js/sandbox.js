@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////////////////////////////
 /// sandbox module - MutationObserver Here!!!
 //////////////////////////////////////////////////////////////////////
-define('dws/sandbox', ['dws/model'], function (ViewModel) {
+define('dws/sandbox', ['dws/model'], function (viewModel) {
 
     //lets monitor the sand box area for new content and bind accordingly
     var config = {
@@ -14,11 +14,14 @@ define('dws/sandbox', ['dws/model'], function (ViewModel) {
         changes.forEach(function (change) {
             
             if (change.addedNodes.length > 0) {
+
                 var $dataNodes = $(change.addedNodes).find('[data-bind]');
                 $dataNodes.each(function () {
                     var $node = $(this);
                     try {
-                        if (!ko.dataFor($node[0])) { ko.applyBindings(ViewModel, $node[0]) }
+                        //if (!ko.dataFor($node[0])) {
+                            ko.applyBindings(viewModel, $node[0])
+                        //}
                     } catch (e) {
                         console.log("ko re-bind exception....")
                     }
@@ -29,7 +32,8 @@ define('dws/sandbox', ['dws/model'], function (ViewModel) {
 
     function observeKo(state) {
         if (state) {
-            observerKo.observe(document.getElementById('sandbox-area'), config);
+            observerKo.observe(document.getElementById('sandbox-target-area'), config);
+            //observerKo.observe(document.getElementById('file-ops-client'), config);
         }
         else {
             observerKo.disconnect();

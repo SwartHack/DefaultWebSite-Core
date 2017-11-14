@@ -2,14 +2,11 @@
 <head>
     @RenderSection("header", true)
     <environment names="Development">
-        <link rel="stylesheet" href="@ViewData["JqueryUiThemeDevelopment"]" />
-        <link rel="stylesheet" href="~/lib/jquery-confirm/css/jquery-confirm.css" />
-        <link rel="stylesheet" href="@ViewData["BootstrapThemeDevelopment"]" asp-append-version="true" />
+        <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" asp-append-version="true" />
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="@ViewData["JqueryUiThemeProduction"]" />
-        <link rel="stylesheet" href="~/css/jquery-confirm.min.css" />
-        <link rel="stylesheet" href="@ViewData["BootstrapThemeProduction"]" asp-append-version="true" />
+        <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
         <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
     </environment>
 </head>

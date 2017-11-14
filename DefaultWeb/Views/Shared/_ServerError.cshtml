@@ -1,33 +1,8 @@
-﻿@model DefaultWeb.Models.DefaultWebSite.ServerError
+﻿@model DefaultWeb.Models.DefaultWebSite.Repositories.ServerException
 <div id="server-error" class="card">
     <div class="card-header">What Did You DO!!!!!!!!!!</div>
     <div class="card-title text-info">Whatever it was, you broke the server...</div>
     <div class="card-img  image-fluid" src="~/Images/cornholio2.jpg"></div>
-    <div id="base-exception" class="card-block">
-        <div class="card-title text-danger">@Model.DbException.Message</div>
-        <div class="card-text-wrapper">
-            <div class="card-text"> @Model.DbException.GetBaseException()</div>
-        </div>      
-     </div>
-    <div id="inner-exception" class="card-block">
-        <div class="card-title text-danger">@Model.DbException.Source</div>
-        <div class="card-text-wrapper">
-            <div class="card-text"> @Model.DbException.InnerException</div>
-        </div>
-    </div>
-
-    <div id="base-exception" class="card-block">
-        <div class="card-title text-danger">@Model.AppException.Message</div>
-        <div class="card-text-wrapper">
-            <div class="card-text"> @Model.AppException.GetBaseException()</div>
-        </div>
-    </div>
-    <div id="inner-exception" class="card-block">
-        <div class="card-title text-danger">@Model.AppException.Source</div>
-        <div class="card-text-wrapper">
-            <div class="card-text"> @Model.AppException.InnerException</div>
-        </div>
-    </div>
 
     <div id="base-exception" class="card-block">
         <div class="card-title text-danger">@Model.MiscException.Message</div>
@@ -42,5 +17,3 @@
         </div>
     </div>
 </div>
-
-

@@ -52,7 +52,6 @@
   "corejs": [
     "../jquery/dist/jquery.js",
     "../jquery-ui/jquery-ui.js",
-    "../jquery-confirm/js/jquery-confirm.js",
     "../blockui/jquery.blockUI.js",
     "../jquery-validation/dist/jquery.validate.js",
     "../jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",

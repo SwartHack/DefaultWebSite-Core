@@ -1,0 +1,48 @@
+﻿<div id="sandbox" class="card">
+    
+    <div id="sandbox-nav">
+        <div class="text-center">The Sandbox</div>
+        <ul class="nav nav-pills">
+            <li class="nav-item active">
+                <a class="sand-link" data-target="#sandbox-target-area" data-target-controller="Sandbox" data-target-action="SandboxDocs">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="sand-link" data-target="#sandbox-target-area" data-target-controller="Comments" data-target-action="CommentsMain">Comments Manager</a>
+            </li>
+            <li class="nav-item">
+                <a class="sand-link" data-target="#sandbox-target-area" data-target-controller="api/dws/files" data-target-action="main">File Operations</a>
+            </li>
+            <li class="nav-item">
+                <a class="sand-link" data-target="#sandbox-target-area" data-target-controller="Sandbox" data-target-action="UnderConstruction" data-target-id="AdventureWorks">Adventure Works</a>
+            </li>
+            <li class="nav-item">
+                <a class="sand-link" data-target="#sandbox-target-area" data-target-controller="Sandbox" data-target-action="UnderConstruction" data-target-id="ArcGISServer">ArcGIS Server</a>
+            </li>
+            <li class="nav-item" dropdown" id="other-dropdown-item">
+                <a class="dropdown-toggle" data-toggle="dropdown">Other...</a>
+                <div id="other" class="dropdown-menu ">
+                    <a class="sand-link dropdown-item" data-target="#sandbox-area" data-target-controller="Sandbox" data-target-action="UnderConstruction" data-target-id="demo1">Demo 1</a>
+                    <a class="sand-link dropdown-item" href="">Item 2</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+   
+    <div id="sandbox-target-area">
+        @{ Html.RenderPartial("SandboxDocs.cshtml");}
+    </div>
+
+</div>
+
+
+<script>
+    require(['dws/sandbox'], function (Sandbox) {
+        $(function () {
+            Sandbox.observeKo(true);
+        });
+
+        // expand this
+        $('#col-util').hide();
+        $('#col-main').addClass('full-size');
+    });
+</script>

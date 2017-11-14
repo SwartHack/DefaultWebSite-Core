@@ -13,6 +13,7 @@
         "sourceType": "module"
     },
   "rules": {
+    "no-cond-assign": "warn",
     "no-unused-vars": "warn",
     "no-console": "warn",
     "no-empty": "warn",

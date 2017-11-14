@@ -33,15 +33,18 @@ module.exports = function(grunt) {
         concat: {
             options: {
                 banner: '<%= banner %>',
-                stripBanners: false
+                stripBanners: false,
+
             },
             jcore: {
                 src: ['<%= pkg.corejs %>'],
-                dest: 'dist/js/jcore.js'
+                dest: 'dist/js/jcore.js',
+                nonull: true
             },
             site: {
                 src: ['<%= pkg.sitejs %>'],
-                dest: 'dist/js/site.js'
+                dest: 'dist/js/site.js',
+                nonull: true
             }
         },
         eslint: {
@@ -83,13 +86,13 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            css: {
-                expand: true,
-                cwd: 'dist/css/themes',
-                src: '*.*',
-                dest: '../../css/themes',
-                filter: 'isFile'
-            },
+            //css: {
+            //    expand: true,
+            //    cwd: 'dist/css',
+            //    src: [ '*.min.css , *.min.*.map' ],
+            //    dest: '../../css',
+            //    filter: 'isFile'
+            //},
             fonts: {
                 expand: true,
                 src: 'dist/fonts/*.*',
@@ -146,7 +149,7 @@ module.exports = function(grunt) {
           //grunt.task.run('clean');
           grunt.task.run('buildtheme:default');
           //grunt.task.run('buildtheme:cerulean');
-          grunt.task.run('copy:css')
+          //grunt.task.run('copy:css')
       });
 
       //////////////////////////////////
@@ -170,7 +173,7 @@ module.exports = function(grunt) {
           //grunt.task.run('clean');
           grunt.task.run('buildtheme:default');
           grunt.task.run('swatch');
-          grunt.task.run('copy:css')
+          //grunt.task.run('copy:css')
       });
 
       grunt.registerMultiTask('swatch', 'build all themes', function () {
@@ -179,7 +182,7 @@ module.exports = function(grunt) {
       });
 
       grunt.registerTask('clean-theme', function () {
-          grunt.config('clean.theme.src', 'dist/css/themes/default.*');
+          grunt.config('clean.theme.src', 'dist/css/default.*');
           grunt.task.run('clean:theme');
       });
 
@@ -192,11 +195,11 @@ module.exports = function(grunt) {
           var theme = theme == undefined ? grunt.config('buildtheme') : theme;
           //var compress = compress == undefined ? true : compress;
           var themedir = '../bootswatch/' + theme;
-          grunt.log.debug(themedir);
+          console.log(themedir);
 
           var isValidTheme = grunt.file.exists(themedir, '_variables.scss') && grunt.file.exists(themedir, '_bootswatch.scss') || theme == 'default';
-          grunt.log.debug('Is valid theme:' + theme + ' - ' + isValidTheme);
-
+          
+          console.log('Is valid theme:' + theme + ' - ' + isValidTheme);
           // cancel the build (without failing) if this directory is not a valid theme
           if (!isValidTheme) {
               return;
@@ -208,7 +211,7 @@ module.exports = function(grunt) {
           var files = {};
           var dist = {};
 
-          concatSrc = './sass/global/build.scss';
+          concatSrc = 'sass/global/build.scss';
           concatDest = themedir + '/build.scss';
 
           if (theme == 'default') 
@@ -216,12 +219,12 @@ module.exports = function(grunt) {
           else
               scssSrc = concatDest;
 
-          scssDest = 'dist/css/themes/' + theme + '.css';
+          scssDest = 'dist/css/' + theme + '.css';
           
-          grunt.log.debug(scssSrc + '\n' + scssDest);
+          console.log(scssSrc + '\n' + scssDest);
 
           // clean this theme
-          grunt.config('clean.theme.src', 'dist/css/themes/' + theme + '.*');
+          grunt.config('clean.theme.src', 'dist/css/' + theme + '.*');
           grunt.task.run('clean:theme')
 
           if (theme != 'default') {
@@ -240,8 +243,8 @@ module.exports = function(grunt) {
           grunt.task.run('postcss');
 
           grunt.config('cssmin.dist', {
-              src: 'dist/css/themes/' + theme + '.css',
-              dest: 'dist/css/themes/' + theme + '.min.css'
+              src: 'dist/css/' + theme + '.css',
+              dest: '../../css/' + theme + '.min.css'
           });
           grunt.task.run('cssmin');
 

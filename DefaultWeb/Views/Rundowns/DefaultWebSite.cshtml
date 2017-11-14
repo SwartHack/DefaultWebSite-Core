@@ -1,35 +1,35 @@
 <div class="paper-wrapper">
-    <span class="text-info text-muted float-right">September 4th, 2017</span>
+    @*<span class="text-info text-muted float-right">September 4th, 2017</span>*@
     <div class="paper">
-        <h5 class="mt-4">A Default WebSite.net Core</h5>
-        <p>This missive will go on a bit as I add content and detail. The purpose here is to run-down the basic set-up, architecture and different 
-        patterns and practices investigated and demonstrated by Default WebSite.net. </p>
-        <p>I am going to cover the listed topics, among others. Here is a fun challenge &mdash; Try to find all the spelling errors 8-P! (will scrub the site soon, and talk about VS 2017 extensions that don't work yet, or correctly anyway?!)</p>
-        <p>General Overview</p>
-        <p>Welcome to the Flex-Box</p>
-        <p>Bootstrap 4 dropped "Panels", "Wells" and replaced them with "Cards". Cards and card elements are styled with flex. Things get a little tweaky when dealing with new Flex-Box patterns. You never seem to know exactly what its going to do...</p>
-        <p>There are a number of "Data Grids" and record browsers out there:</p>
-        <ul>
-            <li><a href="https://www.codeproject.com/Articles/1166225/NET-Core-Datagrid">https://www.codeproject.com/Articles/1166225/NET-Core-Datagrid</a></li>
-            <li><a href="http://mvcgrid.net/">http://mvcgrid.net/</a></li>
-            <li><a href="https://datatables.net/">https://datatables.net/</a></li>
-            <li><a href="https://www.npmjs.com/package/jquery-view">https://www.npmjs.com/package/jquery-view</a></li>
-            <li><a href="http://js-grid.com/">http://js-grid.com/</a></li>
-            <li><a href="https://datatables.net/examples/styling/bootstrap4.html">https://datatables.net/examples/styling/bootstrap4.html</a></li>
-        </ul>
-        <p>and many more...</p>
-        <p>But I was set on doing a basic home-grown record browser/manager. I was also determined to get a scrolling table to work in a flex-box, multi-container design. Not as easy as you may think. FInally had a break through with the help of this:</p>
-        <p><a href="https://codepen.io/RajaJaganathan-1471687644/pen/qNZNZW">https://codepen.io/RajaJaganathan-1471687644/pen/qNZNZW</a></p>
-        <p>Even though it is single-container, I was able to implement in asynchronous container.</p>
-        <p><em><strong>Knockout JS</strong></em></p>
-        <p>Knockout not only provides the functionality for "Coments Mannager", but also controls the main asynchronous exchange and loading of data. Check out how the main navbar loads each root page with Ajax and Json. See "/wwwroot/_site/js" for the model and the code...</p>
-        <p><strong>ASP.NET Core Project Overview</strong> - IConfigurationRoot, IServiceCollection, IHostingEnvironment, UserManager, SignInManger, View Dependency Injections,&hellip;</p>
-        <p><strong>Application Architecture Basics</strong>- Models, Controllers, Views&hellip;</p>
-        <p><strong>Bootstrap 4 beta</strong> -Bootswatch, FontAwesome&hellip;</p>
-        <p><strong>Jquery/Javascript</strong>- Almond, Ajax/HXR/Json, KnockoutJS, JQuery UI&hellip;</p>
-        <p><strong>Application Data</strong> Account Manager, Sandbox, Adventure Works&hellip;</p>
-        <p><strong>ArcGIS Enterprise Server and application API's</strong></p>
-        <p><strong>Mobile form factors and serving mobile requests and data.</strong></p>
-        <p><strong>.........................</strong></p>
-    </div>
+        <h3 class="mt-4">A Default WebSite.net Core</h3>
+            <p>This missive will go on a bit as I add content and detail. The purpose here is to run-down the basic set-up, architecture and different patterns and practices investigated and demonstrated by Default WebSite.net.</p>
+            <p>I am going to cover the listed topics, among others. Here is a fun challenge &mdash; Try to find all the spelling errors 8-P! (will scrub the site soon, and talk about VS 2017 extensions that don't work yet, or correctly anyway?!)</p>
+            <h4>Client Side Overview</h4>
+            <p>The organization and content is basically the same you'd see with most ASP.NET Core MVC projects with a few exceptions. The client-side codes lives in wwwroot/libs/_site. It is completely detached from the solution and is not integrated into any current IDE build tools. I have found the tools usually slow down the IDE and cause more problems. All of the .css and .js is built and deployed using <em><strong>Grunt</strong> </em>and a combination of <em><strong>Bower</strong> </em>and <em><strong>Npm</strong> </em>packages.&nbsp;</p>
+            <p><em><strong>Javascript AMD</strong></em> is used for all site javascript.&nbsp; <em><strong>SASS</strong> </em>is used in conjunction with <em><strong>Bootstrap 4</strong></em> for all site styling.&nbsp;</p>
+            <p><em><strong>Bootstrap 4</strong></em> dropped "Panels", "Wells" and replaced them with "Cards". Cards and card elements are styled with flex. Things get a little tweaky when dealing with new Flex-Box patterns. You never seem to know exactly what its going to do...</p>
+            <p>There are a number of "Data Grids" and record browsers out there:</p>
+            <ul>
+                <li><a href="https://www.codeproject.com/Articles/1166225/NET-Core-Datagrid" target="_blank">https://www.codeproject.com/Articles/1166225/NET-Core-Datagrid</a></li>
+                <li><a href="http://mvcgrid.net/" target="_blank">http://mvcgrid.net/</a></li>
+                <li><a href="https://datatables.net/" target="_blank">https://datatables.net/</a></li>
+                <li><a href="https://www.npmjs.com/package/jquery-view" target="_blank">https://www.npmjs.com/package/jquery-view</a></li>
+                <li><a href="http://js-grid.com/" target="_blank">http://js-grid.com/</a></li>
+                <li><a href="https://datatables.net/examples/styling/bootstrap4.html" target="_blank">https://datatables.net/examples/styling/bootstrap4.html</a></li>
+            </ul>
+            <p>and many more...</p>
+            <p>But I was set on doing a basic home-grown record browser/manager. I was also determined to get a scrolling table to work in a flex-box, multi-container design. Not as easy as you may think. FInally had a break through with the help of this:</p>
+            <p><a href="https://codepen.io/RajaJaganathan-1471687644/pen/qNZNZW">https://codepen.io/RajaJaganathan-1471687644/pen/qNZNZW</a></p>
+            <p>Even though it is single-container, I was able to implement in asynchronous container.</p>
+            <p><em><strong>Knockout JS&nbsp;</strong></em>&nbsp;not only provides the functionality for "Coments Mannager", but also controls the main asynchronous exchange and loading of data. Check out how the main navbar loads each root page with Ajax and Json.</p>
+            <p>See <a href="https://github.com/SwartHack/defaultwebsite-core/tree/master/DefaultWeb/wwwroot" target="_blank" rel="noopener">/wwwroot/_site</a> for the model and the code...</p>
+            <p><strong>ASP.NET Core Project Overview</strong> - IConfigurationRoot, IServiceCollection, IHostingEnvironment, UserManager, SignInManger, View Dependency Injections,&hellip;</p>
+            <p><strong>Application Architecture Basics</strong>- Models, Controllers, Views&hellip;</p>
+            <p><strong>Bootstrap 4 beta</strong> -Bootswatch, FontAwesome&hellip;</p>
+            <p><strong>Jquery/Javascript</strong>- Almond, Ajax/HXR/Json, KnockoutJS, JQuery UI&hellip;</p>
+            <p><strong>Application Data</strong> Account Manager, Sandbox, Adventure Works&hellip;</p>
+            <p><strong>ArcGIS Enterprise Server and application API's</strong></p>
+            <p><strong>Mobile form factors and serving mobile requests and data.</strong></p>
+            <p><strong>.........................</strong></p>
 </div>
+ </div>

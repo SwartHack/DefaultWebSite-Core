@@ -1,40 +1,44 @@
 ﻿<p>
-    This is a proto-type idea the will get eventually get integrated as an extension to the project's User Account Management. 
-    The idea is to manage user comments by "source". Anything you could make a comment on. An entire page, a document, a file, 
-    a page element, a widget. Basically be able to attach "Comment" functionality anywhere. More to be revealed when Comments are enabled...
+    The Comments Manager illustrates a prototype One-&gt;Many database record manager. It is loosley based on the
+    <a href="https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db" target="_blank">https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db</a> sample.
+    But uses &quot;Sources&quot; and &quot;Comments&quot;, instead of &quot;Blogs&quot; and &quot;Posts&quot;.
 </p>
 <p>
-    The original intent of the Comments Manager was to illustrate an asynchronous Razor View MVC implementation of a simple One-&gt;Many 
-    record browser in an embedded container. I quickly ran into some MVC issues with using any IEnumerable model collections.
-</p>
-<p>snippet</p>
-<p>
-    Since the foundation of the site's primary asynchronous navigation is based on a KnockoutJs MVVM model, I decided to move forward using 
-    Partial Razor Views with only the model defined and to extend the ViewModel to deal with the collections.
+    The idea is to manage user comments by &quot;source&quot;. Anything you could make a comment on: an entire page, a document,
+    a file, a page element, a widget. Basically be able to attach &quot;Comment&quot; functionality to any site element,
+    then view an manage it!
 </p>
 <p>
-    It definitely turned out interesting. Especially the flex-box behavior. And I learned a number of things in the process. 
-    The ViewModel could use some optimization, but going forward with it for now. See "/wwwroot/lib/_site/models.js"
-/p>
+    The original intent was to extend the sample, but embedded in an asynchronous container. I quickly ran into some
+    <strong><em>MVC .Net Core</em></strong> issues with using any IEnumerable model collection. It appears there was a
+    problem when using JQuery and Ajax in that the controller results always come back as just the IEnumerableType and not
+    the List. Will re-visit in the AdventureWorks demos.
+</p>
+
 <p>
-    You will notice the use of pop-up dialogs for adding new records. This is not the preferred approach, but it is an experiment in 
-    unobtrusive validation functionality that has dogged me for some time. Look for different types of pop-ups...
+    Since the foundation of the site&#39;s primary asynchronous navigation was already based on <strong><em>JQuery/Ajax</em></strong> using a <strong><em>KnockoutJs MVVM </em></strong>model, I decided to move forward using
+    Partial Razor Views and the MVVM.
+</p>
+<p>
+    It definitely turned out interesting. Especially the <strong><em>Flex-box</em></strong> behavior in <a href="https://getbootstrap.com/docs/4.0/utilities/flex/" target="_blank">Bootstrap 4</a>. And I learned a number of things in the process. The Knockout ViewModel could use some optimization, but going forward with it for now.
+    You will notice the use of pop-up dialogs for adding new records.
+    Their styling stills needs some help but they illustrateis an experiment in unobtrusive validation functionality that has dogged me for some time. Here is what the modal dialogs are doing:
 </p>
 <ol>
-    <li>How can I validate a form when not directly submitting the form via "Submit". &nbsp;But using a Json serialized collection of 
-        form values and Ajax. I know I can write the validation checks myself, like I have seen so many Web Api examples. But then what 
-        good are the model class validation decorations???
-    </li>
-    <li>And not only validate the form, but return the validation messages to the calling modal form. That's what Comments Manager is doing!!!</li>
+    <li>The dialog is a shared container that make asynchronous requests for content based on type. This explains why the dialog body fills-in moments after the container (needs animation). This allows many modal dialogs to share the same modal container.</li>
+    <li>Each record type is represented by a decorated model for database operations. In the past I found no easy way to use unobtrusive validation if not making Controller calls directly from Views. This demo illustrates effectively using unobtrusive validation using JQuery/Ajax Controller calls and PartialViews. </li>
 </ol>
-<a href="https://GitHub.com/SwartHack" target="_blank"><i class="fa fa-github"></i>  Dig into the code</a>
-<p>/Controllers/Comments, /Views/Comments, /wwroot/lib/_site/js</p>
-<p>-Notes-</p>
+<p class="exclamation"> Jump into the code</p>
+<p class="html-link"><a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/Controllers/CommentsController.cs" target="_blank">/Controllers/CommentsController</a></p>
+<p class="html-link"><a href="https://github.com/SwartHack/defaultwebsite-core/tree/master/DefaultWeb/Views/Comments" target="_blank">/Views/Comments</a></p>
+<p class="html-link"><a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/js/models.js" target="_blank">/wwroot/lib/_site/model</a></p>
+
+<div class="h1 text-center">-Notes-</div>
 <p>
-    The Comments Manager MVC components do not utilize a repository. In this case mostly due to the simplicity of dealing with two tables. 
+    The Comments Manager MVC components do not utilize a repository. In this case mostly due to the simplicity of dealing with two tables.
     Also the use of a repository is not necessarily the best choice. See DefaultWebSite.net "Patterns &amp; Practices" Rundown for more on this...
 </p>
 <p>
-    Also in question is the &#64;using" statement with DbContext manipulation. Most all MS .Net Core tutorials I have seen are using try {} catch {}, 
+    Also in question is the &#64;using" statement with DbContext manipulation. Most all MS .Net Core tutorials I have seen are using try {} catch {},
     as the default nature of the DBContext is a global assessor for any MVC EF Controller. More on this...
 </p>

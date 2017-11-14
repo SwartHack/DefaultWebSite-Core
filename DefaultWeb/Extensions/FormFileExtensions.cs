@@ -30,5 +30,17 @@ namespace DefaultWeb.Extensions
                 await inputStream.CopyToAsync(fileStream, DefaultBufferSize, cancellationToken);
             }
         }
+
+        public static void  Save(
+             this IFormFile formFile,
+            string filename)
+        {
+            using (var fileStream = new FileStream(filename, FileMode.Create))
+            {
+                var inputStream = formFile.OpenReadStream();
+                inputStream.CopyTo(fileStream, DefaultBufferSize);
+            }
+        }
+        
     }
 }

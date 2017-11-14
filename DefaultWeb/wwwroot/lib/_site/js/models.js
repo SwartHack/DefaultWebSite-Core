@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////////////////////////////
 /// KO View Model module
 //////////////////////////////////////////////////////////////////////
-define('dws/model', ['dws/model-utils'], function (ModelUtils) {
+define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     
     var viewModel = {
 
@@ -10,17 +10,17 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
         dataType: ko.observable(''),
         dataJson: ko.observable(''),
         targetJson: ko.observable(''),
-        abort: function (xhr, status, error) {
-            viewModel.errorXhr(xhr);
+        abort: function (data, status, error) {
             viewModel.errorStatus(status);
+            viewModel.errorData(data);
             viewModel.errorMsg(error);
         },
-        errorXhr: ko.observableArray([]),
+        errorData: ko.observableArray([]),
         errorStatus: ko.observable(''),
         errorMsg: ko.observableArray(''),
         waiting: ko.observable(false),
         waitingTarget: ko.observable(''),
-        xsrfToken: ko.observable(''),
+        xsrfToken: ko.observable([]),
         sources: ko.observableArray([]),
         source: ko.observable(''),
         sourceId: function (sid) {
@@ -28,10 +28,12 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
             viewModel.sourceIndex(index);
             var source = viewModel.sources()[index];
             viewModel.source(source);
-            return viewModel.source();
+            
         },
         sourceIndex: ko.observable(''),
-        sourcesCount: ko.pureComputed(function () { return 'Records: ' + viewModel.sources().length }, this),
+        sourcesCount: ko.pureComputed(function () {
+            return 'Records: ' + viewModel.sources().length
+        }, this),
         addSource: function (source) {
             viewModel.sources.unshift(source);
             viewModel.sourceId(source.id);
@@ -68,7 +70,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
             var index = viewModel.comments().findIndex(c => c.id == cid);
             var comment = viewModel.comments()[viewModel.commentIndex()];
             viewModel.comments.remove(comment);
-            viewModel.comment(undefined);
+            viewModel.comment('');
         },
         commentAdded: function (item) {
             var $item = $(item);
@@ -83,32 +85,49 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
         //    return isClass;
         //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
         //}
-        contentCacheQueue: ko.observableArray([]),
-        fileInfo: ko.observableArray([]),
-        clientFiles: ko.observableArray([]),
-        contentViewUrl: ko.observable(),
-        exif: ko.observableArray([]),
-        thumb: ko.observable(),
-        thumbRendered: function (elements, item) {
-            var count = elements.length;
-            console.log('thumbRendered: ' + elements + item);
+        contentCacheQueue: ko.observableArray([]), // TODO
+        fileInfo: ko.observable([]),  // ununsed ?
+        uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
+        uploadFiles: ko.observableArray([]), //matching array of IForm files.
+        mimeTypes: ko.observableArray(['image/*', 'application/pdf', '.mp4', '.avi']),
+        uploadFilesCount: ko.pureComputed(function () {
+            return 'Files: ' + viewModel.uploadFiles().length
+        }, this),
+        showFileUpload: ko.pureComputed(function () {
+            return viewModel.uploadFiles().length > 0
+        }, this),
+        uploadFileAdded: function (parent, index, element) {
+            var $parent = $(parent);
+            var $element = $(element);
         },
-        thumbAdded: function (parent, index, element) {
-            var $image = $(parent).find('img');
-            var rendered = $image[0].complete;
-            console.log('thumbAdded-rendered: ' + $image.attr('class') + rendered);
-            //if (!rendered) {
-            //    console.log('thumbAdded-!rendered: ' + $image.attr('class'));
-            //    $image.on('load', function () {
-            //        finishLoadingThumb($(parent));
-            //    });
-            //}
-            //else {
-            //    console.log('thumbAdded-rendered: ' + $image.attr('class'));
-            //    finishLoadingThumb($(parent));
-            //}
+        fileViewApi: ko.observable(''),
+        fileViewTarget: ko.observable(''),
+        imageViewApi: function () { return viewModel.fileViewApi; },
+        docViewApi: function () { return viewModel.fileViewApi; },
+        videoViewApi: function () { return viewModel.fileViewApi; },
+        exif: ko.observableArray([])
 
-        }
+        //thumb: ko.observable(),
+        //thumbRendered: function (elements, item) {
+        //    var count = elements.length;
+        //    console.log('thumbRendered: ' + elements + item);
+        //},
+        //thumbAdded: function (parent, index, element) {
+        //    var $image = $(parent).find('img');
+        //    var rendered = $image[0].complete;
+        //    console.log('thumbAdded-rendered: ' + $image.attr('class') + rendered);
+        //    if (!rendered) {
+        //        console.log('thumbAdded-!rendered: ' + $image.attr('class'));
+        //        $image.on('load', function () {
+        //            finishLoadingThumb($(parent));
+        //        });
+        //    }
+        //    else {
+        //        console.log('thumbAdded-rendered: ' + $image.attr('class'));
+        //        finishLoadingThumb($(parent));
+        //    }
+
+        //}
         
     };
 
@@ -118,16 +137,32 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     /// TODO - move to model-utils module
     ///////////////////////////////////////
 
-    
+    viewModel.fileViewApi.subscribe(function (newFile) {
+
+        // what's my visible content area
+        var $target = $(viewModel.fileViewTarget());
+
+        if (!$target.is(':visible'))
+        {
+            $('.content-area').hide();
+            $target.show();
+        }
+    });
+
 
     ////////////////////////////////////////
     /// model events/actions
     ///////////////////////////////////////
+
+
     // subscribe to any ajax errors
     viewModel.errorMsg.subscribe(function (error) {
-        if (error != undefined)
+        if (error != null)
         {
-            if (!ko.dataFor($('#ajax-error')[0])) { ko.applyBindings(viewModel, $('#ajax-error')[0]) }
+            if (!ko.dataFor($('#ajax-error')[0])) {
+                ko.applyBindings(viewModel, $('#ajax-error')[0])
+            }
+
             $('#ajax-error').dialog({
                 autoOpen: true,
                 modal: true,
@@ -135,6 +170,11 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
                     OK: function () { $(this).dialog("close"); }
                 }
             });
+        }
+        else
+        {
+            $('viewModel.errorData').dialog();
+
         }
     });
 
@@ -150,6 +190,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     });
 
     ////////////////////////////////////////
+    /// Sandbox - Comments Manager
     /// Source subscribe events/actions
     ///////////////////////////////////////
     viewModel.source.subscribe(function (source) {
@@ -182,6 +223,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     });
 
     ////////////////////////////////////////
+    /// Sandbox - Comments Manager
     /// Comment subscribe events/actions
     ///////////////////////////////////////
     viewModel.comment.subscribe(function (comment) {
@@ -212,12 +254,13 @@ define('dws/model', ['dws/model-utils'], function (ModelUtils) {
     });
 
 
+
     ////////////////////////////////////////
     /// Waiting subscribe events/actions
     ///////////////////////////////////////
     viewModel.waiting.subscribe(function (wait) {
 
-        ModelUtils.waitStatus(wait, viewModel.waitingTarget());
+        ModelUtil.waitStatus(wait, viewModel.waitingTarget());
     });
 
     ////////////////////////////////////////

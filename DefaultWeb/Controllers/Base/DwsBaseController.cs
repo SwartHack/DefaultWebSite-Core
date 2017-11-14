@@ -11,21 +11,14 @@ namespace DefaultWeb.Controllers.Base
 {
     public class DwsBaseController : Controller
     {
-        public IOptions<DwsSettings> Settings { get; private set; }
+        public DwsSettings DWSsettings { get; private set; }
         public IHostingEnvironment HostEnv { get; private set; }
 
-        public DwsBaseController()
+
+        public DwsBaseController(IHostingEnvironment hostenv, IOptions<DwsSettings> settings)
         {
-           
+            HostEnv = hostenv;
+            DWSsettings = settings.Value;
         }
-
-        //public DwsBaseController(IHostingEnvironment hostEnv, IOptions<DwsSettings> settings)
-        //{
-        //    Settings = settings.Value;
-        //    HostEnv = hostEnv;
-        //}
-
-        //TODO
-        //Abstract and Interface controllers?
     }
 }

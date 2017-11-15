@@ -194,7 +194,6 @@
     <None Include="wwwroot\lib\_site\js\sandbox.js" />
     <None Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
     <None Include="wwwroot\lib\_site\sass\_fileops-content.scss" />
-    <None Include="wwwroot\lib\_site\sass\_content.scss" />
     <None Include="wwwroot\lib\_site\sass\_fileops-client.scss" />
     <None Include="wwwroot\lib\_site\sass\global\build.scss" />
     <None Include="wwwroot\lib\_site\sass\lib\notepad.scss" />

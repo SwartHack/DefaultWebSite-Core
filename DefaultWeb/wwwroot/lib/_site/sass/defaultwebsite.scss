@@ -111,19 +111,20 @@ div.modal-body {
 
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991px) {
+    #siteseal {
+        display: none;
+    }
 }
 
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1199px) {
-    .content-area {
+    #container-primary {
         max-width: none;
         width: 100%;
         padding: 0;
     }
 
-    #siteseal {
-        display: none;
-    }
+    
 }
 
 

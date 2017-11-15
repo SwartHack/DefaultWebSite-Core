@@ -3,27 +3,29 @@ body {
     //min-height: 75rem;
     padding-top: 3.125rem;
     padding-bottom: 1.5rem;
-    @include gradient-x(steelblue, darkgray);
+    @include gradient-x-three-colors(steelblue, lightsteelblue, 75%, darkgray);
 }
 
 html {
     padding:0;
     margin:0;
-    background-color: black;
+    background-color: transparent;
+    color:lightsteelblue
 }
 
 #row-main {
-    //padding: 0;
+    padding: 0;
     //margin: 0;
     //border-radius: 0px;
     //background-color: black;
     //border: 0.625rem solid #e6e6e6;
-    
+    @include gradient-x(darkgray,steelblue);
+    @include gradient-x-three-colors(darkgray, lightsteelblue, 75%, steelblue);
+
     #col-util {
         padding: 0;
         margin: 0;
-        background-color: darkgray;
-
+        //background-color: darkgray;
         .element {
             .inner {
                 padding: 0.625rem;
@@ -35,7 +37,7 @@ html {
                     padding: 0;
                     margin: 0;
                     border-radius: 0px;
-                    background-color: steelblue;
+                    //background-color: steelblue;
                     height: 60%;
                 }
 
@@ -61,7 +63,7 @@ html {
     #col-main {
         padding: 0;
         margin: 0;
-        background-color: steelblue;
+        //background-color: steelblue;
         height: 100%;
 
         &.full-size {
@@ -83,11 +85,46 @@ html {
                     padding: 0;
                     margin: 0;
                     border-radius: 0;
+                    border:none;
                 }
             }
         }
     }
-
 }
 
+#row-fileops-main {
+    padding: .5rem;
+
+    #col-fileops-util {
+        flex: 0 1 auto;
+        flex-direction: column;
+    }
+
+    #col-fileops-content {
+        /*flex: 0 1 auto;
+        flex-direction: column;*/
+        position: relative;
+        width: 100%;
+        background-color: $gray-500;
+        opacity: 1;
+        text-align: center;
+
+        .element {
+            .inner {
+                padding: .25rem;
+            }
+        }
+    }
+}
+
+#row-thumbs {
+
+    #thumbnails-container {
+
+    }
+
+    #row-doc {
+
+    }
+}
 

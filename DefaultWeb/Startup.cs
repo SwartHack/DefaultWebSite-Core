@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -108,7 +108,7 @@ namespace DefaultWeb
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>
         /// <param name="antiforgery"></param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLife)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -127,7 +127,8 @@ namespace DefaultWeb
             app.UseStaticFiles();
             //app.UseSession();
             app.UseAuthentication();
-
+           
+            appLife.ApplicationStopping.Register(OnAppShutdown);
 
 
             //app.Use(next => context =>
@@ -160,6 +161,11 @@ namespace DefaultWeb
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void OnAppShutdown()
+        {
+            var test = String.Empty;
         }
     }
 }

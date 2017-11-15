@@ -1,23 +1,13 @@
-﻿<p>
-    This demo has taken on a life of its own, and continues to grow. It is defining the file operation&rsquo;s backbone for the
-    .NET Core version of A Document Archive Server. The demo derives mostly from these two tutorials:
-    <a href="https://github.com/muhammad-magdy/UploadingFileUsingAjaxAndHTML5">muhammad-magdy/UploadingFileUsingAjaxAndHTML5</a> and
-    <a href="https://github.com/damienbod/AspNetCoreFileUploadFileTable">damienbod/AspNetCoreFileUploadFileTable</a>
-
-</p>
-<p>
-    The biggest excitement here, at first, is using SQl Server&rsquo;s FileTable for server-side file storage.
-    There are a few caveats though and not convinced it is the best approach as it is Not Transactional. Some T-SQL
-    would be in order to keep things orderly. The AdventureWorks demo database includes lots of T-SQL we get into over there.
-    For now, may have to implement a few &ldquo;workarounds&rdquo; for demo&rsquo;s sake&hellip;
-</p>
-<p>
-    Although versed in file operations, A Document Archive Server had concentrated mostly on &ldquo;download/display&rdquo;.
-    This demo takes the next step by providing a &ldquo;File Upload&rdquo; dialog. The goal being to upload and display as many
-    different file types as possible. The challenge being sorting it all out, while avoiding malicious file types&hellip;
-</p>
+﻿<p>This demo has taken on a life of its own, and continues to grow. It is defining the file operation&rsquo;s backbone for the .NET Core version of A Document Archive Server. The demo derives mostly from these two tutorials (Thanks Guys!)</p>
+<p><a href="https://github.com/muhammad-magdy/UploadingFileUsingAjaxAndHTML5">muhammad-magdy/UploadingFileUsingAjaxAndHTML5</a> <a href="https://github.com/damienbod/AspNetCoreFileUploadFileTable">damienbod/AspNetCoreFileUploadFileTable.</a></p>
+<p>Highlighted are a number of ASP.NET Core features: <em><strong>ASP.NET Core MVC</strong></em>, <em>EntityFramework</em>, <em><strong>JsonResults</strong></em>, <em>scoped IFileRepository</em>, <em><strong>uploading IEnumerable&lt;IFormFile&gt;</strong></em>, custom ViewResults... as well the corresponding client side components: <em><strong>Javascript</strong></em>, <em>JQuery</em>, <em><strong>AMD</strong></em>,&nbsp;<em>KnockoutJS</em>, <strong><em>Ajax/Json</em></strong>, <em>Web APIs<strong>, HTML5</strong></em></p>
+<p>This demo covers a lot of ground. Jump into the code:</p>
+<p>github links</p>
+<p>The biggest excitement here, at first, is using <em><strong>SQl Server&rsquo;s FileTable</strong></em> for server-side file storage. There are a few caveats though and not convinced it is the best approach as it is Not Transactional. Some T-SQL would be required to keep things orderly. The AdventureWorks demo database includes lots of T-SQL we get into over there. For now, may have to implement a few &ldquo;workarounds&rdquo; for demo&rsquo;s sake&hellip;</p>
+<p>Although versed in file operations, A Document Archive Server had concentrated mostly on &ldquo;download/display&rdquo;. This demo takes the next step by providing a &ldquo;File Upload&rdquo; dialog. The goal being to upload and display as many different file types as possible. The challenge being sorting it all out, while avoiding malicious file types&hellip;</p>
 <p>Currently we are supporting the following mime types for upload and display:</p>
 <p>image/*, application/pdf, video/*</p>
 <p>Working on these mime types:</p>
-<p>OpenXml types </p>
+<p>OpenXml types</p>
 <div class="h3 text-center">-Notes-</div>
+<div class="h3 text-center">Video Results will always result in a .ogg format regardless of the files format. This conversion uses the Nreco stuff, link to source.</div>

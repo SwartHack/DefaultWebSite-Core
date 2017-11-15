@@ -1,13 +1,23 @@
 ﻿/// <reference path="defaultwebsite.scss" />
 
 @mixin sandbox-nav() {
-    #sandbox-nav {
 
-        .text-center {
+    #sandbox-nav {
+        margin-left: 1.25rem;
+        margin-right: 1.25rem;
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+
+
+
+        .card-title {
             background-color: tan !important;
+            border: 1px solid transparent;
+            border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
             margin-bottom: 0;
             font-size: 1.5rem;
             font-weight: bold;
+            text-align: center;
         }
 
         ul.nav.nav-pills {
@@ -19,6 +29,8 @@
             font-weight: 500;
             //border-bottom: .125rem groove moccasin;
             background-color: moccasin;
+            border: 1px solid transparent;
+            border-radius: 0 0 calc(1rem - 1px) calc(1rem - 1px);
             cursor: pointer;
 
             .nav-item {
@@ -36,7 +48,6 @@
                 &.active {
                     background-color: darkkhaki;
                     color: $white;
-
                     /*&:hover {
                         background-color: darkkhaki;
                         color: $white;
@@ -54,58 +65,68 @@
 
 #sandbox.card {
     height: 100%;
-    padding: 0;
+    padding: .25rem;
     margin: 0;
-    border-radius: 0;
-    background-color: lemonchiffon;
+    border:none;
+    background-color:transparent;
 
     @include sandbox-nav();
 
     #sandbox-target-area {
         flex: 0 1 auto;
-        display:flex;
-        height:100%
+        display: flex;
+        height: 100%;
+        border-radius: 0;
+        border: none;
+        background-color: transparent;
     }
-    
 }
 
 #sandbox-docs {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     padding: 0;
-    margin: .25rem;
+    //margin: .25rem;
     background-color: transparent;
-    border: none;
-    
-    //display: flex;
-    //flex-direction: column;
+
+
 
     #sandbox-header.card-header {
         background-color: tan;
-        padding-top: .5rem;
-        padding-bottom: .5rem;
+        padding-top: 0;
+        padding-bottom: 0;
         padding-left: 2.5rem;
         margin-bottom: 0;
+        border: none;
+
+        &:first-child {
+            border: 1px solid transparent;
+            border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0;
+        }
 
         .card-title {
-            background-color: transparent;
             font-weight: bold;
             font-size: 1.25rem;
             font-style: italic;
-            margin-bottom: 0;
+            margin-bottom:0;
         }
     }
 
-    .sandbox-wrapper {
+    #sandbox-wrapper {
         //height: 85%;
         display: block;
         overflow-y: auto;
-        border: none;
         padding-left: 15%;
         padding-right: 15%;
         padding-top: 2rem;
         padding-bottom: 0;
+        border: 1px solid transparent;
+        border-radius: 0 0 calc(0.5rem - 1px) calc(0.5rem - 1px);
         background-color: moccasin;
+
+        .list-group {
+
+        }
     }
 
     .card-footer {
@@ -119,6 +140,7 @@
     margin-bottom: 1rem;
     background-color: burlywood;
     border-radius: $card-border-radius;
+    border: 1px solid transparent;
 
     .card-title {
         //border-bottom: .125rem solid black;
@@ -131,20 +153,23 @@
 
     .card-text {
         background-color: lemonchiffon;
-        //max-height: 5rem;
-        height:20%;
-        overflow-y: auto;
+        height: 2.5rem;
+        overflow-y:unset;
         padding: .5rem;
 
         p {
             background-color: transparent;
-            margin-left: .5rem;
-            margin-right: .5rem;
-            margin-bottom: 0;
+            padding: 0;
+            margin: 0;
+            margin-bottom: .25rem;
+            text-align: left;
+            font-size: 16px;
+            line-height: 20px;
         }
 
         &.expand {
-            max-height: 50%;
+            height: 50%;
+            overflow-y:auto;
         }
     }
 

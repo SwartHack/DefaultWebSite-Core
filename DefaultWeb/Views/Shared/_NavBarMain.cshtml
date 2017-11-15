@@ -14,13 +14,13 @@
     </div>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
-            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="About">About</a></li>
-            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="Contact">Contact</a></li>
-            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="Comments">Comments</a></li>
             <li><a class="nav-link" href="" data-target="#main-target-area" data-target-controller="Sandbox" data-target-action="SandboxMain">Sandbox</a></li>
+            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="Contact">Contact</a></li>
+            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="About">About</a></li>
+            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="Comments">Comments</a></li>
             <li><a class="nav-link" href="" data-target="#main-target-area" data-target-id="Ack">Acknowledgements</a></li>
             <li class="dropdown" id="theme-dropdown-item">
-                <a class="dropdown-toggle" data-toggle="dropdown">@ViewData["ThemeName"]</a>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown">@ViewData["ThemeName"]</a>
                 <div id="theme-switcher" class="dropdown-menu ">
                     @foreach (var file in Directory.GetFiles(Host.WebRootPath + @"\css\", "*.css"))
                     {

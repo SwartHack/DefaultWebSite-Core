@@ -30,32 +30,34 @@
         <div class="element d-flex h-100 flex-column justify-content-between">
             <div class="inner d-flex h-100 flex-column align-items-center justify-content-center">
 
-                <div id="row-util" class="row no-gutters">
-                    <div id="col-util-top" class="col-12">
-                        @{ Html.RenderPartial("~/Views/Rundowns/Rundowns.cshtml");}
+                <div class="row no-gutters w-100">
+                    <div id="col-util-top" class="col-12 no-gutters">
+                        @{ Html.RenderPartial("~/Views/Notepad/NotepadMain.cshtml");}
                     </div>
-                </div>
+               </div>
 
                 <div class="row no-gutters w-100">
-                    <div id="col-util-bottom" class="col-12">
+
+                    <div id="col-util-bottom" class="col-12 no-gutters">
                         @{ Html.RenderPartial("~/Views/Shared/_Carousel.cshtml");}
+
+                        
+                    </div>
+
+                    <div id="footer-scroll">
+                        <span>
+                            &copy; Eric K. Swartling  @DateTime.Now.Year &mdash;
+                            <a href="Html/term-conditions.html" target="_blank">Terms and Condtions of Use </a> &mdash;
+                            <a href="Html/conduct.html" target="_blank">Code of Conduct Policy </a> &mdash;
+                            <a href="Html/privacy.html" target="_blank">Privacy Policy </a>
+                            <span class="text-danger">
+                                !!!!!This Is Pre-Release Preview! DefaultWebSiteCore &mdash;
+                                @Assembly.GetEntryAssembly().GetName().Version.ToString()!!!!!
+                            </span> &rArr;&nbsp;
+                        </span>
                     </div>
                 </div>
 
-                <div id="footer-scroll">
-                    <span>
-                         &copy; Eric K. Swartling  @DateTime.Now.Year &mdash;
-                        <a href="term-conditions.html">Terms and Condtions of Use </a> &mdash;
-                        <a href="conduct.html">Code of Conduct Policy </a> &mdash;
-                        <a href="privacy.html">Privacy Policy </a>
-                        <span class="text-danger">!!!!!This Is Pre-Release Preview! DefaultWebSiteCore &mdash; @Assembly.GetEntryAssembly().GetName().Version.ToString()!!!!!</span> &rArr;&nbsp;
-                        @*@{ 
-                            var basePath = AppContext.BaseDirectory;
-                            var appName = Assembly.GetEntryAssembly().GetName().Name;
-                            var appVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
-                        }*@
-                    </span>
-                </div>
             </div>
         </div>
     </div>

@@ -1,35 +1,54 @@
 ﻿/// <reference path="defaultwebsite.scss" />
 #theCarousel {
     //border: .075rem solid black;
+    /*display: flex;*/
+
     .carousel-inner {
 
         #carousel-item-1 {
+            /*display: flex;
+            flex-direction: column;*/
+            background-color: transparent;
 
-            div.text-center {
+            .text-center {
                 font-size: 1.5rem;
+                font-style: italic;
+                font-weight: 600;
                 color: whitesmoke;
             }
 
+
+
             img {
-                height: 85%;
+                max-width: 100%;
+                height: auto;
+                align-self:center;
+                //width: 100%;
+                //height: 100%;
+                //object-fit: contain;
             }
 
+
+
             &.active {
-                display: block !important;
+                //display: block !important;
             }
         }
 
         #carousel-item-2 {
+            background-color: transparent;
 
-            div.text-center {
+            .text-center {
                 font-size: 1.5rem;
+                font-style: italic;
+                font-weight: 600;
                 color: whitesmoke;
             }
 
             a {
                 i {
-                    height: 85%;
-                    font-size: 30vh;
+                    //height: 100%;
+                    font-size: 25vh;
                     display: block;
                     text-align: center;
                 }
@@ -39,27 +58,30 @@
                 }
             }
 
-            div.caption {
-                text-align: center
+            div.h5 span {
+                color: red;
             }
 
+
             &.active {
-                display: block !important;
+                //display: block !important;
             }
         }
 
         #carousel-item-3 {
+            background-color: transparent;
 
-            div.text-center {
-                font-size: 1rem;
+            .text-center {
+                font-size: 1.5rem;
+                font-style: italic;
+                font-weight: 600;
                 color: whitesmoke;
             }
 
             a {
 
                 i {
-                    height: 85%;
-                    font-size: 30vh;
+                    font-size: 25vh;
                     display: block;
                     text-align: center;
                 }
@@ -69,12 +91,11 @@
                 }
             }
 
-            div.caption {
-                text-align: center
+            div.h5 span {
             }
 
             &.active {
-                display: block !important;
+                //display: block !important;
             }
         }
     }

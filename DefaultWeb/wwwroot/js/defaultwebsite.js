@@ -48854,7 +48854,7 @@ function (viewModel, Dispatch) {
     }
     
     //////////////////////////////////
-    ///
+    /// Incorporate this into an HtmlHelper DwsLink()
     ////////////////////////////////
     function parseNavUrl($link) {
         var url;
@@ -48863,7 +48863,7 @@ function (viewModel, Dispatch) {
             url = "/" + $link.attr('data-target-controller') + "/" + $link.attr('data-target-action');
         }
         else {
-            url = "/Home/GetView";
+            url = "/" + $link.attr('data-target-controller') + "/GetView";
         }
 
         if ($link.attr('data-target-id')) {

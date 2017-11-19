@@ -58,10 +58,10 @@ namespace DefaultWeb.Controllers
             return PartialView(String.Format("~/Views/Home/{0}.cshtml", id));
         }
 
-        public IActionResult GetRundown(string id)
+        public IActionResult GetNotepad(string id)
         {
             var model = new TargetView { Name = id + ".cshtml"};
-            return PartialView("~/Views/Rundowns/Rundown.cshtml", model);
+            return PartialView("~/Views/Notepad/NotepadMain.cshtml", model);
         }
 
 

@@ -1,8 +1,8 @@
 ﻿@model DefaultWeb.Models.DefaultWebSite.TargetView
- <div class="rundown-document">
+ <div class="notepad-document">
     @if (!String.IsNullOrEmpty(Model.Name))
     {
-        Html.RenderPartial(String.Format("~/Views/Rundowns/{0}", Model.Name));
+        Html.RenderPartial(String.Format("~/Views/Notepad/Notes/{0}", Model.Name));
     }
     else
     {

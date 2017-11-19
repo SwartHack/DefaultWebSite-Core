@@ -20,7 +20,7 @@ html {
     //background-color: black;
     //border: 0.625rem solid #e6e6e6;
     @include gradient-x(darkgray,steelblue);
-    @include gradient-x-three-colors(darkgray, lightsteelblue, 75%, steelblue);
+    @include gradient-x-three-colors(darkgray, lightsteelblue, 25%, steelblue);
 
     #col-util {
         padding: 0;
@@ -29,24 +29,23 @@ html {
         .element {
             .inner {
                 padding: 0.625rem;
-                /*border-width: 0.625rem;
-                border-style: inset;
-                border-color: lightslategray;*/
-                //border: 2px solid black;
+
                 #col-util-top {
+                    display: flex;
+                    height: 60%;
                     padding: 0;
                     margin: 0;
                     border-radius: 0px;
                     //background-color: steelblue;
-                    height: 60%;
                 }
 
                 #col-util-bottom {
+                    display: flex;
+                    height: 36.5%;
                     padding: 0;
                     margin: 0;
                     border-radius: 0px;
                     background: linear-gradient(to right, red, yellow);
-                    height: 36.5%;
                 }
 
 
@@ -85,7 +84,7 @@ html {
                     padding: 0;
                     margin: 0;
                     border-radius: 0;
-                    border:none;
+                    border: none;
                 }
             }
         }

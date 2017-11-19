@@ -12,7 +12,7 @@ namespace DefaultWeb.Controllers
             return PartialView();
         }
 
-        public IActionResult SandboxItems()
+        public IActionResult SandboxDocs()
         {
             return PartialView();
         }

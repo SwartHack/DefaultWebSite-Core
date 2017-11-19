@@ -34,95 +34,95 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\Rundowns\Snippets\ArchiveFile.html" />
-    <None Remove="Views\Rundowns\Snippets\CommentEtc.html" />
-    <None Remove="Views\Rundowns\Snippets\Controller1.html" />
-    <None Remove="Views\Rundowns\Snippets\Controller2.html" />
-    <None Remove="Views\Rundowns\Snippets\edittemp.html" />
-    <None Remove="Views\Rundowns\Snippets\gruntfile.html" />
-    <None Remove="Views\Rundowns\Snippets\Inject.html" />
-    <None Remove="Views\Rundowns\Snippets\Inject2.html" />
-    <None Remove="Views\Rundowns\Snippets\JsonClient.html" />
-    <None Remove="Views\Rundowns\Snippets\JsonConfig.html" />
-    <None Remove="Views\Rundowns\Snippets\JsonServer.html" />
-    <None Remove="Views\Rundowns\Snippets\KnockDoc.html" />
-    <None Remove="Views\Rundowns\Snippets\KnockThumb.html" />
-    <None Remove="Views\Rundowns\Snippets\mainless.html" />
-    <None Remove="Views\Rundowns\Snippets\Model.html" />
-    <None Remove="Views\Rundowns\Snippets\model2.html" />
-    <None Remove="Views\Rundowns\Snippets\ProgramCS.html" />
-    <None Remove="Views\Rundowns\Snippets\RazorVIew.html" />
-    <None Remove="Views\Rundowns\Snippets\RepositoryImp.html" />
-    <None Remove="Views\Rundowns\Snippets\RepositoryInt.html" />
-    <None Remove="Views\Rundowns\Snippets\SiteLess.html" />
-    <None Remove="Views\Rundowns\Snippets\StartUpCS.html" />
+    <None Remove="Views\Notepad\Snippets\ArchiveFile.html" />
+    <None Remove="Views\Notepad\Snippets\CommentEtc.html" />
+    <None Remove="Views\Notepad\Snippets\Controller1.html" />
+    <None Remove="Views\Notepad\Snippets\Controller2.html" />
+    <None Remove="Views\Notepad\Snippets\edittemp.html" />
+    <None Remove="Views\Notepad\Snippets\gruntfile.html" />
+    <None Remove="Views\Notepad\Snippets\Inject.html" />
+    <None Remove="Views\Notepad\Snippets\Inject2.html" />
+    <None Remove="Views\Notepad\Snippets\JsonClient.html" />
+    <None Remove="Views\Notepad\Snippets\JsonConfig.html" />
+    <None Remove="Views\Notepad\Snippets\JsonServer.html" />
+    <None Remove="Views\Notepad\Snippets\KnockDoc.html" />
+    <None Remove="Views\Notepad\Snippets\KnockThumb.html" />
+    <None Remove="Views\Notepad\Snippets\mainless.html" />
+    <None Remove="Views\Notepad\Snippets\Model.html" />
+    <None Remove="Views\Notepad\Snippets\model2.html" />
+    <None Remove="Views\Notepad\Snippets\ProgramCS.html" />
+    <None Remove="Views\Notepad\Snippets\RazorVIew.html" />
+    <None Remove="Views\Notepad\Snippets\RepositoryImp.html" />
+    <None Remove="Views\Notepad\Snippets\RepositoryInt.html" />
+    <None Remove="Views\Notepad\Snippets\SiteLess.html" />
+    <None Remove="Views\Notepad\Snippets\StartUpCS.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Views\Rundowns\Snippets\ArchiveFile.html">
+    <Content Include="Views\Notepad\Snippets\ArchiveFile.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\CommentEtc.html">
+    <Content Include="Views\Notepad\Snippets\CommentEtc.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\Controller1.html">
+    <Content Include="Views\Notepad\Snippets\Controller1.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\Controller2.html">
+    <Content Include="Views\Notepad\Snippets\Controller2.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\edittemp.html">
+    <Content Include="Views\Notepad\Snippets\edittemp.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\gruntfile.html">
+    <Content Include="Views\Notepad\Snippets\gruntfile.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\Inject.html">
+    <Content Include="Views\Notepad\Snippets\Inject.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\Inject2.html">
+    <Content Include="Views\Notepad\Snippets\Inject2.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\JsonClient.html">
+    <Content Include="Views\Notepad\Snippets\JsonClient.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\JsonConfig.html">
+    <Content Include="Views\Notepad\Snippets\JsonConfig.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\JsonServer.html">
+    <Content Include="Views\Notepad\Snippets\JsonServer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\KnockDoc.html">
+    <Content Include="Views\Notepad\Snippets\KnockDoc.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\KnockThumb.html">
+    <Content Include="Views\Notepad\Snippets\KnockThumb.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\mainless.html">
+    <Content Include="Views\Notepad\Snippets\mainless.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\Model.html">
+    <Content Include="Views\Notepad\Snippets\Model.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\model2.html">
+    <Content Include="Views\Notepad\Snippets\model2.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\ProgramCS.html">
+    <Content Include="Views\Notepad\Snippets\ProgramCS.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\RazorVIew.html">
+    <Content Include="Views\Notepad\Snippets\RazorVIew.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\RepositoryImp.html">
+    <Content Include="Views\Notepad\Snippets\RepositoryImp.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\RepositoryInt.html">
+    <Content Include="Views\Notepad\Snippets\RepositoryInt.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\SiteLess.html">
+    <Content Include="Views\Notepad\Snippets\SiteLess.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Rundowns\Snippets\StartUpCS.html">
+    <Content Include="Views\Notepad\Snippets\StartUpCS.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="wwwroot\lib\_site\.eslintrc.json" />
@@ -209,7 +209,7 @@
     <None Include="wwwroot\lib\_site\sass\_keyframes.scss" />
     <None Include="wwwroot\lib\_site\sass\_main-content.scss" />
     <None Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
-    <None Include="wwwroot\lib\_site\sass\_rundowns.scss" />
+    <None Include="wwwroot\lib\_site\sass\_notepad.scss" />
     <None Include="wwwroot\lib\_site\sass\_sandbox.scss" />
     <None Include="wwwroot\lib\_site\sass\_thumbnail.scss" />
   </ItemGroup>

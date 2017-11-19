@@ -154,18 +154,7 @@
     .card-text {
         background-color: lemonchiffon;
         height: 2.5rem;
-        overflow-y:unset;
-        padding: .5rem;
-
-        p {
-            background-color: transparent;
-            padding: 0;
-            margin: 0;
-            margin-bottom: .25rem;
-            text-align: left;
-            font-size: 16px;
-            line-height: 20px;
-        }
+        overflow-y:hidden;
 
         &.expand {
             height: 50%;

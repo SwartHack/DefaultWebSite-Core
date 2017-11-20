@@ -561,21 +561,21 @@ function (Control) {
 
         var options = {
             trigger: 'click',
-            title: 'What is a Run-down???',
-            content: 'A Run-down is a casual non-authoritative white-paper. In my words and IMHO...',
+            title: 'What is the Notepad',
+            content: 'My non-authoritative notes and ramblings. In my words and IMHO...',
             footer: 'I am a Bootstrap popover...',
             placement: 'bottom',
             delay: { "show": 200, "hide": 100 }
 
         }
 
-        $('#rundown-info').popover(options);
+        $('#notepad-info').popover(options);
         
         //$('#rundown-info').on('click', function (e) {
         //    $(this).popover('toggle');
         //})
 
-        
+       
 
         /////////////////////////////
         /// Sandbox events

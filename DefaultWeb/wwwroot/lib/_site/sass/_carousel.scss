@@ -1,102 +1,104 @@
 ﻿/// <reference path="defaultwebsite.scss" />
-#theCarousel {
-    //border: .075rem solid black;
-    /*display: flex;*/
+
+
+#dws-carousel {
 
     .carousel-inner {
+        height: 100%;
+
+
+        .carousel-item.active {
+            display: flex;
+            flex-flow: column;
+        }
 
         #carousel-item-1 {
-            /*display: flex;
-            flex-direction: column;*/
+            display: flex;
+            flex-flow: column;
+            height: 100%;
+            width: 100%;
+            padding-bottom: 2rem;
             background-color: transparent;
-
-            .text-center {
-                font-size: 1.5rem;
-                font-style: italic;
-                font-weight: 600;
-                color: whitesmoke;
-            }
-
-
-
-            img {
-                max-width: 100%;
-                height: auto;
-                align-self:center;
-                //width: 100%;
-                //height: 100%;
-                //object-fit: contain;
-            }
-
-
-
-            &.active {
-                //display: block !important;
-            }
+            //border: 1px solid black;
         }
 
         #carousel-item-2 {
+            display: flex;
+            flex-flow: column;
             background-color: transparent;
-
-            .text-center {
-                font-size: 1.5rem;
-                font-style: italic;
-                font-weight: 600;
-                color: whitesmoke;
-            }
+            //border: 1px solid black;
+            height: 100%;
+            align-items: center;
 
             a {
                 i {
                     //height: 100%;
                     font-size: 25vh;
-                    display: block;
-                    text-align: center;
+                    //flex: 1 1 auto;
                 }
 
                 &:hover {
                     text-decoration: none;
+                    cursor: pointer;
                 }
             }
 
-            div.h5 span {
-                color: red;
-            }
-
-
             &.active {
-                //display: block !important;
             }
         }
 
         #carousel-item-3 {
+            display: flex;
+            flex-flow: column;
             background-color: transparent;
+            //border: 1px solid black;
+            height: 100%;
+            align-items: center;
 
-            .text-center {
-                font-size: 1.5rem;
-                font-style: italic;
-                font-weight: 600;
-                color: whitesmoke;
-            }
 
             a {
 
                 i {
                     font-size: 25vh;
-                    display: block;
-                    text-align: center;
                 }
 
                 &:hover {
                     text-decoration: none;
+                    cursor:pointer;
                 }
-            }
-
-            div.h5 span {
-            }
-
-            &.active {
-                //display: block !important;
             }
         }
     }
+}
+
+.carousel-image {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    //align-items: stretch;
+    //min-height:0;
+
+    img {
+       object-fit:contain;
+    }
+}
+
+a.carousel-link {
+
+
+}
+
+
+.carousel-text {
+    display: block;
+    flex: 1 0 auto;
+    font-size: 2.5vh;
+    font-style: italic;
+    font-weight: 600;
+    
+    //text-align: center !important;
+    //margin: 0;
+    color: whitesmoke;
+    text-align:center !important;
+
 }

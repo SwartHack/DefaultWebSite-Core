@@ -1,0 +1,1132 @@
+﻿<head>
+    <style type="text/css">
+
+ p.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:106%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	}
+    </style>
+</head>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">namespace</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> DefaultWeb.Models.Repositories<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;summary&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> Archive repository. New instance per request.</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;/summary&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">class</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ArchiveRepository</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> : </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">iArchiveRepository</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">private</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">string</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> _relativeAppVirtualUrl;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">private</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">static</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">object</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> cacheLock = </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">object</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> RootFolder { </span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:blue">get</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">; </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">set</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">; }<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">List</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">&gt; Folders { </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">get</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">; </span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">set</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">; }<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">//public CommentRepository CommentRepository { get; set; }</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">string</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> PhysicalPath { </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">get</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">; </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">set</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">; }<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> ArchiveRepository(</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:blue">string</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> basePhysicalPath)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (!</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">Directory</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">.Exists(basePhysicalPath)) {<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">throw</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">new</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ConfigurationException</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;Invalid path: &quot;</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> + basePhysicalPath);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>PhysicalPath = </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">DirectoryInfo</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">(basePhysicalPath).FullName;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">string</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">.IsNullOrWhiteSpace(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">MvcApplication</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">.VirtualRootPath))<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">MvcApplication</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">.VirtualRootPath = </span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:#A31515">&quot;~/&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>_relativeAppVirtualUrl = </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">MvcApplication</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">.VirtualRootPath;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">//CommentRepository = new CommentRepository(this);</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RootFolder = </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RootFolder.PhysicalPath = basePhysicalPath;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>FillSubFoldersRecursive(RootFolder, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:
+Consolas;color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolderNameASCComparer</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">());<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Folders = RootFolder.SubFolders;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;summary&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> Gets repository folder based on virtual Path</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;/summary&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;param name=&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">folderVirtualPath</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:gray">&quot;&gt;&lt;/param&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;returns&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green">ArchiveFolder instance or null if not found</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:gray">&lt;/returns&gt;</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> GetFolder(</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">string</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> folderVirtualPath)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">foreach</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> folder </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">in</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> Folders) {<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> found = folder.SearchSubFolderRecursiveByVPath(folderVirtualPath);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (found != </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">null</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">) {<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> found;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">null</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;summary&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> Get file from virtual path</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;/summary&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;param name=&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">fileVirtualPath</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:gray">&quot;&gt;&lt;/param&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;returns&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green">ArchiveFile instance or null if not found</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:gray">&lt;/returns&gt;</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFile</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> GetFile(</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">string</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> fileVirtualPath)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">foreach</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFile</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> file </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">in</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> GetAllFiles(RootFolder))<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">Util</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">.IsSameVpath(file.VirtualPath, fileVirtualPath))<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> file;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">null</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;summary&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> Returns all files in the archive under folder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;/summary&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">///</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:gray">&lt;returns&gt;&lt;/returns&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">List</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ArchiveFile</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">&gt; GetAllFiles(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> folder)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">List</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFile</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&gt; files = </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">new</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">List</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">&lt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFile</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&gt;();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (folder == </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">null</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>folder = RootFolder;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">//process this folder, then subfolders. Recursive!!!</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>files.AddRange(folder.Files);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">foreach</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> fld </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">in</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> folder.SubFolders)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>files.AddRange(GetAllFiles(fld));<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> files;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">List</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">Comment</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">&gt; GetComments(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> folder, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">string</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> id)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">List</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">Comment</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&gt; comments = </span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">List</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">Comment</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">&gt;();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:green">// if null folder, use Archive root folder ??</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (folder == </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">null</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>folder = RootFolder;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">foreach</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFile</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> file </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">in</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> GetAllFiles(folder))<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>comments.AddRange(file.Comments);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (!</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">string</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">.IsNullOrEmpty(id))<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> comments.Where(c =&gt; c.ID == id).ToList();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> comments;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">void</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> AddComment(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:
+Consolas;color:#2B91AF">Comment</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> comment)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> folder = </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">null</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">switch</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (comment.Type)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">case</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#A31515">&quot;FILE&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">:<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">var</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> file = GetFile(comment.Location);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> ( file == </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">null</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green">//deal with this better TODO</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">throw</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArgumentException</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">(</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#A31515">&quot;file not found: comment.Location&quot;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>file.Comments.Add(comment);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>folder = file.ParentFolder;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">break</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">case</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#A31515">&quot;FOLDER&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">:<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>folder = GetFolder(comment.Location);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> ( folder == </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">null</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green">//deal with this better TODO</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">throw</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">new</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArgumentException</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">(</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#A31515">&quot;folder not found: comment.Location&quot;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>folder.Comments.Add(comment);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">break</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">default</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">:<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green">//deal with this better TODO</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:green">//throw new ArgumentException(&quot;Unknown comment type:comment.Type&quot;);</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>folder.WriteFolderFileInfo();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">void</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> DeleteComment(</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">Comment</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> comment)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFile</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> file = GetFile(comment.Location);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (file == </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">null</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">throw</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">new</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ArgumentException</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#A31515">&quot;file not found&quot;</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:black">);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>file.Comments.Remove(comment);<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>file.ParentFolder.WriteFolderFileInfo();<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">public</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">List</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">ArchiveFile</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">&gt; Search(</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">string</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> q) {<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">return</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> GetAllFiles(RootFolder).Where(<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>i =&gt;<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(i.FriendlyName.IndexOf(q, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">StringComparison</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">.InvariantCultureIgnoreCase) &gt; -1)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>||<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(i.Description.IndexOf(q, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">StringComparison</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">.InvariantCultureIgnoreCase) &gt; -1)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>||<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(i.VirtualPath.IndexOf(q, </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:#2B91AF">StringComparison</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">.InvariantCultureIgnoreCase) &gt; -1)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>||<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(i.ParentFolder != </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">null</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> &amp;&amp; i.ParentFolder.Name != </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">null</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> &amp;&amp; i.ParentFolder.Name.IndexOf(q, </span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">StringComparison</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">.InvariantCultureIgnoreCase) &gt; -1)<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>).ToList();<span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span>
+</p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:gray">#region</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> Helper functions<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">private</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">void</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"> FillSubFoldersRecursive(</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolder</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> folder, </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ArchiveFolderComparer</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> defaultSortingComparer)<o:p></o:p></span></p>
+<span style="font-size:9.5pt;line-height:106%;font-family:Consolas;mso-fareast-font-family:
+Calibri;mso-fareast-theme-font:minor-latin;mso-bidi-font-family:Consolas;
+color:black;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
+AR-SA"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{</span>

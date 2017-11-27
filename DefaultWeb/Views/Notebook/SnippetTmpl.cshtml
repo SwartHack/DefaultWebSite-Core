@@ -1,7 +1,7 @@
 ﻿@using System.IO;
 @model DefaultWeb.Models.DefaultWebSite.Snippet
 @{ 
-    var str = File.ReadAllText(String.Format("{0}/Views/Notepad/Snippets/{1}", Host.ContentRootPath, Model.Name));
+    var str = File.ReadAllText(String.Format("{0}/Views/Notebook/Snippets/{1}", Host.ContentRootPath, Model.Name));
 
 <div class="snippet card">
     <div class="card-header">

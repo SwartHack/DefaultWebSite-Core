@@ -48563,10 +48563,10 @@ function (Control) {
         /////////////////////////////
         /// click events
         ////////////////////////////
-        $('.rundown').on('click',  function (e) {
+        $('.dws-note').on('click',  function (e) {
             e.preventDefault();
             var $rundown = $(this);
-            $('.rundown').removeClass("selected");
+            $('.dws-note').removeClass("selected");
             $rundown.addClass("selected");
 
             Control.sendMessage($rundown);
@@ -48667,7 +48667,7 @@ function (Control) {
         ////////////////////////////
 
         var options = {
-            trigger: 'click',
+            trigger: 'hover',
             title: 'What is the Notepad',
             content: 'My non-authoritative notes and ramblings. In my words and IMHO...',
             footer: 'I am a Bootstrap popover...',
@@ -48676,7 +48676,7 @@ function (Control) {
 
         }
 
-        $('#notepad-info').popover(options);
+        $('#notebook-info').popover(options);
         
         //$('#rundown-info').on('click', function (e) {
         //    $(this).popover('toggle');

@@ -118,7 +118,7 @@
         overflow-y: auto;
         padding-left: 15%;
         padding-right: 15%;
-        padding-top: 2rem;
+        padding-top: 1rem;
         padding-bottom: 0;
         border: 1px solid transparent;
         border-radius: 0 0 calc(0.5rem - 1px) calc(0.5rem - 1px);
@@ -157,7 +157,7 @@
         overflow-y:hidden;
 
         &.expand {
-            height: 50%;
+            height: 60%;
             overflow-y:auto;
         }
     }

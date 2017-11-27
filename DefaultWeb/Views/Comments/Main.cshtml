@@ -1,0 +1,90 @@
+
+@using System.Collections.Generic;
+@*
+    This is inserted inside sandbox-area on Sandbox/Main.cshtml
+*@
+<div id="comments-mgr"> 
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Comments Manager Tool</div>
+        </div>
+        <div id="blurb-comments" class="card-blockquote">
+            <span class="card-text">
+                Allows easy single-point management of "ALL" site "comment"s for any source type: Page, File or Db object!
+                Simply add a "Source" record and name it with a single word description. Then use the name to tag the Source object accordingly. (See code.)
+            </span>
+        </div>
+
+        <div id="sources-card" class="card">
+
+            <table id="sources-table" class="table table-bordered" >
+                <thead class="header">
+                    <tr>
+                        <th>Source Name</th>
+                        <th id="head-description">Description</th>
+                        <th class="tools pull-right">
+                            <a class="btn btn-default" data-toggle="modal" data-target="#modal-action-template" data-target-controller="Comments" data-target-action="GetModalContent" data-target-id="Source">
+                                <i class="fa fa-plus-square-o"></i>
+                            </a>
+                            <a class="btn btn-default" data-toggle="modal" data-type="Source" data-action="edit">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a id="source-delete" class="btn btn-default">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+          
+                @*sources inline  binding template*@
+                <tbody class="tbody" id="sources" data-bind="template: { name: 'sources-template', foreach: sources, afterAdd: sourceAdded }"></tbody>
+
+            </table>
+      
+            <div id="sources-count" class="caption text-right" data-bind="text: sourcesCount"></div>
+           
+        </div>
+
+        @*comments inline binding template*@
+        <div id="comments-card" class="card">
+            <div class="card-header">
+                <div class="card-title text-left" >Comments for Source &rArr; <span class="caption" data-bind="text: source().sourceName"></span></div> 
+                <a class="btn btn-default" data-toggle="modal" data-target="#modal-action-template" data-target-controller="Comments" data-target-action="GetModalContent" data-target-id="Comment">
+                    <i class="fa fa-plus-square-o"></i>
+                </a>
+            </div>
+            <div id="comments-wrapper">
+                <div id="comments" class="list-group" data-bind=" template: { name: 'comments-template', foreach: comments}"></div>
+            </div>
+            <div id="comments-count" class="text-right" data-bind="text: commentsCount"></div>
+        </div>
+      
+    </div> 
+</div>
+
+<script>
+
+    require(['dws/comments'],
+        function (Comments) {
+
+            $(document).ready(function () {
+                Comments.GetSources();
+            });
+        });
+
+</script>
+
+<div id="modal-action-template" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="target-modal" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>

@@ -39,21 +39,21 @@
             One being that the MvcApplication and IAppBuilder classes are gone! And the global.asax file!! As well as just about anything
             familiar with the MVC5 startup and configuration. ASP.NET Core uses a simple program.cs, just like a console or forms application.
         </p>
-        @Html.Partial("~/Views/Notepad/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "ProgramCS.html", Title = ".NET Core program.cs" })
+        @Html.Partial("~/Views/Notebook/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "ProgramCS.html", Title = ".NET Core program.cs" })
         <p><strong><em>The MVC App_Start program folder has</em></strong> been replaced with the single Startup.cs.</p>
-        @Html.Partial("~/Views/Notepad/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "StartUpCS.html", Title = "New Startup class" })
+        @Html.Partial("~/Views/Notebook/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "StartUpCS.html", Title = "New Startup class" })
         <p>
             <strong><em>Client-side compiling, minification and bundling can be done manually</em></strong> with &ldquo;Grunt&rdquo;
             and Task Runner or in the new bundleconfig.json and compilerconfig.json files<em><strong>.</strong></em>
         </p>
-        @Html.Partial("~/Views/Notepad/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "JsonConfig.html", Title = "The bundleconfig.json configuration file" })
+        @Html.Partial("~/Views/Notebook/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "JsonConfig.html", Title = "The bundleconfig.json configuration file" })
         <p>
             <strong><em>Framework container services defined in</em></strong> Startup.ConfigureServices() provide global access and can
             now be &ldquo;Injected&rdquo; into Views.
         </p>
-        @Html.Partial("~/Views/Notepad/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "Inject.html", Title = "View Service Injection" })
+        @Html.Partial("~/Views/Notebook/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "Inject.html", Title = "View Service Injection" })
         <p><strong><em>User Management is now much more efficien</em></strong>t as illustrated by the new _LoginPartial.cshtml</p>
-        @Html.Partial("~/Views/Notepad/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "Inject2.html", Title = "View Service Injection" })
+        @Html.Partial("~/Views/Notebook/SnippetTmpl.cshtml", new DefaultWeb.Models.DefaultWebSite.Snippet { Name = "Inject2.html", Title = "View Service Injection" })
         <p>
             <strong><em>This is just a small taste of the re-design and improvements</em></strong> now in progress.
             Further development will also target C# 6, supporting Open XML documents, user registration, public and private archive areas, Bootstrap4,

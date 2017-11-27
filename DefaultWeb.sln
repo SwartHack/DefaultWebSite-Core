@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefaultWeb", "DefaultWeb.csproj", "{FEFD6327-7AE8-4EBB-B24A-61F54B811924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefaultWeb", "DefaultWeb\DefaultWeb.csproj", "{FEFD6327-7AE8-4EBB-B24A-61F54B811924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExifLib", "..\Exiflib\ExifLib.csproj", "{C878A95F-E695-42FC-A714-E47DF6515679}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExifLib", "Exiflib\ExifLib.csproj", "{C878A95F-E695-42FC-A714-E47DF6515679}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

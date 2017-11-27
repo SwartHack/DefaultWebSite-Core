@@ -4,9 +4,9 @@
     But uses &quot;Sources&quot; and &quot;Comments&quot;, instead of &quot;Blogs&quot; and &quot;Posts&quot;.
 </p>
 <p>
-    The idea is to manage user comments by &quot;source&quot;. Anything you could make a comment on: an entire page, a document,
+    The general idea is to manage user comments by &quot;source&quot;. Anything you could make a comment on: an entire page, a document,
     a file, a page element, a widget. Basically be able to attach &quot;Comment&quot; functionality to any site element,
-    then view an manage it!
+    then view and manage it! Add and Delete work, but Edit is disabled for now...
 </p>
 <p>
     The original intent was to extend the sample, but embedded in an asynchronous container. I quickly ran into some
@@ -19,6 +19,27 @@
     Since the foundation of the site&#39;s primary asynchronous navigation was already based on <strong><em>JQuery/Ajax</em></strong> using a <strong><em>KnockoutJs MVVM </em></strong>model, I decided to move forward using
     Partial Razor Views and the MVVM.
 </p>
+Bootstrap 4 dropped "Panels", "Wells" and replaced them with "Cards". Cards and card elements are styled with flex. Things get a little tweaky when dealing with new Flex-Box patterns. You never seem to know exactly what its going to do...
+
+There are a number of "Data Grids" and record browsers out there:
+
+https://www.codeproject.com/Articles/1166225/NET-Core-Datagrid
+http://mvcgrid.net/
+https://datatables.net/
+https://www.npmjs.com/package/jquery-view
+http://js-grid.com/
+https://datatables.net/examples/styling/bootstrap4.html
+and many more...
+
+But I was set on doing a basic home-grown record browser/manager. I was also determined to get a scrolling table to work in a flex-box, multi-container design. Not as easy as you may think. FInally had a break through with the help of this:
+
+https://codepen.io/RajaJaganathan-1471687644/pen/qNZNZW
+
+Even though it is single-container, I was able to implement in asynchronous container.
+
+Knockout JS  not only provides the functionality for "Coments Mannager", but also controls the main asynchronous exchange and loading of data. Check out how the main navbar loads each root page with Ajax and Json.
+
+See /wwwroot/_site for the model and the code...
 <p>
     It definitely turned out interesting. Especially the <strong><em>Flex-box</em></strong> behavior in <a href="https://getbootstrap.com/docs/4.0/utilities/flex/" target="_blank">Bootstrap 4</a>. And I learned a number of things in the process. The Knockout ViewModel could use some optimization, but going forward with it for now.
     You will notice the use of pop-up dialogs for adding new records.

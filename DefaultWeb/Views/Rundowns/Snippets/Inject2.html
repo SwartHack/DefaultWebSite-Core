@@ -1,0 +1,233 @@
+﻿<head>
+    <style type="text/css">
+
+ p.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:105%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;
+	}
+    </style>
+</head>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size: 9.5pt; font-family: Consolas; mso-bidi-font-family: Consolas; color: black; background: yellow; mso-highlight: yellow">@</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">using</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> Microsoft.AspNetCore.Identity<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size: 9.5pt; font-family: Consolas; mso-bidi-font-family: Consolas; color: black; background: yellow; mso-highlight: yellow">@inject </span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">SignInManager</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ApplicationUser</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&gt; SignInManager<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size: 9.5pt; font-family: Consolas; mso-bidi-font-family: Consolas; color: black; background: yellow; mso-highlight: yellow">@inject </span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:#2B91AF">UserManager</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:#2B91AF">ApplicationUser</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">&gt; UserManager<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p>&nbsp;</o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size: 9.5pt; font-family: Consolas; mso-bidi-font-family: Consolas; color: black; background: yellow; mso-highlight: yellow">@</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">if</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> (SignInManager.IsSignedIn(User))<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;</span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">form</span></b><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:purple">asp-area</span></b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;&quot;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:purple">asp-controller</span></b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;Account&quot;</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">asp-action</span></b><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:blue">=&quot;Logout&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:red">method</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">=&quot;post&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:red">id</span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">=&quot;logoutForm&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:red">class</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">=&quot;navbar-right&quot;&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">ul</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:red">class</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;nav navbar-nav navbar-right&quot;&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">li</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;</span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">a</span></b><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:purple">asp-area</span></b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;&quot;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:purple">asp-controller</span></b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;Manage&quot;</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">asp-action</span></b><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:blue">=&quot;Index&quot;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:red">title</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">=&quot;Manage&quot;&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">Hello <span style="background: yellow; mso-highlight: yellow">@</span>UserManager.GetUserName(User)!</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">&lt;/</span><b><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:purple">a</span></b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;/</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">li</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">li</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">button</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:red">type</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;submit&quot;</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> </span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:red">class</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">=&quot;btn btn-link navbar-btn navbar-link&quot;&gt;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black">Log out</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">&lt;/</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:maroon">button</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">&gt;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;/</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">li</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;/</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">ul</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;/</span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">form</span></b><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">}<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">else</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black">{<o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">li</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;&lt;</span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">a</span></b><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:purple">asp-area</span></b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;&quot;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:purple">asp-controller</span></b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;Account&quot;</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">asp-action</span></b><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:blue">=&quot;Register&quot;&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">Register</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&lt;/</span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">a</span></b><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;&lt;/</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">li</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;mso-layout-grid-align:none;text-autospace:none">
+    <span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span></span><span style="font-size:9.5pt;
+font-family:Consolas;mso-bidi-font-family:Consolas;color:blue">&lt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">li</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;&lt;</span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">a</span></b><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:purple">asp-area</span></b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;&quot;</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:purple">asp-controller</span></b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:blue">=&quot;Account&quot;</span><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black"> </span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">asp-action</span></b><span style="font-size:9.5pt;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:blue">=&quot;Login&quot;&gt;</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:black">Log in</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&lt;/</span><b><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:purple">a</span></b><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;&lt;/</span><span style="font-size:9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;
+color:maroon">li</span><span style="font-size:9.5pt;font-family:Consolas;
+mso-bidi-font-family:Consolas;color:blue">&gt;</span><span style="font-size:
+9.5pt;font-family:Consolas;mso-bidi-font-family:Consolas;color:black"><o:p></o:p></span></p>
+<p class="MsoNormal">
+    <span style="font-size:9.5pt;line-height:105%;font-family:
+Consolas;mso-bidi-font-family:Consolas;color:black">}</span><o:p></o:p></p>

@@ -12,15 +12,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\GIS\**" />
     <Compile Remove="Views\NewFolder\**" />
     <Compile Remove="wwwroot\css\jquery-ui\**" />
     <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="Views\GIS\**" />
     <Content Remove="Views\NewFolder\**" />
     <Content Remove="wwwroot\css\jquery-ui\**" />
     <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="Views\GIS\**" />
     <EmbeddedResource Remove="Views\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\css\jquery-ui\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="Views\GIS\**" />
     <None Remove="Views\NewFolder\**" />
     <None Remove="wwwroot\css\jquery-ui\**" />
     <None Remove="wwwroot\lib\**" />
@@ -34,95 +38,95 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\Notepad\Snippets\ArchiveFile.html" />
-    <None Remove="Views\Notepad\Snippets\CommentEtc.html" />
-    <None Remove="Views\Notepad\Snippets\Controller1.html" />
-    <None Remove="Views\Notepad\Snippets\Controller2.html" />
-    <None Remove="Views\Notepad\Snippets\edittemp.html" />
-    <None Remove="Views\Notepad\Snippets\gruntfile.html" />
-    <None Remove="Views\Notepad\Snippets\Inject.html" />
-    <None Remove="Views\Notepad\Snippets\Inject2.html" />
-    <None Remove="Views\Notepad\Snippets\JsonClient.html" />
-    <None Remove="Views\Notepad\Snippets\JsonConfig.html" />
-    <None Remove="Views\Notepad\Snippets\JsonServer.html" />
-    <None Remove="Views\Notepad\Snippets\KnockDoc.html" />
-    <None Remove="Views\Notepad\Snippets\KnockThumb.html" />
-    <None Remove="Views\Notepad\Snippets\mainless.html" />
-    <None Remove="Views\Notepad\Snippets\Model.html" />
-    <None Remove="Views\Notepad\Snippets\model2.html" />
-    <None Remove="Views\Notepad\Snippets\ProgramCS.html" />
-    <None Remove="Views\Notepad\Snippets\RazorVIew.html" />
-    <None Remove="Views\Notepad\Snippets\RepositoryImp.html" />
-    <None Remove="Views\Notepad\Snippets\RepositoryInt.html" />
-    <None Remove="Views\Notepad\Snippets\SiteLess.html" />
-    <None Remove="Views\Notepad\Snippets\StartUpCS.html" />
+    <None Remove="Views\Notebook\Snippets\ArchiveFile.html" />
+    <None Remove="Views\Notebook\Snippets\CommentEtc.html" />
+    <None Remove="Views\Notebook\Snippets\Controller1.html" />
+    <None Remove="Views\Notebook\Snippets\Controller2.html" />
+    <None Remove="Views\Notebook\Snippets\edittemp.html" />
+    <None Remove="Views\Notebook\Snippets\gruntfile.html" />
+    <None Remove="Views\Notebook\Snippets\Inject.html" />
+    <None Remove="Views\Notebook\Snippets\Inject2.html" />
+    <None Remove="Views\Notebook\Snippets\JsonClient.html" />
+    <None Remove="Views\Notebook\Snippets\JsonConfig.html" />
+    <None Remove="Views\Notebook\Snippets\JsonServer.html" />
+    <None Remove="Views\Notebook\Snippets\KnockDoc.html" />
+    <None Remove="Views\Notebook\Snippets\KnockThumb.html" />
+    <None Remove="Views\Notebook\Snippets\mainless.html" />
+    <None Remove="Views\Notebook\Snippets\Model.html" />
+    <None Remove="Views\Notebook\Snippets\model2.html" />
+    <None Remove="Views\Notebook\Snippets\ProgramCS.html" />
+    <None Remove="Views\Notebook\Snippets\RazorVIew.html" />
+    <None Remove="Views\Notebook\Snippets\RepositoryImp.html" />
+    <None Remove="Views\Notebook\Snippets\RepositoryInt.html" />
+    <None Remove="Views\Notebook\Snippets\SiteLess.html" />
+    <None Remove="Views\Notebook\Snippets\StartUpCS.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Views\Notepad\Snippets\ArchiveFile.html">
+    <Content Include="Views\Notebook\Snippets\ArchiveFile.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\CommentEtc.html">
+    <Content Include="Views\Notebook\Snippets\CommentEtc.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\Controller1.html">
+    <Content Include="Views\Notebook\Snippets\Controller1.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\Controller2.html">
+    <Content Include="Views\Notebook\Snippets\Controller2.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\edittemp.html">
+    <Content Include="Views\Notebook\Snippets\edittemp.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\gruntfile.html">
+    <Content Include="Views\Notebook\Snippets\gruntfile.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\Inject.html">
+    <Content Include="Views\Notebook\Snippets\Inject.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\Inject2.html">
+    <Content Include="Views\Notebook\Snippets\Inject2.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\JsonClient.html">
+    <Content Include="Views\Notebook\Snippets\JsonClient.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\JsonConfig.html">
+    <Content Include="Views\Notebook\Snippets\JsonConfig.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\JsonServer.html">
+    <Content Include="Views\Notebook\Snippets\JsonServer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\KnockDoc.html">
+    <Content Include="Views\Notebook\Snippets\KnockDoc.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\KnockThumb.html">
+    <Content Include="Views\Notebook\Snippets\KnockThumb.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\mainless.html">
+    <Content Include="Views\Notebook\Snippets\mainless.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\Model.html">
+    <Content Include="Views\Notebook\Snippets\Model.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\model2.html">
+    <Content Include="Views\Notebook\Snippets\model2.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\ProgramCS.html">
+    <Content Include="Views\Notebook\Snippets\ProgramCS.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\RazorVIew.html">
+    <Content Include="Views\Notebook\Snippets\RazorVIew.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\RepositoryImp.html">
+    <Content Include="Views\Notebook\Snippets\RepositoryImp.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\RepositoryInt.html">
+    <Content Include="Views\Notebook\Snippets\RepositoryInt.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\SiteLess.html">
+    <Content Include="Views\Notebook\Snippets\SiteLess.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Notepad\Snippets\StartUpCS.html">
+    <Content Include="Views\Notebook\Snippets\StartUpCS.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="wwwroot\lib\_site\.eslintrc.json" />
@@ -164,7 +168,6 @@
   <ItemGroup>
     <Folder Include="Controllers\ActionFIlters\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Views\GIS\" />
     <Folder Include="Views\Sandbox\Snippets\" />
     <Folder Include="wwwroot\css\images\" />
     <Folder Include="wwwroot\js\" />
@@ -196,9 +199,9 @@
     <None Include="wwwroot\lib\_site\sass\_fileops-content.scss" />
     <None Include="wwwroot\lib\_site\sass\_fileops-client.scss" />
     <None Include="wwwroot\lib\_site\sass\global\build.scss" />
-    <None Include="wwwroot\lib\_site\sass\lib\notepad.scss" />
-    <None Include="wwwroot\lib\_site\sass\lib\Paper.scss" />
-    <None Include="wwwroot\lib\_site\sass\lib\video-js.scss" />
+    <None Include="wwwroot\lib\_site\sass\lib\_notepad.scss" />
+    <None Include="wwwroot\lib\_site\sass\lib\_notepaper.scss" />
+    <None Include="wwwroot\lib\_site\sass\lib\_video-js.scss" />
     <None Include="wwwroot\lib\_site\sass\_carousel.scss" />
     <None Include="wwwroot\lib\_site\sass\_comment-source.scss" />
     <None Include="wwwroot\lib\_site\sass\_comment.scss" />
@@ -209,7 +212,7 @@
     <None Include="wwwroot\lib\_site\sass\_keyframes.scss" />
     <None Include="wwwroot\lib\_site\sass\_main-content.scss" />
     <None Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
-    <None Include="wwwroot\lib\_site\sass\_notepad.scss" />
+    <None Include="wwwroot\lib\_site\sass\_notebook.scss" />
     <None Include="wwwroot\lib\_site\sass\_sandbox.scss" />
     <None Include="wwwroot\lib\_site\sass\_thumbnail.scss" />
   </ItemGroup>

@@ -5,8 +5,10 @@
 @import "../../bootstrap/scss/bootstrap-reboot.scss";
 @import "../../font-awesome/scss/font-awesome.scss";
 //@import "../../jq-ui-bootstrap/scss/all.scss";
+@import "../../office-ui-fabric-core/dist/sass/Fabric.scss";
 
 
+@import "../../video-js/src/css/video-js.scss";
 
 @import "keyframes.scss";
 @import "documents.scss";
@@ -23,8 +25,8 @@
 @import "fileops-content.scss";
 @import "errors.scss";
 
+@import "./vendor/jquery-confirm.scss";
 
-//@import "./lib/video-js.scss";
 @import "./lib/notepad.scss";
 @import "./lib/notepaper.scss";
 

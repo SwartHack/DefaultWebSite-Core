@@ -96,7 +96,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         fileInfo: ko.observable([]),  // ununsed ?
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
-        mimeTypes: ko.observableArray(['image/*', 'application/pdf', '.mp4', '.avi']),
+        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'aaplication/mp4', 'application/avi']),
         uploadFilesCount: ko.pureComputed(function () {
             return 'Files: ' + viewModel.uploadFiles().length
         }, this),
@@ -1047,10 +1047,122 @@ function (Control, viewModel) {
 
 
 //////////////////////////////////////////////////////////////////////
+/// thumb client module
+//////////////////////////////////////////////////////////////////////
+define('dws/thumb', [],
+    function () {
+
+        //////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function getThumbFromFile(file, callback) {
+
+            if ( file.type.match('image/*') ) {
+                thumbFromImageFile(file, callback);
+                return;
+            }
+                    
+            if (file.type.match('application/*')) {
+                thumbFromAppFile(file, callback);
+                return;
+            }
+
+            // unsupported/invalid
+
+        }
+
+        //////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function thumbFromImageFile(file, callback) {
+            var reader = new FileReader();
+
+            reader.onload = (function (file) {
+                var test = file.name;
+                return function (file, e) {
+                    callback(file,e.target.results);
+                    
+                }
+            });
+
+            reader.readAsDataURL(file);
+        }
+
+        //////////////////////////////////////////////////////////////////////
+        /// TODO
+        /// Gonna have to deal with each application type individually as we 
+        /// support more. Need a smarter way to do it as there are so many!!!
+        //////////////////////////////////////////////////////////////////////
+        function thumbFromAppFile(file, callback) {
+
+            if (file.type.match('*/pdf')) {
+                thumbFromPdf(file, callback);
+            }
+           
+        }
+
+         //////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function thumbFromPdf(file, callback) {
+
+            PDFJS.workerSrc = 'pdf.worker.js';
+
+            var fullname = file.name;
+            PDFJS.getDocument(fullname).then(function (pdf) {
+
+                pdf.getPage(1).then(function (page) {
+                    var viewport = page.getViewport(0.5);
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    var renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+
+                    page.render(renderContext).then(function () {
+                        //set to draw behind current content
+                        ctx.globalCompositeOperation = "destination-over";
+                        //set background color
+                        ctx.fillStyle = "#fff";
+                        //draw on entire canvas
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        // create an img from the canvas which contains the page contents
+                        var img_src = canvas.toDataURL();
+
+                        callback(file, img_src);
+                    });
+
+                });
+
+
+            });
+
+        }
+
+         //////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function thumbFromVideoFile() {
+
+        }
+
+         
+
+        return {
+            getThumbFromFile: getThumbFromFile
+        }
+
+    });
+
+//////////////////////////////////////////////////////////////////////
 /// File ops client module
 //////////////////////////////////////////////////////////////////////
-define('dws/fileops-client', ['dws/controller', 'dws/model'],
-    function (Control, viewModel) {
+define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
+    function (Control, Thumbnail, viewModel) {
 
         ///////////////////////////////////////////////////////////////////////
         /// init cause it controls/binds async html content not present at site load
@@ -1112,13 +1224,13 @@ define('dws/fileops-client', ['dws/controller', 'dws/model'],
         }
 
         function isValidMimeType(file) {
-            return true;
-            //for (var i = 0; i < viewModel.mimeTypes.length; i++) {
-            //    if (file.type === viewModel.mimeTypes[i]) {
-            //        return true;
-            //    }
-            //}
-            //return false;
+
+            for (var i = 0; i < viewModel.mimeTypes().length; i++) {
+                if ( file.type.match(viewModel.mimeTypes()[i]) ) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -1145,19 +1257,56 @@ define('dws/fileops-client', ['dws/controller', 'dws/model'],
                     var fname = f.name;
                     var dups = viewModel.uploadFilesInfo().findIndex(f => f.name == fname);
                     if (dups > -1) { continue; }
-                    var reader = new FileReader();
-                    reader.onload = (function (file) {
-                        return function (e) {
-                            var fileSize = getFileSize(file.size);
-                            viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: e.target.result });
-                            viewModel.uploadFiles.push(file);
-                        }
-                    })(f);
 
-                    reader.readAsDataURL(f);
+                    
+                    var fileSize = getFileSize(f.size);
+                    
+                   
+                    //viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: fileContent });
+                    //viewModel.uploadFiles.push(file);
+
+                    
                 }
             }
         }
+
+        function pushFile(file) {
+
+            switch (file.type) {
+
+                case file.type.match('image/*'):
+
+                    var reader = new FileReader();
+                    reader.onload = (function (file) {
+                        return function (e) {
+                            viewModel.fileContent(e.target.result);
+                            //push should be localized
+                        }
+                    });
+
+                    reader.readAsDataURL(file);
+                    break;
+
+                case 'application/pdf':
+                    //getApplicationIcon(file);
+                    break;
+
+                default:
+            }
+
+        }
+
+        //function readImageContent(file) {
+
+        //    var reader = new FileReader();
+        //    reader.onload = (function (file) {
+        //        return function (e) {
+        //            viewModel.fileContent(e.target.result);
+        //        }
+        //    })(f);
+
+        //    reader.readAsDataURL(f);
+        //}
 
         function getFileSize(size) {
             var fileSize = 0;
@@ -1494,10 +1643,8 @@ require(['dws/actions']);
 require(['dws/comments']);
 require(['dws/sandbox']);
 require(['dws/model-utils']);
-require(['dws/controller']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
-
 
 require(['dws/controller'],
 function (control) {

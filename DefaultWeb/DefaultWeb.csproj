@@ -14,18 +14,22 @@
   <ItemGroup>
     <Compile Remove="Views\GIS\**" />
     <Compile Remove="Views\NewFolder\**" />
+    <Compile Remove="Views\Sandbox\Snippets\**" />
     <Compile Remove="wwwroot\css\jquery-ui\**" />
     <Compile Remove="wwwroot\lib\**" />
     <Content Remove="Views\GIS\**" />
     <Content Remove="Views\NewFolder\**" />
+    <Content Remove="Views\Sandbox\Snippets\**" />
     <Content Remove="wwwroot\css\jquery-ui\**" />
     <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="Views\GIS\**" />
     <EmbeddedResource Remove="Views\NewFolder\**" />
+    <EmbeddedResource Remove="Views\Sandbox\Snippets\**" />
     <EmbeddedResource Remove="wwwroot\css\jquery-ui\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
     <None Remove="Views\GIS\**" />
     <None Remove="Views\NewFolder\**" />
+    <None Remove="Views\Sandbox\Snippets\**" />
     <None Remove="wwwroot\css\jquery-ui\**" />
     <None Remove="wwwroot\lib\**" />
   </ItemGroup>
@@ -140,6 +144,12 @@
     <Content Include="wwwroot\lib\_site\images\core2.png" />
     <Content Include="wwwroot\lib\_site\images\core3.png" />
     <Content Include="wwwroot\lib\_site\images\cornholio2.jpg" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_444444_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_555555_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_777620_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_777777_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="wwwroot\lib\_site\images\ui-icons_ffffff_256x240.png" />
     <Content Include="wwwroot\lib\_site\images\underconstruct.jpg" />
     <Content Include="wwwroot\lib\_site\images\under_construction.gif" />
     <Content Include="wwwroot\lib\_site\package.json" />
@@ -168,7 +178,6 @@
   <ItemGroup>
     <Folder Include="Controllers\ActionFIlters\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Views\Sandbox\Snippets\" />
     <Folder Include="wwwroot\css\images\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\_site\dist\css\" />
@@ -192,9 +201,11 @@
     <None Include="wwwroot\lib\_site\js\lib\endless_scroll.js" />
     <None Include="wwwroot\lib\_site\js\lib\pdfobject.js" />
     <None Include="wwwroot\lib\_site\js\lib\video.js" />
+    <None Include="wwwroot\lib\_site\js\model-actions.js" />
     <None Include="wwwroot\lib\_site\js\model-utils.js" />
     <None Include="wwwroot\lib\_site\js\models.js" />
     <None Include="wwwroot\lib\_site\js\sandbox.js" />
+    <None Include="wwwroot\lib\_site\js\thumbnail.js" />
     <None Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
     <None Include="wwwroot\lib\_site\sass\_fileops-content.scss" />
     <None Include="wwwroot\lib\_site\sass\_fileops-client.scss" />

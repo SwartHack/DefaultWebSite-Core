@@ -1,35 +1,44 @@
 <div class="paper-wrapper">
     @*<span class="text-info text-muted float-right">September 4th, 2017</span>*@
     <div class="paper">
-        <h3 class="ml-4">A Default WebSite.net Core</h3>
-            <p>This missive will go on a bit as I add content and detail. The purpose here is to run-down the basic set-up, architecture and different patterns and practices investigated and demonstrated by Default WebSite.net.</p>
-            <p>I am going to cover the listed topics, among others. Here is a fun challenge &mdash; Try to find all the spelling errors 8-P! (will scrub the site soon, and talk about VS 2017 extensions that don't work yet, or correctly anyway?!)</p>
-            <h4>Client Side Overview</h4>
-            <p>The organization and content is basically the same you'd see with most ASP.NET Core MVC projects with a few exceptions. The client-side codes lives in wwwroot/libs/_site. It is completely detached from the solution and is not integrated into any current IDE build tools. I have found the tools usually slow down the IDE and cause more problems. All of the .css and .js is built and deployed using <em><strong>Grunt</strong> </em>and a combination of <em><strong>Bower</strong> </em>and <em><strong>Npm</strong> </em>packages.&nbsp;</p>
-            <p><em><strong>Javascript AMD</strong></em> is used for all site javascript.&nbsp; <em><strong>SASS</strong> </em>is used in conjunction with <em><strong>Bootstrap 4</strong></em> for all site styling.&nbsp;</p>
-            <p><em><strong>Bootstrap 4</strong></em> dropped "Panels", "Wells" and replaced them with "Cards". Cards and card elements are styled with flex. Things get a little tweaky when dealing with new Flex-Box patterns. You never seem to know exactly what its going to do...</p>
-            <p>There are a number of "Data Grids" and record browsers out there:</p>
-            <ul>
-                <li><a href="https://www.codeproject.com/Articles/1166225/NET-Core-Datagrid" target="_blank">https://www.codeproject.com/Articles/1166225/NET-Core-Datagrid</a></li>
-                <li><a href="http://mvcgrid.net/" target="_blank">http://mvcgrid.net/</a></li>
-                <li><a href="https://datatables.net/" target="_blank">https://datatables.net/</a></li>
-                <li><a href="https://www.npmjs.com/package/jquery-view" target="_blank">https://www.npmjs.com/package/jquery-view</a></li>
-                <li><a href="http://js-grid.com/" target="_blank">http://js-grid.com/</a></li>
-                <li><a href="https://datatables.net/examples/styling/bootstrap4.html" target="_blank">https://datatables.net/examples/styling/bootstrap4.html</a></li>
-            </ul>
-            <p>and many more...</p>
-            <p>But I was set on doing a basic home-grown record browser/manager. I was also determined to get a scrolling table to work in a flex-box, multi-container design. Not as easy as you may think. FInally had a break through with the help of this:</p>
-            <p><a href="https://codepen.io/RajaJaganathan-1471687644/pen/qNZNZW">https://codepen.io/RajaJaganathan-1471687644/pen/qNZNZW</a></p>
-            <p>Even though it is single-container, I was able to implement in asynchronous container.</p>
-            <p><em><strong>Knockout JS&nbsp;</strong></em>&nbsp;not only provides the functionality for "Coments Mannager", but also controls the main asynchronous exchange and loading of data. Check out how the main navbar loads each root page with Ajax and Json.</p>
-            <p>See <a href="https://github.com/SwartHack/defaultwebsite-core/tree/master/DefaultWeb/wwwroot" target="_blank" rel="noopener">/wwwroot/_site</a> for the model and the code...</p>
-            <p><strong>ASP.NET Core Project Overview</strong> - IConfigurationRoot, IServiceCollection, IHostingEnvironment, UserManager, SignInManger, View Dependency Injections,&hellip;</p>
-            <p><strong>Application Architecture Basics</strong>- Models, Controllers, Views&hellip;</p>
-            <p><strong>Bootstrap 4 beta</strong> -Bootswatch, FontAwesome&hellip;</p>
-            <p><strong>Jquery/Javascript</strong>- Almond, Ajax/HXR/Json, KnockoutJS, JQuery UI&hellip;</p>
-            <p><strong>Application Data</strong> Account Manager, Sandbox, Adventure Works&hellip;</p>
-            <p><strong>ArcGIS Enterprise Server and application API's</strong></p>
-            <p><strong>Mobile form factors and serving mobile requests and data.</strong></p>
-            <p><strong>.........................</strong></p>
+        <h3>A Default WebSite.net Core</h3>
+        <p class="discussion">This missive will go on a bit, as I add more content and detail. The purpose here is give descriptions and comments on the basic set-up, architecture and various patterns and practices investigated and demonstrated by Default WebSite.net. The different Sand Box discussions focus on the specific technology being applied by a particular demo. </p>
+        <p class="disclaimer">Disclaimer - Nothing demonstrated here, nor the contents of any source code area guaranteed to any length. Scrutinizers of the source will notice a number of different approaches and maturities in the source. It may appear sometimes that Chef Boardee&trade; wrote the code. Please don't flame the code, everything is proto-type, pre-Alpha at best. And many times the scope of a particular demo will dictate how "slick" the code is. Code comments are continually being added and are tracked on GitHub. Comments will be incorporated soon, until then, hit up GitHub with any comments or feedback. Thank You for understanding! - The Management</p>
+        <h4>Client Side Overview</h4>
+        <p class="discussion">Why start with the client side? Honestly because that&rsquo;s where most the development time is spent. Specifically using <span class="emphasis-brand">Bootstrap4b.x, SASS, Javascript, JQuery and KnockoutJS</span> to name a few. Developing not only the outward appearance, but the core structure, design and behavior of the entire client-side process; including responsive behavior and asynchronous processing.</p>
+        <p class="discussion">The client-side code lives in the project's <span class="emphasis-text">wwwroot/_site</span> directory...</p>
+        <p class="emphasis-list-item"><a href="https://github.com/SwartHack/defaultwebsite-core/tree/master/DefaultWeb/wwwroot/lib/_site"><i class="fa fa-github"></i> Client-side development directory</a>.</p>
+        <p class="discussion">The client-side build process is detached from the project and not integrated into any IDE tools. Although convenient, they can tend to muck up the entire build process. This enables separate build events for client and server code, which facilitates development and debugging; as well as continuous integration management.</p>
+        <p class="lead"> Here are a few key highlights to the process</p>
+        <p class="discussion"><span class="emphasis-leadin">Manage all the Bower packages using command-line</span>, from the project's default directory. This populates all the requisite <span class="emphasis-text">wwwroot/_site</span> contents, which the <span class="emphasis-text">wwwroot/_site</span>'s scripts require. The utilized Bower packages are listed in the project's &nbsp;<a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/bower.json"><i class="fa fa-github"></i> bower.json file.</a>&nbsp;</p>
+        <p class="discussion">If you downloaded the project and want to restore the bower packages simply open a command-line tool with Administrative privileges, in the project's root directory and execute the bower command:</p>
+        <p class="code">&gt;\ bower install</p>
+        <p class="discussion"><span class="emphasis-leadin">Manage the <span class="emphasis-text">wwwroot/_site</span> build process of CSS and Javascript</span>&nbsp;manually using <a class="link-brand" href="https://nodejs.org/en/download/">Node.js</a>, <a class="link-brand" href="https://www.npmjs.com/">npm</a> and <a class="link-brand" href="https://gruntjs.com/">Grunt</a class="link-brand">, from the command line in the <span class="emphasis-text">wwwroot/_site</span> directory. DO NOT USE npm in the project's root directory. It is advisable to avoid a "node_modules" directory in the project root!&nbsp;</p>
+        <p class="discussion">To restore all of the required NPM packages, in the <span class="emphasis-text">wwwroot/_site</span> directory with the Admin command line execute (requires <a class="link-brand" href="https://nodejs.org/en/download/">Node.js</a> and <a class="link-brand" href="https://github.com/gruntjs/grunt-cli">grunt-cli</a>):</p>
+        <p class="code">&gt;\ npm rebuild</p>
+        <p class="emphasis-leadin">Notes on Grunt, SASS, CSS &amp; Bootstrap 4</p>
+        <p class="discussion">CSS files are preprocessed and compiled using&nbsp;<a class="link-brand" href="https://github.com/gruntjs/grunt-contrib-sass">grunt-contrib-sass v1.0.0.</a>&nbsp;This is a node wrapper for using actual&nbsp;<a class="link-brand" href="http://www.ruby-lang.org/en/downloads/">Ruby</a>&nbsp;&nbsp;<a class="link-brand" href="http://sass-lang.com/download.html">SASS</a>&nbsp;compilers, and not an implementation of <a class="link-brand" href="http://sass-lang.com/libsass">LIBSASS</a>. To configure this component follow the instructions outlined in&nbsp;<a class="link-brand" href="https://github.com/gruntjs/grunt-contrib-sass">grunt-contrib-sass v1.0.0.</a>&nbsp;Make sure to be in the <span class="emphasis-text">wwwroot/_site</span> directory to run the command.</p>
+        <p class="code">&gt;\ gem install sass</p>
+        <p class="discussion"><a href="https://getbootstrap.com/">Bootstrap 4b.x</a> provides the base styling and responsive functionality, but it is integrated into the SASS assembly process a little differently. The standard approach utilizes a CSS reference to a default&nbsp; bootstrap.css and then a reference to the "Site.css" for local customizations and overrides.&nbsp;</p>
+        <p class="code">&lt;link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /&gt;<br /> &lt;link rel="stylesheet" href="~/css/site.css" /&gt;</p>
+        <p class="discussion">Here the process is reversed and the site.css becomes the root and only css file. At the SASS assembly level we reference only one source file. In this case, as illustrated in <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/sass/defaultwebsite.scss"><i class="fa fa-github"></i> defaultwebsite.scss</a>.</p>
+        <p class="code">&lt;link rel="stylesheet" href="&amp ViewData["ThemeDevelopment"]" /&gt;</p>
+        <p class="discussion">where "ThemeDevelopment" would&nbsp; indicate the default Bootstrap theme, "default", or a Bootswatch theme, i.e. "cerulean".&nbsp;BootSwatch themes for Bootstrap4 are incorporated into every build...</p>
+        <p class="discussion"><span class="emphasis-leadin">Use <a class="link-brand" href="">Almond.js</a> and <a class="link-brand" href="">AMD</a></span> for your javascript architecture. It just makes more sense and eliminates CommonJs! Then throw in some <span class="emphasis-brand">JQuery, JQuery UI, Ajax/Json</span></p>
+        <p class="discussion"><span class="emphasis-leadin">Build the Client</span></p>
+        <p class="discussion">The <span class="emphasis-text">wwwroot/_site</span> <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/Gruntfile.js"><i class="fa fa-github"></i> gruntfile.js</a> and <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/package.json"><i class="fa fa-github"></i> package.json</a> run the show for grunt processing. If everything is installed and working, this&nbsp;command will build the default Bootstrap theme then lint and bundle the javascript.&nbsp;</p>
+        <p class="code">&gt;/ grunt build</p>
+        <p class="discussion">Inspecting the gruntfile illustrates many other command options for building the client-side components.</p>
+        <p class="mussing">Ok, there are a <strong><em>number</em></strong> of <span class="emphasis">"client-side"</span> prerequisites! Which has become the nature of web client-side development nowadays. <span class="emphasis">What happened to the "Thin Client"?!</span> In the case of this site, only expect more to be added! &ldquo;The More The Merrier&rdquo;! Nice exposure to a variety of approaches&hellip;</p>
+        <h4>Server-Side Overview - TODO</h4>
+        <p><strong>ASP.NET Core Project Overview</strong> - IConfigurationRoot, IServiceCollection, IHostingEnvironment, UserManager, SignInManger, View Dependency Injections, Middleware and more&hellip;</p>
+        <p><strong>Application Architecture Basics</strong>- Models, Controllers, Views&hellip;</p>
+        <p><strong>EntityFramework and Sql Server 2017</strong></p>
+        <p><strong>Application Data</strong> Account Manager, Sandbox, Adventure Works&hellip;</p>
+        <p><strong>ArcGIS Enterprise Server and application API's</strong></p>
+        <p><strong>Mobile form factors and serving mobile requests and data.</strong></p>
+        <p><strong>.........................</strong></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
     </div>
- </div>
+</div>

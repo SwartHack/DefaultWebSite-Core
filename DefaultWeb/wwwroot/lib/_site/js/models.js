@@ -89,7 +89,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         fileInfo: ko.observable([]),  // ununsed ?
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
-        mimeTypes: ko.observableArray(['image/*', 'application/pdf', '.mp4', '.avi']),
+        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'aaplication/mp4', 'application/avi']),
         uploadFilesCount: ko.pureComputed(function () {
             return 'Files: ' + viewModel.uploadFiles().length
         }, this),

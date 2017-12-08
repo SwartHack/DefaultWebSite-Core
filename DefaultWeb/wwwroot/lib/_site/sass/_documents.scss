@@ -56,19 +56,20 @@
 p {
     margin-left: 2vw;
     margin-right: 2vw;
-    margin-top: 1.5vh;
+    margin-top: .5vh;
     margin-bottom: .5vh;
     text-align: justify;
-    font-size: 2vh;
+    font-size: 1.5vh;
     font-weight: normal;
     font-style: normal;
-    line-height: 2.2vh;
+    line-height: 2vh;
     background-color: transparent;
 
     /*&:nth-child(1) {
         margin-top: 2vh;
     }*/
 }
+
 
 .exclamation {
     margin-left: 3vw;
@@ -89,13 +90,15 @@ p {
     margin-right: 3vw;
     margin-top: 2vh;
     margin-bottom: 1.5vh;
-    padding-top: .5vh;
-    padding-bottom: .5vh;
+    padding: 1vh;
     font-style: italic;
-    font-weight: 500;
+    font-weight: 400;
+    font-size: 1.5vh;
+    line-height: 1.8vh;
     text-align: justify !important;
-    background-color: lightgray;
-    color:crimson;
+    background-color: transparent;
+    box-shadow: inset -2px 1px 20px 0px crimson;
+
 }
 
 .official {
@@ -121,8 +124,8 @@ p {
     font-style: italic;
     line-height: 2.5vh;
     text-align: center;
-    border: .25vh inset whitesmoke;
-    background-color: lightblue;
+    border: .1vh inset whitesmoke;
+    background-color: transparent;
 }
 
 .discussion {
@@ -131,7 +134,7 @@ p {
     text-align: justify;
     line-height: 2vh;
     //padding-bottom: .1rem;
-    margin: 1vh 2vw 1vh 2vw;
+    //margin: 1vh 2vw 1vh 2vw;
 }
 
 .side-note {
@@ -158,12 +161,33 @@ p {
     }
 }
 
-.emphasis {
-    font-style: italic;
-    font-weight: 500;
-    font-size:2.5vh;
+@mixin emphasis($style : italic, $weight: 600, $size: 2vh) {
+    font-style: $style;
+    font-weight: $weight;
+    font-size:$size;
 }
 
+.emphasis {
+    @include emphasis();
+}
+
+.emphasis-text {
+    @include emphasis(italic,600,1.5vh);
+}
+
+.emphasis-brand {
+    @include emphasis(italic,700,inherit);
+}
+
+.emphasis-leadin {
+    @include emphasis(italic,800,inherit);
+}
+
+.emphasis-list-item {
+    @include emphasis(italic,600,1.5vh);
+    margin-top:0;
+    margin-bottom:0;
+}
 .sub-heading {
     font-size: 2.5vh;
     font-weight: 400;
@@ -180,6 +204,39 @@ p {
     margin-top:0;
 }
 
+
+.code {
+    font-size:1.5vh;
+    line-height:1.7vh;
+    font-style:normal;
+    font-weight:500;
+    text-align:left;
+    background-color:lightyellow;
+
+}
+
+.link-brand {
+    //text-decoration: underline;
+    font-style: italic;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.link-text {
+    font-style: normal;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+///////////////////////////////
 card-text ul {
     line-height: 1.25rem;
     margin-left: 3rem;

@@ -1,8 +1,8 @@
 ﻿//////////////////////////////////////////////////////////////////////
 /// File ops client module
 //////////////////////////////////////////////////////////////////////
-define('dws/fileops-client', ['dws/controller', 'dws/model'],
-    function (Control, viewModel) {
+define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
+    function (Control, Thumbnail, viewModel) {
 
         ///////////////////////////////////////////////////////////////////////
         /// init cause it controls/binds async html content not present at site load
@@ -64,13 +64,13 @@ define('dws/fileops-client', ['dws/controller', 'dws/model'],
         }
 
         function isValidMimeType(file) {
-            return true;
-            //for (var i = 0; i < viewModel.mimeTypes.length; i++) {
-            //    if (file.type === viewModel.mimeTypes[i]) {
-            //        return true;
-            //    }
-            //}
-            //return false;
+
+            for (var i = 0; i < viewModel.mimeTypes().length; i++) {
+                if ( file.type.match(viewModel.mimeTypes()[i]) ) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -97,19 +97,56 @@ define('dws/fileops-client', ['dws/controller', 'dws/model'],
                     var fname = f.name;
                     var dups = viewModel.uploadFilesInfo().findIndex(f => f.name == fname);
                     if (dups > -1) { continue; }
-                    var reader = new FileReader();
-                    reader.onload = (function (file) {
-                        return function (e) {
-                            var fileSize = getFileSize(file.size);
-                            viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: e.target.result });
-                            viewModel.uploadFiles.push(file);
-                        }
-                    })(f);
 
-                    reader.readAsDataURL(f);
+                    
+                    var fileSize = getFileSize(f.size);
+                    
+                   
+                    //viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: fileContent });
+                    //viewModel.uploadFiles.push(file);
+
+                    
                 }
             }
         }
+
+        function pushFile(file) {
+
+            switch (file.type) {
+
+                case file.type.match('image/*'):
+
+                    var reader = new FileReader();
+                    reader.onload = (function (file) {
+                        return function (e) {
+                            viewModel.fileContent(e.target.result);
+                            //push should be localized
+                        }
+                    });
+
+                    reader.readAsDataURL(file);
+                    break;
+
+                case 'application/pdf':
+                    //getApplicationIcon(file);
+                    break;
+
+                default:
+            }
+
+        }
+
+        //function readImageContent(file) {
+
+        //    var reader = new FileReader();
+        //    reader.onload = (function (file) {
+        //        return function (e) {
+        //            viewModel.fileContent(e.target.result);
+        //        }
+        //    })(f);
+
+        //    reader.readAsDataURL(f);
+        //}
 
         function getFileSize(size) {
             var fileSize = 0;

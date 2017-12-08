@@ -32399,7 +32399,7 @@ $.validator.addMethod("ziprange", function(value, element) {
 }));
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.12.7
+ * @version 1.12.9
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -32427,7 +32427,7 @@ $.validator.addMethod("ziprange", function(value, element) {
 	(global.Popper = factory());
 }(this, (function () { 'use strict';
 
-var isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
 var timeoutDuration = 0;
 for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
@@ -32444,7 +32444,7 @@ function microtaskDebounce(fn) {
       return;
     }
     called = true;
-    Promise.resolve().then(function () {
+    window.Promise.resolve().then(function () {
       called = false;
       fn();
     });
@@ -32501,7 +32501,7 @@ function getStyleComputedProperty(element, property) {
     return [];
   }
   // NOTE: 1 DOM access here
-  var css = window.getComputedStyle(element, null);
+  var css = getComputedStyle(element, null);
   return property ? css[property] : css;
 }
 
@@ -32529,7 +32529,7 @@ function getParentNode(element) {
 function getScrollParent(element) {
   // Return body, `getScroll` will take care to get the correct `scrollTop` from it
   if (!element) {
-    return window.document.body;
+    return document.body;
   }
 
   switch (element.nodeName) {
@@ -32571,7 +32571,7 @@ function getOffsetParent(element) {
       return element.ownerDocument.documentElement;
     }
 
-    return window.document.documentElement;
+    return document.documentElement;
   }
 
   // .offsetParent will return the closest TD or TABLE in case
@@ -32618,7 +32618,7 @@ function getRoot(node) {
 function findCommonOffsetParent(element1, element2) {
   // This check is needed to avoid errors in case one of the elements isn't defined for any reason
   if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
-    return window.document.documentElement;
+    return document.documentElement;
   }
 
   // Here we make sure to give as "start" the element that comes first in the DOM
@@ -32710,7 +32710,7 @@ function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
   var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-  return +styles['border' + sideA + 'Width'].split('px')[0] + +styles['border' + sideB + 'Width'].split('px')[0];
+  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
 }
 
 /**
@@ -32733,9 +32733,9 @@ function getSize(axis, body, html, computedStyle) {
 }
 
 function getWindowSizes() {
-  var body = window.document.body;
-  var html = window.document.documentElement;
-  var computedStyle = isIE10$1() && window.getComputedStyle(html);
+  var body = document.body;
+  var html = document.documentElement;
+  var computedStyle = isIE10$1() && getComputedStyle(html);
 
   return {
     height: getSize('Height', body, html, computedStyle),
@@ -32878,8 +32878,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var scrollParent = getScrollParent(children);
 
   var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = +styles.borderTopWidth.split('px')[0];
-  var borderLeftWidth = +styles.borderLeftWidth.split('px')[0];
+  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
   var offsets = getClientRect({
     top: childrenRect.top - parentRect.top - borderTopWidth,
@@ -32895,8 +32895,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    var marginTop = +styles.marginTop.split('px')[0];
-    var marginLeft = +styles.marginLeft.split('px')[0];
+    var marginTop = parseFloat(styles.marginTop, 10);
+    var marginLeft = parseFloat(styles.marginLeft, 10);
 
     offsets.top -= borderTopWidth - marginTop;
     offsets.bottom -= borderTopWidth - marginTop;
@@ -33101,7 +33101,7 @@ function getReferenceOffsets(state, popper, reference) {
  * @returns {Object} object containing width and height properties
  */
 function getOuterSizes(element) {
-  var styles = window.getComputedStyle(element);
+  var styles = getComputedStyle(element);
   var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
   var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
   var result = {
@@ -33318,7 +33318,7 @@ function getSupportedPropertyName(property) {
   for (var i = 0; i < prefixes.length - 1; i++) {
     var prefix = prefixes[i];
     var toCheck = prefix ? '' + prefix + upperProp : property;
-    if (typeof window.document.body.style[toCheck] !== 'undefined') {
+    if (typeof document.body.style[toCheck] !== 'undefined') {
       return toCheck;
     }
   }
@@ -33437,7 +33437,7 @@ function removeEventListeners(reference, state) {
  */
 function disableEventListeners() {
   if (this.state.eventsEnabled) {
-    window.cancelAnimationFrame(this.scheduleUpdate);
+    cancelAnimationFrame(this.scheduleUpdate);
     this.state = removeEventListeners(this.reference, this.state);
   }
 }
@@ -33677,6 +33677,8 @@ function isModifierRequired(modifiers, requestingName, requestedName) {
  * @returns {Object} The data object, properly modified
  */
 function arrow(data, options) {
+  var _data$offsets$arrow;
+
   // arrow depends on keepTogether in order to work
   if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
     return data;
@@ -33728,22 +33730,23 @@ function arrow(data, options) {
   if (reference[side] + arrowElementSize > popper[opSide]) {
     data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
   }
+  data.offsets.popper = getClientRect(data.offsets.popper);
 
   // compute center of the popper
   var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
 
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
-  var popperMarginSide = getStyleComputedProperty(data.instance.popper, 'margin' + sideCapitalized).replace('px', '');
-  var sideValue = center - getClientRect(data.offsets.popper)[side] - popperMarginSide;
+  var css = getStyleComputedProperty(data.instance.popper);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+  var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
   sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
 
   data.arrowElement = arrowElement;
-  data.offsets.arrow = {};
-  data.offsets.arrow[side] = Math.round(sideValue);
-  data.offsets.arrow[altSide] = ''; // make sure to unset any eventual altSide value from the DOM node
+  data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
 
   return data;
 }
@@ -48203,7 +48206,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         fileInfo: ko.observable([]),  // ununsed ?
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
-        mimeTypes: ko.observableArray(['image/*', 'application/pdf', '.mp4', '.avi']),
+        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'aaplication/mp4', 'application/avi']),
         uploadFilesCount: ko.pureComputed(function () {
             return 'Files: ' + viewModel.uploadFiles().length
         }, this),
@@ -49154,10 +49157,122 @@ function (Control, viewModel) {
 
 
 //////////////////////////////////////////////////////////////////////
+/// thumb client module
+//////////////////////////////////////////////////////////////////////
+define('dws/thumb', [],
+    function () {
+
+        //////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function getThumbFromFile(file, callback) {
+
+            if ( file.type.match('image/*') ) {
+                thumbFromImageFile(file, callback);
+                return;
+            }
+                    
+            if (file.type.match('application/*')) {
+                thumbFromAppFile(file, callback);
+                return;
+            }
+
+            // unsupported/invalid
+
+        }
+
+        //////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function thumbFromImageFile(file, callback) {
+            var reader = new FileReader();
+
+            reader.onload = (function (file) {
+                var test = file.name;
+                return function (file, e) {
+                    callback(file,e.target.results);
+                    
+                }
+            });
+
+            reader.readAsDataURL(file);
+        }
+
+        //////////////////////////////////////////////////////////////////////
+        /// TODO
+        /// Gonna have to deal with each application type individually as we 
+        /// support more. Need a smarter way to do it as there are so many!!!
+        //////////////////////////////////////////////////////////////////////
+        function thumbFromAppFile(file, callback) {
+
+            if (file.type.match('*/pdf')) {
+                thumbFromPdf(file, callback);
+            }
+           
+        }
+
+         //////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function thumbFromPdf(file, callback) {
+
+            PDFJS.workerSrc = 'pdf.worker.js';
+
+            var fullname = file.name;
+            PDFJS.getDocument(fullname).then(function (pdf) {
+
+                pdf.getPage(1).then(function (page) {
+                    var viewport = page.getViewport(0.5);
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    var renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+
+                    page.render(renderContext).then(function () {
+                        //set to draw behind current content
+                        ctx.globalCompositeOperation = "destination-over";
+                        //set background color
+                        ctx.fillStyle = "#fff";
+                        //draw on entire canvas
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        // create an img from the canvas which contains the page contents
+                        var img_src = canvas.toDataURL();
+
+                        callback(file, img_src);
+                    });
+
+                });
+
+
+            });
+
+        }
+
+         //////////////////////////////////////////////////////////////////////
+        /// 
+        //////////////////////////////////////////////////////////////////////
+        function thumbFromVideoFile() {
+
+        }
+
+         
+
+        return {
+            getThumbFromFile: getThumbFromFile
+        }
+
+    });
+
+//////////////////////////////////////////////////////////////////////
 /// File ops client module
 //////////////////////////////////////////////////////////////////////
-define('dws/fileops-client', ['dws/controller', 'dws/model'],
-    function (Control, viewModel) {
+define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
+    function (Control, Thumbnail, viewModel) {
 
         ///////////////////////////////////////////////////////////////////////
         /// init cause it controls/binds async html content not present at site load
@@ -49219,13 +49334,13 @@ define('dws/fileops-client', ['dws/controller', 'dws/model'],
         }
 
         function isValidMimeType(file) {
-            return true;
-            //for (var i = 0; i < viewModel.mimeTypes.length; i++) {
-            //    if (file.type === viewModel.mimeTypes[i]) {
-            //        return true;
-            //    }
-            //}
-            //return false;
+
+            for (var i = 0; i < viewModel.mimeTypes().length; i++) {
+                if ( file.type.match(viewModel.mimeTypes()[i]) ) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -49252,19 +49367,56 @@ define('dws/fileops-client', ['dws/controller', 'dws/model'],
                     var fname = f.name;
                     var dups = viewModel.uploadFilesInfo().findIndex(f => f.name == fname);
                     if (dups > -1) { continue; }
-                    var reader = new FileReader();
-                    reader.onload = (function (file) {
-                        return function (e) {
-                            var fileSize = getFileSize(file.size);
-                            viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: e.target.result });
-                            viewModel.uploadFiles.push(file);
-                        }
-                    })(f);
 
-                    reader.readAsDataURL(f);
+                    
+                    var fileSize = getFileSize(f.size);
+                    
+                   
+                    //viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: fileContent });
+                    //viewModel.uploadFiles.push(file);
+
+                    
                 }
             }
         }
+
+        function pushFile(file) {
+
+            switch (file.type) {
+
+                case file.type.match('image/*'):
+
+                    var reader = new FileReader();
+                    reader.onload = (function (file) {
+                        return function (e) {
+                            viewModel.fileContent(e.target.result);
+                            //push should be localized
+                        }
+                    });
+
+                    reader.readAsDataURL(file);
+                    break;
+
+                case 'application/pdf':
+                    //getApplicationIcon(file);
+                    break;
+
+                default:
+            }
+
+        }
+
+        //function readImageContent(file) {
+
+        //    var reader = new FileReader();
+        //    reader.onload = (function (file) {
+        //        return function (e) {
+        //            viewModel.fileContent(e.target.result);
+        //        }
+        //    })(f);
+
+        //    reader.readAsDataURL(f);
+        //}
 
         function getFileSize(size) {
             var fileSize = 0;
@@ -49601,10 +49753,8 @@ require(['dws/actions']);
 require(['dws/comments']);
 require(['dws/sandbox']);
 require(['dws/model-utils']);
-require(['dws/controller']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
-
 
 require(['dws/controller'],
 function (control) {

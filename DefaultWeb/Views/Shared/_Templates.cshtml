@@ -59,7 +59,7 @@
                 <div class="card-title">Select or Drop Files</div>
                 <a id="file-select" role="button" title="Browse Files...">
                     <i class="fa fa-border fa-folder-open"></i>
-                    <input class="form-control" id="file-input" type="file" name="files" multiple accept="image/*, application/pdf, .mp4, .avi" />
+                    <input class="form-control" id="file-input" type="file" name="files" multiple data-bind="attr { accept: mimeTypes}" />
                 </a>
             </div>
             <div id="file-upload-drop">Drop files here</div>

@@ -40,7 +40,7 @@ namespace DefaultWeb.Controllers
         {
             //FileRepository.Rollback();
             //FileRepository.CommitTransaction();
-            FileRepository.Janitor(HttpContext.Session.Id);
+            //FileRepository.Janitor(HttpContext.Session.Id);
         }
 
         /// <summary>

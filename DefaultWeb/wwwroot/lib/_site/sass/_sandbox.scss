@@ -89,8 +89,6 @@
     //margin: .25rem;
     background-color: transparent;
 
-
-
     #sandbox-header.card-header {
         background-color: tan;
         padding-top: 0;
@@ -157,7 +155,7 @@
         overflow-y:hidden;
 
         &.expand {
-            height: 60%;
+            height: auto;
             overflow-y:auto;
         }
     }

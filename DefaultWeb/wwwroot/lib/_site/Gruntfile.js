@@ -51,20 +51,20 @@ module.exports = function(grunt) {
             src: ['dist/js/site.js']
         },
         sass: {
-          dist: {
-              options: {
-                  sourceMap: false
-            },
-            src: [],
-            dest: ''
-          }
+            dist: {
+                options: {
+                    sourceMap: false
+                },
+                src: [],
+                dest: ''
+            }
         },
         postcss: {
             options: {
                 map: false, // inline sourcemaps
                 processors: [
                     require('postcss')(), // add fallbacks for rem units
-                    
+
                 ]
             },
             dist: {
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: '',
-                dest:''
+                dest: ''
             }
         },
         copy: {
@@ -98,7 +98,14 @@ module.exports = function(grunt) {
                 src: 'dist/fonts/*.*',
                 dest: '../../fonts/',
                 filter: 'isFile'
-            }    
+            },
+            pdfjs: {
+                expand: true,
+                cwd: 'node_modules/pdf.js/build/generic/build',
+                src: ['pdf.js', 'pdf.worker.js'],
+                dest: 'dist/js/',
+                filter: 'isFile'
+            }
         },
         uglify: {
             wwwroot: {
@@ -138,7 +145,7 @@ module.exports = function(grunt) {
 
       });
 
-      grunt.registerTask('build', function () {
+      grunt.registerTask('dist', function () {
           grunt.task.run('theme');
           grunt.task.run('js');
 
@@ -159,6 +166,7 @@ module.exports = function(grunt) {
           grunt.task.run('concat:jcore');
           grunt.task.run('concat:site');
           grunt.task.run('eslint');
+          grunt.task.run('copy:pdfjs');
           //grunt.task.run('uglify:wwwroot')
       });
 

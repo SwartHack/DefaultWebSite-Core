@@ -67,6 +67,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Controllers\AccountController.cs" />
+    <Content Include="Controllers\ActionResults\DocumentResult.cs" />
+    <Content Include="Controllers\ActionResults\ImageResult.cs" />
+    <Content Include="Controllers\ActionResults\ThumbnailResult.cs" />
+    <Content Include="Controllers\ActionResults\VideoResult.cs" />
+    <Content Include="Controllers\base\DwsBaseController.cs" />
+    <Content Include="Controllers\CommentsController.cs" />
+    <Content Include="Controllers\FileOpsControllers.cs" />
+    <Content Include="Controllers\GISController.cs" />
+    <Content Include="Controllers\HomeController.cs" />
+    <Content Include="Controllers\ManageController.cs" />
+    <Content Include="Controllers\SandboxController.cs" />
     <Content Include="Views\Notebook\Snippets\ArchiveFile.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

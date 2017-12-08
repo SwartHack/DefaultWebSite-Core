@@ -1,0 +1,118 @@
+﻿/// <reference path="defaultwebsite.scss" />
+
+.dws-page {
+    height: 100%;
+    //padding: 5%;
+    margin: 0;
+    border-radius: 0;
+}
+
+#welcome.card {
+    @extend .dws-page;
+    background-color: transparent;
+    overflow-y: auto;
+    //margin-top:.5rem;
+    padding:0;
+    border:none;
+
+    .card-header {
+        border:none;
+    }
+
+}
+
+#about.card {
+    @extend .dws-page;
+    background-color: firebrick;
+    color: ghostwhite;
+    overflow: auto;
+
+    ul#about-content.list-group {
+        list-style: none;
+        background-color: transparent;
+
+        li.list-group-item {
+            background-color: transparent;
+            border: none;
+        }
+    }
+}
+
+#contact.card {
+    @extend .dws-page;
+    overflow: auto;
+
+    .card-block {
+        display: block;
+        padding: .5rem;
+        margin: 0;
+        background-color: transparent;
+
+        address {
+            box-shadow: inset;
+            padding: .5em;
+            margin-bottom: 0;
+        }
+
+        .quote-container {
+            margin-bottom: 1rem;
+
+            .note.yellow {
+                width: auto;
+                margin-left: 5%;
+                margin-right: 5%;
+                margin-bottom: 2rem;
+                font-size: 1em;
+                font-style: italic;
+            }
+        }
+
+        #doc-buttons.card {
+            flex-direction: row;
+            justify-content: space-between;
+            border: none;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+
+            button {
+                padding-left: 2em
+            }
+        }
+    }
+
+    div#doc-resume.collapse.show, div#doc-cv.collapse.show, div#doc-masters.collapse.show {
+        .card.card-block {
+            .open-document {
+                height: 90%;
+            }
+        }
+    }
+}
+
+/*#sandbox.card {
+    @extend .dws-page;
+    
+}*/
+
+
+#comments.card {
+    @extend .dws-page;
+    background-color: hotpink;
+    color: chartreuse;
+}
+
+
+#ack.card {
+    @extend .dws-page;
+    background-color: silver;
+    color: royalblue;
+    padding: 0;
+    overflow-y: auto;
+
+    .card-block {
+        display: block;
+        //padding: 0;
+        margin: 0;
+        background-color: transparent;
+    }
+}

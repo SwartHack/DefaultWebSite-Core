@@ -4,6 +4,7 @@
     <environment names="Development">
         <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true" />
         <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" asp-append-version="true" />
+        <script src="~/lib/_site/dist/js/pdf.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
@@ -18,6 +19,7 @@
    @{Html.RenderPartial("_Templates.cshtml");}
     <environment names="Development">
         <script src="~/lib/_site/dist/js/jcore.js" asp-append-version="true"></script>
+        <script src="~/lib/_site/dist/js/pdf.worker.js" asp-append-version="true"></script>
         <script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">

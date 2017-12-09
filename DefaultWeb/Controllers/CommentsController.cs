@@ -45,11 +45,21 @@ namespace DefaultWeb.Controllers
         /// Retun list off Sources 
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetSources()
+        public IActionResult GetSources()
         {
-            var commentContext = _context.Sources.Include(c => c.Comments);
-            Response.StatusCode = 200;
-            return Json(commentContext.ToArray());
+            try
+            {
+                var commentContext = _context.Sources.Include(c => c.Comments);
+                Response.StatusCode = 200;
+                return Json(commentContext.ToArray());
+            }
+            catch (Exception ex)
+            {
+                var serverEx = new ServerException() { MiscException = ex };
+                Response.StatusCode = 400;
+                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverEx);
+            }
+
         }
 
         /// <summary>
@@ -58,9 +68,19 @@ namespace DefaultWeb.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         public IActionResult GetModalContent(string id)
-        {  
+        {
+            try
+            {
                 string viewname = String.Format("~/Views/Comments/Create{0}.cshtml", id);
                 return PartialView(viewname);
+            }
+            catch (Exception ex)
+            {
+                var serverEx = new ServerException() { MiscException = ex };
+                Response.StatusCode = 400;
+                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverEx);
+            }
+            
         }
 
         /// <summary>

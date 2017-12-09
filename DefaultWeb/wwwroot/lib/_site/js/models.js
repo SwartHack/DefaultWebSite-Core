@@ -189,6 +189,12 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             $(newdata).dialog();
     });
 
+    //viewModel.source.subscribe(function (data) {
+    //    viewModel.sources.sortByName('sourceName', 'asc')
+    //});
+
+
+
     ////////////////////////////////////////
     /// Sandbox - Comments Manager
     /// Source subscribe events/actions
@@ -212,6 +218,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         //re-set comments
         //viewModel.comments([]);
         viewModel.comments(source.comments == null ? [] : source.comments);
+
         if ( viewModel.comments().length > 0 ) {
             viewModel.commentId(viewModel.comments()[0].id);
         }  
@@ -248,7 +255,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
 
          // sort here ? We souldn't have too?
          // TODO -Always adds on top, need to animate nicely, offer asc/desc
-        viewModel.comments.sortByDateTime('datetime', 'desc');
+        viewModel.comments.sortByDateTime('datetime', 'asc');
 
         //console.log('comment subscribe:' + comment.id);
     });

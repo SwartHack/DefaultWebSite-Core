@@ -8,8 +8,7 @@ function (Control, viewModel) {
         
         var settings = {
             url: "/Comments/GetSources",
-            cache: false,
-            dataType: 'json'
+            cache: false
         }
         viewModel.waitingTarget('#navbar-main');
         viewModel.waiting(true);
@@ -18,11 +17,12 @@ function (Control, viewModel) {
             .done(function (data) {
                 viewModel.sources([]);
                 viewModel.sources(data);
+                viewModel.sources.sortByName('sourceName', 'asc')
                 // this is against my pattern!!!! TODO
                 // model should deal with this, but only first time loading...
                 if (data.length > 0) {
                  //$('#sources-table tbody tr:first').addClass('active');
-                    viewModel.sourceId(data[0].id);
+                    viewModel.sourceId(viewModel.sources()[0].id);
                 }
                 
             })
@@ -113,7 +113,6 @@ function (Control, viewModel) {
         var settings = {
             url: '/Comments/CreateComment',
             type: 'POST',
-            dataType: 'json',
             data: formvals
         };
 

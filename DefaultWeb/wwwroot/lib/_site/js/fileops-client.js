@@ -1,7 +1,7 @@
 ﻿//////////////////////////////////////////////////////////////////////
 /// File ops client module
 //////////////////////////////////////////////////////////////////////
-define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
+define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
     function (Control, Thumbnail, viewModel) {
 
         ///////////////////////////////////////////////////////////////////////
@@ -28,14 +28,17 @@ define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
                 $('#file-ops-client').dialog(options);
             });
 
-            $('#file-ops-client').on('dialogclose', function (event, ui) {
-                var $diag = $(this);
-                $diag.hide(); //animate
-                $diag.empty();
-                $diag.remove();
-            });
+            //$('#file-ops-client').on('dialogclose', function (event, ui) {
+            //    var $diag = $(this);
+            //    $diag.hide(); //animate TODO
+            //});
 
-            $(document).on('click', '.upload-file-delete', function (e) {
+            //$('.file-ops-client').on('click', 'a.upload-file-delete',  function (e) {
+            //    e.preventDefault();
+            //    fileRemove(e);
+            //});
+
+            $(document).on('click', 'a.upload-file-delete', function (e) {
                 e.preventDefault();
                 fileRemove(e);
             });
@@ -98,55 +101,20 @@ define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
                     var dups = viewModel.uploadFilesInfo().findIndex(f => f.name == fname);
                     if (dups > -1) { continue; }
 
-                    
-                    var fileSize = getFileSize(f.size);
-                    
+                    Thumbnail.getThumbFromFile(f, pushFile);
                    
-                    //viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: fileContent });
-                    //viewModel.uploadFiles.push(file);
-
-                    
                 }
             }
         }
 
-        function pushFile(file) {
-
-            switch (file.type) {
-
-                case file.type.match('image/*'):
-
-                    var reader = new FileReader();
-                    reader.onload = (function (file) {
-                        return function (e) {
-                            viewModel.fileContent(e.target.result);
-                            //push should be localized
-                        }
-                    });
-
-                    reader.readAsDataURL(file);
-                    break;
-
-                case 'application/pdf':
-                    //getApplicationIcon(file);
-                    break;
-
-                default:
-            }
-
+        ///////////////////////////////////////////////////////////////////////
+        /// This will not happen in order!!!
+        //////////////////////////////////////////////////////////////////////
+        function pushFile(file, thumbContext) {
+            var fileSize = getFileSize(file.size);
+            viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, thumbcontext: thumbContext });
+            viewModel.uploadFiles.push(file);
         }
-
-        //function readImageContent(file) {
-
-        //    var reader = new FileReader();
-        //    reader.onload = (function (file) {
-        //        return function (e) {
-        //            viewModel.fileContent(e.target.result);
-        //        }
-        //    })(f);
-
-        //    reader.readAsDataURL(f);
-        //}
 
         function getFileSize(size) {
             var fileSize = 0;
@@ -163,7 +131,7 @@ define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
         }
 
         function fileRemove(e) {
-            var $item = $(e.originalEvent.target).closest('#file-info-container');
+            var $item = $(e.originalEvent.target).closest('.file-info-container');
             var index = $item.index();
             // remove from viewModel uploadFiles
             viewModel.uploadFilesInfo.splice(index, 1);

@@ -196,6 +196,12 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             $(newdata).dialog();
     });
 
+    //viewModel.source.subscribe(function (data) {
+    //    viewModel.sources.sortByName('sourceName', 'asc')
+    //});
+
+
+
     ////////////////////////////////////////
     /// Sandbox - Comments Manager
     /// Source subscribe events/actions
@@ -219,6 +225,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         //re-set comments
         //viewModel.comments([]);
         viewModel.comments(source.comments == null ? [] : source.comments);
+
         if ( viewModel.comments().length > 0 ) {
             viewModel.commentId(viewModel.comments()[0].id);
         }  
@@ -255,7 +262,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
 
          // sort here ? We souldn't have too?
          // TODO -Always adds on top, need to animate nicely, offer asc/desc
-        viewModel.comments.sortByDateTime('datetime', 'desc');
+        viewModel.comments.sortByDateTime('datetime', 'asc');
 
         //console.log('comment subscribe:' + comment.id);
     });
@@ -845,8 +852,7 @@ function (Control, viewModel) {
         
         var settings = {
             url: "/Comments/GetSources",
-            cache: false,
-            dataType: 'json'
+            cache: false
         }
         viewModel.waitingTarget('#navbar-main');
         viewModel.waiting(true);
@@ -855,11 +861,12 @@ function (Control, viewModel) {
             .done(function (data) {
                 viewModel.sources([]);
                 viewModel.sources(data);
+                viewModel.sources.sortByName('sourceName', 'asc')
                 // this is against my pattern!!!! TODO
                 // model should deal with this, but only first time loading...
                 if (data.length > 0) {
                  //$('#sources-table tbody tr:first').addClass('active');
-                    viewModel.sourceId(data[0].id);
+                    viewModel.sourceId(viewModel.sources()[0].id);
                 }
                 
             })
@@ -950,7 +957,6 @@ function (Control, viewModel) {
         var settings = {
             url: '/Comments/CreateComment',
             type: 'POST',
-            dataType: 'json',
             data: formvals
         };
 
@@ -1049,7 +1055,7 @@ function (Control, viewModel) {
 //////////////////////////////////////////////////////////////////////
 /// thumb client module
 //////////////////////////////////////////////////////////////////////
-define('dws/thumb', [],
+define('dws/thumbnail', [],
     function () {
 
         //////////////////////////////////////////////////////////////////////
@@ -1058,13 +1064,11 @@ define('dws/thumb', [],
         function getThumbFromFile(file, callback) {
 
             if ( file.type.match('image/*') ) {
-                thumbFromImageFile(file, callback);
-                return;
+               thumbFromImageFile(file, callback);
             }
                     
             if (file.type.match('application/*')) {
                 thumbFromAppFile(file, callback);
-                return;
             }
 
             // unsupported/invalid
@@ -1076,13 +1080,10 @@ define('dws/thumb', [],
         //////////////////////////////////////////////////////////////////////
         function thumbFromImageFile(file, callback) {
             var reader = new FileReader();
+            reader.file = file;
 
-            reader.onload = (function (file) {
-                var test = file.name;
-                return function (file, e) {
-                    callback(file,e.target.results);
-                    
-                }
+            reader.onload = (function (e) {
+                callback(reader.file,e.target.result);
             });
 
             reader.readAsDataURL(file);
@@ -1161,7 +1162,7 @@ define('dws/thumb', [],
 //////////////////////////////////////////////////////////////////////
 /// File ops client module
 //////////////////////////////////////////////////////////////////////
-define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
+define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
     function (Control, Thumbnail, viewModel) {
 
         ///////////////////////////////////////////////////////////////////////
@@ -1188,14 +1189,17 @@ define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
                 $('#file-ops-client').dialog(options);
             });
 
-            $('#file-ops-client').on('dialogclose', function (event, ui) {
-                var $diag = $(this);
-                $diag.hide(); //animate
-                $diag.empty();
-                $diag.remove();
-            });
+            //$('#file-ops-client').on('dialogclose', function (event, ui) {
+            //    var $diag = $(this);
+            //    $diag.hide(); //animate TODO
+            //});
 
-            $(document).on('click', '.upload-file-delete', function (e) {
+            //$('.file-ops-client').on('click', 'a.upload-file-delete',  function (e) {
+            //    e.preventDefault();
+            //    fileRemove(e);
+            //});
+
+            $(document).on('click', 'a.upload-file-delete', function (e) {
                 e.preventDefault();
                 fileRemove(e);
             });
@@ -1258,55 +1262,20 @@ define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
                     var dups = viewModel.uploadFilesInfo().findIndex(f => f.name == fname);
                     if (dups > -1) { continue; }
 
-                    
-                    var fileSize = getFileSize(f.size);
-                    
+                    Thumbnail.getThumbFromFile(f, pushFile);
                    
-                    //viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, filecontent: fileContent });
-                    //viewModel.uploadFiles.push(file);
-
-                    
                 }
             }
         }
 
-        function pushFile(file) {
-
-            switch (file.type) {
-
-                case file.type.match('image/*'):
-
-                    var reader = new FileReader();
-                    reader.onload = (function (file) {
-                        return function (e) {
-                            viewModel.fileContent(e.target.result);
-                            //push should be localized
-                        }
-                    });
-
-                    reader.readAsDataURL(file);
-                    break;
-
-                case 'application/pdf':
-                    //getApplicationIcon(file);
-                    break;
-
-                default:
-            }
-
+        ///////////////////////////////////////////////////////////////////////
+        /// This will not happen in order!!!
+        //////////////////////////////////////////////////////////////////////
+        function pushFile(file, thumbContext) {
+            var fileSize = getFileSize(file.size);
+            viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, thumbcontext: thumbContext });
+            viewModel.uploadFiles.push(file);
         }
-
-        //function readImageContent(file) {
-
-        //    var reader = new FileReader();
-        //    reader.onload = (function (file) {
-        //        return function (e) {
-        //            viewModel.fileContent(e.target.result);
-        //        }
-        //    })(f);
-
-        //    reader.readAsDataURL(f);
-        //}
 
         function getFileSize(size) {
             var fileSize = 0;
@@ -1323,7 +1292,7 @@ define('dws/fileops-client', ['dws/controller','/dws/thumbnail', 'dws/model'],
         }
 
         function fileRemove(e) {
-            var $item = $(e.originalEvent.target).closest('#file-info-container');
+            var $item = $(e.originalEvent.target).closest('.file-info-container');
             var index = $item.index();
             // remove from viewModel uploadFiles
             viewModel.uploadFilesInfo.splice(index, 1);
@@ -1643,6 +1612,7 @@ require(['dws/actions']);
 require(['dws/comments']);
 require(['dws/sandbox']);
 require(['dws/model-utils']);
+require(['dws/thumbnail']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
 

@@ -37,16 +37,22 @@
 </script>
 
 <script id="selected-upload-files" type="text/html">
-    <div id="file-info-container" class="card">
+    <div class="file-info-container card">
         <div class="upload-file-thumb">
-            <img data-bind="attr: { src : file.filecontent }"/>
+            <img data-bind="attr: { src : file.thumbcontext }"/>
         </div>
         <div class="upload-file-info">
-            <a class="upload-file-delete btn"><i class="fa fa-trash"></i></a>
-            <div class="file-name" data-bind="text: file.name"></div>
-            <div class="file-details" data-bind="text: file.size"></div>
-            <div class="file-details" data-bind="text: file.type"></div>
-            <div class="file-error"></div>
+            <div class="file-delete">
+                <a class="upload-file-delete"><i class="fa fa-trash"></i></a>
+            </div>
+            <div class="file-info">
+                <div class="file-name" data-bind="text: file.name"></div>
+                <div class="file-details">
+                    <div class="file-size" data-bind="text: file.size"></div>
+                    <div class="file-type" data-bind="text: file.type"></div>
+                </div>
+                <div class="file-error"></div>
+           </div>
         </div>
     </div>
 </script>
@@ -56,11 +62,12 @@
        
         <div id="upload-input">
             <div class="card-header">
-                <div class="card-title">Select or Drop Files</div>
                 <a id="file-select" role="button" title="Browse Files...">
                     <i class="fa fa-border fa-folder-open"></i>
-                    <input class="form-control" id="file-input" type="file" name="files" multiple data-bind="attr { accept: mimeTypes}" />
+                    <input class="form-control" id="file-input" type="file" name="files" multiple  bind-data="attr { accept: mimeTypes }" />
                 </a>
+                <div class="card-title">Select or Drop Files</div>
+                
             </div>
             <div id="file-upload-drop">Drop files here</div>
         </div>
@@ -93,7 +100,7 @@
             <div class="modal-header">
                 <div class="modal-title"></div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true"></span>
                 </button>
             </div>
             <div id="target-modal" class="modal-body">

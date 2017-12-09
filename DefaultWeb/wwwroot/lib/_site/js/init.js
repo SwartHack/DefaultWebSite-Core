@@ -5,6 +5,7 @@ require(['dws/actions']);
 require(['dws/comments']);
 require(['dws/sandbox']);
 require(['dws/model-utils']);
+require(['dws/thumbnail']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
 

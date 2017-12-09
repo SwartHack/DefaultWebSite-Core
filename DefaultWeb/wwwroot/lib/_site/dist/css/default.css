@@ -20763,10 +20763,10 @@ flex-direction: column;*/
     #comments-mgr.card #comments-doc.card .card-text {
       background-color: lemonchiffon;
       overflow-y: auto;
-      margin-top: .25rem;
-      margin-left: .5rem;
-      margin-bottom: .25rem;
-      margin-right: .5rem; }
+      padding-top: .25rem;
+      padding-left: .5rem;
+      padding-bottom: .25rem;
+      padding-right: .5rem; }
       #comments-mgr.card #comments-doc.card .card-text p {
         background-color: transparent;
         padding: 0;
@@ -21021,35 +21021,34 @@ form#create-source {
 #thumbnails-container {
   display: flex;
   flex-direction: column;
-  background-color: whitesmoke;
+  background-color: transparent;
   margin: 0;
   padding: 0; }
   #thumbnails-container .card-header {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    font-size: 1.5rem;
     margin: 0;
-    padding: .25rem;
+    padding: .5vh .5vw 0 .5vw;
     border-radius: 0px;
     background-color: transparent; }
     #thumbnails-container .card-header .card-title {
       margin: 0;
-      padding-left: 1rem; }
+      font-size: 2.5vh;
+      padding-left: 2vw; }
     #thumbnails-container .card-header a#file-upload-open {
       padding: 0;
-      font-size: 1.5rem; }
+      font-size: 2.5vh; }
       #thumbnails-container .card-header a#file-upload-open:hover {
         cursor: pointer;
         transform: scale(1.4);
         z-index: 10; }
   #thumbnails-container #thumbs-list {
+    display: flex;
+    height: 100%;
     overflow-y: auto;
     overflow-x: unset;
-    min-height: 50%;
-    max-height: 50%;
-    margin: .5rem;
-    background-color: white; }
+    background-color: transparent; }
     #thumbnails-container #thumbs-list ul#thumbnails {
       opacity: 1;
       text-align: center;
@@ -21229,21 +21228,20 @@ form#create-source {
     min-height: 3rem;
     max-height: 300px;
     overflow-y: auto; }
-  #file-ops-client #file-info-container.card {
+  #file-ops-client .file-info-container.card {
     display: flex !important;
     flex: 1 !important;
     flex-direction: row;
     border-radius: 0;
     margin-top: .25rem; }
-    #file-ops-client #file-info-container.card .upload-file-thumb {
+    #file-ops-client .file-info-container.card .upload-file-thumb {
       display: flex !important;
       flex: 0 auto !important;
       /*margin-left: .5rem;
       margin-top: .25rem;
       margin-bottom: .25rem;
-      margin-right: .5rem;*/
-      object-fit: unset; }
-      #file-ops-client #file-info-container.card .upload-file-thumb img {
+      margin-right: .5rem;*/ }
+      #file-ops-client .file-info-container.card .upload-file-thumb img {
         padding: 0px;
         height: 3rem;
         width: 3rem;
@@ -21258,19 +21256,17 @@ form#create-source {
         -ms-transition: all 0.1s ease;
         -o-transition: all 0.1s ease;
         transition: all 0.1s ease; }
-    #file-ops-client #file-info-container.card .upload-file-info {
+      #file-ops-client .file-info-container.card .upload-file-thumb img {
+        object-fit: unset; }
+    #file-ops-client .file-info-container.card .upload-file-info {
       display: flex;
-      flex-flow: column;
-      justify-content: space-around;
+      flex-flow: row;
       width: 100%;
-      font-size: 2vh;
-      margin-bottom: 8px; }
-      #file-ops-client #file-info-container.card .upload-file-info .file-info {
+      font-size: 2vh; }
+      #file-ops-client .file-info-container.card .upload-file-info .file-delete {
         display: flex;
-        flex-direction: row;
-        align-items: baseline;
-        width: 100%; }
-        #file-ops-client #file-info-container.card .upload-file-info .file-info a.upload-file-delete {
+        align-items: center; }
+        #file-ops-client .file-info-container.card .upload-file-info .file-delete a.upload-file-delete {
           color: red;
           pointer-events: none !important;
           cursor: default;
@@ -21278,71 +21274,75 @@ form#create-source {
           text-align: center;
           padding: 0;
           margin: 0 1vh 0 1vh; }
-          #file-ops-client #file-info-container.card .upload-file-info .file-info a.upload-file-delete :hover {
-            transform: scale(1.2);
-            z-index: 10;
-            cursor: pointer;
-            pointer-events: all !important;
-            opacity: 1; }
-        #file-ops-client #file-info-container.card .upload-file-info .file-info .file-name {
+        #file-ops-client .file-info-container.card .upload-file-info .file-delete:focus a.upload-file-delete, #file-ops-client .file-info-container.card .upload-file-info .file-delete:hover a.upload-file-delete {
+          transform: scale(1.3);
+          z-index: 10;
+          cursor: pointer;
+          pointer-events: all !important;
+          opacity: 1;
+          color: crimson; }
+      #file-ops-client .file-info-container.card .upload-file-info .file-info {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        width: 100%; }
+        #file-ops-client .file-info-container.card .upload-file-info .file-info .file-name {
           font-size: 1.75vh;
           font-weight: 500;
           line-height: 1.95vh; }
-      #file-ops-client #file-info-container.card .upload-file-info .file-details {
-        display: flex;
-        flex-direction: row;
-        width: 50%;
-        justify-content: space-around; }
-        #file-ops-client #file-info-container.card .upload-file-info .file-details .file-size {
-          font-size: 1.25vh;
-          line-height: 1.35vh;
-          font-weight: 500;
-          font-style: normal; }
-        #file-ops-client #file-info-container.card .upload-file-info .file-details .file-type {
-          font-size: 1.25vh;
-          line-height: 1.5vh;
-          font-weight: 500;
-          font-style: italic; }
-      #file-ops-client #file-info-container.card .upload-file-info .file-error {
-        display: flex;
-        color: red;
-        font-weight: 900; }
+        #file-ops-client .file-info-container.card .upload-file-info .file-info .file-details {
+          display: flex;
+          flex-direction: row;
+          width: 50%;
+          justify-content: space-around; }
+          #file-ops-client .file-info-container.card .upload-file-info .file-info .file-details .file-size {
+            font-size: 1.25vh;
+            line-height: 1.35vh;
+            font-weight: 500;
+            font-style: normal; }
+          #file-ops-client .file-info-container.card .upload-file-info .file-info .file-details .file-type {
+            font-size: 1.25vh;
+            line-height: 1.5vh;
+            font-weight: 500;
+            font-style: italic; }
+        #file-ops-client .file-info-container.card .upload-file-info .file-info .file-error {
+          display: flex;
+          color: red;
+          font-weight: 900; }
 
 #col-fileops-util #file-ops-doc {
   display: flex;
   flex-direction: column;
   background-color: antiquewhite;
-  border-radius: 0.25rem; }
-  #col-fileops-util #file-ops-doc .card-title {
-    font-size: 1.25rem;
+  border-radius: 0; }
+  #col-fileops-util #file-ops-doc .card-header .card-title {
+    font-size: 2.25vh;
     font-style: italic;
     font-weight: 400;
     margin-bottom: 0;
-    text-align: center; }
+    text-align: center;
+    border: none; }
   #col-fileops-util #file-ops-doc .card-text {
     background-color: antiquewhite;
     overflow-y: auto;
-    padding: .5rem;
-    margin-top: .25rem;
-    margin-left: .5rem;
-    margin-bottom: .25rem;
-    margin-right: .5rem; }
+    padding: 1vh 1vw 1vh 1vw; }
     #col-fileops-util #file-ops-doc .card-text p {
       background-color: transparent;
       padding: 0;
       margin: 0;
-      margin-bottom: .25rem;
-      text-align: left;
-      font-size: 14px;
-      line-height: 20px; }
-    #col-fileops-util #file-ops-doc .card-text.expand {
-      max-height: 50%; }
+      margin-bottom: 1vh;
+      text-align: justify;
+      font-size: 1.5vh;
+      line-height: 1.6vh; }
 
 #col-fileops-content .main-document {
+  display: none;
   position: center; }
 #col-fileops-content .main-video {
+  display: none;
   position: center; }
 #col-fileops-content .main-image {
+  display: none;
   position: relative;
   display: inline-block;
   height: 100%; }

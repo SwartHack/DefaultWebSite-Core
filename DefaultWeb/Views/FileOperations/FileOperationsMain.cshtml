@@ -43,10 +43,12 @@
                 </div>
 
                 <div class="main-document content-area">
+                   @*@{ Html.RenderPartial("");}*@
                     <embed id="doc-embedded" data-bind="attr: { src : docViewApi() }" style="overflow: auto; width: 100%; height: 100%;" />
                 </div>
 
                 <div class="main-video content-area">
+                   @* @{ Html.RenderPartial("");}*@
                     <video id="video-player" class="video-js" controls autoplay preload="auto" width="800" height="600"></video>
                 </div>
 

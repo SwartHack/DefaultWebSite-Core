@@ -243,10 +243,12 @@
     <None Include="wwwroot\lib\_site\dist\css\themes\default.min.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\united.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\yeti.css.map" />
+    <None Include="wwwroot\lib\_site\dist\js\debugger.js" />
     <None Include="wwwroot\lib\_site\dist\js\jcore.js" />
     <None Include="wwwroot\lib\_site\dist\js\pdf.js" />
     <None Include="wwwroot\lib\_site\dist\js\pdf.worker.js" />
     <None Include="wwwroot\lib\_site\dist\js\site.js" />
+    <None Include="wwwroot\lib\_site\dist\js\viewer.js" />
     <None Include="wwwroot\lib\_site\fonts\fontawesome-webfont.svg" />
     <None Include="wwwroot\lib\_site\fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\lib\_site\Gruntfile.js" />
@@ -260,7 +262,6 @@
     <None Include="wwwroot\lib\_site\js\lib\endless_scroll.js" />
     <None Include="wwwroot\lib\_site\js\lib\pdfobject.js" />
     <None Include="wwwroot\lib\_site\js\lib\video.js" />
-    <None Include="wwwroot\lib\_site\js\model-actions.js" />
     <None Include="wwwroot\lib\_site\js\model-utils.js" />
     <None Include="wwwroot\lib\_site\js\models.js" />
     <None Include="wwwroot\lib\_site\js\sandbox.js" />

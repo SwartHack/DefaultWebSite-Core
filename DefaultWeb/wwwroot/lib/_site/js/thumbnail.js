@@ -4,6 +4,8 @@
 define('dws/thumbnail', [],
     function () {
 
+        PDFJS.workerSrc = './pdf.worker.js';
+
         //////////////////////////////////////////////////////////////////////
         /// 
         //////////////////////////////////////////////////////////////////////
@@ -18,7 +20,6 @@ define('dws/thumbnail', [],
             }
 
             // unsupported/invalid
-
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -42,21 +43,26 @@ define('dws/thumbnail', [],
         //////////////////////////////////////////////////////////////////////
         function thumbFromAppFile(file, callback) {
 
-            if (file.type.match('*/pdf')) {
-                thumbFromPdf(file, callback);
+            if (file.type.match('/pdf')) {
+                var reader = new FileReader();
+                reader.file = file;
+                reader.callback = callback;
+
+                reader.onload = (function (e) {
+                    thumbFromPdf(reader.file, e.target.result, reader.callback);
+                });
+
+                reader.readAsDataURL(file);
             }
-           
         }
 
          //////////////////////////////////////////////////////////////////////
         /// 
         //////////////////////////////////////////////////////////////////////
-        function thumbFromPdf(file, callback) {
+        function thumbFromPdf(file, fileUrl, callback) {
 
-            PDFJS.workerSrc = 'pdf.worker.js';
-
-            var fullname = file.name;
-            PDFJS.getDocument(fullname).then(function (pdf) {
+            
+            PDFJS.getDocument(fileUrl).then(function (pdf) {
 
                 pdf.getPage(1).then(function (page) {
                     var viewport = page.getViewport(0.5);
@@ -84,10 +90,7 @@ define('dws/thumbnail', [],
                     });
 
                 });
-
-
             });
-
         }
 
          //////////////////////////////////////////////////////////////////////
@@ -98,7 +101,6 @@ define('dws/thumbnail', [],
         }
 
          
-
         return {
             getThumbFromFile: getThumbFromFile
         }

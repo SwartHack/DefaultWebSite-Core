@@ -260,23 +260,23 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
             switch (category)
                 {
                     case "application":
-                    fileinfo.FileTarget = ".main-document";
+                        fileinfo.FileTarget = ".main-document";
                         break;
 
                     case "audio":
-                    fileinfo.FileTarget = ".main-audio";
+                        fileinfo.FileTarget = ".main-audio";
                         break;
 
                     case "video":
-                    fileinfo.FileTarget = ".main-video";
+                        fileinfo.FileTarget = ".main-video";
                         break;
 
                     case "image":
-                    fileinfo.FileTarget = ".main-image";
+                        fileinfo.FileTarget = ".main-image";
                         break;
 
                     default:
-                    fileinfo.FileTarget = "";
+                        fileinfo.FileTarget = "";
                         break;
                 }
 

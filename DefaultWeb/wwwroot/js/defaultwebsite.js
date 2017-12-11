@@ -48203,7 +48203,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
         //}
         contentCacheQueue: ko.observableArray([]), // TODO
-        fileInfo: ko.observable([]),  // ununsed ?
+        fileInfo: ko.observable([]),  // the selected file for viewing
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
         mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'aaplication/mp4', 'application/avi']),
@@ -48254,17 +48254,17 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     /// TODO - move to model-utils module
     ///////////////////////////////////////
 
-    viewModel.fileViewApi.subscribe(function (newFile) {
+    //viewModel.fileViewApi.subscribe(function (newFile) {
 
-        // what's my visible content area
-        var $target = $(viewModel.fileViewTarget());
+    //    // what's my visible content area
+    //    var $target = $(viewModel.fileViewTarget());
 
-        if (!$target.is(':visible'))
-        {
-            $('.content-area').hide();
-            $target.show();
-        }
-    });
+    //    if (!$target.is(':visible'))
+    //    {
+    //        $('.content-area').hide();
+    //        $target.show();
+    //    }
+    //});
 
 
     ////////////////////////////////////////
@@ -48534,7 +48534,7 @@ define('dws/dispatcher', ['dws/model'], function (ViewModel) {
             ViewModel.data(data); 
         })
         .fail(function (xhr, textStatus, error) {
-            ViewModel.aborted(xhr, textStatus, error)
+            ViewModel.abort(xhr, textStatus, error)
         })
         .always(function () {
         //waitEffects(false);
@@ -49168,6 +49168,8 @@ function (Control, viewModel) {
 define('dws/thumbnail', [],
     function () {
 
+        PDFJS.workerSrc = './pdf.worker.js';
+
         //////////////////////////////////////////////////////////////////////
         /// 
         //////////////////////////////////////////////////////////////////////
@@ -49182,7 +49184,6 @@ define('dws/thumbnail', [],
             }
 
             // unsupported/invalid
-
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -49206,21 +49207,26 @@ define('dws/thumbnail', [],
         //////////////////////////////////////////////////////////////////////
         function thumbFromAppFile(file, callback) {
 
-            if (file.type.match('*/pdf')) {
-                thumbFromPdf(file, callback);
+            if (file.type.match('/pdf')) {
+                var reader = new FileReader();
+                reader.file = file;
+                reader.callback = callback;
+
+                reader.onload = (function (e) {
+                    thumbFromPdf(reader.file, e.target.result, reader.callback);
+                });
+
+                reader.readAsDataURL(file);
             }
-           
         }
 
          //////////////////////////////////////////////////////////////////////
         /// 
         //////////////////////////////////////////////////////////////////////
-        function thumbFromPdf(file, callback) {
+        function thumbFromPdf(file, fileUrl, callback) {
 
-            PDFJS.workerSrc = 'pdf.worker.js';
-
-            var fullname = file.name;
-            PDFJS.getDocument(fullname).then(function (pdf) {
+            
+            PDFJS.getDocument(fileUrl).then(function (pdf) {
 
                 pdf.getPage(1).then(function (page) {
                     var viewport = page.getViewport(0.5);
@@ -49248,10 +49254,7 @@ define('dws/thumbnail', [],
                     });
 
                 });
-
-
             });
-
         }
 
          //////////////////////////////////////////////////////////////////////
@@ -49262,7 +49265,6 @@ define('dws/thumbnail', [],
         }
 
          
-
         return {
             getThumbFromFile: getThumbFromFile
         }
@@ -49551,20 +49553,22 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
         ////////////////////////////////////////////////
         function init() {
 
-            $('#content-left').on("click", function (e) {
-                contentPrev();
+            $('.main-document.content-area').on('show', function () {
+
+                if (viewModel.fileInfo.contentType.match('application/pdf')) {
+                    loadPdfFile();
+                    $('#dws-pdf-container').show();
+                    $('#doc-embedded').hide();
+                }
+                else {
+                    $('#dws-pdf-container').hide();
+                    $('#doc-embedded').show();
+                }
+
             });
 
-            $('#content-right').on("click", function (e) {
-                contentNext();
-            });
+            $('.content-area').on('hide', function () {
 
-            $('.main-content-area').on("swipeleft", function (e) {
-                contentPrev();
-            });
-
-            $('.main-image').on("swiperight", function (e) {
-                contentNext();
             });
 
 
@@ -49590,6 +49594,22 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 if (!$link.hasClass('selected')) { 
                     openFile($link);
                 }
+            });
+
+            $('#content-left').on("click", function (e) {
+                contentPrev();
+            });
+
+            $('#content-right').on("click", function (e) {
+                contentNext();
+            });
+
+            $('.main-content-area').on("swipeleft", function (e) {
+                contentPrev();
+            });
+
+            $('.main-image').on("swiperight", function (e) {
+                contentNext();
             });
 
             hideAllContent();
@@ -49672,37 +49692,64 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
         }
 
         ///////////////////////////////////////////////////////////////////////
-        // TODO - all ajax calls through dispatcher, extend model to deal with it
+        // 
         ////////////////////////////////////////////////////////////////////////
-        //function loadContent(fileApi) {
+        viewModel.fileViewApi.subscribe(function (newFile) {
 
-        //    var settings = {
-        //        url: fileApi,  //Server web api
-        //        type: 'Get',
-        //        cache: false
-        //    };
+            // what's my visible content area
+            var $target = $(viewModel.fileViewTarget());
 
-        //    $.ajax(settings)
-        //        .done(function (data, textStatus, xhr) {
-        //            if (data.statusCode == 200) {
-        //                viewModel.
-        //            }
-        //            else {
-                        
-        //            }
-        //        })
-        //        .fail(function (xhr, textStatus, error) {
-        //            viewModel.aborted(xhr, textStatus, error);
-        //        })
-        //        .always(function () {
-        //            //$('#client-container').empty();
-        //            //$('.create-file-link').show();
-        //            //$.unblockUI();
-        //            viewModel.waitEffects(false);
-        //        });
+            if (!$target.is(':visible')) {
+                $('.content-area').hide();
+                $target.show();
+            }
+        });
+
+        ///////////////////////////////////////////////////////////////////////
+        // 
+        ////////////////////////////////////////////////////////////////////////
+        function loadPdfFile() {
+
+            var SEARCH_FOR = ''; // try 'Mozilla';
+
+            var container = document.getElementById('viewerContainer');
+
+            // (Optionally) enable hyperlinks within PDF files.
+            var pdfLinkService = new PDFJS.PDFLinkService();
+
+            var pdfViewer = new PDFJS.PDFViewer({
+                container: container,
+                linkService: pdfLinkService
+            });
+            pdfLinkService.setViewer(pdfViewer);
+
+            // (Optionally) enable find controller.
+            var pdfFindController = new PDFJS.PDFFindController({
+                pdfViewer: pdfViewer
+            });
+            pdfViewer.setFindController(pdfFindController);
+
+            container.addEventListener('pagesinit', function () {
+                // We can use pdfViewer now, e.g. let's change default scale.
+                pdfViewer.currentScaleValue = 'page-width';
+
+                if (SEARCH_FOR) { // We can try search for things
+                    pdfFindController.executeCommand('find', { query: SEARCH_FOR });
+                }
+            });
+
+            // Loading document.
+            PDFJS.getDocument(viewModel.docViewApi()).then(function (pdfDocument) {
+                // Document loaded, specifying document for the viewer and
+                // the (optional) linkService.
+                pdfViewer.setDocument(pdfDocument);
+
+                pdfLinkService.setDocument(pdfDocument, null);
+            });
 
 
-        //}
+            
+        }
 
         return {
             init:init,
@@ -49726,9 +49773,11 @@ require(['dws/thumbnail']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
 
+PDFJS.workerSrc = 'pdf.worker.js';
+
 require(['dws/controller'],
 function (control) {
-
+    
     $(document).ready(function () {
         control.initKO();
     });

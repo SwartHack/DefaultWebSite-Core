@@ -50,7 +50,17 @@ namespace DefaultWeb.Controllers
         [Route("main")]
         public IActionResult Main()
         {
-            return PartialView("~/Views/FileOperations/FileOperationsMain.cshtml");
+            try
+            {
+                return PartialView("~/Views/FileOperations/FileOperationsMain.cshtml");
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                var serverEx = new ServerException() { MiscException = ex };
+                return PartialView("~/Views/Shared/_ServerError.cshtml", serverEx); ;
+            }
+
         }
 
         /// <summary>

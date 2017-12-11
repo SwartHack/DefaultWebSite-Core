@@ -30,7 +30,7 @@ define('dws/dispatcher', ['dws/model'], function (ViewModel) {
             ViewModel.data(data); 
         })
         .fail(function (xhr, textStatus, error) {
-            ViewModel.aborted(xhr, textStatus, error)
+            ViewModel.abort(xhr, textStatus, error)
         })
         .always(function () {
         //waitEffects(false);

@@ -3,35 +3,35 @@ $contentTransitionSpeed : 0.7s;
 $contentBorder : 1rem;
 
 #col-fileops-util {
-
-
+    padding-right: 1vw;
+    // styling inserted dynamically by thumbnail.scss
+    // <div id="row-thumbs" class="row no-gutters w-100">
+    //   <div id="thumbnails-container" class="col-12 no-gutters"></div>
+    // <div>
     #file-ops-doc {
         display: flex;
         flex-direction: column;
         //margin-bottom: 1rem;
-        background-color: antiquewhite;
+        //background-color: antiquewhite;
         border-radius: 0;
 
-        .card-header {
-
-            .card-title {
-                //border-bottom: .125rem solid black;
-                font-size: 2.25vh;
-                font-style: italic;
-                font-weight: 400;
-                margin-bottom: 0;
-                text-align: center;
-                border: none;
-            }
+        .card-title {
+            //border-bottom: .125rem solid black;
+            font-size: 2.25vh;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 0;
+            text-align: center;
+            border: none;
+            border-top: 1px solid rgba(0, 0, 0, 0.125)
         }
 
-
         .card-text {
-            background-color: antiquewhite;
-            //max-height: 5rem;
-            //height: 20%;
             overflow-y: auto;
             padding: 1vh 1vw 1vh 1vw;
+            border-left: .7vh inset lightsteelblue;
+            border-top: .5vh outset lightsteelblue;
+            border-bottom: .5vh solid lightsteelblue;
 
             p {
                 background-color: transparent;
@@ -51,6 +51,14 @@ $contentBorder : 1rem;
     .main-document {
         display:none;
         position: center;
+
+        #dws-pdf-viewer {
+            display:none;
+        }
+
+        #doc-embedded {
+            display:none;
+        }
     }
 
     .main-video {

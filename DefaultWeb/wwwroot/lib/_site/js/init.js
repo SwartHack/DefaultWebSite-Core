@@ -9,9 +9,11 @@ require(['dws/thumbnail']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
 
+PDFJS.workerSrc = 'pdf.worker.js';
+
 require(['dws/controller'],
 function (control) {
-
+    
     $(document).ready(function () {
         control.initKO();
     });

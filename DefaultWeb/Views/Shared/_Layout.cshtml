@@ -1,11 +1,14 @@
-﻿<html mozdisallowselectionprint moznomarginboxes>
+﻿<html>
 <head>
     @RenderSection("header", true)
     <environment names="Development">
-        <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true" />
         @*<link rel="stylesheet" href="~/lib/_site/dist/css/viewer.css" asp-append-version="true" />*@
+        <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true" />
         <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" asp-append-version="false" />
+
         <script src="~/lib/_site/dist/js/pdf.js" asp-append-version="true"></script>
+        
+
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
@@ -21,7 +24,8 @@
     <environment names="Development">
         <script src="~/lib/_site/dist/js/jcore.js" asp-append-version="true"></script>
         <script src="~/lib/_site/dist/js/pdf.worker.js" asp-append-version="true"></script>
-        <script src="~/lib/_site/dist/js/viewer.js" asp-append-version="true"></script>
+        <script src="~/lib/_site/dist/js/pdf-debugger.js" asp-append-version="true"></script>
+        <script src="~/lib/_site/dist/js/pdf-viewer.js" asp-append-version="true"></script>
         <script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">

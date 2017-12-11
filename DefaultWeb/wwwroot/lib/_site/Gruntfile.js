@@ -103,25 +103,11 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'node_modules/pdf.js/build/generic/build',
-                        src: ['pdf.js', 'pdf.worker.js'],
+                        cwd: 'js/pdfjs/',
+                        src: '**',
                         dest: 'dist/js/',
                         filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'node_modules/pdf.js/build/generic/web',
-                        src: ['viewer.css',],
-                        dest: 'dist/css/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'node_modules/pdf.js/build/generic/web',
-                        src: ['viewer.js', 'debugger.js'],
-                        dest: 'dist/js/',
-                        filter: 'isFile'
-                    },
+                    }
                 ],
             }
         },

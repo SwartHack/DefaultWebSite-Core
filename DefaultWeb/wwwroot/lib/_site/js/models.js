@@ -86,7 +86,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
         //}
         contentCacheQueue: ko.observableArray([]), // TODO
-        fileInfo: ko.observable([]),  // ununsed ?
+        fileInfo: ko.observable([]),  // the selected file for viewing
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
         mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'aaplication/mp4', 'application/avi']),
@@ -137,17 +137,17 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     /// TODO - move to model-utils module
     ///////////////////////////////////////
 
-    viewModel.fileViewApi.subscribe(function (newFile) {
+    //viewModel.fileViewApi.subscribe(function (newFile) {
 
-        // what's my visible content area
-        var $target = $(viewModel.fileViewTarget());
+    //    // what's my visible content area
+    //    var $target = $(viewModel.fileViewTarget());
 
-        if (!$target.is(':visible'))
-        {
-            $('.content-area').hide();
-            $target.show();
-        }
-    });
+    //    if (!$target.is(':visible'))
+    //    {
+    //        $('.content-area').hide();
+    //        $target.show();
+    //    }
+    //});
 
 
     ////////////////////////////////////////

@@ -99,6 +99,8 @@ namespace DefaultWeb
             {
 
             });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         /// <summary>

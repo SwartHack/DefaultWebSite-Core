@@ -47,7 +47,9 @@
     "pixrem": "^3.0.2",
     "postcss-flexbugs-fixes": "^3.0.0",
     "postcss-loader": "^2.0.6",
-    "time-grunt": "^1.4.0"
+    "time-grunt": "^1.4.0",
+    "video-codec-js": "^0.1.0",
+    "videojs-font": "^2.1.0"
   },
   "corejs": [
     "../jquery/dist/jquery.js",
@@ -73,6 +75,6 @@
     "js/thumbnail.js",
     "js/fileops-client.js",
     "js/fileops-content.js",
-    "js/init.js"
+    "js/main.js"
   ]
 }

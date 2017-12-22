@@ -107,6 +107,13 @@ module.exports = function(grunt) {
                         src: '**',
                         dest: 'dist/js/',
                         filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: '../video-js/dist/',
+                        src:'video.js',
+                        dest: 'dist/js/',
+                        filter: 'isFile'
                     }
                 ],
             }

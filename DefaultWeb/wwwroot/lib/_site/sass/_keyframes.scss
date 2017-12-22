@@ -31,6 +31,58 @@
     100% { @include gradient-x-three-colors(crimson, steelblue, 75%, black); }
 }
 
+@keyframes dws-text-action-right {
+    from { margin-left:0; }
+    to { margin-left:50%; }
+}
+
+@keyframes dws-icon-flash {
+    from { color:inherit; }
+    to { color: $green; }
+}
+
+
+@-webkit-keyframes dws-main-content {
+    0% {
+        background-position: 97% 0%
+    }
+
+    50% {
+        background-position: 4% 100%
+    }
+
+    100% {
+        background-position: 97% 0%
+    }
+}
+
+@-moz-keyframes dws-main-content {
+    0% {
+        background-position: 97% 0%
+    }
+
+    50% {
+        background-position: 4% 100%
+    }
+
+    100% {
+        background-position: 97% 0%
+    }
+}
+
+@keyframes dws-main-content {
+    0% {
+        background-position: 97% 0%
+    }
+
+    50% {
+        background-position: 4% 100%
+    }
+
+    100% {
+        background-position: 97% 0%
+    }
+}
 
 ////the following were provided by?
 @-webkit-keyframes bounce {

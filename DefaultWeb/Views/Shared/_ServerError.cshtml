@@ -1,19 +1,18 @@
 ﻿@model DefaultWeb.Models.DefaultWebSite.Repositories.ServerException
 <div id="server-error" class="card">
-    <div class="card-header">What Did You DO!!!!!!!!!!</div>
-    <div class="card-title text-info">Whatever it was, you broke the server...</div>
-    <div class="card-img  image-fluid" src="~/Images/cornholio2.jpg"></div>
-
-    <div id="base-exception" class="card-block">
-        <div class="card-title text-danger">@Model.MiscException.Message</div>
-        <div class="card-text-wrapper">
-            <div class="card-text"> @Model.MiscException.GetBaseException()</div>
+    <div id="error-header">
+        <div class="card-header">
+            What Did You DO!?!?
+            <div class="card-title text-info">....Whatever it was, you broke the server and woke my admin. Now I have to have pay overtime and royalties to Mike Judge!!!</div>
         </div>
+        <img id="admin-img" src="~/images/cornholio2.jpg"/>
     </div>
-    <div id="inner-exception" class="card-block">
-        <div class="card-title text-danger">@Model.MiscException.Source</div>
-        <div class="card-text-wrapper">
-            <div class="card-text"> @Model.MiscException.InnerException</div>
+    <div id="error-body">
+        <div id="base-exception" class="card-block">
+            <div class="card-title text-danger">@Model.MiscException.Message</div>
+            <div class="card-text-wrapper">
+                <div class="card-text"> @Model.MiscException.GetBaseException()</div>
+            </div>
         </div>
     </div>
 </div>

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DefaultWeb.Models.DefaultWebSite.Repositories
 {
@@ -23,6 +24,8 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
         public ILogger FileLogger { get; set; }
         public DwsSettings Settings { get; set; }
         private IDbContextTransaction FileTransaction { get; set; }
+        private IHttpContextAccessor ContextAccesor { get; set; }
+        private string ServerFileShare { get; set; }
 
         /// <summary>
         /// 
@@ -31,11 +34,13 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
         /// <param name="settings"></param>
         /// <param name="loggerFactory"></param>
         /// <param name="config"></param>
-        public FileRepository(DwsDbContext context, IOptions<DwsSettings> settings, ILoggerFactory loggerFactory, IConfiguration config)
+        public FileRepository(DwsDbContext context, IOptions<DwsSettings> settings, ILoggerFactory loggerFactory, IHttpContextAccessor contextAccessor)
         {
             FileContext = context;
-            Settings = settings.Value;
             FileLogger = loggerFactory.CreateLogger("FileRepository");
+            string host = contextAccessor.HttpContext.Request.Host.Host;
+            string share = settings.Value.ServerFileShare;
+            ServerFileShare = String.Format(@"\\{0}\{1}", host, share);
         }
         
         /// <summary>
@@ -86,7 +91,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
 
         public void Janitor(string sessionId)
         {
-            string sessionDir = String.Format(@"{0}\tmp\{1}", Settings.ServerFileShare, sessionId);
+            string sessionDir = String.Format(@"{0}\{1}", ServerFileShare, sessionId);
           
         }
 
@@ -97,7 +102,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
         /// <returns></returns>
         private string GetUploadDir(string sessionId)
         {
-            string uploadDir = String.Format(@"{0}\tmp\{1}", Settings.ServerFileShare,sessionId);
+            string uploadDir = String.Format(@"{0}\{1}", ServerFileShare, sessionId);
             if (!Directory.Exists(uploadDir))
             {
                 try
@@ -235,13 +240,14 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
             try
             {
                 ///Lambda
-                DwsFileInfo fileinfo = FileContext.DwsFileInfo.Single(f => f.Id == id && f.SessionId == sessionId);
+                var fileinfo = FileContext.DwsFileInfo.Single(f => f.Id == id && f.SessionId == sessionId);
                 return SetFileInfoExt(fileinfo);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            
         }
 
         /// <summary>

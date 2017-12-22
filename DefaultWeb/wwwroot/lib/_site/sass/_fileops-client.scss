@@ -7,6 +7,7 @@
     padding: 0;
 
     form#file-upload {
+        margin-bottom: 0;
 
         #upload-input {
             //background-color: whitesmoke;
@@ -16,7 +17,7 @@
                 display: flex;
                 //justify-content: space-between;
                 width: 100%;
-                font-size: 2.2vh;
+                font-size: 2vh;
                 font-style: italic;
                 font-weight: 500;
                 margin: 0;
@@ -32,6 +33,7 @@
                 a#file-select {
                     position: relative;
                     overflow: hidden;
+                    background-color: #d3dde8;
 
                     input[type=file] {
                         position: absolute;
@@ -93,25 +95,24 @@
 
         #upload-header {
             display: flex;
-            flex: auto;
+            align-content:space-around;
             justify-content: space-between;
             align-items: baseline;
 
             .card-title {
                 font-style: italic;
-                display: flex;
                 margin-bottom: 0;
-                margin-left: 1vw;
+                margin-left:1vw;
             }
 
             button#upload-submit {
                 border: none;
-                display: flex;
                 color: green;
                 background: transparent;
                 padding: 0;
-                margin-right: 2vw;
+                margin-right:.5vw;
                 cursor: pointer;
+                animation:dws-icon-flash 1s infinite;
 
                 i {
                     font-size: 2.25rem;
@@ -125,27 +126,37 @@
             }
         }
 
-        button#upload-submit {
-            //display: none;
-        }
-
         #file-upload-wrapper {
             padding: .25rem;
             min-height: 3rem;
             max-height: 300px;
             overflow-y: auto;
+            background-color: #d3dde8;
 
             #file-upload-list {
                 //background-color: antiquewhite;
             }
         }
 
-        #files-count {
+        #file-upload-details {
+            display: flex;
+            justify-content: space-around;
 
+            #file-upload-count {
+                font-size: 1.5vh;
+                font-weight: 400;
+            }
+
+            #file-upload-size {
+                font-size: 1.5vh;
+                font-style:italic;
+                font-weight: 400;
+            }
         }
     }
-
-
+    ////////////////////////////////
+    ///
+    ////////////////////////////////
     .file-info-container.card {
         //background-color: #F0F0F0;
         display: flex !important;
@@ -161,7 +172,7 @@
             margin-top: .25rem;
             margin-bottom: .25rem;
             margin-right: .5rem;*/
-            @include thumbnail-image();
+            @include thumbnail-image(4vw,4vw);
 
             img {
                 object-fit: unset;

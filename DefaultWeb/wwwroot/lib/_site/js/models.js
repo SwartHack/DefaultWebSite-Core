@@ -2,25 +2,35 @@
 /// KO View Model module
 //////////////////////////////////////////////////////////////////////
 define('dws/model', ['dws/model-utils'], function (ModelUtil) {
-    
+
+    /////////////////////////////
+    ///
+    /////////////////////////////
     var viewModel = {
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         data: ko.observable(''),
         target: ko.observable(''),
         dataType: ko.observable(''),
         dataJson: ko.observable(''),
         targetJson: ko.observable(''),
-        abort: function (data, status, error) {
+        abort: function (xhr, status, error) {
             viewModel.errorStatus(status);
-            viewModel.errorData(data);
+            viewModel.errorXhr(xhr);
             viewModel.errorMsg(error);
         },
-        errorData: ko.observableArray([]),
+        errorXhr: ko.observable(''),
         errorStatus: ko.observable(''),
-        errorMsg: ko.observableArray(''),
+        errorMsg: ko.observable(''),
         waiting: ko.observable(false),
         waitingTarget: ko.observable(''),
         xsrfToken: ko.observable([]),
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         sources: ko.observableArray([]),
         source: ko.observable(''),
         sourceId: function (sid) {
@@ -78,21 +88,37 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             console.log('Comment afterAdd... ');
         },
         canAddComment: function () { return viewModel.sources().length === 0 ? false : true },
-        //canDeleteComment: function () {
+         //canDeleteComment: function () {
         //    var list = $('#comments.list-group').children();
         //    var $element = $(list[viewModel.commentIndex()]);
         //    var isClass = $element.hasClass('active')
         //    return isClass;
         //    //return $($('#comments.list-group').children()[viewModel.commentIndex()]).hasClass('active')
         //}
-        contentCacheQueue: ko.observableArray([]), // TODO
-        fileInfo: ko.observable([]),  // the selected file for viewing
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
-        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'aaplication/mp4', 'application/avi']),
-        uploadFilesCount: ko.pureComputed(function () {
-            return 'Files: ' + viewModel.uploadFiles().length
-        }, this),
+        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'video/mp4', 'video/avi']), //these should come from settings
+        uploadFileCount: ko.pureComputed(function () {
+            return 'Number files: ' + viewModel.uploadFiles().length; }, this),
+        uploadFileSize: ko.pureComputed(function () {
+            return 'Total size: ' + viewModel.getFileSize( viewModel.uploadFiles.sumProperty('size') ); }, this),
+        getFileSize: function (size) {
+            var fileSize = 0;
+            if (size > 1048576) {
+                fileSize = Math.round(size * 100 / 1048576) / 100 + " MB";
+            }
+            else if (size > 1024) {
+                fileSize = Math.round(size * 100 / 1024) / 100 + " KB";
+            }
+            else {
+                fileSize = size + " bytes";
+            }
+            return fileSize;
+        },
         showFileUpload: ko.pureComputed(function () {
             return viewModel.uploadFiles().length > 0
         }, this),
@@ -100,12 +126,20 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             var $parent = $(parent);
             var $element = $(element);
         },
+
+       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        contentCacheQueue: ko.observableArray([]), // TODO
+        serverFiles: ko.observable([]),  // the server-side files after upload
+        serverFilesCount: function () { return viewModel.serverFiles().length },
+        showUploadPrompt: function () { return viewModel.serverFiles().length == 0 ? true : false },
         fileViewApi: ko.observable(''),
         fileViewTarget: ko.observable(''),
         imageViewApi: function () { return viewModel.fileViewApi; },
         docViewApi: function () { return viewModel.fileViewApi; },
         videoViewApi: function () { return viewModel.fileViewApi; },
-        exif: ko.observableArray([])
+        exif: ko.observableArray([]) // image header details
 
         //thumb: ko.observable(),
         //thumbRendered: function (elements, item) {
@@ -159,11 +193,16 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     viewModel.errorMsg.subscribe(function (error) {
         if (error != null)
         {
-            if (!ko.dataFor($('#ajax-error')[0])) {
-                ko.applyBindings(viewModel, $('#ajax-error')[0])
+            var $ajaxerr = $('#ajax-error');
+            if (!ko.dataFor($ajaxerr[0])) {
+                ko.applyBindings(viewModel, $ajaxerr[0]);
             }
 
+            $($ajaxerr).html(viewModel.errorXhr().responseText);
+
             $('#ajax-error').dialog({
+                width: 600,
+                height: 400,
                 autoOpen: true,
                 modal: true,
                 buttons: {
@@ -299,6 +338,17 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             return textA == textB ? 0 : (textA > textB ? -1 : 1);
         });
 
+    };
+
+    ko.observableArray.fn.sumProperty = function (property) {
+
+        var total = 0;
+    
+        for (var i = 0, len = this().length; i < len; i++) {
+            total += this()[i].size
+        }
+
+        return total;
     };
 
     return viewModel;

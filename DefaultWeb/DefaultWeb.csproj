@@ -174,6 +174,7 @@
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.woff" />
     <Content Include="wwwroot\lib\_site\fonts\FontAwesome.otf" />
     <Content Include="wwwroot\lib\_site\fonts\SwartFont.ttf" />
+    <Content Include="wwwroot\lib\_site\images\8ball32.jpg" />
     <Content Include="wwwroot\lib\_site\images\bot1.jpg" />
     <Content Include="wwwroot\lib\_site\images\core.png" />
     <Content Include="wwwroot\lib\_site\images\core2.png" />
@@ -190,6 +191,7 @@
     <Content Include="wwwroot\lib\_site\images\loading-icon.gif" />
     <Content Include="wwwroot\lib\_site\images\loading-small%402x.png" />
     <Content Include="wwwroot\lib\_site\images\loading-small.png" />
+    <Content Include="wwwroot\lib\_site\images\pdf-icon.jpg" />
     <Content Include="wwwroot\lib\_site\images\secondaryToolbarButton-documentProperties%402x.png" />
     <Content Include="wwwroot\lib\_site\images\secondaryToolbarButton-documentProperties.png" />
     <Content Include="wwwroot\lib\_site\images\secondaryToolbarButton-firstPage%402x.png" />
@@ -271,11 +273,11 @@
     <PackageReference Include="CoreCompat.System.Drawing.v2" Version="5.2.0-preview1-r131" />
     <PackageReference Include="EntityFrameworkCore.Triggers" Version="1.1.1" />
     <PackageReference Include="NETStandard.Library" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="NReco.VideoConverter.LT" Version="1.1.2" />
   </ItemGroup>
@@ -320,6 +322,10 @@
     <None Include="wwwroot\lib\_site\dist\css\united.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\yeti.css.map" />
     <None Include="wwwroot\lib\_site\dist\js\jcore.js" />
+    <None Include="wwwroot\lib\_site\dist\js\pdf-debugger.js" />
+    <None Include="wwwroot\lib\_site\dist\js\pdf-viewer.js" />
+    <None Include="wwwroot\lib\_site\dist\js\pdf.js" />
+    <None Include="wwwroot\lib\_site\dist\js\pdf.worker.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf.worker.js" />
     <None Include="wwwroot\lib\_site\dist\js\site.js" />
@@ -343,10 +349,9 @@
     <None Include="wwwroot\lib\_site\js\dispatcher.js" />
     <None Include="wwwroot\lib\_site\js\fileops-client.js" />
     <None Include="wwwroot\lib\_site\js\fileops-content.js" />
-    <None Include="wwwroot\lib\_site\js\init.js" />
+    <None Include="wwwroot\lib\_site\js\main.js" />
     <None Include="wwwroot\lib\_site\js\lib\endless_scroll.js" />
     <None Include="wwwroot\lib\_site\js\lib\pdfobject.js" />
-    <None Include="wwwroot\lib\_site\js\lib\video.js" />
     <None Include="wwwroot\lib\_site\js\model-utils.js" />
     <None Include="wwwroot\lib\_site\js\models.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf-debugger.js" />
@@ -370,6 +375,7 @@
     <None Include="wwwroot\lib\_site\sass\_grids.scss" />
     <None Include="wwwroot\lib\_site\sass\_keyframes.scss" />
     <None Include="wwwroot\lib\_site\sass\_main-content.scss" />
+    <None Include="wwwroot\lib\_site\sass\_mixins.scss" />
     <None Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
     <None Include="wwwroot\lib\_site\sass\_notebook.scss" />
     <None Include="wwwroot\lib\_site\sass\_sandbox.scss" />

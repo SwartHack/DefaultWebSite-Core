@@ -23,11 +23,12 @@ namespace DefaultWeb.Controllers.ActionResults
 
         public string DwsFile { get; set; }
 
-        public ThumbnailResult(int width, int height, DwsFileInfo fileInfo)
+        public ThumbnailResult(int width, int height, DwsFileInfo fileInfo, IHostingEnvironment env)
         {
             Width = width;
             Height = height;
             FileInfo = fileInfo;
+            HostEnv = env;
             
         }
 
@@ -44,26 +45,29 @@ namespace DefaultWeb.Controllers.ActionResults
 
         public override void ExecuteResult(ActionContext context)
         {
-            Context = context;
-
-            if (!File.Exists(FileInfo.FileFull))
+            try
             {
-                //sub Archive Bot for image thumnail
-                FileInfo.FileFull = String.Format(@"{0}/8ball32.jpg","~/Images");
+                Context = context;
+                
+                // this is on the server!!!!
+                //bool hasCache = !string.IsNullOrWhiteSpace(CacheFilePath) && File.Exists(CacheFilePath);
+                //if (hasCache)
+                //{
+                //    using (Image image = Image.FromFile(CacheFilePath))
+                //    {
+                //        OutputImageJPEG(image);
+                //        return;
+                //    }
+                //}
+
+               GetThumbFromFile();
+
             }
-
-            // this is on the server!!!!
-            //bool hasCache = !string.IsNullOrWhiteSpace(CacheFilePath) && File.Exists(CacheFilePath);
-            //if (hasCache)
-            //{
-            //    using (Image image = Image.FromFile(CacheFilePath))
-            //    {
-            //        OutputImageJPEG(image);
-            //        return;
-            //    }
-            //}
-
-            GetThumbFromFile();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
             
         }
 
@@ -73,7 +77,11 @@ namespace DefaultWeb.Controllers.ActionResults
         /// </summary>
         private void GetThumbFromFile()
         {
-            
+            if (!File.Exists(FileInfo.FileFull))
+            {
+                //sub Archive Bot for image thumnail
+                FileInfo.FileFull = String.Format(@"{0}/8ball32.jpg", "~/Images");
+            }
             try
             {
                 // we need to proceed based on mime type of file
@@ -83,6 +91,7 @@ namespace DefaultWeb.Controllers.ActionResults
                 var type = FileInfo.ContentType.Substring(index + 1);
                 //TODO, only process accepted files, but should be filtered before this
                 // Upload should only allowed accepted file types
+                FileStream fStream = null;
 
                 switch (category)
                 {
@@ -99,7 +108,11 @@ namespace DefaultWeb.Controllers.ActionResults
                         break;
 
                     case "image":
-                        image = Image.FromFile(FileInfo.FileFull);
+                        fStream = File.Open(FileInfo.FileFull,FileMode.Open);
+                        image = Image.FromStream(fStream);
+                        //stream.Close();
+                        //stream.Dispose();
+                        //image = Image.FromFile(FileInfo.FileFull);
                         break;
 
 
@@ -118,14 +131,17 @@ namespace DefaultWeb.Controllers.ActionResults
                     //    thumb.Save(CacheFilePath);
 
                     OutputImageJPEG(thumb);
-
                     thumb.Dispose();
+
+                    if (fStream != null)
+                    {
+                        fStream.Dispose();
+                    }
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
-                //Elmah.ErrorSignal.FromCurrentContext().Raise(e);
             }
         }
 
@@ -135,11 +151,18 @@ namespace DefaultWeb.Controllers.ActionResults
         /// <param name="image"></param>
         private void OutputImageJPEG(Image image)
         {
-            //SetCache(Context.HttpContext.Response, 10);
+            try
+            {
+                //SetCache(Context.HttpContext.Response, 10);
 
-            // set content type
-            Context.HttpContext.Response.ContentType = "image/jpeg";
-            image.Save(Context.HttpContext.Response.Body, ImageFormat.Jpeg);
+                // set content type
+                Context.HttpContext.Response.ContentType = "image/jpeg";
+                image.Save(Context.HttpContext.Response.Body, ImageFormat.Jpeg);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private Image GetThumbFromVideo(DwsFileInfo fileInfo)
@@ -166,29 +189,22 @@ namespace DefaultWeb.Controllers.ActionResults
         {
             // parse to see if supported mimetype
             // need a better way to do this!!! TODO
+            // TODO - how to get a PDF thumbnail on server!?
             if (fileInfo.ContentType == "application/pdf")
             {
                 try
                 {
-                    var outThumb = new FileStream(fileInfo.FileFull, FileMode.Open, FileAccess.Read);
-                    return Image.FromStream(outThumb);
+                    var file = String.Format("{0}{1}", HostEnv.WebRootPath, @"\images\pdf-icon.jpg");
+                    return Image.FromFile(file);
                 }
                 catch
                 {
-                    try
-                    {
-                        return Image.FromFile(Path.Combine(HostEnv.WebRootPath, "Images/pdf-icon.jpg"));
-                    }
-                    catch
-                    {
 
-                        return Image.FromFile(Path.Combine(HostEnv.WebRootPath, "~/content/images/8ball32.jpg"));
-                    }
+                    return Image.FromFile(Path.Combine(HostEnv.WebRootPath, @"\images\8ball32.jpg"));
                 }
-
             }
             else {
-                return Image.FromFile(Path.Combine(HostEnv.WebRootPath, "~/content/images/8ball32.jpg"));
+                return Image.FromFile(Path.Combine(HostEnv.ContentRootPath, @"\images\8ball32.jpg"));
             }
         }
     }

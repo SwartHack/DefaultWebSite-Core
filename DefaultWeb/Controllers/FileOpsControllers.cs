@@ -12,6 +12,7 @@ using DefaultWeb.Controllers.Base;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using DefaultWeb.Controllers.ActionResults;
+using System.Threading.Tasks;
 
 namespace DefaultWeb.Controllers
 {
@@ -22,6 +23,7 @@ namespace DefaultWeb.Controllers
     public class FileOpsController : DwsBaseController
     {
         private IFileRepository FileRepository { get; set; }
+        
 
         /// <summary>
         /// 
@@ -99,8 +101,18 @@ namespace DefaultWeb.Controllers
         [HttpGet]
         public IActionResult List()
         {
-            var files = FileRepository.Select(Request.Cookies["DwsSessionToken"]);
-            return Json(files.ToList());
+            try
+            {
+                var files = FileRepository.Select(Request.Cookies["DwsSessionToken"]);
+                return Json(files.ToList());
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                var serverEx = new ServerException() { MiscException = ex };
+                return PartialView("~/Views/Shared/_ServerError.cshtml", serverEx); ;
+            }
+
         }
 
         /// <summary>
@@ -112,30 +124,41 @@ namespace DefaultWeb.Controllers
         [HttpGet]
         public IActionResult Download(int id)
         {
-            var fileInfo = FileRepository.Select(id, Request.Cookies["DwsSessionToken"]);
 
-            // check for video format
-            if (fileInfo.ContentType.Contains(@"video/"))
+            try
             {
-                return new VideoResult(fileInfo.FileFull, fileInfo.ContentType);
+                var fileInfo = FileRepository.Select(id, Request.Cookies["DwsSessionToken"]);
+
+                // check for video format
+                if (fileInfo.ContentType.Contains(@"video/"))
+                {
+                    return new VideoResult(fileInfo.FileFull, fileInfo.ContentType);
+                }
+
+                if (fileInfo.ContentType.Contains(@"application/"))
+                {
+                    return File(fileInfo.FileName, fileInfo.ContentType);
+                    //return new DocViewResult(this, fileInfo);
+                }
+
+                if (fileInfo.ContentType.Contains(@"image/"))
+                {
+
+                    var imageFileStream = System.IO.File.OpenRead(fileInfo.FileFull);
+                    return File(imageFileStream, fileInfo.ContentType);
+                    //return new ImageViewResult(fileInfo);
+                }
+
+                Response.StatusCode = 404;
+                return Content("Error:unsuported file type!!!");
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                var serverEx = new ServerException() { MiscException = ex };
+                return PartialView("~/Views/Shared/_ServerError.cshtml", serverEx); ;
             }
 
-            if (fileInfo.ContentType.Contains(@"application/"))
-            {
-                return File(fileInfo.FileName, fileInfo.ContentType);
-                //return new DocViewResult(this, fileInfo);
-            }
-
-            if (fileInfo.ContentType.Contains(@"image/"))
-            {
-
-                var imageFileStream = System.IO.File.OpenRead(fileInfo.FileFull);
-                return File(imageFileStream, fileInfo.ContentType);
-                //return new ImageViewResult(fileInfo);
-            }
-
-            Response.StatusCode = 404;
-            return Content("Error:unsuported file type!!!");
         }
 
         /// <summary>
@@ -159,9 +182,20 @@ namespace DefaultWeb.Controllers
             //        SetCache(Response, CacheFilePath);
             //}
 
-            var fileInfo = FileRepository.Select(id, Request.Cookies["DwsSessionToken"]);
+            try
+            {
+                
 
-            return new ThumbnailResult(width, height, fileInfo);
+                var fileInfo = FileRepository.Select(id, Request.Cookies["DwsSessionToken"]);
+                return new ThumbnailResult(width, height, fileInfo, HostEnv);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                var serverEx = new ServerException() { MiscException = ex };
+                return PartialView("~/Views/Shared/_ServerError.cshtml", serverEx); ;
+            }
+            
         }
 
         //private static string GetMD5(string str)

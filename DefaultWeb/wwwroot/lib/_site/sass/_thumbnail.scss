@@ -1,17 +1,17 @@
 ﻿/// <reference path="defaultwebsite.scss" />
-$thumbnailWidth:3rem;
-$thumbnailHeight:3rem;
+$thumbnailWidth:6vw;
+$thumbnailHeight:6vw;
 
 $thumbnailWidthMobile: 2rem;
 $thumbnailHeightMobile: 2rem;
 
-$thumbnailHoverScale : 1.1;
+$thumbnailHoverScale : 1.3;
 $thumbnailTransitionSpeed : 0.1s;
 
 // thumbnail mixin, will over-ride bootstrap mixin
 // make sure to override all values, or it will use the bootstrap defaults
 // TODO Provide mixin arguments, extend to entire li element
-@mixin thumbnail( $width: $thumbnailHeight, $height: $thumbnailHeight) {
+@mixin thumbnail( $width: $thumbnailWidth, $height: $thumbnailHeight) {
     li.thumbnail {
         // this is the thumb
         display: inline-block;
@@ -21,13 +21,17 @@ $thumbnailTransitionSpeed : 0.1s;
         margin-bottom: 0;
         line-height: $line-height-base;
         //border: 1px solid $thumbnail-border;
+        background-color: transparent;
+
         @include thumbnail-image($width, $height);
 
         .caption {
+            max-width: 7vw;
             padding: 0;
-            margin-bottom: 0;
-            margin-top: .25rem;
-            white-space: pre-line;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             color: $figure-caption-color;
         }
         //loading state of thumbnail
@@ -49,12 +53,16 @@ $thumbnailTransitionSpeed : 0.1s;
         }
         //hover on thumbnail
         &:hover {
-            @include selected($thumbnailHoverScale);
+           @include selected($thumbnailHoverScale);
+           
+            .caption {
+                max-width: unset;
+            }
         }
     }
 }
 
-@mixin thumbnail-image($width: $thumbnailHeight, $height: $thumbnailHeight) {
+@mixin thumbnail-image($width: $thumbnailWidth, $height: $thumbnailHeight) {
     img {
         padding: 0px;
         height: $height;
@@ -104,11 +112,19 @@ $thumbnailTransitionSpeed : 0.1s;
         padding: 0 .5vw 0 .5vw;
         border-radius: 0px;
         background-color: transparent;
-        height:10vh;
+        height: 10vh;
+        margin-bottom: 1vh;
 
         .card-title {
             margin: 0;
             font-size: 2.5vh;
+        }
+
+
+        .text-action {
+            //display:none;
+            animation: dws-text-action-right 2s 1;
+            margin-left: 50%;
         }
 
         a#file-upload-open {
@@ -129,6 +145,17 @@ $thumbnailTransitionSpeed : 0.1s;
         overflow-y: auto;
         overflow-x: unset;
         background-color: transparent;
+
+        .no-thumbs {
+            //display:none;
+            font-size: 1.7vh;
+            font-weight: 500;
+            font-style:oblique;
+            text-align: center;
+            line-height: 2vh;
+            padding: 1vh 1vw 1vh 1vw;
+            background-color: #d3dde8;
+        }
 
         ul#thumbnails { // root, only <ul>, all thumbs are <li>'s and children of root <ul>
             //display: flex;
@@ -164,21 +191,6 @@ $thumbnailTransitionSpeed : 0.1s;
         div.card-header {
             -webkit-animation: thumbsLoading 5s infinite; /* Chrome, Safari, Opera */
             animation: thumbsLoading 0.5s infinite;
-        }
-    }
-    //TODO
-    .admin {
-        #dropZone {
-            margin: 10px;
-            background: $table-bg;
-            border: $gray-500 dashed 2px;
-            padding: 50px;
-            text-align: center;
-            color: $gray-500;
-
-            &.hover {
-                background: $gray-300;
-            }
         }
     }
 }

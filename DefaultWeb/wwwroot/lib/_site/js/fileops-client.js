@@ -20,7 +20,8 @@ define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
             $('a#file-upload-open').on('click', function (e) {
 
                 var options = {
-                    minWidth: 500,
+                    minWidth: 400,
+                    maxWidth:400,
                     //height: 'auto',
                     modal: true,
                     title: 'Upload Files'
@@ -111,23 +112,14 @@ define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
         /// This will not happen in order!!!
         //////////////////////////////////////////////////////////////////////
         function pushFile(file, thumbContext) {
-            var fileSize = getFileSize(file.size);
+            var fileSize = viewModel.getFileSize(file.size);
+            //var codec = getCodec(file);
             viewModel.uploadFilesInfo.push({ name: file.name, size: fileSize, type: file.type, thumbcontext: thumbContext });
             viewModel.uploadFiles.push(file);
         }
 
-        function getFileSize(size) {
-            var fileSize = 0;
-            if (size > 1048576) {
-                fileSize = Math.round(size * 100 / 1048576) / 100 + " MB";
-            }
-            else if (size > 1024) {
-                fileSize = Math.round(size * 100 / 1024) / 100 + " KB";
-            }
-            else {
-                fileSize = size + " bytes";
-            }
-            return fileSize;
+        function getCodec(file) {
+           
         }
 
         function fileRemove(e) {
@@ -193,7 +185,7 @@ define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
             $.ajax(settings)
                 .done(function (data, textStatus, xhr) {
                     if (xhr.status == 200) {
-                        viewModel.fileInfo(data);
+                        viewModel.serverFiles(data);
                     }
                     else {
                         viewModel.abort(data, textStatus, null);

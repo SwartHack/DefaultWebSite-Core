@@ -32,7 +32,7 @@
 <script id='thumbnails-template' type="text/html">
     <li class="thumbnail" data-bind="attr: { 'data-api': fileApi, 'data-target': fileTarget  }">
         <img data-bind="attr: { src: thumbnailUrl }" />
-        <h6 class="caption" data-bind="text:friendlyName"></h6>
+        <div class="caption" data-bind="text:friendlyName"></div>
     </li>
 </script>
 
@@ -90,7 +90,10 @@
         <div id="file-upload-wrapper">
             <div id="file-upload-list" data-bind="template: { name: 'selected-upload-files', foreach: uploadFilesInfo, as: 'file'}"> No Files Selected</div>
         </div>
-        <div id="files-count" class="caption text-right" data-bind="text: uploadFilesCount"></div>
+        <div id="file-upload-details" class="caption">
+            <div id="file-upload-count" data-bind="text: uploadFileCount"></div>
+            <div id="file-upload-size" data-bind="text: uploadFileSize"></div>
+        </div>
     </form>
 </div>
 
@@ -139,11 +142,8 @@
 <script id="xhr-errors" type="text/html">
     <li>i am an error</li>
     <li data-bind="value: property"></li>
+
 </script>
 
-<div id="ajax-error" title="Communication Breakdown!">
-    <div class="card-header" data-bind='text: errorMsg'>This is an error message</div>
-    <div class="card-title" data-bind='text: errorStatus'>I am the status</div>
-    <div class="card-block" data-bind='text: errorData'>I am the xhr</div>
-    <ul class="list-group" data-bind="template: { name: 'xhr-errors', foreach: errorData, as: 'property'}">I am the error list</ul>
-</div>
+<div id="ajax-error" title="Communication Breakdown!"></div>
+

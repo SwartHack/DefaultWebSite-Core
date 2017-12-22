@@ -1,52 +1,74 @@
 ﻿#server-error.card {
-    display: flex;
     margin: 0;
-    padding: 1rem;
-    flex: 1 1 auto;
+    padding: 0;
+    border: none;
 
-    .card-header {
+    #error-header {
         display: flex;
-        flex-direction: column;
-        align-content: center;
-        border: .1rem solid gray;
-    }
+        flex-direction: row-reverse;
 
-    .card-title {
-        border: .1rem solid green;
-    }
-
-    .card-image {
-        border: .1rem solid indigo;
-    }
-
-    #base-exception, #inner-exception {
-        display: flex;
-        flex-direction: column;
-        padding: .5rem;
-
-        .card-title {
-            display: flex;
-        }
-
-        .card-text-wrapper {
+        .card-header {
             display: flex;
             flex-direction: column;
-            flex-flow: column;
-            //display: block;
-            overflow-y: auto;
-            max-height: 2.5rem;
-            border: .1rem solid violet;
+            align-items: center;
+            border: none;
+            font-size: 2vh;
+            font-weight: 700;
 
-            .card-text {
-                display: block;
+            .card-title {
+                font-size: 1.75vh;
+                font-weight: 500;
+                text-align: justify;
+                font-style: italic;
+            }
+        }
+
+        img#admin-img {
+            //border: .1rem solid indigo;
+            object-fit: contain;
+        }
+    }
+
+
+
+    #error-body {
+        #base-exception {
+            display: flex;
+            flex-direction: column;
+            padding: .5rem;
+
+            .card-title {
+                display: flex;
+                font-stretch: condensed;
+            }
+
+            .card-text-wrapper {
+                display: flex;
+                flex-direction: column;
+                flex-flow: column;
+                //display: block;
                 overflow-y: auto;
-                border: .075rem solid red;
+                height: auto;
+                max-height: 6vh;
+                border: .1vh solid red;
+
+                .card-text {
+                    display: block;
+                }
             }
         }
     }
 }
 
-#ajax-error, #file {
+#file {
     display:none;
+}
+
+#ajax-error {
+    display:none;
+    /*height:35vh;
+    max-height:35vh;
+    width:35vw;
+    max-width:35vw;*/
 
 }

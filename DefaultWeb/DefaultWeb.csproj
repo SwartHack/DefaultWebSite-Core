@@ -14,22 +14,22 @@
   <ItemGroup>
     <Compile Remove="Views\GIS\**" />
     <Compile Remove="Views\NewFolder\**" />
-    <Compile Remove="Views\Sandbox\Snippets\**" />
+    <Compile Remove="Views\Sandpit\Snippets\**" />
     <Compile Remove="wwwroot\css\jquery-ui\**" />
     <Compile Remove="wwwroot\lib\**" />
     <Content Remove="Views\GIS\**" />
     <Content Remove="Views\NewFolder\**" />
-    <Content Remove="Views\Sandbox\Snippets\**" />
+    <Content Remove="Views\Sandpit\Snippets\**" />
     <Content Remove="wwwroot\css\jquery-ui\**" />
     <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="Views\GIS\**" />
     <EmbeddedResource Remove="Views\NewFolder\**" />
-    <EmbeddedResource Remove="Views\Sandbox\Snippets\**" />
+    <EmbeddedResource Remove="Views\Sandpit\Snippets\**" />
     <EmbeddedResource Remove="wwwroot\css\jquery-ui\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
     <None Remove="Views\GIS\**" />
     <None Remove="Views\NewFolder\**" />
-    <None Remove="Views\Sandbox\Snippets\**" />
+    <None Remove="Views\Sandpit\Snippets\**" />
     <None Remove="wwwroot\css\jquery-ui\**" />
     <None Remove="wwwroot\lib\**" />
   </ItemGroup>
@@ -78,7 +78,7 @@
     <Content Include="Controllers\GISController.cs" />
     <Content Include="Controllers\HomeController.cs" />
     <Content Include="Controllers\ManageController.cs" />
-    <Content Include="Controllers\SandboxController.cs" />
+    <Content Include="Controllers\SandPitController.cs" />
     <Content Include="Views\Notebook\Snippets\ArchiveFile.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -165,8 +165,6 @@
     <Content Include="wwwroot\lib\_site\dist\css\solar.css" />
     <Content Include="wwwroot\lib\_site\dist\css\spacelab.css" />
     <Content Include="wwwroot\lib\_site\dist\css\superhero.css" />
-    <Content Include="wwwroot\lib\_site\dist\css\themes\default.css" />
-    <Content Include="wwwroot\lib\_site\dist\css\themes\default.min.css" />
     <Content Include="wwwroot\lib\_site\dist\css\united.css" />
     <Content Include="wwwroot\lib\_site\dist\css\yeti.css" />
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.eot" />
@@ -317,8 +315,6 @@
     <None Include="wwwroot\lib\_site\dist\css\solar.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\spacelab.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\superhero.css.map" />
-    <None Include="wwwroot\lib\_site\dist\css\themes\default.css.map" />
-    <None Include="wwwroot\lib\_site\dist\css\themes\default.min.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\united.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\yeti.css.map" />
     <None Include="wwwroot\lib\_site\dist\js\jcore.js" />
@@ -356,7 +352,7 @@
     <None Include="wwwroot\lib\_site\js\models.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf-debugger.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf-viewer.js" />
-    <None Include="wwwroot\lib\_site\js\sandbox.js" />
+    <None Include="wwwroot\lib\_site\js\sandpit.js" />
     <None Include="wwwroot\lib\_site\js\thumbnail.js" />
     <None Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
     <None Include="wwwroot\lib\_site\sass\vendor\jquery-confirm.scss" />
@@ -378,7 +374,7 @@
     <None Include="wwwroot\lib\_site\sass\_mixins.scss" />
     <None Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
     <None Include="wwwroot\lib\_site\sass\_notebook.scss" />
-    <None Include="wwwroot\lib\_site\sass\_sandbox.scss" />
+    <None Include="wwwroot\lib\_site\sass\_sandpit.scss" />
     <None Include="wwwroot\lib\_site\sass\_thumbnail.scss" />
   </ItemGroup>
 

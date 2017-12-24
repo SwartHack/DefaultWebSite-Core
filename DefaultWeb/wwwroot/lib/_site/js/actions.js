@@ -132,7 +132,7 @@ function (Control) {
        
 
         /////////////////////////////
-        /// Sandbox events
+        /// SandPit events
         ////////////////////////////
 
 
@@ -144,7 +144,7 @@ function (Control) {
             Control.sendMessage($item);
         });
 
-        $(document).on('click', 'a.sandbox-toggle-text', function (e) {
+        $(document).on('click', 'a.sandpit-toggle-text', function (e) {
             e.preventDefault();
             var $link = $(e.target);
             var $text = $link.parent().siblings('.card-text.expand');
@@ -155,8 +155,8 @@ function (Control) {
             }
             else {
 
-                $('.sandbox-wrapper').find('.sandbox-item').children('.card-text.expand').removeClass('expand');
-                $('.sandbox-wrapper').find('.sandbox-toggle-text').text('More...');
+                $('.sandpit-wrapper').find('.sandpit-item').children('.card-text.expand').removeClass('expand');
+                $('.sandpit-wrapper').find('.sandpit-toggle-text').text('More...');
                 $link.parent().siblings('.card-text').addClass('expand');
                 $link.text('Less...');
             }

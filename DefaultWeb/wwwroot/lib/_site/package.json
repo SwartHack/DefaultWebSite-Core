@@ -69,12 +69,20 @@
     "js/model-utils.js",
     "js/dispatcher.js",
     "js/actions.js",
-    "js/sandbox.js",
+    "js/sandpit.js",
     "js/controller.js",
     "js/comments.js",
     "js/thumbnail.js",
     "js/fileops-client.js",
     "js/fileops-content.js",
     "js/main.js"
+  ],
+  "deployjs": [
+    "dist/js/jcore.js",
+    "dist/js/video.js",
+    "dist/js/pdf.js",
+    "dist/js/pdf-debugger.js",
+    "dist/js/pdf-viewer.js",
+    "dist/js/site.js"
   ]
 }

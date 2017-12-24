@@ -11796,18 +11796,18 @@ flex-direction: column;*/
       #navbar-main #navbarCollapse ul li a:focus, #navbar-main #navbarCollapse ul li a:hover {
         color: crimson; }
 
-#sandbox.card {
+#sandpit.card {
   height: 100%;
   padding: .25rem;
   margin: 0;
   border: none;
   background-color: transparent; }
-  #sandbox.card #sandbox-nav {
+  #sandpit.card #sandpit-nav {
     margin-left: 1.25rem;
     margin-right: 1.25rem;
     margin-top: .5rem;
     margin-bottom: .5rem; }
-    #sandbox.card #sandbox-nav .card-title {
+    #sandpit.card #sandpit-nav .card-title {
       background-color: tan !important;
       border: 1px solid transparent;
       border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
@@ -11815,7 +11815,7 @@ flex-direction: column;*/
       font-size: 1.5rem;
       font-weight: bold;
       text-align: center; }
-    #sandbox.card #sandbox-nav ul.nav.nav-pills {
+    #sandpit.card #sandpit-nav ul.nav.nav-pills {
       width: 100%;
       padding-bottom: .25rem;
       flex-wrap: wrap;
@@ -11825,25 +11825,25 @@ flex-direction: column;*/
       border: 1px solid transparent;
       border-radius: 0 0 calc(1rem - 1px) calc(1rem - 1px);
       cursor: pointer; }
-      #sandbox.card #sandbox-nav ul.nav.nav-pills .nav-item {
+      #sandpit.card #sandpit-nav ul.nav.nav-pills .nav-item {
         border-radius: .75rem;
         margin-top: .25rem;
         margin-left: .75rem;
         background-color: tan; }
-        #sandbox.card #sandbox-nav ul.nav.nav-pills .nav-item a {
+        #sandpit.card #sandpit-nav ul.nav.nav-pills .nav-item a {
           padding-left: .5rem;
           padding-right: .5rem; }
-        #sandbox.card #sandbox-nav ul.nav.nav-pills .nav-item.active {
+        #sandpit.card #sandpit-nav ul.nav.nav-pills .nav-item.active {
           background-color: darkkhaki;
           color: #fff;
           /*&:hover {
               background-color: darkkhaki;
               color: $white;
           }*/ }
-        #sandbox.card #sandbox-nav ul.nav.nav-pills .nav-item:focus, #sandbox.card #sandbox-nav ul.nav.nav-pills .nav-item:hover {
+        #sandpit.card #sandpit-nav ul.nav.nav-pills .nav-item:focus, #sandpit.card #sandpit-nav ul.nav.nav-pills .nav-item:hover {
           background-color: khaki;
           color: #fff; }
-  #sandbox.card #sandbox-target-area {
+  #sandpit.card #sandpit-target-area {
     flex: 0 1 auto;
     display: flex;
     height: 100%;
@@ -11851,29 +11851,29 @@ flex-direction: column;*/
     border: none;
     background-color: transparent; }
 
-#sandbox-docs {
+#sandpit-docs {
   display: flex;
   flex-direction: column;
   padding: 0;
   background-color: transparent;
   margin-left: 5%;
   margin-right: 5%; }
-  #sandbox-docs #sandbox-header.card-header {
+  #sandpit-docs #sandpit-header.card-header {
     background-color: tan;
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 2.5rem;
     margin-bottom: 0;
     border: none; }
-    #sandbox-docs #sandbox-header.card-header:first-child {
+    #sandpit-docs #sandpit-header.card-header:first-child {
       border: 1px solid transparent;
       border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0; }
-    #sandbox-docs #sandbox-header.card-header .card-title {
+    #sandpit-docs #sandpit-header.card-header .card-title {
       font-weight: bold;
       font-size: 1.25rem;
       font-style: italic;
       margin-bottom: 0; }
-  #sandbox-docs #sandbox-wrapper {
+  #sandpit-docs #sandpit-wrapper {
     display: block;
     overflow-y: auto;
     padding-left: 5%;
@@ -11884,34 +11884,34 @@ flex-direction: column;*/
     border-radius: 0 0 calc(0.5rem - 1px) calc(0.5rem - 1px);
     background-color: moccasin; }
 
-.sandbox-doc.card {
+.sandpit-doc.card {
   display: block;
   margin-bottom: 1rem;
   background-color: burlywood;
   border-radius: 0.25rem;
   border: 1px solid transparent; }
-  .sandbox-doc.card .card-title {
+  .sandpit-doc.card .card-title {
     font-size: 1.25rem;
     font-style: italic;
     font-weight: 400;
     margin-bottom: 0;
     text-align: center; }
-  .sandbox-doc.card .card-text {
+  .sandpit-doc.card .card-text {
     background-color: lemonchiffon;
     height: 2.5rem;
     overflow-y: hidden; }
-    .sandbox-doc.card .card-text.expand {
+    .sandpit-doc.card .card-text.expand {
       height: auto;
       overflow-y: auto; }
-  .sandbox-doc.card .card-footer {
+  .sandpit-doc.card .card-footer {
     border: none;
     padding-top: 0;
     padding-bottom: 0;
     background-color: transparent; }
-    .sandbox-doc.card .card-footer a.sandbox-toggle-text {
+    .sandpit-doc.card .card-footer a.sandpit-toggle-text {
       text-decoration: none;
       color: #007bff; }
-      .sandbox-doc.card .card-footer a.sandbox-toggle-text:focus, .sandbox-doc.card .card-footer a.sandbox-toggle-text:hover {
+      .sandpit-doc.card .card-footer a.sandpit-toggle-text:focus, .sandpit-doc.card .card-footer a.sandpit-toggle-text:hover {
         cursor: pointer; }
 
 .dws-page, #welcome.card, #about.card, #contact.card, #comments.card, #ack.card {
@@ -11970,10 +11970,6 @@ flex-direction: column;*/
   #contact.card div#doc-resume.collapse.show .card.card-block .open-document, #contact.card div#doc-cv.collapse.show .card.card-block .open-document, #contact.card div#doc-masters.collapse.show .card.card-block .open-document {
     height: 90%; }
 
-/*#sandbox.card {
-    @extend .dws-page;
-    
-}*/
 #comments.card {
   background-color: hotpink;
   color: chartreuse; }

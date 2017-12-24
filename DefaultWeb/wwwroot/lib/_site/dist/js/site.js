@@ -242,7 +242,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
 
 
     ////////////////////////////////////////
-    /// Sandbox - Comments Manager
+    /// Sandpit - Comments Manager
     /// Source subscribe events/actions
     ///////////////////////////////////////
     viewModel.source.subscribe(function (source) {
@@ -276,7 +276,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     });
 
     ////////////////////////////////////////
-    /// Sandbox - Comments Manager
+    /// Sandpit - Comments Manager
     /// Comment subscribe events/actions
     ///////////////////////////////////////
     viewModel.comment.subscribe(function (comment) {
@@ -598,7 +598,7 @@ function (Control) {
        
 
         /////////////////////////////
-        /// Sandbox events
+        /// SandPit events
         ////////////////////////////
 
 
@@ -610,7 +610,7 @@ function (Control) {
             Control.sendMessage($item);
         });
 
-        $(document).on('click', 'a.sandbox-toggle-text', function (e) {
+        $(document).on('click', 'a.sandpit-toggle-text', function (e) {
             e.preventDefault();
             var $link = $(e.target);
             var $text = $link.parent().siblings('.card-text.expand');
@@ -621,8 +621,8 @@ function (Control) {
             }
             else {
 
-                $('.sandbox-wrapper').find('.sandbox-item').children('.card-text.expand').removeClass('expand');
-                $('.sandbox-wrapper').find('.sandbox-toggle-text').text('More...');
+                $('.sandpit-wrapper').find('.sandpit-item').children('.card-text.expand').removeClass('expand');
+                $('.sandpit-wrapper').find('.sandpit-toggle-text').text('More...');
                 $link.parent().siblings('.card-text').addClass('expand');
                 $link.text('Less...');
             }
@@ -644,9 +644,9 @@ function (Control) {
 });
 
 //////////////////////////////////////////////////////////////////////
-/// sandbox module - MutationObserver Here!!!
+/// sandpit module - MutationObserver Here!!!
 //////////////////////////////////////////////////////////////////////
-define('dws/sandbox', ['dws/model'], function (viewModel) {
+define('dws/sandpit', ['dws/model'], function (viewModel) {
 
     //lets monitor the sand box area for new content and bind accordingly
     var config = {
@@ -677,7 +677,7 @@ define('dws/sandbox', ['dws/model'], function (viewModel) {
 
     function observeKo(state) {
         if (state) {
-            observerKo.observe(document.getElementById('sandbox-target-area'), config);
+            observerKo.observe(document.getElementById('sandpit-target-area'), config);
             //observerKo.observe(document.getElementById('file-ops-client'), config);
         }
         else {
@@ -1738,7 +1738,7 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 //////////////////////////////////////////////////////////////////////
 require(['dws/actions']);
 require(['dws/comments']);
-require(['dws/sandbox']);
+require(['dws/sandpit']);
 require(['dws/model-utils']);
 require(['dws/thumbnail']);
 require(['dws/fileops-client']);

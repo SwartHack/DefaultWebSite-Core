@@ -235,7 +235,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
 
 
     ////////////////////////////////////////
-    /// Sandbox - Comments Manager
+    /// Sandpit - Comments Manager
     /// Source subscribe events/actions
     ///////////////////////////////////////
     viewModel.source.subscribe(function (source) {
@@ -269,7 +269,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     });
 
     ////////////////////////////////////////
-    /// Sandbox - Comments Manager
+    /// Sandpit - Comments Manager
     /// Comment subscribe events/actions
     ///////////////////////////////////////
     viewModel.comment.subscribe(function (comment) {

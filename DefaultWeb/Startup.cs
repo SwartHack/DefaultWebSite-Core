@@ -95,6 +95,10 @@ namespace DefaultWeb
             // create service for accessing settings
             services.Configure<DwsSettings>(Configuration.GetSection("DefaultWebSiteSettings"));
 
+            ////////////////////////////
+            /// testing ONLY
+            //services.AddDirectoryBrowser();
+
             services.Configure<IISOptions>(options =>
             {
 

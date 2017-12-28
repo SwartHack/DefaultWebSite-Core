@@ -133,11 +133,12 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         contentCacheQueue: ko.observableArray([]), // TODO
         serverFiles: ko.observable([]),  // the server-side files after upload
         serverFilesCount: function () { return viewModel.serverFiles().length },
-        showUploadPrompt: function () { return viewModel.serverFiles().length == 0 ? true : false },
+        fileMimeType: ko.observable(''),
         fileViewApi: ko.observable(''),
         fileViewTarget: ko.observable(''),
         imageViewApi: function () { return viewModel.fileViewApi; },
         docViewApi: function () { return viewModel.fileViewApi; },
+        pdfWorker: ko.observable(''),
         videoViewApi: function () { return viewModel.fileViewApi; },
         exif: ko.observableArray([]) // image header details
 

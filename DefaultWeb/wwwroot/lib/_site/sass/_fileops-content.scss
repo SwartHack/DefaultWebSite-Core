@@ -60,21 +60,26 @@ $contentBorder : 1rem;
 
 
         .main-document {
-            display: none;
+            display: inline;
             position: center;
+            display:none;
 
-            #dws-pdf-viewer {
+            #my-pdf-viewer {
                 display: none;
             }
 
             #doc-embedded {
-                display: none;
+                overflow: auto;
+                width: 100%;
+                height: 100%;
             }
         }
 
         .main-video {
             display: none;
             position: center;
+            border-radius: 5px;
+            margin-bottom: 3px;
         }
 
         .main-image {

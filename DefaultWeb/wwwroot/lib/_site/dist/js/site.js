@@ -140,11 +140,12 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         contentCacheQueue: ko.observableArray([]), // TODO
         serverFiles: ko.observable([]),  // the server-side files after upload
         serverFilesCount: function () { return viewModel.serverFiles().length },
-        showUploadPrompt: function () { return viewModel.serverFiles().length == 0 ? true : false },
+        fileMimeType: ko.observable(''),
         fileViewApi: ko.observable(''),
         fileViewTarget: ko.observable(''),
         imageViewApi: function () { return viewModel.fileViewApi; },
         docViewApi: function () { return viewModel.fileViewApi; },
+        pdfWorker: ko.observable(''),
         videoViewApi: function () { return viewModel.fileViewApi; },
         exif: ko.observableArray([]) // image header details
 
@@ -836,11 +837,15 @@ function (viewModel, Dispatch) {
     ////////////////////////////////
     function initKO() {
         ko.applyBindings(viewModel);
-        
     }
 
     function setXsrf(xsrf) {
         viewModel.xsrfToken(xsrf);
+    }
+
+    function setPdfWorker(pdfWorker) {
+        PDFJS.workerSrc = pdfWorker;
+        viewModel.pdfWorker(pdfWorker);
     }
 
     return {
@@ -851,7 +856,8 @@ function (viewModel, Dispatch) {
         showContentArea: showContentArea,
         hideAllContent: hideAllContent,
         parseNavUrl: parseNavUrl,
-        setXsrf: setXsrf
+        setXsrf: setXsrf,
+        setPdfWorker: setPdfWorker
     }
 });
 
@@ -1071,7 +1077,7 @@ function (Control, viewModel) {
 define('dws/thumbnail', [],
     function () {
 
-        PDFJS.workerSrc = '/lib/_site/dist/js/pdf.worker.js';
+        //PDFJS.workerSrc = '/lib/_site/dist/js/pdf.worker.js';
 
         //////////////////////////////////////////////////////////////////////
         /// 
@@ -1520,6 +1526,7 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             /////////////////////////////////////////////////////////////
             $(document).on('click', 'ul#thumbnails li', function (e) {
                 e.preventDefault();
+                
                 var $link = $(this);
                 if (!$link.hasClass('selected')) {
                     openFile($link);
@@ -1527,111 +1534,25 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             });
 
 
-            $('.main-document.content-area').on('show', function () {
+            //$('.main-document.content-area').on('show', function (e) {
+            //    e.preventDefault();
+               
+            //    if (viewModel.fileMimeType().match('application/pdf')) {
+            //        loadPdfFile();
+            //        $(this).children('#my-pdf-container').show();
+            //        $('#doc-embedded').hide();
+            //    }
+            //    else {
+            //        $('#my-pdf-container').hide();
+            //        //$('#doc-embedded').show();
+            //    }
 
-                if (viewModel.fileInfo.contentType.match('application/pdf')) {
-                    loadPdfFile();
-                    $('#dws-pdf-container').show();
-                    $('#doc-embedded').hide();
-                }
-                else {
-                    $('#dws-pdf-container').hide();
-                    $('#doc-embedded').show();
-                }
-
-            });
+            //});
 
             $('.main-document.content-area').on('hide', function () {
 
             });
-
-            ///////////////////////////////////////////////////////////////////////
-            // TODO - all ajax calls through dispatcher, extend model to deal with it
-            ////////////////////////////////////////////////////////////////////////
-            function getContent() {
-
-                var settings = {
-                    url: "/api/dws/files/list",
-                    cache: false
-                }
-                viewModel.waitingTarget('#navbar-main');
-                viewModel.waiting(true);
-                $.ajax(settings)
-                    .done(function (data, textStatus, xhr) {
-                        viewModel.serverFiles([]);
-                        viewModel.serverFiles(data);
-                    })
-                    .fail(function (xhr, textStatus, error) {
-                        viewModel.abort(xhr, textStatus, error);
-                    })
-                    .always(function (data, textStatus, xhr) {
-                        viewModel.waiting(false);
-                    });
-
-            }
-
-            ///////////////////////////////////////////////////////////////////////
-            // 
-            ////////////////////////////////////////////////////////////////////////
-            viewModel.fileViewApi.subscribe(function (newFile) {
-
-                // what's my visible content area
-                var $target = $(viewModel.fileViewTarget());
-
-                if (!$target.is(':visible')) {
-                    $('.content-area').hide();
-                    $target.show();
-                }
-            });
-
-            ///////////////////////////////////////////////////////////////////////
-            // 
-            ////////////////////////////////////////////////////////////////////////
-            function loadPdfFile() {
-
-                var SEARCH_FOR = ''; // try 'Mozilla';
-
-                var container = document.getElementById('viewerContainer');
-
-                // (Optionally) enable hyperlinks within PDF files.
-                var pdfLinkService = new PDFJS.PDFLinkService();
-
-                var pdfViewer = new PDFJS.PDFViewer({
-                    container: container,
-                    linkService: pdfLinkService
-                });
-                pdfLinkService.setViewer(pdfViewer);
-
-                // (Optionally) enable find controller.
-                var pdfFindController = new PDFJS.PDFFindController({
-                    pdfViewer: pdfViewer
-                });
-                pdfViewer.setFindController(pdfFindController);
-
-                container.addEventListener('pagesinit', function () {
-                    // We can use pdfViewer now, e.g. let's change default scale.
-                    pdfViewer.currentScaleValue = 'page-width';
-
-                    if (SEARCH_FOR) { // We can try search for things
-                        pdfFindController.executeCommand('find', { query: SEARCH_FOR });
-                    }
-                });
-
-                // Loading document.
-                PDFJS.getDocument(viewModel.docViewApi()).then(function (pdfDocument) {
-                    // Document loaded, specifying document for the viewer and
-                    // the (optional) linkService.
-                    pdfViewer.setDocument(pdfDocument);
-
-                    pdfLinkService.setDocument(pdfDocument, null);
-                });
-
-
-
-            }
-
-
-
+            
             $(document).on('keydown', '#main-content-area', function (e) {
                 //if (!shortcutsEnabled) {
                 //    return;
@@ -1647,8 +1568,6 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                     return false;
                 }
             });
-
-            
 
             $('#content-left').on("click", function (e) {
                 contentPrev();
@@ -1666,6 +1585,8 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 contentNext();
             });
 
+            
+
             hideAllContent();
 
             getContent();
@@ -1673,6 +1594,159 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             //// expand this
             //$('#col-util').hide();
             //$('#col-main').addClass('full-size');
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // Subscribing to viewModel anywhere you reference it!!
+        ////////////////////////////////////////////////////////////////////////
+        viewModel.fileViewApi.subscribe(function (newFile) {
+
+            // we have a new file, depending on type we have to account for model binding
+            // behavior, <embed> and <video>.
+            // do this before show
+
+            if (viewModel.fileMimeType().match('application/pdf')) {
+                // try to get pdfjs viewer to work, TODO
+                // must replace the element each time! binding does not work!
+                // default to HTML5 only
+                var target = document.querySelector('.main-content .main-document');
+                $(target).empty;
+                var emb = document.createElement('embed');
+                emb.setAttribute('id', 'doc-embedded');
+                emb.setAttribute('src', viewModel.fileViewApi());
+                emb.setAttribute('type', viewModel.fileMimeType());
+                target.appendChild(emb);
+
+                // pdf-js
+                //loadPdfFile();
+            }
+            else if (viewModel.fileMimeType().match('image/*')) {
+                // call out to do this TODO
+                //var exif = parseEXIF(data.EXIF);
+                //if (exif) {
+                //    viewModel.exif(exif);
+                //    exif.length ? $('.image-info.image-exif').fadeIn() : $('.image-info.image-exif').fadeOut();
+                //}
+                //data.Desription ? $('.image-info-descr').fadeIn() : $('.image-info-descr').fadeOut();
+
+                //$('#ImageVPathEditImageInfo').val(data.VirtualPath);
+            }
+            else if (viewModel.fileMimeType().match('video/mp4')) {
+
+                // switch to videojs TODO
+                // this replaces the element each time! binding does not work!
+                var video = document.querySelector('.main-content .main-video video');
+                var source = document.createElement('source');
+
+                source.setAttribute('src', viewModel.fileViewURL());
+                source.setAttribute('type', viewModel.fileMimeType());
+
+                //delete <source> child elements
+                $(video).empty();  //detach
+
+                video.appendChild(source);
+                video.load();
+            }
+
+            // now make it visible
+            // what's my visible content area
+            var $target = $(viewModel.fileViewTarget());
+
+            if (!$target.is(':visible')) {
+                $('.content-area').hide();
+                $target.show();
+
+               
+            }
+        });
+
+        ///////////////////////////////////////////////////////////////////////
+        // TODO - all ajax calls through dispatcher, extend model to deal with it
+        ////////////////////////////////////////////////////////////////////////
+        function getContent() {
+
+            var settings = {
+                url: "/api/dws/files/list",
+                cache: false
+            }
+            viewModel.waitingTarget('#navbar-main');
+            viewModel.waiting(true);
+            $.ajax(settings)
+                .done(function (data, textStatus, xhr) {
+                    viewModel.serverFiles([]);
+                    viewModel.serverFiles(data);
+                })
+                .fail(function (xhr, textStatus, error) {
+                    viewModel.abort(xhr, textStatus, error);
+                })
+                .always(function (data, textStatus, xhr) {
+                    viewModel.waiting(false);
+                });
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // 
+        ////////////////////////////////////////////////////////////////////////
+        function clickThumbnail($thumbnail) {
+            //figure this latter
+            //window.history && window.history.pushState && window.history.replaceState({ image: "", virtualPath: "" }, "", "");
+            openFile($thumbnail);
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // 
+        ////////////////////////////////////////////////////////////////////////
+        function openFile($thumbnail) {
+            var fileApi = $thumbnail.attr('data-api');
+            var fileTarget = $thumbnail.attr('data-target');
+            var type = $thumbnail.attr('data-type');
+
+            styleSelectedThumbnail($thumbnail);
+
+            viewModel.fileMimeType(type);
+            viewModel.fileViewTarget(fileTarget);
+            viewModel.fileViewApi(fileApi);
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        // 
+        ////////////////////////////////////////////////////////////////////////
+        function loadPdfFile() {
+
+            var SEARCH_FOR = ''; 
+            var mypdf = document.getElementById('my-pdf-viewer');
+            var container = mypdf.querySelector('#viewerContainer');
+
+            // (Optionally) enable hyperlinks within PDF files.
+            var pdfLinkService = new PDFJS.PDFLinkService();
+            
+            var pdfViewer = new PDFJS.PDFViewer({
+                container: container
+            });
+            pdfLinkService.setViewer(pdfViewer);
+
+            // (Optionally) enable find controller.
+            var pdfFindController = new PDFJS.PDFFindController({
+                pdfViewer: pdfViewer
+            });
+            pdfViewer.setFindController(pdfFindController);
+
+            container.addEventListener('pagesinit', function () {
+                // We can use pdfViewer now, e.g. let's change default scale.
+                pdfViewer.currentScaleValue = 'page-width';
+
+                if (SEARCH_FOR) { // We can try search for things
+                    pdfFindController.executeCommand('find', { query: SEARCH_FOR });
+                }
+            });
+
+            // Loading document.
+            PDFJS.getDocument(viewModel.fileViewApi()).then(function (pdfDocument) {
+                // Document loaded, specifying document for the viewer and
+                // the (optional) linkService.
+                pdfViewer.setDocument(pdfDocument);
+                pdfLinkService.setDocument(pdfDocument, null);
+            });
         }
 
         function contentNext() {
@@ -1685,23 +1759,7 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             $(linkPrev).trigger('click');
         }
 
-        // do we really need this???
-        function clickThumbnail($thumbnail) {
-            //figure this latter
-            //window.history && window.history.pushState && window.history.replaceState({ image: "", virtualPath: "" }, "", "");
-            openFile($thumbnail);
-        }
-
-        function openFile($thumbnail) {
-            var fileApi = $thumbnail.attr('data-api');
-            var fileTarget = $thumbnail.attr('data-target');
-
-            styleSelectedThumbnail($thumbnail);
-
-            viewModel.fileViewTarget(fileTarget);
-            viewModel.fileViewApi(fileApi);
-
-        }
+        
 
         function styleSelectedThumbnail($thumbnail) {
             $('ul#thumbnails li').removeClass("selected");
@@ -1744,7 +1802,6 @@ require(['dws/thumbnail']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
 
-PDFJS.workerSrc = 'pdf.worker.js';
 
 //require('video-codec-js/lib/encoder');
 //require('video-codec-js/lib/decoder');
@@ -1808,3 +1865,14 @@ $.fn.isWithinParent = function () {
     //return ((viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 
 }
+
+// this gives us the on show/hide events for containers
+$(function () {
+    $.each(['show', 'hide'], function (i, ev) {
+        var el = $.fn[ev];
+        $.fn[ev] = function () {
+            this.trigger(ev);
+            return el.apply(this, arguments);
+        };
+    });
+});

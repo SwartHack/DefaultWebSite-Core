@@ -21884,7 +21884,7 @@ exports.PostScriptCompiler = PostScriptCompiler;
 
 
 var pdfjsVersion = '2.0.0';
-var pdfjsBuild = '3f0fb18';
+var pdfjsBuild = 'd1878a1';
 var pdfjsCoreWorker = __w_pdfjs_require__(72);
 exports.WorkerMessageHandler = pdfjsCoreWorker.WorkerMessageHandler;
 

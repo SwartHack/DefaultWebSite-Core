@@ -2,6 +2,7 @@
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
 @{
     var _ajaxRequestToken = antiforgery.GetAndStoreTokens(Context).RequestToken;
+    var _pdfWorker = String.Format("{0}", DwsConfig.Value.PdfWorker);
 }
 @section Header
 {
@@ -46,9 +47,9 @@
                 <div id="footer-scroll">
                     <span>
                         &copy; Eric K. Swartling  @DateTime.Now.Year &mdash;
-                        <a href="Html/term-conditions.html" target="_blank">Terms and Condtions of Use </a> &mdash;
-                        <a href="Html/conduct.html" target="_blank">Code of Conduct Policy </a> &mdash;
-                        <a href="Html/privacy.html" target="_blank">Privacy Policy </a>
+                        <a href="~/resource/html/terms-conditions.html" target="_blank">Terms and Condtions of Use </a> &mdash;
+                        <a href="~/resource/html/conduct.html" target="_blank">Code of Conduct Policy </a> &mdash;
+                        <a href="~/resource/html/privacy.html" target="_blank">Privacy Policy </a>
                         <span class="text-danger">
                             !!!!!This Is Pre-Release Preview! DefaultWebSiteCore &mdash;
                             @Assembly.GetEntryAssembly().GetName().Version.ToString()!!!!!
@@ -81,7 +82,7 @@
 
                 $(document).ready(function () {
                     Controller.setXsrf(@Json.Serialize(_ajaxRequestToken));
-                    
+                    Controller.setPdfWorker("@_pdfWorker");
                 });
             });
 

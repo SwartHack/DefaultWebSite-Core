@@ -14,6 +14,7 @@ namespace DefaultWeb.Models.DefaultWebSite
         public string CacheFolderPhysicalPath { get; set; }
         public string FolderContentFileName { get; set; }
         public string DefaultTheme { get; set; }
+        public string PdfWorker { get; set; }
         public string[] ValidFileExtensions { get; set; }
         public string[] IgnoreFolders { get; set; }
         public bool HidePrivateFolders { get; set; }

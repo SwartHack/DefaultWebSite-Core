@@ -30,7 +30,7 @@
 </script>
 
 <script id='thumbnails-template' type="text/html">
-    <li class="thumbnail" data-bind="attr: { 'data-api': fileApi, 'data-target': fileTarget  }">
+    <li class="thumbnail" data-bind="attr: { 'data-api': fileApi, 'data-target': fileTarget, 'data-type': contentType  }">
         <img data-bind="attr: { src: thumbnailUrl }" />
         <div class="caption" data-bind="text:friendlyName"></div>
     </li>

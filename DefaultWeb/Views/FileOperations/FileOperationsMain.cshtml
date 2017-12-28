@@ -8,16 +8,16 @@
                     <div id="thumbnails-container" class="col-12 no-gutters">
                         <div class="card-header">
                             <div class="card-title">Thumbnails</div>
-                            <div class="text-action" data-bind="visible: showUploadPrompt"><i class="fa fa-arrow-right"></i></div>
+                            <div class="text-action" data-bind="visible:  serverFiles().length == 0"><i class="fa fa-arrow-right"></i></div>
                             <a id="file-upload-open" role="button" title="Upload Files...">
                                 <i class="fa fa-border fa-upload"></i>
                             </a>
                         </div>
 
                         <div id="thumbs-list">
-                            <div class="no-thumbs" data-bind="visible: showUploadPrompt">There are no server files!? 
+                            <div class="no-thumbs" data-bind="visible: serverFiles().length == 0">There are no server files!? 
                             Upload some files to display. What kind? The upload dialog will display the supported file types. 
-                            Can't decide? Try the <file href="~/images/samplefiles.zip"> Sample Files!</file></div>
+                            Can't decide? Try the <a href="~/images/samplefiles.zip"> Sample Files!</a></div>
                             <ul id="thumbnails" data-bind='template: {name:"thumbnails-template", foreach: serverFiles }'></ul>
                         </div>
                     </div>
@@ -46,8 +46,7 @@
                     </div>
 
                     <div class="main-document content-area">
-                        @{ Html.RenderPartial("~/Views/FileOperations/PdfViewer.cshtml");}
-                        <embed id="doc-embedded" data-bind="attr: { src : docViewApi() }" style="overflow: auto; width: 100%; height: 100%;" />
+                        @*@{ Html.RenderPartial("~/Views/FileOperations/PdfViewer.cshtml");}*@
                     </div>
 
                     <div class="main-video content-area">

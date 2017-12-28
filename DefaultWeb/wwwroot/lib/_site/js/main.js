@@ -9,7 +9,6 @@ require(['dws/thumbnail']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
 
-PDFJS.workerSrc = 'pdf.worker.js';
 
 //require('video-codec-js/lib/encoder');
 //require('video-codec-js/lib/decoder');
@@ -73,3 +72,14 @@ $.fn.isWithinParent = function () {
     //return ((viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
 
 }
+
+// this gives us the on show/hide events for containers
+$(function () {
+    $.each(['show', 'hide'], function (i, ev) {
+        var el = $.fn[ev];
+        $.fn[ev] = function () {
+            this.trigger(ev);
+            return el.apply(this, arguments);
+        };
+    });
+});

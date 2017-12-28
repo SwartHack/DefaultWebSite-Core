@@ -5,6 +5,7 @@
   "globals": {
     "$": true,
     "ko": true,
+    "PDFObject": true,
     "PDFJS": true,
     "videojs": true,
     "require": true,

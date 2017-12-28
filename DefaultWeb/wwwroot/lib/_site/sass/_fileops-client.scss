@@ -172,10 +172,10 @@
             margin-top: .25rem;
             margin-bottom: .25rem;
             margin-right: .5rem;*/
-            @include thumbnail-image(4vw,4vw);
 
             img {
                 object-fit: unset;
+                height:4vw;
             }
         }
 

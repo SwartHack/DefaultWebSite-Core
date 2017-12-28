@@ -4,7 +4,7 @@
 define('dws/thumbnail', [],
     function () {
 
-        PDFJS.workerSrc = '/lib/_site/dist/js/pdf.worker.js';
+        //PDFJS.workerSrc = '/lib/_site/dist/js/pdf.worker.js';
 
         //////////////////////////////////////////////////////////////////////
         /// 

@@ -1,35 +1,3 @@
 [
-  {
-    "outputFileName": "wwwroot/js/defaultwebsite.js",
-    "inputFiles": [
-      "wwwroot/lib/_site/dist/js/jcore.js",
-      "wwwroot/lib/_site/dist/js/site.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/defaultwebsite.css",
-    "inputFiles": [
-      "wwwroot/lib/_site/dist/css/cerulean.css",
-      "wwwroot/lib/_site/dist/css/cosmo.css",
-      "wwwroot/lib/_site/dist/css/cyborg.css",
-      "wwwroot/lib/_site/dist/css/darkly.css",
-      "wwwroot/lib/_site/dist/css/default.css",
-      "wwwroot/lib/_site/dist/css/flatly.css",
-      "wwwroot/lib/_site/dist/css/journal.css",
-      "wwwroot/lib/_site/dist/css/litera.css",
-      "wwwroot/lib/_site/dist/css/lumen.css",
-      "wwwroot/lib/_site/dist/css/lux.css",
-      "wwwroot/lib/_site/dist/css/materia.css",
-      "wwwroot/lib/_site/dist/css/minty.css",
-      "wwwroot/lib/_site/dist/css/pulse.css",
-      "wwwroot/lib/_site/dist/css/sandstone.css",
-      "wwwroot/lib/_site/dist/css/simplex.css",
-      "wwwroot/lib/_site/dist/css/slate.css",
-      "wwwroot/lib/_site/dist/css/solar.css",
-      "wwwroot/lib/_site/dist/css/spacelab.css",
-      "wwwroot/lib/_site/dist/css/superhero.css",
-      "wwwroot/lib/_site/dist/css/united.css",
-      "wwwroot/lib/_site/dist/css/yeti.css"
-    ]
-  }
+ 
 ]

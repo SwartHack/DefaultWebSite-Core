@@ -98,11 +98,15 @@ function (viewModel, Dispatch) {
     ////////////////////////////////
     function initKO() {
         ko.applyBindings(viewModel);
-        
     }
 
     function setXsrf(xsrf) {
         viewModel.xsrfToken(xsrf);
+    }
+
+    function setPdfWorker(pdfWorker) {
+        PDFJS.workerSrc = pdfWorker;
+        viewModel.pdfWorker(pdfWorker);
     }
 
     return {
@@ -113,6 +117,7 @@ function (viewModel, Dispatch) {
         showContentArea: showContentArea,
         hideAllContent: hideAllContent,
         parseNavUrl: parseNavUrl,
-        setXsrf: setXsrf
+        setXsrf: setXsrf,
+        setPdfWorker: setPdfWorker
     }
 });

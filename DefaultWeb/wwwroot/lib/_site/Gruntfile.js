@@ -24,10 +24,10 @@ module.exports = function(grunt) {
                 src: ['../bootswatch/*/build.scss', '!../bootswatch/global/build.scss']
             },
             distcss: {
-                src: ['dist/css/*.*']
+                src: ['dist/css/*.*', '!dist/css/images', '!dist/css/video-js.css']
             },
             distjs: {
-                src: ['dist/js/*.*']
+                src: ['dist/js/*.*', '!dist/js/pdf.worker.js']
             },
             theme: {
                 src: ''
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
             wwwrootall: {
                 src:['../../css/**', '../../js/**','../../fonts/**', '../../images/**']
             },
-            wwwrootall: {
+            wwwroot: {
                 src: ['../../css/**', '../../js/**']
             }
         },
@@ -53,6 +53,11 @@ module.exports = function(grunt) {
             site: {
                 src: ['<%= pkg.sitejs %>'],
                 dest: 'dist/js/site.js',
+                nonull: true
+            },
+            header: {
+                src: ['<%= pkg.headerjs %>'],
+                dest: 'dist/js/header.js',
                 nonull: true
             }
         },
@@ -120,20 +125,6 @@ module.exports = function(grunt) {
                 dest: '../../images/',
                 filter: 'isFile'
             },
-            pdfjs: {
-                expand: true,
-                cwd: 'js/pdfjs/',
-                src: '**',
-                dest: 'dist/js/',
-                filter: 'isFile'
-            },
-            videojs: {
-                expand: true,
-                cwd: '../video-js/dist/',
-                src:'video.js',
-                dest: 'dist/js/',
-                filter: 'isFile'
-            }
         },
         uglify: {
             wwwroot: {
@@ -178,7 +169,7 @@ module.exports = function(grunt) {
     });
 
     //////////////////////////////////////////////////////////
-    //// main dist, builds default theme and js
+    //// build all, must have dist-all built
     //////////////////////////////////////////////////////////
     grunt.registerTask('build-all', function () {
         grunt.task.run('clean:wwwrootall');
@@ -208,7 +199,9 @@ module.exports = function(grunt) {
     grunt.registerTask('dist-all', function () {
         grunt.task.run('themes');
         grunt.task.run('js');
+        
         grunt.task.run('dist-videojs-css');
+
     });
 
     //////////////////////////////////////////////////////////
@@ -216,18 +209,16 @@ module.exports = function(grunt) {
     //////////////////////////////////////////////////////////
     grunt.registerTask('js', function () {
         grunt.task.run('clean:distjs');
+        grunt.task.run('concat:header');
         grunt.task.run('concat:jcore');
         grunt.task.run('concat:site');
         grunt.task.run('eslint');
-        grunt.task.run('copy:pdfjs');
-        grunt.task.run('copy:videojs');
-        
     });
 
     //////////////////////////////////////////////////////////
     //// deal with the videojs css seperately, don't build with site!
     //////////////////////////////////////////////////////////
-    grunt.registerTask('dist-videojs-css', function () {
+    grunt.registerTask('dist-videojs-css', function (files) {
         var scssSrc = '../video-js/src/css/video-js.scss';
         var scssDest = 'dist/css/video-js.css';
         grunt.config('sass.dist', { src: scssSrc, dest: scssDest });

@@ -137,7 +137,8 @@ namespace DefaultWeb.Controllers
 
                 if (fileInfo.ContentType.Contains(@"application/"))
                 {
-                    return File(fileInfo.FileName, fileInfo.ContentType);
+                    var appFileStream = System.IO.File.OpenRead(fileInfo.FileFull);
+                    return File(appFileStream, fileInfo.ContentType);
                     //return new DocViewResult(this, fileInfo);
                 }
 

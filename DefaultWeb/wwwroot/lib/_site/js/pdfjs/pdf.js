@@ -4652,7 +4652,7 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
 var version, build;
 {
   exports.version = version = '2.0.0';
-  exports.build = build = '3f0fb18';
+  exports.build = build = 'd1878a1';
 }
 exports.getDocument = getDocument;
 exports.LoopbackPort = LoopbackPort;
@@ -7383,7 +7383,7 @@ exports.SVGGraphics = SVGGraphics;
 
 
 var pdfjsVersion = '2.0.0';
-var pdfjsBuild = '3f0fb18';
+var pdfjsBuild = 'd1878a1';
 var pdfjsSharedUtil = __w_pdfjs_require__(0);
 var pdfjsDisplayGlobal = __w_pdfjs_require__(112);
 var pdfjsDisplayAPI = __w_pdfjs_require__(57);
@@ -12713,7 +12713,7 @@ if (!_global_scope2.default.PDFJS) {
 var PDFJS = _global_scope2.default.PDFJS;
 {
   PDFJS.version = '2.0.0';
-  PDFJS.build = '3f0fb18';
+  PDFJS.build = 'd1878a1';
 }
 PDFJS.pdfBug = false;
 if (PDFJS.verbosity !== undefined) {

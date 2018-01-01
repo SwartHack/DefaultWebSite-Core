@@ -51,7 +51,6 @@
                     <div class="file-size" data-bind="text: file.size"></div>
                     <div class="file-type" data-bind="text: file.type"></div>
                 </div>
-                <div class="file-error"></div>
            </div>
         </div>
     </div>
@@ -59,15 +58,15 @@
 
 <div id="file-ops-client">
     <form id="file-upload" enctype="multipart/form-data" method="post">
-       
+
         <div id="upload-input">
             <div class="card-header">
                 <a id="file-select" role="button" title="Browse Files...">
                     <i class="fa fa-border fa-folder-open"></i>
-                    <input class="form-control" id="file-input" type="file" name="files" multiple  bind-data="attr { accept: mimeTypes }" />
+                    <input class="form-control" id="file-input" type="file" name="files" multiple bind-data="attr { accept: mimeTypes }" />
                 </a>
                 <div class="card-title">Select or Drop Files</div>
-                
+
             </div>
             <div id="file-upload-drop">Drop files here</div>
         </div>
@@ -80,6 +79,7 @@
             <div id="file-progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                 <span></span>
             </div>
+            <div id="max-upload-error"></div>
         </div>
         <div id="upload-header">
             <div class="card-title">Selected Files for Dws Cloud Upload</div>
@@ -91,8 +91,8 @@
             <div id="file-upload-list" data-bind="template: { name: 'selected-upload-files', foreach: uploadFilesInfo, as: 'file'}"> No Files Selected</div>
         </div>
         <div id="file-upload-details" class="caption">
-            <div id="file-upload-count" data-bind="text: uploadFileCount"></div>
-            <div id="file-upload-size" data-bind="text: uploadFileSize"></div>
+            <div id="file-upload-count" data-bind=" text: uploadCount "></div>
+            <div id="file-upload-size" data-bind=" text: uploadSize "></div>
         </div>
     </form>
 </div>

@@ -20,15 +20,17 @@ namespace DefaultWeb.Controllers.ActionResults
         public DwsFileInfo FileInfo { get; set; }
         public ActionContext Context { get; set; }
         public IHostingEnvironment HostEnv { get; set; }
+        private FFMpegConverter Converter { get; set; }
 
         public string DwsFile { get; set; }
 
-        public ThumbnailResult(int width, int height, DwsFileInfo fileInfo, IHostingEnvironment env)
+        public ThumbnailResult(int width, int height, DwsFileInfo fileInfo, IHostingEnvironment env, FFMpegConverter converter)
         {
             Width = width;
             Height = height;
             FileInfo = fileInfo;
             HostEnv = env;
+            Converter = converter;
             
         }
 
@@ -167,12 +169,18 @@ namespace DefaultWeb.Controllers.ActionResults
 
         private Image GetThumbFromVideo(DwsFileInfo fileInfo)
         {
-            var outThumb = new MemoryStream();
+            try
+            {
 
-            var ffMpeg = new FFMpegConverter();
-            ffMpeg.GetVideoThumbnail(fileInfo.FileFull, outThumb, 5);
-
-            return Image.FromStream(outThumb);
+                var outThumb = new MemoryStream();
+                Converter.GetVideoThumbnail(fileInfo.FileFull, outThumb, 5);
+                return Image.FromStream(outThumb);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         private Image GetThumbForAudio(DwsFileInfo fileInfoh)

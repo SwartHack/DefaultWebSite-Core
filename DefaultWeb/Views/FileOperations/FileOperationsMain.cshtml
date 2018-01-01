@@ -20,12 +20,15 @@
                             Can't decide? Try the <a href="~/images/samplefiles.zip"> Sample Files!</a></div>
                             <ul id="thumbnails" data-bind='template: {name:"thumbnails-template", foreach: serverFiles }'></ul>
                         </div>
+                        <div id="thumbs-details">
+                            <span class="">Available Space: <span data-bind=" text: serverSpace "></span></span>
+                        </div>
                     </div>
                 </div>
 
                 <div id="row-doc" class="row no-gutters w-100">
                     <div id="file-ops-doc" class="col-12 no-gutters">
-                        <div class="card-title">File Operations</div>
+                        <div class="card-title">About File Operations</div>
                         <div class="card-text">
                             @{ Html.RenderPartial("~/Views/Sandpit/Content/FileIO.cshtml"); }
                         </div>

@@ -108,11 +108,12 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
-        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'video/mp4', 'video/avi']), //these should come from settings
-        uploadFileCount: ko.pureComputed(function () {
-            return 'Number files: ' + viewModel.uploadFiles().length; }, this),
-        uploadFileSize: ko.pureComputed(function () {
-            return 'Total size: ' + viewModel.getFileSize( viewModel.uploadFiles.sumProperty('size') ); }, this),
+        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'video/mp4']), //these should come from settings
+        uploadFilesSize: ko.pureComputed( function () { return viewModel.uploadFiles.sumProperty('size') }, this),
+        uploadFilesCount: ko.pureComputed( function () { return viewModel.uploadFiles().length }, this),
+        uploadCount: ko.pureComputed(function () { return 'Number files: ' + viewModel.uploadFiles().length }, this),
+        uploadSize: ko.pureComputed(function () { return 'Total size: ' + viewModel.getFileSize(viewModel.uploadFiles.sumProperty('size')) }, this),
+        showFileUpload: ko.pureComputed(function() { return viewModel.uploadFiles().length > 0 && !viewModel.isMaxUpload()}, this),
         getFileSize: function (size) {
             var fileSize = 0;
             if (size > 1048576) {
@@ -126,20 +127,26 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             }
             return fileSize;
         },
-        showFileUpload: ko.pureComputed(function () {
-            return viewModel.uploadFiles().length > 0
-        }, this),
-        uploadFileAdded: function (parent, index, element) {
-            var $parent = $(parent);
-            var $element = $(element);
+        isMaxUpload: function () {
+            var max = ( parseInt(viewModel.uploadFilesSize()) + parseInt(viewModel.serverSpaceCurrent()) ) > parseInt(viewModel.serverSpaceMax() );
+            return max
         },
 
        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         contentCacheQueue: ko.observableArray([]), // TODO
-        serverFiles: ko.observable([]),  // the server-side files after upload
-        serverFilesCount: function () { return viewModel.serverFiles().length },
+        
+        serverFiles: ko.observableArray([]),  // the server-side files after upload
+        serverSpaceMax: ko.observable(50000000),
+        serverSpaceCurrent: ko.pureComputed(function () { return viewModel.serverFiles.sumProperty('fileSize') }, this),
+        serverFilesCount: ko.pureComputed(function () { return viewModel.serverFiles().length }, this),
+        serverSpace: ko.pureComputed(function () {
+            var max = viewModel.serverSpaceMax();
+            var current = viewModel.serverSpaceCurrent();
+            var num = parseInt(max) - parseInt(current);
+            return viewModel.getFileSize(num);
+        }, this),
         fileMimeType: ko.observable(''),
         fileViewApi: ko.observable(''),
         fileViewTarget: ko.observable(''),
@@ -1147,34 +1154,38 @@ define('dws/thumbnail', [],
 
             reader.onload = (function (e) {
 
-                var domVideo = document.createElement('video');
-                var objVideo = videojs(domVideo);
-                objVideo.height(90);
-                objVideo.width(160);
-                objVideo.preload('auto');
+                //var objVideo = videojs(domVideo);
+                //objVideo.height(90);
+                //objVideo.width(160);
+                //objVideo.preload('auto');
+
                 //$(video).show();
                 //$('.main-content').append(video);
 
-                objVideo.on('loadeddata', function () {
-                    objVideo.currentTime(10);
-                });
+                //objVideo.on('loadeddata', function () {
+                //    objVideo.currentTime(10);
+                //});
 
-                objVideo.on('seeked', function () {
-                    generateThumbnail(this, file, callback);
-                });
+                //objVideo.on('seeked', function () {
+                //    generateThumbnail(this, file, callback);
+                //});
 
-                //video.addEventListener('loadeddata', function (e) {
-                //    video.currentTime = 10;
-                //}, false);
+                var domVideo = document.createElement('video');
+                domVideo.height = 90;
+                domVideo.width = 160;
+                domVideo.preload = true;
 
-                //video.addEventListener('seeked', function () {
+                domVideo.addEventListener('loadeddata', function (e) {
+                    domVideo.currentTime = 10;
+                }, false);
 
-                //    generateThumbnail(video, file, callback);
+                domVideo.addEventListener('seeked', function () {
+                    generateThumbnail(domVideo, file, callback);
+                }, false);
 
-                   
-                //}, false);
+                domVideo.src = e.target.result;
 
-                objVideo.src(e.target.result);
+                //objVideo.src(e.target.result);
                 //video.load();
           
             });
@@ -1193,7 +1204,7 @@ define('dws/thumbnail', [],
             canvas.height = 90;
             canvas.width = 160;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(video.el().children[0], 0, 0, canvas.width, canvas.height);
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             //var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             //$('.main-content').append(canvas);
             var dataurl = canvas.toDataURL();
@@ -1203,8 +1214,8 @@ define('dws/thumbnail', [],
             //clean up, no dispose on DOM elements, how does HTML5 API deal with this?
             //TODO
             //objVideo = videojs(video);
-            video.src(null);
-            video.dispose();
+            video.src = null;
+            //video.dispose();
         }
 
          //////////////////////////////////////////////////////////////////////
@@ -1421,6 +1432,13 @@ define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
             var settings = {
                 url: '/api/dws/files/upload',  //Server web api
                 type: 'POST',
+                xhr: function () {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // Check if upload property exists
+                        myXhr.upload.addEventListener('progress', progressHandlingFunction, false); // For handling the progress of the upload
+                    }
+                    return myXhr;
+                },
                 data: formData,
                 contentType: false,
                 processData:false
@@ -1430,7 +1448,7 @@ define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
             // as always we want to dispatch, but need to account for variety of request types and targets.
             viewModel.waitingTarget('#navbar-main');
             viewModel.waiting(true);
-            $($form,'.progress.upload-progress').show();
+            $($form,'.progress .upload-progress').show();
 
             $.ajax(settings)
                 .done(function (data, textStatus, xhr) {
@@ -1610,7 +1628,9 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 // must replace the element each time! binding does not work!
                 // default to HTML5 only
                 var target = document.querySelector('.main-content .main-document');
-                $(target).empty;
+                while (target.firstChild) {
+                    target.removeChild(target.firstChild);
+                }
                 var emb = document.createElement('embed');
                 emb.setAttribute('id', 'doc-embedded');
                 emb.setAttribute('src', viewModel.fileViewApi());
@@ -1631,7 +1651,7 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
                 //$('#ImageVPathEditImageInfo').val(data.VirtualPath);
             }
-            else if (viewModel.fileMimeType().match('video/mp4')) {
+            else if (viewModel.fileMimeType().match('video/*')) {
 
                 // switch to videojs TODO
                 // this replaces the element each time! binding does not work!
@@ -1654,10 +1674,8 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
             if (!$target.is(':visible')) {
                 $('.content-area').hide();
-                $target.show();
-
-               
-            }
+                $target.css('display', 'inline');
+                $target.show();            }
         });
 
         ///////////////////////////////////////////////////////////////////////

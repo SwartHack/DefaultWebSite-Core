@@ -97,7 +97,9 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 // must replace the element each time! binding does not work!
                 // default to HTML5 only
                 var target = document.querySelector('.main-content .main-document');
-                $(target).empty;
+                while (target.firstChild) {
+                    target.removeChild(target.firstChild);
+                }
                 var emb = document.createElement('embed');
                 emb.setAttribute('id', 'doc-embedded');
                 emb.setAttribute('src', viewModel.fileViewApi());
@@ -118,7 +120,7 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
                 //$('#ImageVPathEditImageInfo').val(data.VirtualPath);
             }
-            else if (viewModel.fileMimeType().match('video/mp4')) {
+            else if (viewModel.fileMimeType().match('video/*')) {
 
                 // switch to videojs TODO
                 // this replaces the element each time! binding does not work!
@@ -141,10 +143,8 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
             if (!$target.is(':visible')) {
                 $('.content-area').hide();
-                $target.show();
-
-               
-            }
+                $target.css('display', 'inline');
+                $target.show();            }
         });
 
         ///////////////////////////////////////////////////////////////////////

@@ -74,34 +74,38 @@ define('dws/thumbnail', [],
 
             reader.onload = (function (e) {
 
-                var domVideo = document.createElement('video');
-                var objVideo = videojs(domVideo);
-                objVideo.height(90);
-                objVideo.width(160);
-                objVideo.preload('auto');
+                //var objVideo = videojs(domVideo);
+                //objVideo.height(90);
+                //objVideo.width(160);
+                //objVideo.preload('auto');
+
                 //$(video).show();
                 //$('.main-content').append(video);
 
-                objVideo.on('loadeddata', function () {
-                    objVideo.currentTime(10);
-                });
+                //objVideo.on('loadeddata', function () {
+                //    objVideo.currentTime(10);
+                //});
 
-                objVideo.on('seeked', function () {
-                    generateThumbnail(this, file, callback);
-                });
+                //objVideo.on('seeked', function () {
+                //    generateThumbnail(this, file, callback);
+                //});
 
-                //video.addEventListener('loadeddata', function (e) {
-                //    video.currentTime = 10;
-                //}, false);
+                var domVideo = document.createElement('video');
+                domVideo.height = 90;
+                domVideo.width = 160;
+                domVideo.preload = true;
 
-                //video.addEventListener('seeked', function () {
+                domVideo.addEventListener('loadeddata', function (e) {
+                    domVideo.currentTime = 10;
+                }, false);
 
-                //    generateThumbnail(video, file, callback);
+                domVideo.addEventListener('seeked', function () {
+                    generateThumbnail(domVideo, file, callback);
+                }, false);
 
-                   
-                //}, false);
+                domVideo.src = e.target.result;
 
-                objVideo.src(e.target.result);
+                //objVideo.src(e.target.result);
                 //video.load();
           
             });
@@ -120,7 +124,7 @@ define('dws/thumbnail', [],
             canvas.height = 90;
             canvas.width = 160;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(video.el().children[0], 0, 0, canvas.width, canvas.height);
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             //var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             //$('.main-content').append(canvas);
             var dataurl = canvas.toDataURL();
@@ -130,8 +134,8 @@ define('dws/thumbnail', [],
             //clean up, no dispose on DOM elements, how does HTML5 API deal with this?
             //TODO
             //objVideo = videojs(video);
-            video.src(null);
-            video.dispose();
+            video.src = null;
+            //video.dispose();
         }
 
          //////////////////////////////////////////////////////////////////////

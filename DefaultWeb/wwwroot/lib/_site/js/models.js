@@ -101,11 +101,12 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
-        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'video/mp4', 'video/avi']), //these should come from settings
-        uploadFileCount: ko.pureComputed(function () {
-            return 'Number files: ' + viewModel.uploadFiles().length; }, this),
-        uploadFileSize: ko.pureComputed(function () {
-            return 'Total size: ' + viewModel.getFileSize( viewModel.uploadFiles.sumProperty('size') ); }, this),
+        mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'video/mp4']), //these should come from settings
+        uploadFilesSize: ko.pureComputed( function () { return viewModel.uploadFiles.sumProperty('size') }, this),
+        uploadFilesCount: ko.pureComputed( function () { return viewModel.uploadFiles().length }, this),
+        uploadCount: ko.pureComputed(function () { return 'Number files: ' + viewModel.uploadFiles().length }, this),
+        uploadSize: ko.pureComputed(function () { return 'Total size: ' + viewModel.getFileSize(viewModel.uploadFiles.sumProperty('size')) }, this),
+        showFileUpload: ko.pureComputed(function() { return viewModel.uploadFiles().length > 0 && !viewModel.isMaxUpload()}, this),
         getFileSize: function (size) {
             var fileSize = 0;
             if (size > 1048576) {
@@ -119,20 +120,26 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             }
             return fileSize;
         },
-        showFileUpload: ko.pureComputed(function () {
-            return viewModel.uploadFiles().length > 0
-        }, this),
-        uploadFileAdded: function (parent, index, element) {
-            var $parent = $(parent);
-            var $element = $(element);
+        isMaxUpload: function () {
+            var max = ( parseInt(viewModel.uploadFilesSize()) + parseInt(viewModel.serverSpaceCurrent()) ) > parseInt(viewModel.serverSpaceMax() );
+            return max
         },
 
        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         contentCacheQueue: ko.observableArray([]), // TODO
-        serverFiles: ko.observable([]),  // the server-side files after upload
-        serverFilesCount: function () { return viewModel.serverFiles().length },
+        
+        serverFiles: ko.observableArray([]),  // the server-side files after upload
+        serverSpaceMax: ko.observable(50000000),
+        serverSpaceCurrent: ko.pureComputed(function () { return viewModel.serverFiles.sumProperty('fileSize') }, this),
+        serverFilesCount: ko.pureComputed(function () { return viewModel.serverFiles().length }, this),
+        serverSpace: ko.pureComputed(function () {
+            var max = viewModel.serverSpaceMax();
+            var current = viewModel.serverSpaceCurrent();
+            var num = parseInt(max) - parseInt(current);
+            return viewModel.getFileSize(num);
+        }, this),
         fileMimeType: ko.observable(''),
         fileViewApi: ko.observable(''),
         fileViewTarget: ko.observable(''),

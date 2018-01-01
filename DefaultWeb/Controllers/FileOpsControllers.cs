@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using DefaultWeb.Controllers.ActionResults;
 using System.Threading.Tasks;
+using NReco.VideoConverter;
 
 namespace DefaultWeb.Controllers
 {
@@ -23,7 +24,7 @@ namespace DefaultWeb.Controllers
     public class FileOpsController : DwsBaseController
     {
         private IFileRepository FileRepository { get; set; }
-        
+        private FFMpegConverter Converter { get; set; }
 
         /// <summary>
         /// 
@@ -36,6 +37,9 @@ namespace DefaultWeb.Controllers
         {
             FileRepository = fileRepository;
             FileRepository.BeginTransaction();
+
+            Converter = new FFMpegConverter();
+            //License.SetLicenseKey(DWSsettings.NRecoLicense.KeyName, DWSsettings.NRecoLicense.KeyValue);
         }
 
         ~FileOpsController()
@@ -132,7 +136,7 @@ namespace DefaultWeb.Controllers
                 // check for video format
                 if (fileInfo.ContentType.Contains(@"video/"))
                 {
-                    return new VideoResult(fileInfo.FileFull, fileInfo.ContentType);
+                    return new VideoResult(fileInfo.FileFull, fileInfo.ContentType, Converter);
                 }
 
                 if (fileInfo.ContentType.Contains(@"application/"))
@@ -185,10 +189,8 @@ namespace DefaultWeb.Controllers
 
             try
             {
-                
-
                 var fileInfo = FileRepository.Select(id, Request.Cookies["DwsSessionToken"]);
-                return new ThumbnailResult(width, height, fileInfo, HostEnv);
+                return new ThumbnailResult(width, height, fileInfo, HostEnv, Converter);
             }
             catch (Exception ex)
             {

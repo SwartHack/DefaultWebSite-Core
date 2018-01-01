@@ -278,7 +278,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="NReco.VideoConverter.LT" Version="1.1.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -380,5 +379,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Exiflib\ExifLib.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NReco.VideoConverter.LT">
+      <HintPath>..\lib\NReco.VideoConverter.LT.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy ..\lib\ffmpeg.exe $(OutDir)ffmpeg.exe" />
+  </Target>
 
 </Project>

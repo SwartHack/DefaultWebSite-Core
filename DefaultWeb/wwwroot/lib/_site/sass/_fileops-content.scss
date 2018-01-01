@@ -21,7 +21,7 @@ $contentBorder : 1rem;
             font-style: italic;
             font-weight: 400;
             margin-bottom: 0;
-            text-align: center;
+            padding-left:1vw;
             border: none;
             border-top: 1px solid rgba(0, 0, 0, 0.125)
         }
@@ -60,7 +60,6 @@ $contentBorder : 1rem;
 
 
         .main-document {
-            display: inline;
             position: center;
             display:none;
 
@@ -85,7 +84,7 @@ $contentBorder : 1rem;
         .main-image {
             display: none;
             position: relative;
-            display: inline-block;
+            //display: inline-block;
             height: 100%;
 
             img {

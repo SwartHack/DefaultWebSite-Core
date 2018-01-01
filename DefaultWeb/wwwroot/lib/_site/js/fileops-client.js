@@ -171,6 +171,13 @@ define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
             var settings = {
                 url: '/api/dws/files/upload',  //Server web api
                 type: 'POST',
+                xhr: function () {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // Check if upload property exists
+                        myXhr.upload.addEventListener('progress', progressHandlingFunction, false); // For handling the progress of the upload
+                    }
+                    return myXhr;
+                },
                 data: formData,
                 contentType: false,
                 processData:false
@@ -180,7 +187,7 @@ define('dws/fileops-client', ['dws/controller','dws/thumbnail', 'dws/model'],
             // as always we want to dispatch, but need to account for variety of request types and targets.
             viewModel.waitingTarget('#navbar-main');
             viewModel.waiting(true);
-            $($form,'.progress.upload-progress').show();
+            $($form,'.progress .upload-progress').show();
 
             $.ajax(settings)
                 .done(function (data, textStatus, xhr) {

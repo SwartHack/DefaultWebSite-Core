@@ -15,6 +15,8 @@ namespace DefaultWeb.Models.DefaultWebSite
         public string FolderContentFileName { get; set; }
         public string DefaultTheme { get; set; }
         public string PdfWorker { get; set; }
+        public NRecoLicenseInfo NRecoLicense { get; set; }
+
         public string[] ValidFileExtensions { get; set; }
         public string[] IgnoreFolders { get; set; }
         public bool HidePrivateFolders { get; set; }
@@ -34,5 +36,11 @@ namespace DefaultWeb.Models.DefaultWebSite
         public string SmtpRelay { get; set; }
         public int SmtpPort { get; set; }
         public string NotifyEmail { get; set; }
+    }
+
+    public class NRecoLicenseInfo
+    {
+        public string KeyName { get; set; }
+        public string KeyValue { get; set; }
     }
 }

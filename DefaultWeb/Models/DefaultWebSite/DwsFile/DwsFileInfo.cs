@@ -20,7 +20,7 @@ namespace DefaultWeb.Models.DefaultWebSite.DwsFile
         public string Description { get; set; }
         public DateTime CreatedTimestamp { get; set; }
         public DateTime UpdatedTimestamp { get; set; }
-        public string ContentType { get; set; }
+        public string MimeType { get; set; }
         public long FileSize { get; set; }
         [JsonIgnore]
         public string SessionId { get; set; }
@@ -31,6 +31,26 @@ namespace DefaultWeb.Models.DefaultWebSite.DwsFile
         public string FileTarget { get; set; }
         [NotMapped]
         public string ThumbnailUrl { get; set; }
+
+        [NotMapped]
+        [JsonIgnore]
+        public string MimeTypeCategory
+        {
+            get
+            {
+                return MimeType.Substring(0, (MimeType.IndexOf(@"/")));
+            }
+        }
+
+        [NotMapped]
+        [JsonIgnore]
+        public string MimeTypeCode
+        {
+            get
+            {
+                return MimeType.Substring( MimeType.IndexOf(@"/") + 1 );
+            }
+        }
 
         public DwsFileInfo()
         {

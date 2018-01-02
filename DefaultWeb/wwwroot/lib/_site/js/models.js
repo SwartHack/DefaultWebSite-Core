@@ -8,9 +8,9 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     /////////////////////////////
     var viewModel = {
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        ///
+        //////////////////////////////////////////////////
         data: ko.observable(''),
         target: ko.observable(''),
         dataType: ko.observable(''),
@@ -143,10 +143,16 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         fileMimeType: ko.observable(''),
         fileViewApi: ko.observable(''),
         fileViewTarget: ko.observable(''),
-        imageViewApi: function () { return viewModel.fileViewApi; },
-        docViewApi: function () { return viewModel.fileViewApi; },
+        imageViewApi: ko.pureComputed(function () { return viewModel.fileMimeType().match('image/*') ? viewModel.fileViewApi : '#'; }, this),
+        docViewApi: ko.pureComputed(function () { return viewModel.fileMimeType.match('application/pdf') ? viewModel.fileViewApi : '#'; }, this),
+        
+        videoViewApi: ko.pureComputed(function () {
+            if (viewModel.fileMimeType().match('video/*'))
+                return viewModel.fileViewApi();
+            else
+                return null;
+        }, this),
         pdfWorker: ko.observable(''),
-        videoViewApi: function () { return viewModel.fileViewApi; },
         exif: ko.observableArray([]) // image header details
 
         //thumb: ko.observable(),

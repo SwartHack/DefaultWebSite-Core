@@ -88,9 +88,9 @@ namespace DefaultWeb.Controllers.ActionResults
             {
                 // we need to proceed based on mime type of file
                 Image image = null;
-                var index = FileInfo.ContentType.IndexOf(@"/");
-                var category =  FileInfo.ContentType.Substring(0, (index));
-                var type = FileInfo.ContentType.Substring(index + 1);
+                var index = FileInfo.MimeType.IndexOf(@"/");
+                var category =  FileInfo.MimeType.Substring(0, (index));
+                var type = FileInfo.MimeType.Substring(index + 1);
                 //TODO, only process accepted files, but should be filtered before this
                 // Upload should only allowed accepted file types
                 FileStream fStream = null;
@@ -175,6 +175,7 @@ namespace DefaultWeb.Controllers.ActionResults
                 var outThumb = new MemoryStream();
                 Converter.GetVideoThumbnail(fileInfo.FileFull, outThumb, 5);
                 return Image.FromStream(outThumb);
+                
             }
             catch (Exception ex)
             {
@@ -198,7 +199,7 @@ namespace DefaultWeb.Controllers.ActionResults
             // parse to see if supported mimetype
             // need a better way to do this!!! TODO
             // TODO - how to get a PDF thumbnail on server!?
-            if (fileInfo.ContentType == "application/pdf")
+            if (fileInfo.MimeType == "application/pdf")
             {
                 try
                 {

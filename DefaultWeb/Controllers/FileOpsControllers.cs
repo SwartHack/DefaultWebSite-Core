@@ -134,23 +134,23 @@ namespace DefaultWeb.Controllers
                 var fileInfo = FileRepository.Select(id, Request.Cookies["DwsSessionToken"]);
 
                 // check for video format
-                if (fileInfo.ContentType.Contains(@"video/"))
+                if (fileInfo.MimeType.Contains(@"video/"))
                 {
-                    return new VideoResult(fileInfo.FileFull, fileInfo.ContentType, Converter);
+                    return new VideoResult(fileInfo, Converter);
                 }
 
-                if (fileInfo.ContentType.Contains(@"application/"))
+                if (fileInfo.MimeType.Contains(@"application/"))
                 {
                     var appFileStream = System.IO.File.OpenRead(fileInfo.FileFull);
-                    return File(appFileStream, fileInfo.ContentType);
+                    return File(appFileStream, fileInfo.MimeType);
                     //return new DocViewResult(this, fileInfo);
                 }
 
-                if (fileInfo.ContentType.Contains(@"image/"))
+                if (fileInfo.MimeType.Contains(@"image/"))
                 {
 
                     var imageFileStream = System.IO.File.OpenRead(fileInfo.FileFull);
-                    return File(imageFileStream, fileInfo.ContentType);
+                    return File(imageFileStream, fileInfo.MimeType);
                     //return new ImageViewResult(fileInfo);
                 }
 

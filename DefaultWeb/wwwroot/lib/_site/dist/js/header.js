@@ -1,7 +1,7 @@
 /*!
  * defaultwebsite.net v1.0.0
  * Homepage: https://hackinc.net
- * Copyright 2012-2017 SwartHack
+ * Copyright 2012-2018 SwartHack
  * Licensed under ISC
  * Based on...
 */

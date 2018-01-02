@@ -76,9 +76,15 @@ $contentBorder : 1rem;
 
         .main-video {
             display: none;
-            position: center;
-            border-radius: 5px;
-            margin-bottom: 3px;
+            width:inherit;
+            //position: center;
+            //border-radius: 5px;
+            //margin-bottom: 3px;
+
+            video#video-player {
+                width:-webkit-fill-available;
+
+            }
         }
 
         .main-image {

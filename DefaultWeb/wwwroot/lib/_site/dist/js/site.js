@@ -1,7 +1,7 @@
 /*!
  * defaultwebsite.net v1.0.0
  * Homepage: https://hackinc.net
- * Copyright 2012-2017 SwartHack
+ * Copyright 2012-2018 SwartHack
  * Licensed under ISC
  * Based on...
 */
@@ -15,9 +15,9 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     /////////////////////////////
     var viewModel = {
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////
+        ///
+        //////////////////////////////////////////////////
         data: ko.observable(''),
         target: ko.observable(''),
         dataType: ko.observable(''),
@@ -150,10 +150,16 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         fileMimeType: ko.observable(''),
         fileViewApi: ko.observable(''),
         fileViewTarget: ko.observable(''),
-        imageViewApi: function () { return viewModel.fileViewApi; },
-        docViewApi: function () { return viewModel.fileViewApi; },
+        imageViewApi: ko.pureComputed(function () { return viewModel.fileMimeType().match('image/*') ? viewModel.fileViewApi : '#'; }, this),
+        docViewApi: ko.pureComputed(function () { return viewModel.fileMimeType.match('application/pdf') ? viewModel.fileViewApi : '#'; }, this),
+        
+        videoViewApi: ko.pureComputed(function () {
+            if (viewModel.fileMimeType().match('video/*'))
+                return viewModel.fileViewApi();
+            else
+                return null;
+        }, this),
         pdfWorker: ko.observable(''),
-        videoViewApi: function () { return viewModel.fileViewApi; },
         exif: ko.observableArray([]) // image header details
 
         //thumb: ko.observable(),
@@ -1658,7 +1664,7 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 var video = document.querySelector('.main-content .main-video video');
                 var source = document.createElement('source');
 
-                source.setAttribute('src', viewModel.fileViewURL());
+                source.setAttribute('src', viewModel.videoViewApi());
                 source.setAttribute('type', viewModel.fileMimeType());
 
                 //delete <source> child elements
@@ -1674,8 +1680,9 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
             if (!$target.is(':visible')) {
                 $('.content-area').hide();
-                $target.css('display', 'inline');
-                $target.show();            }
+                $target.css('display', 'inline-flex');
+                $target.show();
+            }
         });
 
         ///////////////////////////////////////////////////////////////////////

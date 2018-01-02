@@ -141,7 +141,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
                         Description = uploadInfo.Description,
                         CreatedTimestamp = DateTime.UtcNow,
                         UpdatedTimestamp = DateTime.UtcNow,
-                        ContentType = file.ContentType,
+                        MimeType = file.ContentType,
                         FileSize = file.Length,
                         SessionId = uploadInfo.SessionId
                     };
@@ -259,11 +259,9 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
         {
             fileinfo.FileApi = String.Format(@"/api/dws/files/view/{0}", fileinfo.Id);
             fileinfo.ThumbnailUrl = String.Format(@"/api/dws/files/thumbnail/100/100/{0}", fileinfo.Id);
-            var index = fileinfo.ContentType.IndexOf(@"/");
-            var category = fileinfo.ContentType.Substring(0, (index));
-            var type = fileinfo.ContentType.Substring(index + 1);
+           
 
-            switch (category)
+            switch (fileinfo.MimeTypeCategory)
                 {
                     case "application":
                         fileinfo.FileTarget = ".main-document";

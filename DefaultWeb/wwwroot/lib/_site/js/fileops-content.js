@@ -127,7 +127,7 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 var video = document.querySelector('.main-content .main-video video');
                 var source = document.createElement('source');
 
-                source.setAttribute('src', viewModel.fileViewURL());
+                source.setAttribute('src', viewModel.videoViewApi());
                 source.setAttribute('type', viewModel.fileMimeType());
 
                 //delete <source> child elements
@@ -143,8 +143,9 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
             if (!$target.is(':visible')) {
                 $('.content-area').hide();
-                $target.css('display', 'inline');
-                $target.show();            }
+                $target.css('display', 'inline-flex');
+                $target.show();
+            }
         });
 
         ///////////////////////////////////////////////////////////////////////

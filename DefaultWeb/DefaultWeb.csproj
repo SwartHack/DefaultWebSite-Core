@@ -38,7 +38,17 @@
     <Content Remove="bower.json" />
     <Content Remove="bundleconfig.json" />
     <Content Remove="Views\FileOperations\MultiClient1.cshtml" />
-    <Content Remove="wwwroot\css\images\Thumbs.db" />
+    <Content Remove="wwwroot\css\images\annotation-check.svg" />
+    <Content Remove="wwwroot\css\images\annotation-comment.svg" />
+    <Content Remove="wwwroot\css\images\annotation-help.svg" />
+    <Content Remove="wwwroot\css\images\annotation-insert.svg" />
+    <Content Remove="wwwroot\css\images\annotation-key.svg" />
+    <Content Remove="wwwroot\css\images\annotation-newparagraph.svg" />
+    <Content Remove="wwwroot\css\images\annotation-noicon.svg" />
+    <Content Remove="wwwroot\css\images\annotation-note.svg" />
+    <Content Remove="wwwroot\css\images\annotation-paragraph.svg" />
+    <Content Remove="wwwroot\css\images\grab.cur" />
+    <Content Remove="wwwroot\css\images\grabbing.cur" />
   </ItemGroup>
 
   <ItemGroup>
@@ -289,13 +299,23 @@
   <ItemGroup>
     <Folder Include="Controllers\ActionFIlters\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="wwwroot\css\images\" />
     <Folder Include="wwwroot\resource\locale\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="bower.json" />
     <None Include="bundleconfig.json" />
+    <None Include="wwwroot\css\images\annotation-check.svg" />
+    <None Include="wwwroot\css\images\annotation-comment.svg" />
+    <None Include="wwwroot\css\images\annotation-help.svg" />
+    <None Include="wwwroot\css\images\annotation-insert.svg" />
+    <None Include="wwwroot\css\images\annotation-key.svg" />
+    <None Include="wwwroot\css\images\annotation-newparagraph.svg" />
+    <None Include="wwwroot\css\images\annotation-noicon.svg" />
+    <None Include="wwwroot\css\images\annotation-note.svg" />
+    <None Include="wwwroot\css\images\annotation-paragraph.svg" />
+    <None Include="wwwroot\css\images\grab.cur" />
+    <None Include="wwwroot\css\images\grabbing.cur" />
     <None Include="wwwroot\lib\_site\dist\css\cerulean.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\cosmo.css.map" />
     <None Include="wwwroot\lib\_site\dist\css\cyborg.css.map" />
@@ -387,7 +407,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy ..\lib\ffmpeg.exe $(OutDir)ffmpeg.exe" />
+    <Exec Command="copy ..\lib\ffmpeg.exe &quot;$(OutDir)ffmpeg.exe&quot;" />
   </Target>
 
 </Project>

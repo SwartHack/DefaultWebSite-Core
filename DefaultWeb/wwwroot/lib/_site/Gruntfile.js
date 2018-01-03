@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                 src:['../../css/**', '../../js/**','../../fonts/**', '../../images/**']
             },
             wwwroot: {
-                src: ['../../css/**', '../../js/**']
+                src: ['../../css/*.cs', '!../../css/images', '../../js/**']
             }
         },
         concat: {
@@ -44,6 +44,11 @@ module.exports = function(grunt) {
                 banner: '<%= banner %>',
                 stripBanners: false,
 
+            },
+            theme: {
+                src: '',
+                dest: '',
+                nonull: true
             },
             jcore: {
                 src: ['<%= pkg.corejs %>'],
@@ -97,10 +102,6 @@ module.exports = function(grunt) {
             wwwroot: {
                 src: 'dist/css/*.*',
                 dest: '../../css/defaultwebsite.min.css'
-            },
-            videojs: {
-                src: 'dist/css/*.*',
-                dest: '../../css/defaultwebsite.min.css'
             }
         },
         copy: {
@@ -138,7 +139,8 @@ module.exports = function(grunt) {
 
                 },
                 files: {
-                    '../../js/defaultwebsite.min.js': ['<%= pkg.deployjs %>']
+                    '../../js/defaultwebsite.min.js': ['<%= pkg.deployjs %>'],
+                    '../../js/header.min.js': ['<%= pkg.headerjs %>']
                 }
             }
 
@@ -161,28 +163,28 @@ module.exports = function(grunt) {
     //////////////////////////////////////////////////////////
     //// main build, must have dist built
     //////////////////////////////////////////////////////////
-    grunt.registerTask('build', function () {
+    grunt.registerTask('deploy', function () {
         grunt.task.run('clean:wwwroot');
         grunt.task.run('cssmin:wwwroot');
         grunt.task.run('uglify:wwwroot');
-        //grunt.task.run('uglify:videojs');
+        grunt.task.run('copy:pdfworker');
     });
 
     //////////////////////////////////////////////////////////
     //// build all, must have dist-all built
     //////////////////////////////////////////////////////////
-    grunt.registerTask('build-all', function () {
-        grunt.task.run('clean:wwwrootall');
+    //grunt.registerTask('deploy-all', function () {
+    //    grunt.task.run('clean:wwwrootall');
 
-        grunt.task.run('cssmin:wwwroot');
-        grunt.task.run('uglify:wwwroot');
+    //    grunt.task.run('cssmin:wwwroot');
+    //    grunt.task.run('uglify:wwwroot');
 
-        grunt.task.run('copy:pdfworker');
+    //    grunt.task.run('copy:pdfworker');
 
-        // fonts and images
-        grunt.task.run('copy:fonts');
-        grunt.task.run('copy:images');
-    });
+    //    // fonts and images
+    //    grunt.task.run('copy:fonts');
+    //    grunt.task.run('copy:images');
+    //});
 
     //////////////////////////////////////////////////////////
     //// main dist, builds default theme and js
@@ -299,8 +301,8 @@ module.exports = function(grunt) {
 
         if (theme != 'default') {
             //dist = { src: concatSrc, dest: concatDest };
-            grunt.config('concat.dist', { src: concatSrc, dest: concatDest });
-            grunt.task.run('concat');
+            grunt.config('concat.theme', { src: concatSrc, dest: concatDest });
+            grunt.task.run('concat:theme');
         }
 
         //dist = { src: scssSrc, dest: scssDest };

@@ -1,13 +1,43 @@
-﻿<p>This demo has taken on a life of its own, and continues to grow. It is defining the file operation&rsquo;s backbone for the .NET Core version of A Document Archive Server. The demo derives mostly from these two tutorials (Thanks Guys!)</p>
-<p><a href="https://github.com/muhammad-magdy/UploadingFileUsingAjaxAndHTML5">muhammad-magdy/UploadingFileUsingAjaxAndHTML5</a> <a href="https://github.com/damienbod/AspNetCoreFileUploadFileTable">damienbod/AspNetCoreFileUploadFileTable.</a></p>
-<p>Highlighted are a number of ASP.NET Core features: <em><strong>ASP.NET Core MVC</strong></em>, <em>EntityFramework</em>, <em><strong>JsonResults</strong></em>, <em>scoped IFileRepository</em>, <em><strong>uploading IEnumerable&lt;IFormFile&gt;</strong></em>, custom ViewResults... as well the corresponding client side components: <em><strong>Javascript</strong></em>, <em>JQuery</em>, <em><strong>AMD</strong></em>,&nbsp;<em>KnockoutJS</em>, <strong><em>Ajax/Json</em></strong>, <em>Web APIs<strong>, HTML5</strong></em></p>
+﻿<p><strong>File Operations</strong> has taken on a life of its own, and continues to grow. It is defining the file operation&rsquo;s 
+    backbone for the .NET Core version of A Document Archive Server. The demo derives mostly from these two tutorials (Thanks Guys!)
+</p>
+<p><a href="https://github.com/muhammad-magdy/UploadingFileUsingAjaxAndHTML5">muhammad-magdy/UploadingFileUsingAjaxAndHTML5</a></p>
+<p><a href="https://github.com/damienbod/AspNetCoreFileUploadFileTable">damienbod/AspNetCoreFileUploadFileTable.</a></p>
+<p>Highlighted are a number of server-side ASP.NET Core features: <strong><em>ASP.NET Core MVC</em></strong>, <em>EntityFramework</em>,
+    <strong><em>JsonResults</em></strong>, <em>scoped IFileRepository</em>, <strong><em>uploading IEnumerable&lt;IFormFile&gt;</em></strong>,
+    custom ViewResults... Including the third-party <a href="https://www.nrecosite.com/doc/NReco.VideoConverter/" target="_blank" rel="noopener">NReco VideoConverter</a>.
+</p>
+<p>The usual client-side suspects: <strong><em>Javascript</em></strong>, <em>JQuery</em>, <strong><em>AMD</em></strong>,&nbsp;<em>KnockoutJS</em>, <strong><em>Ajax/Json</em></strong>..</p>
+<p>And we get more with <em>HTML5</em> <strong>&lt;video&gt;</strong> and <strong>&lt;embed&gt;</strong> elements along with some&nbsp;
+    <a href="https://videojs.com/" target="_blank" rel="noopener">VideoJS</a>&nbsp;and <a href="https://mozilla.github.io/pdf.js/" target="_blank" rel="noopener">PDF.js</a>.
+</p>
+<p>Also, some core &nbsp;<strong><em>HTML5 and Javascript Web APIs. </em></strong>Things like: <em>File</em>, <em><strong>FileReader</strong></em>, 
+    <em>FileList</em>, <em><strong>FormData</strong></em>&hellip; just to name a few.
+</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API" target="_blank" rel="noopener">Web APIs</a>&nbsp;is significant, 
+    and along with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">Javascript</a>, there is not much else 
+    required on our technology stack. The use of JQuery was avoided, as the world of pure Javascript was explored.
+</p>
+
+<p>The biggest excitement here, at first, is using <strong><em>SQl Server&rsquo;s FileTable</em></strong> for server-side file storage. 
+    There are a few caveats though and not convinced it is the best approach as it is Not Transactional. Some T-SQL would be required to 
+    keep things orderly. The Microsoft demo databases includes lots of T-SQL when get over there. For now, may have to implement a 
+    few &ldquo;workarounds&rdquo; for demo&rsquo;s sake&hellip;
+</p>
+<p>Although versed in file operations, A Document Archive Server had concentrated mostly on &ldquo;download/display&rdquo;. 
+    This demo takes the next step by providing a &ldquo;File Upload&rdquo; dialog. The goal being to upload and display as many
+    different file types as possible. The challenge being sorting it all out, while avoiding malicious file types&hellip;
+</p>
 <p>This demo covers a lot of ground. Jump into the code:</p>
-<p>github links</p>
-<p>The biggest excitement here, at first, is using <em><strong>SQl Server&rsquo;s FileTable</strong></em> for server-side file storage. There are a few caveats though and not convinced it is the best approach as it is Not Transactional. Some T-SQL would be required to keep things orderly. The AdventureWorks demo database includes lots of T-SQL we get into over there. For now, may have to implement a few &ldquo;workarounds&rdquo; for demo&rsquo;s sake&hellip;</p>
-<p>Although versed in file operations, A Document Archive Server had concentrated mostly on &ldquo;download/display&rdquo;. This demo takes the next step by providing a &ldquo;File Upload&rdquo; dialog. The goal being to upload and display as many different file types as possible. The challenge being sorting it all out, while avoiding malicious file types&hellip;</p>
-<p>Currently we are supporting the following mime types for upload and display:</p>
-<p>image/*, application/pdf, video/*</p>
+<p><a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/Views/FileOperations/FileOperationsMain.cshtml" target="_blank" rel="noopener"><i class="fa fa-github"></i>Views/FileOperations/FileOperationsMain.cshtml</a></p>
+<p><a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/Controllers/FileOpsControllers.cs" target="_blank" rel="noopener"><i class="fa fa-github"></i>/Controlers/FileOpsControllers.cs</a></p>
+<p><a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/js/fileops-client.js" target="_blank" rel="noopener"><i class="fa fa-github"></i>wwwroot/lib/_site/js/fileops-client.js</a></p>
+<p><a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/js/fileops-content.js" target="_blank" rel="noopener"><i class="fa fa-github"></i>wwwroot/lib/_site/js/fileops-content.js</a></p>
+<p><a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/js/fileops-client.js" target="_blank" rel="noopener"><i class="fa fa-github"></i>wwwroot/lib/_site/js/model.js</a></p>
+<p>Currently supported are the following mime types for upload and display:</p>
+<p><em><strong>image/*, application/pdf, video/mp4</strong></em></p>
+<p>All video response streams encode into <em><strong>video/ogg</strong> </em>format, regardless of the .mp4 codec. Some .mp4 codecs will not 
+    display or play video/audio properly. Or, it may not be converted at all. A fallback will simply stream the<em><strong> byte[] buffer</strong></em> of the source file.
+</p>
 <p>Working on these mime types:</p>
-<p>OpenXml types</p>
-<div class="h3 text-center">-Notes-</div>
-<div class="h3 text-center">Video Results will always result in a .ogg format regardless of the files format. This conversion uses the Nreco stuff, link to source.</div>
+<p>OpenXml and Office docs</p>

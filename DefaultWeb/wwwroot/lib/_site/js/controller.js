@@ -64,9 +64,9 @@ function (viewModel, Dispatch) {
        
     }
 
-    //////////////////////////////////
-    ///
-    ////////////////////////////////
+    //////////////////////////////////////////////
+    /// What advantage/disadvantage to doing this?
+    ////////////////////////////////////////////
     function sendMessageDefer($item) {
         var target = $item.attr('data-target')
         var url = parseNavUrl($item);
@@ -84,8 +84,8 @@ function (viewModel, Dispatch) {
                 // or return deferred to calling action
                 viewModel.data(data);
             }
-        }).fail(function (error) {
-            alert(error);
+        }).fail(function (xhr, textStatus, error) {
+            viewModel.abort(xhr, textStatus, error);
         });
 
         viewModel.target(target);

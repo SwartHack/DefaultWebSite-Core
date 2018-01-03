@@ -30,7 +30,7 @@ define('dws/dispatcher', ['dws/model'], function (ViewModel) {
             ViewModel.data(data); 
         })
         .fail(function (xhr, textStatus, error) {
-            ViewModel.abort(xhr, textStatus, error)
+            ViewModel.abort(xhr, textStatus, error);
         })
         .always(function () {
         //waitEffects(false);
@@ -44,7 +44,7 @@ define('dws/dispatcher', ['dws/model'], function (ViewModel) {
                 deferred.resolve(data); //ok, fires deferred callback
             })
             .fail(function (xhr, textStatus, error) {
-                deferred.reject(this.responseText + '\n' + error)
+                deferred.reject(this.responseText + '\n' + error);
             })
             .always(function () {
         

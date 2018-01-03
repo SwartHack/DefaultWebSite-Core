@@ -115,8 +115,8 @@
         //height: 85%;
         display: block;
         overflow-y: auto;
-        padding-left: 5%;
-        padding-right: 5%;
+        padding-left: 10%;
+        padding-right: 10%;
         padding-top: 1vh;
         padding-bottom: 0;
         border: 1px solid transparent;
@@ -155,7 +155,7 @@
         overflow-y:hidden;
 
         &.expand {
-            height: auto;
+            height: 75%;
             overflow-y:auto;
         }
     }

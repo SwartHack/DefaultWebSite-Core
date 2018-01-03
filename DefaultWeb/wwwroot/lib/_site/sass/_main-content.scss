@@ -39,21 +39,128 @@
     }
 }
 
+////////////////////////////////////
+///
+////////////////////////////////////
 #contact.card {
     @extend .dws-page;
-    overflow: auto;
+    //overflow: auto;
+    #top.card {
+        flex-direction: row;
+        flex: 1;
 
-    .card-block {
-        display: block;
-        padding: .5rem;
-        margin: 0;
-        background-color: transparent;
+        #top-left.card {
+            flex-direction: column;
+            width: 100%;
 
-        address {
-            box-shadow: inset;
-            padding: .5em;
-            margin-bottom: 0;
+            #info {
+                box-shadow: inset;
+                padding: .5em;
+                margin-bottom: 0;
+            }
+
+            #more-info {
+            }
         }
+
+        #top-right.card {
+            flex: 1 1 auto;
+
+            #photo-main {
+                display: flex !important;
+                //flex: 1 0 auto !important;
+                justify-content: flex-end;
+
+
+                img {
+                    object-fit: contain;
+                    height: 20vh;
+                }
+            }
+
+            #slide-content {
+                display: flex;
+                flex-direction: row;
+                cursor: pointer;
+
+                .slide {
+                    cursor: pointer;
+
+                    img {
+                        //position: absolute;
+                        width: 100%;
+                        left: 0;
+                        -webkit-transition: all 300ms ease-out;
+                        -moz-transition: all 300ms ease-out;
+                        -o-transition: all 300ms ease-out;
+                        -ms-transition: all 300ms ease-out;
+                        transition: all 300ms ease-out;
+                        //object-fit: contain;
+                    }
+
+                    .caption {
+                        background-color: rgba(0,0,0,0.8);
+                        position: absolute;
+                        color: #fff;
+                        z-index: 100;
+                        -webkit-transition: all 300ms ease-out;
+                        -moz-transition: all 300ms ease-out;
+                        -o-transition: all 300ms ease-out;
+                        -ms-transition: all 300ms ease-out;
+                        transition: all 300ms ease-out;
+                        left: 0;
+
+                        .simple-caption {
+                            height: 30px;
+                            width: 200px;
+                            display: block;
+                            bottom: -30px;
+                            line-height: 25pt;
+                            text-align: center;
+                        }
+
+                        .full-caption {
+                            width: 170px;
+                            height: 170px;
+                            top: -200px;
+                            text-align: left;
+                            padding: 15px;
+                        }
+
+                        .fade-caption, .scale-caption {
+                            opacity: 0;
+                            width: 170px;
+                            height: 170px;
+                            text-align: left;
+                            padding: 15px;
+                        }
+
+                        &:hover .simple-caption {
+                            -moz-transform: translateY(-100%);
+                            -o-transform: translateY(-100%);
+                            -webkit-transform: translateY(-100%);
+                            opacity: 1;
+                            transform: translateY(-100%);
+                        }
+
+                        &:hover .full-caption {
+                            -moz-transform: translateY(100%);
+                            -o-transform: translateY(100%);
+                            -webkit-transform: translateY(100%);
+                            opacity: 1;
+                            transform: translateY(100%);
+                        }
+
+                        &:hover .fade-caption, .scale-caption {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #middle.card {
 
         .quote-container {
             margin-bottom: 1rem;
@@ -67,6 +174,9 @@
                 font-style: italic;
             }
         }
+    }
+
+    #bottom.card {
 
         #doc-buttons.card {
             flex-direction: row;

@@ -1,9 +1,20 @@
-﻿<p>The <strong>Sandpit</strong> is a place for you to play with live on-line demos! So grab your pail and shovel, bring your Tonka trucks, dig-in and get your hands dirty! See what you can break.</p>
+﻿<p>The <strong>Sandpit</strong> is a place for you to play with live on-line demos! So grab your pail and shovel, 
+    bring your Tonka trucks, dig-in and get your hands dirty! See what you can break.
+</p>
 <p class="exclamation">Just don't kick sand at the server! You wouldn't want to wake the admin.</p>
-<p>The <strong>Sandpit</strong> features numerous approaches to client-side framework design and functionality. It also illustrates the implementation of Default WebSite.net's VPS Server functionality and capabilities. Each demo's description highlights the implemented technologies.</p>
+<p>The <strong>Sandpit</strong> features numerous approaches to client-side framework design and functionality. 
+    It also illustrates the implementation of Default WebSite.net's VPS Server functionality and capabilities. 
+    Each demo's description highlights the implemented technologies.
+</p>
 <p><em>These are live demos!</em> If something breaks, try to refresh/reload. If that does not work, well they are demos....</p>
-<p class="official">You must read and agree to both the <a href="conduct.html" target="_blank" rel="noopener">Code of Conduct policy</a> and <a href="term-conditions.html" target="_blank" rel="noopener">Terms of Use Agreement</a> before proceeding with any <strong>Sandpit</strong> demos. By continuing with any sandpit live demos you assert that you have read and accept both agreement and policy. Thanks - <em>The Management</em>.</p>
-<p>Actually, nobody but you will ever see anything you do. The nature of all <strong>Sandpit</strong> demos and server interaction consist of "<strong><em>User Session</em></strong>" transactions. You are interacting with a number of live services, including</p>
+<p class="official">You must read and agree to both the <a href="~/resource/html/conduct.html" target="_blank" rel="noopener">Code of Conduct policy</a> 
+    and <a href="~/resource/html/term-conditions.html" target="_blank" rel="noopener">Terms of Use Agreement</a> before proceeding 
+    with any <strong>Sandpit</strong> demos. By continuing with any sandpit live demos you assert that you have read and 
+    accept both agreement and policy. Thanks - <em>The Management</em>.
+</p>
+<p>Actually, nobody but you will ever see anything you do. The nature of all <strong>Sandpit</strong> demos and server interaction 
+    consist of "<strong><em>User Session</em></strong>" transactions. You are interacting with a number of live services, including
+</p>
 <ul>
     <li>Microsoft 2017 Sql Server data and client services, including FileTable.</li>
     <li>Esri Enterprise ArcGis Server Rest services.</li>
@@ -11,10 +22,15 @@
     <li></li>
 </ul>
 <p>The Server never permantly saves anything. Everything Rolls-Back on application exit.</p>
-<p>Another note worth pointing out and not to be missed by the code scrutinizer. Generally, most all of the content on the site is asynchronous in nature. Many <em>ASP.NET Core MVC </em>&trade; <em>PartialViews</em> share the same <em>HTML5</em> &lt;div&gt; or target container. These View contents are not present in the <em>DOM</em> during the initial <em>HTML</em> document load process! This present a challenge as neither, the Knockout.js data bound elements or the <em>Javascript/JQuery AMD</em> elements are initialized.</p>
-<p>For <em>Javascript/JQuery</em>, the solution entails using an <em><strong>init()</strong></em> function and calling it from within the asynchronous content.</p>
-<p>&hellip;</p>
+<p>Another note worth pointing out and not to be missed by the code scrutinizer. Generally, most all of the content on the site is 
+    asynchronous in nature. Many <em>ASP.NET Core MVC </em>&trade; <em>PartialViews</em> share the same <em>HTML5</em> &lt;div&gt; or target container. 
+    These View contents are not present in the <em>DOM</em> during the initial <em>HTML</em> document load process! This present a challenge as neither, 
+    the Knockout.js data bound elements or the <em>Javascript/JQuery AMD</em> elements are initialized.
+</p>
+<p>For <em>Javascript/JQuery</em>, the solution entails using an <em><strong>init()</strong></em> function and calling it from within the asynchronous content. &hellip;</p>
 <p>The solution for Knockout.js binding is significantly simplified with <em>HTML5</em> and <em>Web API.</em> It entails using the <em>MutationObserver</em> &hellip;</p>
-<p>This simple implementation illustrates the potential of the MutationObserver</p>
-<p>&nbsp;Have fun!!</p>
-<p>Comments coming soon!!! But still feel free to contact me. See Contacts...</p>
+<p><a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/js/fileops-client.js" target="_blank" rel="noopener"><i class="fa fa-github"></i>wwwroot/lib/_site/js/model.js</a>
+    This simple implementation illustrates the potential of the MutationObserver
+    </p>
+<p>Have fun!!</p>
+<p>Comments coming soon!!! But still feel free to contact me. See Contact...</p>

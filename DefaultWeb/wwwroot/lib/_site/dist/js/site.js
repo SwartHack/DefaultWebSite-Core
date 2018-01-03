@@ -451,7 +451,7 @@ define('dws/dispatcher', ['dws/model'], function (ViewModel) {
             ViewModel.data(data); 
         })
         .fail(function (xhr, textStatus, error) {
-            ViewModel.abort(xhr, textStatus, error)
+            ViewModel.abort(xhr, textStatus, error);
         })
         .always(function () {
         //waitEffects(false);
@@ -465,7 +465,7 @@ define('dws/dispatcher', ['dws/model'], function (ViewModel) {
                 deferred.resolve(data); //ok, fires deferred callback
             })
             .fail(function (xhr, textStatus, error) {
-                deferred.reject(this.responseText + '\n' + error)
+                deferred.reject(this.responseText + '\n' + error);
             })
             .always(function () {
         
@@ -486,11 +486,44 @@ function (Control) {
     
     $(document).ready(function () {
 
-        
-        /////////////////////////////
-        /// click events
+         /////////////////////////////
+        /// main navbar toolbar
         ////////////////////////////
-        $('.dws-note').on('click',  function (e) {
+        $('.nav-link').on('click', function (e) {
+            e.preventDefault();
+            var $item = $(this);
+            Control.sendMessageDefer($item);
+
+            //better way/place to do this?
+            // TODO - bind class with model!!!
+            if ($item.attr('data-target-controller') == 'Home') {
+                if ($('#col-main').hasClass('full-size')) {
+                    $('#col-util').show();
+                    $('#col-main').removeClass('full-size');
+                }
+            }
+            
+            if ( $('#container-primary').hasClass('container-fluid')) {
+                $('#container-primary').removeClass('container-fluid');
+                $('#container-primary').addClass('container');
+            }
+        });
+
+        /////////////////////////////
+        /// SandPit toolbar
+        ////////////////////////////
+        $(document).on('click', '.nav-item', function (e) {
+            e.preventDefault();
+            var $item = $(e.target);
+            $('.nav-item').removeClass('active');
+            $item.closest('.nav-item').addClass('active');
+            Control.sendMessage($item);
+        });
+
+        /////////////////////////////
+        /// NotePad click events
+        ////////////////////////////
+        $('.dws-note').on('click', function (e) {
             e.preventDefault();
             var $rundown = $(this);
             $('.dws-note').removeClass("selected");
@@ -498,14 +531,6 @@ function (Control) {
 
             Control.sendMessage($rundown);
         });
-
-        $('.nav-link').on('click', function (e) {
-            e.preventDefault();
-            var $item = $(this);
-            Control.sendMessageDefer($item);
-        });
-
-        
 
         /////////////////////////////
         /// show/hide events
@@ -592,7 +617,6 @@ function (Control) {
         /////////////////////////////
         /// popover init
         ////////////////////////////
-
         var options = {
             trigger: 'hover',
             title: 'What is the Notepad',
@@ -600,29 +624,9 @@ function (Control) {
             footer: 'I am a Bootstrap popover...',
             placement: 'bottom',
             delay: { "show": 200, "hide": 100 }
-
         }
-
         $('#notebook-info').popover(options);
-        
-        //$('#rundown-info').on('click', function (e) {
-        //    $(this).popover('toggle');
-        //})
-
-       
-
-        /////////////////////////////
-        /// SandPit events
-        ////////////////////////////
-
-
-        $(document).on('click', '.nav-item', function (e) {
-            e.preventDefault();
-            var $item = $(e.target);
-            $('.nav-item').removeClass('active');
-            $item.closest('.nav-item').addClass('active');
-            Control.sendMessage($item);
-        });
+      
 
         $(document).on('click', 'a.sandpit-toggle-text', function (e) {
             e.preventDefault();
@@ -641,12 +645,6 @@ function (Control) {
                 $link.text('Less...');
             }
         });
-
-        /////////////////////////////
-        /// File Ops stuff
-        ////////////////////////////
-       
-     
 
         $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 30, mousestop: true });
 
@@ -816,9 +814,9 @@ function (viewModel, Dispatch) {
        
     }
 
-    //////////////////////////////////
-    ///
-    ////////////////////////////////
+    //////////////////////////////////////////////
+    /// What advantage/disadvantage to doing this?
+    ////////////////////////////////////////////
     function sendMessageDefer($item) {
         var target = $item.attr('data-target')
         var url = parseNavUrl($item);
@@ -836,8 +834,8 @@ function (viewModel, Dispatch) {
                 // or return deferred to calling action
                 viewModel.data(data);
             }
-        }).fail(function (error) {
-            alert(error);
+        }).fail(function (xhr, textStatus, error) {
+            viewModel.abort(xhr, textStatus, error);
         });
 
         viewModel.target(target);

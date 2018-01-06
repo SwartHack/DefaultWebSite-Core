@@ -246,8 +246,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
             catch (Exception ex)
             {
                 throw ex;
-            }
-            
+            }   
         }
 
         /// <summary>
@@ -259,7 +258,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
         {
             fileinfo.FileApi = String.Format(@"/api/dws/files/view/{0}", fileinfo.Id);
             fileinfo.ThumbnailUrl = String.Format(@"/api/dws/files/thumbnail/100/100/{0}", fileinfo.Id);
-           
+
 
             switch (fileinfo.MimeTypeCategory)
                 {
@@ -277,6 +276,8 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
 
                     case "image":
                         fileinfo.FileTarget = ".main-image";
+                        fileinfo.ExifDescription = DwsImageExif.GetExifDescription(fileinfo.FileFull);
+                        fileinfo.ExifDetails = DwsImageExif.GetExifDetails(fileinfo.FileFull);
                         break;
 
                     default:

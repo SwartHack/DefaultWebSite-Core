@@ -21,7 +21,7 @@
                             <ul id="thumbnails" data-bind='template: {name:"thumbnails-template", foreach: serverFiles }'></ul>
                         </div>
                         <div id="thumbs-details">
-                            <span class="">Available Space: <span data-bind=" text: serverSpace "></span></span>
+                            <span class="">Available Space: <span data-bind=" text: serverSpace() "></span></span>
                         </div>
                     </div>
                 </div>
@@ -39,13 +39,35 @@
         </div>
     </div>
 
-    <div id="col-fileops-content" class="col-7 no-gutters w-100 h-100">
+    <div id="col-fileops-content" class="col-7 no-gutters">
         <div class="element d-flex flex-column justify-content-between">
             <div class="inner d-flex flex-column align-items-center justify-content-center">
-                
+
                 <div class="main-content">
                     <div class="main-image content-area">
                         <img data-bind="attr: { src : imageViewApi() }" />
+                        <div class="content-info content-info-title">
+                            <div class="content-edit-operations">
+                                <a id="full-content" href="#content-full-modal" role="button" data-toggle="modal" title="Open full size...">
+                                    <i class="fa fa-2x fa-arrows-alt" aria-hidden="true"></i>
+                                </a>
+                            </div>
+
+                            <div class="content-title" data-bind="text: serverFile().friendlyName"></div>
+
+                            <div class="content-edit-operations">
+                                <a id="image-details" href="#image-exif-modal" role="button" data-toggle="modal" title="View details...">
+                                    <span class="fa fa-2x fa-list-alt" aria-hidden="true"></span>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="content-info content-info-descr" data-bind="text: serverFile().description"></div>
+
+                        <div id="content-loading">
+                            <i class="fa fa-spinner" style="font-size:48px;color:red"></i>
+                        </div>
                     </div>
 
                     <div class="main-document content-area">
@@ -57,25 +79,47 @@
                         <video id="video-player" controls autoplay preload="auto" width="800" height="600"></video>
                     </div>
 
-                    @*<div class="content-info content-info-title">
-                    <span data-bind="text: friendlyname()"></span>
-                    </div>*@
-
-                    <div class="content-info content-info-descr"></div>
-
-                    <a class="left carousel-control" id="content-left" href="#" role="button">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <a class="carousel-control-prev" id="content-prev" href="#" role="button">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="right carousel-control" id="content-right" href="#" role="button">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <a class="carousel-control-next" id="content-next" href="#" role="button">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                    <div id="content-loading">
-                        <i class="fa fa-spinner" style="font-size:48px;color:red"></i>
+
+                    
+                </div>
+
+                <div id="content-full-modal" class="modal fade fullscreen">
+                    <div class="modal-dialog fullscreen">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <a class="modalbuttons button" data-bind="attr: { href : imageViewApi(),  download: serverFile().friendlyName }" style="float:left">
+                                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                                </a>
+
+                                <a class="close modalbuttons" role="button" data-dismiss="modal">
+                                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                                </a>
+
+                                <h4 class="modal-title">Full Size Image</h4>
+                            </div>
+                            <div class="modal-body">
+                                <img id="modalimage" class="main-image" data-bind="attr: { src : imageViewApi(),  alt: serverFile().friendlyName  }" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-           </div>
+
+
+            </div>
         </div>
    </div>
 

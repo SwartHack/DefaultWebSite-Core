@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DefaultWeb.Controllers
 {
-    public class SandPitController : Controller
+    public class SandpitController : Controller
     {
 
 

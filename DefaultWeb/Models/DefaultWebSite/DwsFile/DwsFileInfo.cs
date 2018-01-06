@@ -12,16 +12,17 @@ namespace DefaultWeb.Models.DefaultWebSite.DwsFile
     {
         public int Id { get; set; }
         public string FileName { get; private set; }
-        [JsonIgnore]
-        public string FilePath { get; private set; }
-        [JsonIgnore]
-        public string FileFull { get; set; }
         public string FriendlyName { get; set; }
         public string Description { get; set; }
         public DateTime CreatedTimestamp { get; set; }
         public DateTime UpdatedTimestamp { get; set; }
         public string MimeType { get; set; }
         public long FileSize { get; set; }
+
+        [JsonIgnore]
+        public string FilePath { get; private set; }
+        [JsonIgnore]
+        public string FileFull { get; set; }
         [JsonIgnore]
         public string SessionId { get; set; }
 
@@ -31,6 +32,10 @@ namespace DefaultWeb.Models.DefaultWebSite.DwsFile
         public string FileTarget { get; set; }
         [NotMapped]
         public string ThumbnailUrl { get; set; }
+        [NotMapped]
+        public string ExifDescription { get; set; }
+        [NotMapped]
+        public Dictionary<string, object> ExifDetails { get; set; }
 
         [NotMapped]
         [JsonIgnore]
@@ -48,7 +53,7 @@ namespace DefaultWeb.Models.DefaultWebSite.DwsFile
         {
             get
             {
-                return MimeType.Substring( MimeType.IndexOf(@"/") + 1 );
+                return MimeType.Substring(MimeType.IndexOf(@"/") + 1);
             }
         }
 
@@ -65,9 +70,10 @@ namespace DefaultWeb.Models.DefaultWebSite.DwsFile
         public DwsFileInfo(string fileName, string filePath)
         {
             FileName = fileName;
-            FilePath = String.Format(@"{0}", filePath); 
+            FilePath = String.Format(@"{0}", filePath);
             FileFull = String.Format(@"{0}\{1}", FilePath, FileName);
             FriendlyName = fileName;
         }
     }
+
 }

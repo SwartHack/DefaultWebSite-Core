@@ -47,6 +47,8 @@ $contentBorder : 1rem;
 }
 
 #col-fileops-content {
+    width: 100%;
+    height: 100%;
 
     .main-content {
         width: 100%;
@@ -58,10 +60,11 @@ $contentBorder : 1rem;
         -moz-animation: dws-main-content 8s ease infinite;
         animation: dws-main-content 8s ease infinite;
 
-
         .main-document {
             position: center;
-            display:none;
+            display: none;
+            height: 100%;
+            width: 100%;
 
             #my-pdf-viewer {
                 display: none;
@@ -76,107 +79,131 @@ $contentBorder : 1rem;
 
         .main-video {
             display: none;
-            width:inherit;
-            //position: center;
-            //border-radius: 5px;
-            //margin-bottom: 3px;
+            height: 100%;
+            width: 100%;
 
             video#video-player {
-                width:-webkit-fill-available;
-
+                width: -webkit-fill-available;
             }
         }
+
+        #content-prev, #content-next {
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+
 
         .main-image {
             display: none;
             position: relative;
             //display: inline-block;
             height: 100%;
+            width: 100%;
 
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
             }
-        }
 
-        .content-info {
-            visibility: visible;
-            right: 15px;
-            opacity: 0;
-            position: absolute;
-            text-align: center;
-            vertical-align: middle;
-            background: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
-            background: -o-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
-            background: -moz-linear-gradient(right, rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
-            background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
-            color: white;
-            /*padding:0.3em;*/
-            padding: 0 0 0 0;
-            -webkit-transition: all $contentTransitionSpeed ease-out;
-            -moz-transition: all $contentTransitionSpeed ease-out;
-            -o-transition: all $contentTransitionSpeed ease-out;
-            transition: all $contentTransitionSpeed ease-out;
+            .content-info {
+                visibility: visible;
+                opacity: 0;
+                position: absolute;
+                text-align: center;
+                width: 100%;
+                vertical-align: middle;
+                @include gradient-x(transparent,$black,-10%,250%);
+                color: white;
+                /*padding:0.3em;*/
+                padding: 0;
+                -webkit-transition: all $contentTransitionSpeed ease-out;
+                -moz-transition: all $contentTransitionSpeed ease-out;
+                -o-transition: all $contentTransitionSpeed ease-out;
+                transition: all $contentTransitionSpeed ease-out;
 
-            &.content-info-title {
-                top: 0;
-                /*font-size: 1.8em;*/
-                font-size: 1.5em;
-                padding: 0 0 0 0;
-                margin: 0 0 0 0;
-            }
-
-            &.content-info-descr {
-                padding-bottom: 10px;
-                bottom: 30px;
-                font-size: 1.2em;
-            }
-
-            &.image-exif {
-                background: rgba(0,0,0,0.3);
-                text-align: left;
-
-                ul {
-                    list-style-type: none;
+                &.content-info-title {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    top: 0;
+                    /*font-size: 1.8em;*/
+                    font-size: 2.5vh;
+                    padding: 0 0 0 0;
+                    margin: 0 0 0 0;
                 }
 
-                top: 20%;
-                left: 30px;
-                width: 400px;
-                font-size: 1.1em;
+                &.content-info-descr {
+                    padding-bottom: 1.75vh;
+                    bottom: 3.5vh;
+                    font-size: 2vh;
+                }
+
+                &.image-exif {
+                    background: rgba(0,0,0,0.3);
+                    text-align: left;
+
+                    ul {
+                        list-style-type: none;
+                    }
+
+                    top: 20%;
+                    left: 3.5vw;
+                    width: 400px;
+                    font-size: 2vh;
+                }
+
+                .content-edit-operations {
+                    font-size: 2vh;
+                    padding: 0px 5px;
+                    background-color: transparent;
+                    border: none;
+
+                    @include hover-focus {
+                        border-style: solid;
+                        border-width: 1px;
+                        border-radius: 3px;
+                        border-color: white;
+
+                        a {
+                            color: white;
+                        }
+                    }
+                }
             }
 
-            &:hover {
-                opacity: 0.9;
-            }
-        }
-
-        &.loading {
-            opacity: 0.5;
-
-            #content-loading {
-                display: block;
+            @include hover {
+                .content-info {
+                    opacity: 0.9;
+                }
             }
 
-            div.content-info {
+            &.loading {
+                opacity: 0.5;
+
+                #content-loading {
+                    display: block;
+                }
+
+                div.content-info {
+                    display: none;
+                }
+            }
+
+            div#content-loading {
+                //opacity: 0.1;
                 display: none;
+                position: absolute;
+                left: 50px;
+                top: 50px;
+                width: 50px;
+                height: 50px;
+                border: 5px solid $gray-500;
+                border-right-color: transparent;
+                border-radius: 50px;
+                box-shadow: 0 0 25px 2px #f5f5f5;
+                animation: fa-spin 2s infinite linear;
             }
-        }
-
-        div#content-loading {
-            //opacity: 0.1;
-            display: none;
-            position: absolute;
-            left: 50px;
-            top: 50px;
-            width: 50px;
-            height: 50px;
-            border: 5px solid $gray-500;
-            border-right-color: transparent;
-            border-radius: 50px;
-            box-shadow: 0 0 25px 2px #f5f5f5;
-            animation: fa-spin 2s infinite linear;
         }
     }
     // TODO

@@ -88,7 +88,7 @@
     <Content Include="Controllers\GISController.cs" />
     <Content Include="Controllers\HomeController.cs" />
     <Content Include="Controllers\ManageController.cs" />
-    <Content Include="Controllers\SandPitController.cs" />
+    <Content Include="Controllers\SandpitController.cs" />
     <Content Include="Views\Notebook\Snippets\ArchiveFile.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -374,6 +374,7 @@
     <None Include="wwwroot\lib\_site\js\thumbnail.js" />
     <None Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
     <None Include="wwwroot\lib\_site\sass\vendor\jquery-confirm.scss" />
+    <None Include="wwwroot\lib\_site\sass\_contact.scss" />
     <None Include="wwwroot\lib\_site\sass\_fileops-content.scss" />
     <None Include="wwwroot\lib\_site\sass\_fileops-client.scss" />
     <None Include="wwwroot\lib\_site\sass\global\build.scss" />
@@ -389,6 +390,7 @@
     <None Include="wwwroot\lib\_site\sass\_grids.scss" />
     <None Include="wwwroot\lib\_site\sass\_keyframes.scss" />
     <None Include="wwwroot\lib\_site\sass\_main-content.scss" />
+    <None Include="wwwroot\lib\_site\sass\_nav-content.scss" />
     <None Include="wwwroot\lib\_site\sass\_mixins.scss" />
     <None Include="wwwroot\lib\_site\sass\_navbarmain.scss" />
     <None Include="wwwroot\lib\_site\sass\_notebook.scss" />

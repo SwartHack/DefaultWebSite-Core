@@ -88,15 +88,24 @@
 
         .progress .upload-progress {
             width: 100%;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
+            margin-top: .5vh;
+            margin-bottom: .5vh;
             display: none;
 
             #file-progress {
             }
+        }
 
-            #max-upload-error {
-            }
+        #max-upload-error {
+            visibility:visible;
+            font-size: 2vh;
+            font-style: italic;
+            font-weight: 600;
+            width: 100%;
+            margin-top: .5vh;
+            margin-bottom: .6vh;
+            color: $red;
+            background-color: white;
         }
 
         #upload-header {
@@ -159,7 +168,6 @@
                 font-weight: 400;
             }
         }
-
     }
     ////////////////////////////////
     ///

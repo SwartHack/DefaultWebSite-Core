@@ -167,6 +167,21 @@ namespace DefaultWeb.Controllers
         }
 
         /// <summary>
+        /// for images only
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("details/{id}")]
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var fileinfo = FileRepository.Select(id, Request.Cookies["DwsSessionToken"]);
+            var details = DwsImageExif.GetExifDetails(fileinfo.FileFull);
+            var desc = DwsImageExif.GetExifDescription(fileinfo.FileFull);
+            return Json(new { desc, details });
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="width"></param>

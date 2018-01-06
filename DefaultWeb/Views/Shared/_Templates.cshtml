@@ -30,7 +30,7 @@
 </script>
 
 <script id='thumbnails-template' type="text/html">
-    <li class="thumbnail" data-bind="attr: { 'data-api': fileApi, 'data-target': fileTarget, 'data-type': mimeType  }">
+    <li class="thumbnail" data-bind="attr: { 'id': id}">
         <img data-bind="attr: { src: thumbnailUrl }" />
         <div class="caption" data-bind="text:friendlyName"></div>
     </li>
@@ -79,8 +79,8 @@
             <div id="file-progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                 <span></span>
             </div>
-            <div id="max-upload-error"></div>
         </div>
+        <div id="max-upload-error" data-bind="visible: isMaxUpload">Max upload exceeded!!!</div>
         <div id="upload-header">
             <div class="card-title">Selected Files for Dws Cloud Upload</div>
             <button id="upload-submit" type="submit" data-bind="visible: showFileUpload">

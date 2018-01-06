@@ -106,7 +106,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         uploadFilesCount: ko.pureComputed( function () { return viewModel.uploadFiles().length }, this),
         uploadCount: ko.pureComputed(function () { return 'Number files: ' + viewModel.uploadFiles().length }, this),
         uploadSize: ko.pureComputed(function () { return 'Total size: ' + viewModel.getFileSize(viewModel.uploadFiles.sumProperty('size')) }, this),
-        showFileUpload: ko.pureComputed(function() { return viewModel.uploadFiles().length > 0 && !viewModel.isMaxUpload()}, this),
+        showFileUpload: ko.pureComputed(function() { return viewModel.uploadFiles().length > 0 && !viewModel.isMaxUpload() }, this),
         getFileSize: function (size) {
             var fileSize = 0;
             if (size > 1048576) {
@@ -120,10 +120,10 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             }
             return fileSize;
         },
-        isMaxUpload: function () {
+        isMaxUpload: ko.pureComputed( function () {
             var max = ( parseInt(viewModel.uploadFilesSize()) + parseInt(viewModel.serverSpaceCurrent()) ) > parseInt(viewModel.serverSpaceMax() );
             return max
-        },
+        }, this),
 
        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -131,7 +131,8 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         contentCacheQueue: ko.observableArray([]), // TODO
         
         serverFiles: ko.observableArray([]),  // the server-side files after upload
-        serverSpaceMax: ko.observable(50000000),
+        serverFile: ko.observable(''),
+        serverSpaceMax: ko.observable(10000000),
         serverSpaceCurrent: ko.pureComputed(function () { return viewModel.serverFiles.sumProperty('fileSize') }, this),
         serverFilesCount: ko.pureComputed(function () { return viewModel.serverFiles().length }, this),
         serverSpace: ko.pureComputed(function () {
@@ -140,18 +141,8 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             var num = parseInt(max) - parseInt(current);
             return viewModel.getFileSize(num);
         }, this),
-        fileMimeType: ko.observable(''),
-        fileViewApi: ko.observable(''),
-        fileViewTarget: ko.observable(''),
-        imageViewApi: ko.pureComputed(function () { return viewModel.fileMimeType().match('image/*') ? viewModel.fileViewApi : '#'; }, this),
-        docViewApi: ko.pureComputed(function () { return viewModel.fileMimeType.match('application/pdf') ? viewModel.fileViewApi : '#'; }, this),
-        
-        videoViewApi: ko.pureComputed(function () {
-            if (viewModel.fileMimeType().match('video/*'))
-                return viewModel.fileViewApi();
-            else
-                return null;
-        }, this),
+        imageViewApi: ko.pureComputed(function () { return viewModel.serverFile().fileApi }, this),
+
         pdfWorker: ko.observable(''),
         exif: ko.observableArray([]) // image header details
 
@@ -359,7 +350,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         var total = 0;
     
         for (var i = 0, len = this().length; i < len; i++) {
-            total += this()[i].size
+            total += this()[i][property];
         }
 
         return total;

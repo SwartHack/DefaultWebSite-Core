@@ -56,11 +56,11 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 }
             });
 
-            $('#content-left').on("click", function (e) {
+            $('#content-prev').on("click", function (e) {
                 contentPrev();
             });
 
-            $('#content-right').on("click", function (e) {
+            $('#content-next').on("click", function (e) {
                 contentNext();
             });
 
@@ -71,8 +71,6 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
             $('.main-image').on("swiperight", function (e) {
                 contentNext();
             });
-
-            
 
             hideAllContent();
 
@@ -86,13 +84,13 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
         ///////////////////////////////////////////////////////////////////////
         // Subscribing to viewModel anywhere you reference it!!
         ////////////////////////////////////////////////////////////////////////
-        viewModel.fileViewApi.subscribe(function (newFile) {
+        viewModel.serverFile.subscribe(function (serverfile) {
 
             // we have a new file, depending on type we have to account for model binding
             // behavior, <embed> and <video>.
             // do this before show
 
-            if (viewModel.fileMimeType().match('application/pdf')) {
+            if (serverfile.mimeType.match('application/pdf')) {
                 // try to get pdfjs viewer to work, TODO
                 // must replace the element each time! binding does not work!
                 // default to HTML5 only
@@ -102,14 +100,14 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 }
                 var emb = document.createElement('embed');
                 emb.setAttribute('id', 'doc-embedded');
-                emb.setAttribute('src', viewModel.fileViewApi());
-                emb.setAttribute('type', viewModel.fileMimeType());
+                emb.setAttribute('src', serverfile.fileApi);
+                emb.setAttribute('type', serverfile.mimeType);
                 target.appendChild(emb);
 
                 // pdf-js
                 //loadPdfFile();
             }
-            else if (viewModel.fileMimeType().match('image/*')) {
+            else if (serverfile.mimeType.match('image/*')) {
                 // call out to do this TODO
                 //var exif = parseEXIF(data.EXIF);
                 //if (exif) {
@@ -120,15 +118,15 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
                 //$('#ImageVPathEditImageInfo').val(data.VirtualPath);
             }
-            else if (viewModel.fileMimeType().match('video/*')) {
+            else if (serverfile.mimeType().match('video/*')) {
 
                 // switch to videojs TODO
                 // this replaces the element each time! binding does not work!
                 var video = document.querySelector('.main-content .main-video video');
                 var source = document.createElement('source');
 
-                source.setAttribute('src', viewModel.videoViewApi());
-                source.setAttribute('type', viewModel.fileMimeType());
+                source.setAttribute('src', serverfile.fileApi);
+                source.setAttribute('type', serverfile.mimeType);
 
                 //delete <source> child elements
                 $(video).empty();  //detach
@@ -139,7 +137,7 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
 
             // now make it visible
             // what's my visible content area
-            var $target = $(viewModel.fileViewTarget());
+            var $target = $(serverfile.fileTarget);
 
             if (!$target.is(':visible')) {
                 $('.content-area').hide();
@@ -185,15 +183,33 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
         // 
         ////////////////////////////////////////////////////////////////////////
         function openFile($thumbnail) {
-            var fileApi = $thumbnail.attr('data-api');
-            var fileTarget = $thumbnail.attr('data-target');
-            var type = $thumbnail.attr('data-type');
-
+            var fid = $thumbnail.attr('id');
             styleSelectedThumbnail($thumbnail);
+            var index = viewModel.serverFiles().findIndex(f => f.id == fid); 
+            viewModel.serverFile(viewModel.serverFiles()[index]); 
+        }
 
-            viewModel.fileMimeType(type);
-            viewModel.fileViewTarget(fileTarget);
-            viewModel.fileViewApi(fileApi);
+        function contentNext() {
+            var linkNext = $('ul#thumbnails li.selected').next('li');
+            $(linkNext).trigger('click');
+        }
+
+        function contentPrev() {
+            var linkPrev = $('ul#thumbnails li.selected').closest('li');
+            $(linkPrev).trigger('click');
+        }
+
+        function styleSelectedThumbnail($thumbnail) {
+            $('ul#thumbnails li').removeClass("selected");
+            $thumbnail.addClass("selected");
+        }
+
+        function hideAllContent() {
+            $('.content-area').hide();
+        }
+
+        function showContent($selector) {
+
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -201,13 +217,13 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
         ////////////////////////////////////////////////////////////////////////
         function loadPdfFile() {
 
-            var SEARCH_FOR = ''; 
+            var SEARCH_FOR = '';
             var mypdf = document.getElementById('my-pdf-viewer');
             var container = mypdf.querySelector('#viewerContainer');
 
             // (Optionally) enable hyperlinks within PDF files.
             var pdfLinkService = new PDFJS.PDFLinkService();
-            
+
             var pdfViewer = new PDFJS.PDFViewer({
                 container: container
             });
@@ -236,37 +252,6 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
                 pdfLinkService.setDocument(pdfDocument, null);
             });
         }
-
-        function contentNext() {
-            var linkNext = $('ul#thumbnails li.selected').next('li');
-            $(linkNext).trigger('click');
-        }
-
-        function contentPrev() {
-            var linkPrev = $('ul#thumbnails li.selected').closest('li');
-            $(linkPrev).trigger('click');
-        }
-
-        
-
-        function styleSelectedThumbnail($thumbnail) {
-            $('ul#thumbnails li').removeClass("selected");
-            $thumbnail.addClass("selected");
-        }
-
-        function empty() {
-            viewModel.thumbnails([]);
-        }
-
-        function hideAllContent() {
-            $('.content-area').hide();
-        }
-
-        function showContent($selector) {
-
-        }
-
-        
 
         return {
             init:init,

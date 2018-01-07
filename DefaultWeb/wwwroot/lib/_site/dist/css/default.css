@@ -11820,6 +11820,21 @@ p {
   font-weight: 700;
   cursor: pointer; }
 
+div#parable {
+  background-image: url("/resource/media/parchment.jpg");
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-left: 2vw;
+  padding-right: 1vw;
+  background-repeat: round; }
+  div#parable p {
+    font-family: 'Viner Hand ITC';
+    font-size: 2vh;
+    line-height: 2.5vh;
+    text-align: left;
+    background-color: transparent;
+    color: #000; }
+
 card-text ul {
   line-height: 1.25rem;
   margin-left: 3rem; }
@@ -12171,6 +12186,18 @@ flex-direction: column;*/
         display: flex;
         flex-direction: row;
         justify-content: space-between; }
+        #contact.card #top.card #top-right.card #top-right-top #badges {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+          align-items: center; }
+          #contact.card #top.card #top-right.card #top-right-top #badges a {
+            padding: 0;
+            margin: 0;
+            width: 6vh;
+            height: 6vh; }
+            #contact.card #top.card #top-right.card #top-right-top #badges a img {
+              object-fit: contain; }
         #contact.card #top.card #top-right.card #top-right-top #photo-main {
           display: flex !important;
           justify-content: flex-end;

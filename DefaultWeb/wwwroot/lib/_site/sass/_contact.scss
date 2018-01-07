@@ -1,0 +1,194 @@
+﻿/// <reference path="defaultwebsite.scss" />
+@mixin dws-contact() {
+    #top.card {
+        flex-direction: row;
+        flex: 1;
+        border: none;
+
+        #top-left.card {
+            flex-direction: column;
+            width: 100%;
+            border: none;
+
+            #info {
+                box-shadow: inset;
+                padding: .5em;
+                margin-bottom: 0;
+            }
+
+            #more-info {
+                text-align: left
+            }
+        }
+
+        #top-right.card {
+            flex: 1 1 auto;
+            border: none;
+
+            #top-right-top {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                #badges {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-evenly;
+                    align-items: center;
+
+                    a {
+                        padding: 0;
+                        margin: 0;
+                        width: 6vh;
+                        height:6vh;
+
+                        img {
+                            object-fit:contain;
+                        }
+                    }
+                }
+
+                #photo-main {
+                    display: flex !important;
+                    //flex: 1 0 auto !important;
+                    justify-content: flex-end;
+                    border: none;
+
+
+                    img {
+                        object-fit: contain;
+                        height: 20vh;
+                    }
+                }
+            }
+
+            #top-right-bottom {
+                display: flex;
+                flex-direction: row;
+                cursor: pointer;
+                border: none;
+                //height: auto;
+                text-align: center;
+
+                .slide {
+                    cursor: pointer;
+
+                    img {
+                        //position: absolute;
+                        width: 100%;
+                        left: 0;
+                        -webkit-transition: all 300ms ease-out;
+                        -moz-transition: all 300ms ease-out;
+                        -o-transition: all 300ms ease-out;
+                        -ms-transition: all 300ms ease-out;
+                        transition: all 300ms ease-out;
+                        //object-fit: contain;
+                    }
+
+                    .caption {
+                        background-color: transparent;
+                        position: absolute;
+                        color: #fff;
+                        z-index: 100;
+                        -webkit-transition: all 300ms ease-out;
+                        -moz-transition: all 300ms ease-out;
+                        -o-transition: all 300ms ease-out;
+                        -ms-transition: all 300ms ease-out;
+                        transition: all 300ms ease-out;
+                        left: 0;
+                    }
+
+                    .simple-caption {
+                        height: 3.5vh;
+                        width: auto;
+                        display: block;
+                        line-height: 1.7vh;
+                        text-align: center;
+                        bottom: 1.5vh;
+                    }
+
+                    .full-caption {
+                        width: 170px;
+                        height: 170px;
+                        top: -200px;
+                        text-align: left;
+                        padding: 15px;
+                    }
+
+                    .fade-caption, .scale-caption {
+                        opacity: 0;
+                        width: 170px;
+                        height: 170px;
+                        text-align: left;
+                        padding: 15px;
+                    }
+
+                    @include hover-focus {
+                        .simple-caption {
+                            -moz-transform: translateY(-100%);
+                            -o-transform: translateY(-100%);
+                            -webkit-transform: translateY(-100%);
+                            opacity: 1;
+                            transform: translateY(-100%);
+                        }
+
+                        .full-caption {
+                            -moz-transform: translateY(100%);
+                            -o-transform: translateY(100%);
+                            -webkit-transform: translateY(100%);
+                            opacity: 1;
+                            transform: translateY(100%);
+                        }
+
+                        .fade-caption, .scale-caption {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #middle.card {
+        border: none;
+
+        .quote-container {
+            margin-bottom: 1rem;
+
+            .note.yellow {
+                width: auto;
+                margin-left: 5%;
+                margin-right: 5%;
+                margin-bottom: 2rem;
+                font-size: 1em;
+                font-style: italic;
+            }
+        }
+    }
+
+    #bottom.card {
+        border: none;
+        padding-left: 1vw;
+        padding-right: 1vw;
+
+        #doc-buttons.card {
+            flex-direction: row;
+            justify-content: space-between;
+            border: none;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+
+            button {
+                padding-left: 2em
+            }
+        }
+    }
+
+    div#doc-resume.collapse.show, div#doc-cv.collapse.show, div#doc-masters.collapse.show {
+        .card.card-block {
+            .open-document {
+                height: 90%;
+            }
+        }
+    }
+}

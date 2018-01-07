@@ -1,10 +1,40 @@
 ﻿<div class="paper-wrapper">
-    <span class="text-info text-muted float-right">July-2017</span>
     <div class="paper">
-        <h5> What The LINQ??? </h5>
+        <h3> A Service Controller </h3>
         <p>
-            Rundown on using LINQ to Objects and .NET ServiceController. And "What the LINQ" is the difference between LINQs??? Coming soon...
+            A Service Controller is part of the growing <a href="https://github.com/SwartHack/A-Tool" target="_blank" rel="noopener"><i class="fa fa-github"></i> A-Tool collection</a>.
+            A-Tool intent is providing a library of tools for development and demonstration purposes.
         </p>
-        <a href="https://github.com/SwartHack/A-Tool"><i class="fa fa-5x fa-github" aria-hidden="true"></i>Check out the code now! </a>
+        <p class="text-left">
+            The main technology demonstrated by A Service Controller derives from
+            <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/linq-to-objects" target="_blank" rel="noopener">C# LINQ to Objects</a>
+            and <a href="https://msdn.microsoft.com/en-us/library/system.serviceprocess.servicecontroller(v=vs.110).aspx" target="_blank" rel="noopener">System.ServiceProcess.ServiceController Class.</a>
+        </p>
+            
+        <p class="text-left">
+            But we also take a dive into: 
+            <a href="https://msdn.microsoft.com/en-us/library/gg145030(v=vs.110).aspx" target="_blank" rel="noopener">System.Diagnostics</a>,&nbsp;
+            <a href="https://msdn.microsoft.com/en-us/library/system.runtime.interopservices%28v=vs.110%29.aspx" target="_blank" rel="noopener">System.Runtime.InteropServices</a>,&nbsp;
+            <a href="https://msdn.microsoft.com/en-us/library/system.serviceprocess(v=vs.110).aspx" target="_blank" rel="noopener">System.ServiceProcess</a>, and&nbsp;
+            <a href="https://msdn.microsoft.com/en-us/library/system.threading(v=vs.110).aspx" target="_blank">System.Threading.</a>
+        </p>
+        <h4 class="text-center">##########WARNING##############</h4>
+        <p class="disclaimer">
+            Use at own risk! A Service Controller requires Administrative privileges.
+            It will attempt to assess your access and depending on system set-up may prompt/warn you. YOU CONTINUE AT YOUR OWN RISK.
+            This applications dives into Windows Shared, OWN AND Device services! It definitely gives a different view to the whole set-up.
+            You can BORK your OS with A Service Controller!!!!! Say if you decide to shutdown/disable your "Kernel Streaming Thunks" or Intel Processor device drivers.
+            It may not be able to do it, but it will try to force any process to shutdown. If it is a shared or device driver service,
+            it will also attempt to disable the service.
+        </p>
+        <p>I don't claim to know what all the services are and/or do. Not sure exactly what a &ldquo;Thunk is, but yes, it is actually a device driver running on my system!!</p>
+        <h5>The Game Is:</h5>
+        <ul>
+            <li>Create a Restore Point,</li>
+            <li>Try to figure out the bare minimum to run your system. How low can you get the memory? Below 10%, may be 9%??? I originally developed this app for doing just that : Overclocking and Benchmarking, see&nbsp;<a href="http://hwbot.org/user/swarthack/" target="_blank">http://hwbot.org/user/swarthack/</a></li>
+        </ul>
+        <p><a href="https://github.com/SwartHack/A-Tool/raw/master/Aservicecontrollerdemo.zip" download> Download the demo video! </a></p>
+        <p class="disclaimer"> Apologies for demo video quality. It was my first try with VLC. Will eventually redo and address that pesky mouse tracking...</p>
+        <img src="~/resource/media/atool1.jpg" class="w-100" />
     </div>
 </div>

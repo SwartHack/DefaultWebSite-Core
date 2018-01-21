@@ -1,8 +1,8 @@
 ﻿$fa-font-path: "/fonts" !default;
 
-@import "../../bootstrap/scss/bootstrap.scss";
-@import "../../bootstrap/scss/bootstrap-grid.scss";
-@import "../../bootstrap/scss/bootstrap-reboot.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap/scss/bootstrap-grid.scss";
+@import "../node_modules/bootstrap/scss/bootstrap-reboot.scss";
 @import "../../font-awesome/scss/font-awesome.scss";
 //@import "../../jq-ui-bootstrap/scss/all.scss";
 //@import "../../office-ui-fabric-core/dist/sass/Fabric.scss";
@@ -25,6 +25,7 @@
 @import "thumbnail.scss";
 @import "fileops-client.scss";
 @import "fileops-content.scss";
+@import "arcgis.scss";
 @import "errors.scss";
 
 @import "./vendor/jquery-confirm.scss";
@@ -77,25 +78,7 @@
 }
 
 
-div.modal-header {
-    padding: .3rem .75rem;
 
-    button {
-    }
-
-    &.waiting {
-        -webkit-animation: dws-waiting 500ms infinite;
-        animation: dws-waiting 500ms infinite;
-    }
-}
-
-div.modal-title {
-}
-
-
-div.modal-body {
-    padding: 0;
-}
 
 
 // Extra small devices (portrait phones, less than 576px)

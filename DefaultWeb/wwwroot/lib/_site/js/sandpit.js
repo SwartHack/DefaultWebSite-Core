@@ -3,6 +3,28 @@
 //////////////////////////////////////////////////////////////////////
 define('dws/sandpit', ['dws/model'], function (viewModel) {
 
+    $(document).ready(function () {
+
+        $(document).on('click', 'a.sandpit-toggle-text', function (e) {
+            e.preventDefault();
+            var $link = $(e.target);
+            var $text = $link.parent().siblings('.card-text.expand');
+
+            if ($text.length == 1) {
+                $text.removeClass('expand');
+                $link.text('More...');
+            }
+            else {
+
+                $('.sandpit-wrapper').find('.sandpit-item').children('.card-text.expand').removeClass('expand');
+                $('.sandpit-wrapper').find('.sandpit-toggle-text').text('More...');
+                $link.parent().siblings('.card-text').addClass('expand');
+                $link.text('Less...');
+            }
+        });
+
+    });
+    
     //lets monitor the sand box area for new content and bind accordingly
     var config = {
         attributes: true,

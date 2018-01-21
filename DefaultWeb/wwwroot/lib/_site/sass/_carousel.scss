@@ -3,9 +3,37 @@
 
 #dws-carousel {
 
+    #carousel-info {
+        position: absolute;
+        right: 0;
+        top: 20;
+        z-index: 10;
+        cursor: pointer;
+    }
+
+    .popover {
+        cursor: pointer;
+
+        .popover-body {
+
+            a#carousel-control {
+                color: #007bff;
+                text-decoration: none;
+                background-color: transparent;
+
+                @include hover-focus();
+            }
+        }
+    }
+
+
     .carousel-inner {
         height: 100%;
 
+        .carousel-control-prev, .carousel-control-next {
+            margin-top: 20%;
+            margin-bottom: 20%;
+        }
 
         .carousel-item.active {
             display: flex;
@@ -64,7 +92,7 @@
 
                 &:hover {
                     text-decoration: none;
-                    cursor:pointer;
+                    cursor: pointer;
                 }
             }
         }

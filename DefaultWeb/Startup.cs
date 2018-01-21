@@ -26,11 +26,12 @@ namespace DefaultWeb
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddJsonFile("appsettings-dws.json", optional: false, reloadOnChange: true);
 
             if (env.IsDevelopment())
             {
+                builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                builder.AddJsonFile($"appsettings-dws.{env.EnvironmentName}.json", optional: true);
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
             }
@@ -122,7 +123,7 @@ namespace DefaultWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
             }
             else
@@ -134,7 +135,8 @@ namespace DefaultWeb
             //app.UseSession();
             app.UseAuthentication();
            
-            appLife.ApplicationStopping.Register(OnAppShutdown);
+            appLife.ApplicationStopping.Register(OnAppStopping);
+            appLife.ApplicationStopped.Register(OnAppStopped);
 
 
             //app.Use(next => context =>
@@ -151,11 +153,13 @@ namespace DefaultWeb
             //return next(context);
             //});
 
-            string guid = Guid.NewGuid().ToString();
+            string sessionid = Guid.NewGuid().ToString();
+            string appid = Configuration.GetSection("DefaultWebSiteSettings").GetValue<String>("AdminSessionId");
             app.Use(next => context =>
             {
                 string path = context.Request.Path;
-                context.Response.Cookies.Append("DwsSessionToken",guid , new CookieOptions() { HttpOnly = false });
+                context.Response.Cookies.Append("DwsSessionToken", sessionid, new CookieOptions() { HttpOnly = false });
+                context.Response.Cookies.Append("DwsToken", appid, new CookieOptions() { HttpOnly = false });
                 return next(context);
 
             });
@@ -169,7 +173,12 @@ namespace DefaultWeb
             });
         }
 
-        private void OnAppShutdown()
+        private void OnAppStopping()
+        {
+            var test = String.Empty;
+        }
+
+        private void OnAppStopped()
         {
             var test = String.Empty;
         }

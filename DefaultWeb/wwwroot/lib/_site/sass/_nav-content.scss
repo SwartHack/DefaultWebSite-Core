@@ -42,12 +42,13 @@
 ////////////////////////////////////
 ///
 ////////////////////////////////////
-#contact.card {
-    @extend .dws-page;
-    //overflow: auto;
+#contact {
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
     border: none;
+    overflow-y: auto;
     @include dws-contact();
-    
 }
 
 

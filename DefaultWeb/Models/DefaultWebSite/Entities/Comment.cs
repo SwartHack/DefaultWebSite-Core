@@ -36,6 +36,9 @@ namespace DefaultWeb.Models.DefaultWebSite.Entities
 
         public int SourceId { get; set; }
         
-        public Source Source { get; set; }
+        public  Source Source { get; set; }
+
+        [JsonIgnore]
+        public string SessionId { get; set; }
     }
 }

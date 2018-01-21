@@ -1,23 +1,58 @@
 ﻿/// <reference path="defaultwebsite.scss" />
 @mixin dws-contact() {
+
     #top.card {
+        display: flex;
         flex-direction: row;
-        flex: 1;
+        border-radius: 0;
         border: none;
 
         #top-left.card {
             flex-direction: column;
             width: 100%;
+            border-radius: 0;
             border: none;
+            background-color: ghostwhite;
 
-            #info {
-                box-shadow: inset;
-                padding: .5em;
+            #info.card-body {
+                padding: .5vw;
                 margin-bottom: 0;
-            }
 
-            #more-info {
-                text-align: left
+                p.address {
+                    text-align: left;
+                    font-style: normal;
+                    font-size: 2vh;
+                    line-height: 2.2vh;
+                    margin-bottom: 1vh;
+                    margin-left: .5vw;
+                    margin-right: .1vw;
+                }
+
+                p.associations {
+                    text-align: center;
+                    font-style: italic;
+                    font-weight: 600;
+                    font-size: 2vh;
+                    line-height: 2.2vh;
+                    margin-left: .5vw;
+                    margin-right: .5vw;
+                    margin-bottom: 1vh;
+                }
+            }
+        }
+
+        #more-info {
+            text-align: left;
+            padding: 0;
+            padding-left: .25vw;
+
+            a {
+
+                i {
+                }
+
+                span {
+                }
             }
         }
 
@@ -36,14 +71,25 @@
                     justify-content: space-evenly;
                     align-items: center;
 
-                    a {
+                    .dws-badge {
                         padding: 0;
                         margin: 0;
-                        width: 6vh;
-                        height:6vh;
 
-                        img {
-                            object-fit:contain;
+                        a {
+                            padding: 0;
+                            margin: 0;
+                            width: 4vh;
+                            height: 4vh;
+                            text-align: center;
+
+                            img {
+                                width: 3.5vh;
+                                height: auto;
+                            }
+
+                            i {
+                                font-size: 4vh;
+                            }
                         }
                     }
                 }
@@ -104,7 +150,7 @@
                         display: block;
                         line-height: 1.7vh;
                         text-align: center;
-                        bottom: 1.5vh;
+                        //bottom: 1.5vh;
                     }
 
                     .full-caption {
@@ -151,6 +197,7 @@
 
     #middle.card {
         border: none;
+        border-radius: 0;
 
         .quote-container {
             margin-bottom: 1rem;
@@ -167,6 +214,7 @@
     }
 
     #bottom.card {
+        border-radius: 0;
         border: none;
         padding-left: 1vw;
         padding-right: 1vw;
@@ -181,14 +229,34 @@
             button {
                 padding-left: 2em
             }
+
+            #masters-info {
+                cursor: pointer;
+                z-index:10;
+            }
         }
     }
 
-    div#doc-resume.collapse.show, div#doc-cv.collapse.show, div#doc-masters.collapse.show {
-        .card.card-block {
+
+    .popover {
+        max-width: 75%;
+        width:75%;
+
+        .popover-body {
+
+            p {
+                text-align:left;
+                margin-left:0;
+                margin-right:0;
+            }
+        }
+    }
+
+    /*div#doc-resume.collapse.show, div#doc-cv.collapse.show, div#doc-masters.collapse.show {
+        .card {
             .open-document {
                 height: 90%;
             }
         }
-    }
+    }*/
 }

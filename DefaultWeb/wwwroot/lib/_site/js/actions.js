@@ -57,17 +57,15 @@ function (Control) {
         /// TODO - optimize these events...
         ////////////////////////////
         $(document).on("shown.bs.collapse", "#doc-resume", function (e) {
-            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
+            $('#contact').animate({ scrollTop: $(this).offset().top }, 800);
             $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
-            if ($('#doc-cv').hasClass('show')) {
-                $('#doc-cv').removeClass('show');
-                $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            if ($('#doc-cv').is(':visible')) {
+                $('#doc-cv').hide();
             }
-            if ($('#doc-masters').hasClass('show')) {
-                $('#doc-masters').removeClass('show');
-                $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
-            } 
+            if ($('#doc-masters').is(':visible')) {
+                $('#doc-masters').hide();
+            }
         });
 
         $(document).on("hide.bs.collapse", "#doc-resume", function (e) {
@@ -75,40 +73,36 @@ function (Control) {
         });
 
         $(document).on('shown.bs.collapse', '#doc-cv', function (e) {
-            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
+            $('#contact').animate({ scrollTop: $(this).offset().top }, 800);
             $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
-            if ($('#doc-resume').hasClass('show')) {
-                $('#doc-resume').removeClass('show');
-                $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            if ($('#doc-resume').is(':visible')) {
+                $('#doc-resume').hide();
             }
-            if ($('#doc-masters').hasClass('show')) {
-                $('#doc-masters').removeClass('show');
-                $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
-            } 
+            if ($('#doc-masters').is(':visible')) {
+                $('#doc-masters').hide();
+            }
         });
 
-        $(document).on('hide.bs.collapse','#doc-cv', function (e) {
+        $(document).on('hide.bs.collapse', '#doc-cv', function (e) {
             $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
         $(document).on('shown.bs.collapse', '#doc-masters', function (e) {
             e.preventDefault();
-            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
-            $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
+            $('#contact').animate({ scrollTop: $(this).offset().top }, 800);
+            $('[data-target="#doc-masters"] h4 i.fa.fa-eye').switchClass('fa-eye', 'fa-eye-slash');
 
-            if ($('#doc-resume').hasClass('show')) {
-                $('#doc-resume').removeClass('show');
-                $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            if ($('#doc-resume').is(':visible')) {
+                $('#doc-resume').hide();
             }
-            if ($('#doc-cv').hasClass('show')) {
-                $('#doc-cv').removeClass('show');
-                $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            if ($('#doc-cv').is(':visible')) {
+                $('#doc-cv').hide();
             }
         });
 
         $(document).on('hide.bs.collapse', '#doc-masters', function (e) {
-            $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            $('[data-target="#doc-masters"] h4 i.fa.fa-eye-slash').switchClass('fa-eye-slash', 'fa-eye');
         });
 
         //$('#modal-action-template').on('show.bs.modal', function (e) {
@@ -142,30 +136,34 @@ function (Control) {
             title: 'What is the Notepad',
             content: 'My non-authoritative notes and ramblings. In my words and IMHO...',
             footer: 'I am a Bootstrap popover...',
-            placement: 'bottom',
+            placement: 'auto',
             delay: { "show": 200, "hide": 100 }
         }
         $('#notebook-info').popover(options);
-      
 
-        $(document).on('click', 'a.sandpit-toggle-text', function (e) {
+        var options2 = {
+            animation:true,
+            trigger: 'click',
+            placement: 'auto',
+            html: true,
+            container: '#dws-carousel',
+            content: '<a id="carousel-control" data-state="1">Please turn off...</a>',
+            delay: { "show": 200, "hide": 100 }
+        }
+        $('#carousel-info').popover(options2);
+
+        $(document).on('click', '#carousel-control', function (e) {
             e.preventDefault();
-            var $link = $(e.target);
-            var $text = $link.parent().siblings('.card-text.expand');
-
-            if ($text.length == 1) {
-                $text.removeClass('expand');
-                $link.text('More...');
-            }
-            else {
-
-                $('.sandpit-wrapper').find('.sandpit-item').children('.card-text.expand').removeClass('expand');
-                $('.sandpit-wrapper').find('.sandpit-toggle-text').text('More...');
-                $link.parent().siblings('.card-text').addClass('expand');
-                $link.text('Less...');
-            }
+            var $carousel = $('.dws-carousel');
+            $carousel.attr('data-interval') ? $carousel.removeAttr('data-interval') : $carousel.attr('data-interval', '7500');
+            $('#carousel-info').popover('hide');
+            var popover = $('#carousel-info').data('bs.popover');
+            popover.config.content = '<h4 class="text-center"></h4><p>Please turn on...</p>';
+            
         });
 
+       
+        
         $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 30, mousestop: true });
 
     });

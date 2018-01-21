@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -17,6 +18,9 @@ namespace DefaultWeb.Models.DefaultWebSite.Entities
         [StringLength(32), MinLength(4)]
         public string Description { get; set; }
 
-       public List<Comment> Comments { get; set; }
+       public  List<Comment> Comments { get; set; }
+
+        [JsonIgnore]
+        public string SessionId { get; set; }
     }
 }

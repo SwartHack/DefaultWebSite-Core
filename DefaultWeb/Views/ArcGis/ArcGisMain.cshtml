@@ -1,0 +1,37 @@
+﻿
+<div id="arcgis-main" class="card">
+
+    <div id="arcgis-nav">
+        <div class="card-title">GIS Nav</div>
+        <ul class="nav nav-pills">
+            <li class="nav-item active">
+                <a data-target="#arcgis-map" data-target-controller="ArcGis" data-target-action="LoadMap1">Map 1</a>
+            </li>
+            <li class="nav-item active">
+                <a data-target="#arcgis-map" data-target-controller="ArcGis" data-target-action="">Map 2</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="arcgis-map">
+      
+    </div>
+
+</div>
+
+
+<script>
+    require(['dws/arcgis'], function (ArcGis) {
+        //$(function () {
+        //    ArcGis.observeKo(true);
+        //});
+        $('#arcgis-main').ready(function () {
+            ArcGis.init();
+        })
+        
+
+        // expand this
+        //$('#col-util').hide();
+        //$('#col-main').addClass('full-size');
+    });
+</script>

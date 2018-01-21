@@ -45,7 +45,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             viewModel.sourceIndex(index);
             var source = viewModel.sources()[index];
             viewModel.source(source);
-            
+
         },
         sourceIndex: ko.observable(''),
         sourcesCount: ko.pureComputed(function () {
@@ -60,10 +60,10 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             var index = viewModel.sources().findIndex(s => s.id == sid);
             var source = viewModel.sources()[viewModel.sourceIndex()];
             viewModel.sources.remove(source);
-            viewModel.source(undefined);
+            viewModel.source('');
         },
         sourceAdded: function (parent, index, item) {
-            var $parent = $(parent); 
+            var $parent = $(parent);
             var $item = $(item);
             //viewModel.sources.sort();
             $item.hide().fadeIn('slow');
@@ -78,7 +78,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         },
         commentIndex: ko.observable(''),
         commentsCount: ko.pureComputed(function () { return 'Records: ' + viewModel.comments().length }, this),
-        commentTitle: ko.pureComputed(function () { return 'Ima a stupid title!'}, this),
+        commentTitle: ko.pureComputed(function () { return 'Ima a stupid title!' }, this),
         addComment: function (comment) {
             viewModel.comments.unshift(comment);
             viewModel.commentId(comment.id);
@@ -95,7 +95,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             console.log('Comment afterAdd... ');
         },
         canAddComment: function () { return viewModel.sources().length === 0 ? false : true },
-         //canDeleteComment: function () {
+        //canDeleteComment: function () {
         //    var list = $('#comments.list-group').children();
         //    var $element = $(list[viewModel.commentIndex()]);
         //    var isClass = $element.hasClass('active')
@@ -109,11 +109,11 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
         mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'video/mp4']), //these should come from settings
-        uploadFilesSize: ko.pureComputed( function () { return viewModel.uploadFiles.sumProperty('size') }, this),
-        uploadFilesCount: ko.pureComputed( function () { return viewModel.uploadFiles().length }, this),
+        uploadFilesSize: ko.pureComputed(function () { return viewModel.uploadFiles.sumProperty('size') }, this),
+        uploadFilesCount: ko.pureComputed(function () { return viewModel.uploadFiles().length }, this),
         uploadCount: ko.pureComputed(function () { return 'Number files: ' + viewModel.uploadFiles().length }, this),
         uploadSize: ko.pureComputed(function () { return 'Total size: ' + viewModel.getFileSize(viewModel.uploadFiles.sumProperty('size')) }, this),
-        showFileUpload: ko.pureComputed(function() { return viewModel.uploadFiles().length > 0 && !viewModel.isMaxUpload() }, this),
+        showFileUpload: ko.pureComputed(function () { return viewModel.uploadFiles().length > 0 && !viewModel.isMaxUpload() }, this),
         getFileSize: function (size) {
             var fileSize = 0;
             if (size > 1048576) {
@@ -127,16 +127,16 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             }
             return fileSize;
         },
-        isMaxUpload: ko.pureComputed( function () {
-            var max = ( parseInt(viewModel.uploadFilesSize()) + parseInt(viewModel.serverSpaceCurrent()) ) > parseInt(viewModel.serverSpaceMax() );
+        isMaxUpload: ko.pureComputed(function () {
+            var max = (parseInt(viewModel.uploadFilesSize()) + parseInt(viewModel.serverSpaceCurrent())) > parseInt(viewModel.serverSpaceMax());
             return max
         }, this),
 
-       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         contentCacheQueue: ko.observableArray([]), // TODO
-        
+
         serverFiles: ko.observableArray([]),  // the server-side files after upload
         serverFile: ko.observable(''),
         serverSpaceMax: ko.observable(10000000),
@@ -174,7 +174,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         //    }
 
         //}
-        
+
     };
 
 
@@ -203,8 +203,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
 
     // subscribe to any ajax errors
     viewModel.errorMsg.subscribe(function (error) {
-        if (error != null)
-        {
+        if (error != null) {
             var $ajaxerr = $('#ajax-error');
             if (!ko.dataFor($ajaxerr[0])) {
                 ko.applyBindings(viewModel, $ajaxerr[0]);
@@ -213,8 +212,9 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             $($ajaxerr).html(viewModel.errorXhr().responseText);
 
             $('#ajax-error').dialog({
-                width: 600,
-                height: 400,
+                maxWidth: 800,
+                maxHeight: 600,
+                width:800,
                 autoOpen: true,
                 modal: true,
                 buttons: {
@@ -222,8 +222,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
                 }
             });
         }
-        else
-        {
+        else {
             $('viewModel.errorData').dialog();
 
         }
@@ -251,17 +250,30 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     /// Source subscribe events/actions
     ///////////////////////////////////////
     viewModel.source.subscribe(function (source) {
-       
-        if (source == undefined) {
-            var prev = viewModel.sourceIndex() - 1;
-            if (prev >= 0)
-            {
-                source = viewModel.sources()[prev];
-                viewModel.sourceId(source.id);
+
+        if ( !source ) {
+
+            //clear out comments here?
+            viewModel.comments([]);
+
+            if (viewModel.sources().length >= 1) {
+                //was there a previous source loaded?
+                var last = parseInt(viewModel.sourceIndex());
+                var prev = last != 'NaN' ? last - 1 : 0;
+                var next = last != 'NaN' ? last : 0;
+
+                if (prev >= 0) {
+                    source = viewModel.sources()[prev];
+                    viewModel.sourceId(source.id);
+                }
+                else {
+                    source = viewModel.sources()[next];
+                    viewModel.sourceId(source.id);
+                }
             }
             return;
         }
-       
+
         ///TODO
         /// this should all be done with a class binding
         var $element = $($('#sources-table tbody tr')[viewModel.sourceIndex()])
@@ -286,11 +298,21 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     ///////////////////////////////////////
     viewModel.comment.subscribe(function (comment) {
 
-        if ( comment == undefined ) {
-            var prev = viewModel.commentIndex() - 1;
-            if ( prev >= 0 ) {
-                comment = viewModel.comments()[prev];
-                viewModel.commentId(comment.id);
+        if ( !comment ) {
+            if (viewModel.comments().length >= 1) {
+                //was there a previous source loaded?
+                var last = parseInt(viewModel.commentIndex());
+                var prev = last != 'NaN' ? last - 1 : 0;
+                var next = last != 'NaN' ? last : 0;
+
+                if (prev >= 0) {
+                    comment = viewModel.comments()[prev];
+                    viewModel.commentId(comment.id);
+                }
+                else {
+                    comment = viewModel.comments()[next];
+                    viewModel.commentId(comment.id);
+                }
             }
             return;
         }
@@ -528,17 +550,15 @@ function (Control) {
         /// TODO - optimize these events...
         ////////////////////////////
         $(document).on("shown.bs.collapse", "#doc-resume", function (e) {
-            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
+            $('#contact').animate({ scrollTop: $(this).offset().top }, 800);
             $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
-            if ($('#doc-cv').hasClass('show')) {
-                $('#doc-cv').removeClass('show');
-                $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            if ($('#doc-cv').is(':visible')) {
+                $('#doc-cv').hide();
             }
-            if ($('#doc-masters').hasClass('show')) {
-                $('#doc-masters').removeClass('show');
-                $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
-            } 
+            if ($('#doc-masters').is(':visible')) {
+                $('#doc-masters').hide();
+            }
         });
 
         $(document).on("hide.bs.collapse", "#doc-resume", function (e) {
@@ -546,40 +566,36 @@ function (Control) {
         });
 
         $(document).on('shown.bs.collapse', '#doc-cv', function (e) {
-            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
+            $('#contact').animate({ scrollTop: $(this).offset().top }, 800);
             $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
 
-            if ($('#doc-resume').hasClass('show')) {
-                $('#doc-resume').removeClass('show');
-                $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            if ($('#doc-resume').is(':visible')) {
+                $('#doc-resume').hide();
             }
-            if ($('#doc-masters').hasClass('show')) {
-                $('#doc-masters').removeClass('show');
-                $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
-            } 
+            if ($('#doc-masters').is(':visible')) {
+                $('#doc-masters').hide();
+            }
         });
 
-        $(document).on('hide.bs.collapse','#doc-cv', function (e) {
+        $(document).on('hide.bs.collapse', '#doc-cv', function (e) {
             $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
         });
 
         $(document).on('shown.bs.collapse', '#doc-masters', function (e) {
             e.preventDefault();
-            $('#contact.card').animate({ scrollTop: $(this).offset().top }, 800);
-            $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye', 'fa-eye-slash');
+            $('#contact').animate({ scrollTop: $(this).offset().top }, 800);
+            $('[data-target="#doc-masters"] h4 i.fa.fa-eye').switchClass('fa-eye', 'fa-eye-slash');
 
-            if ($('#doc-resume').hasClass('show')) {
-                $('#doc-resume').removeClass('show');
-                $('[data-target="#doc-resume"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            if ($('#doc-resume').is(':visible')) {
+                $('#doc-resume').hide();
             }
-            if ($('#doc-cv').hasClass('show')) {
-                $('#doc-cv').removeClass('show');
-                $('[data-target="#doc-cv"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            if ($('#doc-cv').is(':visible')) {
+                $('#doc-cv').hide();
             }
         });
 
         $(document).on('hide.bs.collapse', '#doc-masters', function (e) {
-            $('[data-target="#doc-masters"] h4 i').switchClass('fa-eye-slash', 'fa-eye');
+            $('[data-target="#doc-masters"] h4 i.fa.fa-eye-slash').switchClass('fa-eye-slash', 'fa-eye');
         });
 
         //$('#modal-action-template').on('show.bs.modal', function (e) {
@@ -613,11 +629,49 @@ function (Control) {
             title: 'What is the Notepad',
             content: 'My non-authoritative notes and ramblings. In my words and IMHO...',
             footer: 'I am a Bootstrap popover...',
-            placement: 'bottom',
+            placement: 'auto',
             delay: { "show": 200, "hide": 100 }
         }
         $('#notebook-info').popover(options);
-      
+
+        var options2 = {
+            animation:true,
+            trigger: 'click',
+            placement: 'auto',
+            html: true,
+            container: '#dws-carousel',
+            content: '<a id="carousel-control" data-state="1">Please turn off...</a>',
+            delay: { "show": 200, "hide": 100 }
+        }
+        $('#carousel-info').popover(options2);
+
+        $(document).on('click', '#carousel-control', function (e) {
+            e.preventDefault();
+            var $carousel = $('.dws-carousel');
+            $carousel.attr('data-interval') ? $carousel.removeAttr('data-interval') : $carousel.attr('data-interval', '7500');
+            $('#carousel-info').popover('hide');
+            var popover = $('#carousel-info').data('bs.popover');
+            popover.config.content = '<h4 class="text-center"></h4><p>Please turn on...</p>';
+            
+        });
+
+       
+        
+        $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 30, mousestop: true });
+
+    });
+
+    return {
+     
+    };
+});
+
+//////////////////////////////////////////////////////////////////////
+/// sandpit module - MutationObserver Here!!!
+//////////////////////////////////////////////////////////////////////
+define('dws/sandpit', ['dws/model'], function (viewModel) {
+
+    $(document).ready(function () {
 
         $(document).on('click', 'a.sandpit-toggle-text', function (e) {
             e.preventDefault();
@@ -637,20 +691,8 @@ function (Control) {
             }
         });
 
-        $('div#footer-scroll').endlessScroll({ width: '100%', height: '20px', steps: -2, speed: 30, mousestop: true });
-
     });
-
-    return {
-     
-    };
-});
-
-//////////////////////////////////////////////////////////////////////
-/// sandpit module - MutationObserver Here!!!
-//////////////////////////////////////////////////////////////////////
-define('dws/sandpit', ['dws/model'], function (viewModel) {
-
+    
     //lets monitor the sand box area for new content and bind accordingly
     var config = {
         attributes: true,
@@ -892,7 +934,7 @@ function (Control, viewModel) {
                 
             })
             .fail(function (xhr, textStatus, error) {
-                viewModel.aborted(xhr, textStatus, error);
+                viewModel.abort(xhr, textStatus, error);
             })
             .always(function (data, textStatus, xhr) {
                 viewModel.waiting(false);
@@ -919,8 +961,21 @@ function (Control, viewModel) {
 
     $('#modal-action-template').on('show.bs.modal', function (e) {
         //e.preventDefault();
+        var $this = $(this);
         var $item = $(e.relatedTarget);
+
+        $this.draggable({
+            handle: ".modal-header",
+            cursor: "move"
+        });
+        //$this.position({
+        //    of: $('#col-main'),
+        //    my: 'center',
+        //    at: 'center'
+        //});
+
         Control.sendMessage($item, '#modal-action-template');
+
     });
 
     $(document).on('submit', 'form#create-source', function (e) {
@@ -1003,20 +1058,20 @@ function (Control, viewModel) {
 
     $(document).on('click', 'a#source-delete', function (e) {
 
-        //if (viewModel.comments().length > 0) {
+        if (viewModel.comments().length > 0) {
             
-        //    $.confirm({
-        //        title: 'Cascade Delete Source and Comments?',
-        //        content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
-        //        buttons: {
-        //            confirm: function () { deleteSource(); },
-        //            cancel: function () { return; }
-        //        }
-        //    });
-        //}
-        //else {
-        //    deleteSource();
-        //}
+            $.confirm({
+                title: 'Cascade Delete Source and Comments?',
+                content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
+                buttons: {
+                    confirm: function () { deleteSource(); },
+                    cancel: function () { return; }
+                }
+            });
+        }
+        else {
+            deleteSource();
+        }
     });
 
     function deleteSource() {
@@ -1038,14 +1093,14 @@ function (Control, viewModel) {
 
     $(document).on('click', 'a#comment-delete', function (e) {
        
-        //$.confirm({
-        //    title: 'Delete Comment(s)?',
-        //    content: 'This action can not be undone!!!',
-        //    buttons: {
-        //        confirm: function () { deleteComment(); },
-        //        cancel: function () { return; }
-        //    }
-        //});
+        $.confirm({
+            title: 'Delete Comment(s)?',
+            content: 'This action can not be undone!!!',
+            buttons: {
+                confirm: function () { deleteComment(); },
+                cancel: function () { return; }
+            }
+        });
     });
 
     function deleteComment() {
@@ -1790,6 +1845,26 @@ define('dws/fileops-content', ['dws/controller', 'dws/model'],
         };
 
     });
+define('dws/arcgis', ['esri/Map', 'esri/views/MapView,', 'dojo/domReady!'],
+    function (Map, Mapview) {
+
+
+        function init() {
+
+
+        }
+
+
+        $(document).ready(function () {
+
+        });
+
+
+        return {
+            init: init
+        }
+
+    });
 //////////////////////////////////////////////////////////////////////
 /// init module - TODO eliminate redundant requires, control initiates all
 //////////////////////////////////////////////////////////////////////
@@ -1800,6 +1875,7 @@ require(['dws/model-utils']);
 require(['dws/thumbnail']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
+//require(['dws/arcgis']);
 
 
 //require('video-codec-js/lib/encoder');
@@ -1829,14 +1905,14 @@ $.fn.scrollToTop = function () {
         bottom: $parent.height()
     };
 
-    console.log('parent viewport: top ' + viewport.top + ', left ' + viewport.left + ', bottom ' + viewport.bottom + ', right ' + viewport.right);
+    //console.log('parent viewport: top ' + viewport.top + ', left ' + viewport.left + ', bottom ' + viewport.bottom + ', right ' + viewport.right);
 
-    console.log('viewport parent bottom: ' + viewport.bottom);
+    //console.log('viewport parent bottom: ' + viewport.bottom);
     var position = $element.position();
     position.bottom = position.top + $element.height();
     position.right = position.left + $element.width();
 
-    console.log('element position top ' + position.top + ', left ' + position.left + ', bottom ' + position.bottom + ', right ' + position.right);
+    //console.log('element position top ' + position.top + ', left ' + position.left + ', bottom ' + position.bottom + ', right ' + position.right);
 
     // above or below = !in-between
     if ((position.bottom < viewport.top) || (position.top > viewport.bottom)) {

@@ -8,6 +8,7 @@ require(['dws/model-utils']);
 require(['dws/thumbnail']);
 require(['dws/fileops-client']);
 require(['dws/fileops-content']);
+//require(['dws/arcgis']);
 
 
 //require('video-codec-js/lib/encoder');
@@ -37,14 +38,14 @@ $.fn.scrollToTop = function () {
         bottom: $parent.height()
     };
 
-    console.log('parent viewport: top ' + viewport.top + ', left ' + viewport.left + ', bottom ' + viewport.bottom + ', right ' + viewport.right);
+    //console.log('parent viewport: top ' + viewport.top + ', left ' + viewport.left + ', bottom ' + viewport.bottom + ', right ' + viewport.right);
 
-    console.log('viewport parent bottom: ' + viewport.bottom);
+    //console.log('viewport parent bottom: ' + viewport.bottom);
     var position = $element.position();
     position.bottom = position.top + $element.height();
     position.right = position.left + $element.width();
 
-    console.log('element position top ' + position.top + ', left ' + position.left + ', bottom ' + position.bottom + ', right ' + position.right);
+    //console.log('element position top ' + position.top + ', left ' + position.left + ', bottom ' + position.bottom + ', right ' + position.right);
 
     // above or below = !in-between
     if ((position.bottom < viewport.top) || (position.top > viewport.bottom)) {

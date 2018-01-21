@@ -27,7 +27,7 @@ function (Control, viewModel) {
                 
             })
             .fail(function (xhr, textStatus, error) {
-                viewModel.aborted(xhr, textStatus, error);
+                viewModel.abort(xhr, textStatus, error);
             })
             .always(function (data, textStatus, xhr) {
                 viewModel.waiting(false);
@@ -54,8 +54,21 @@ function (Control, viewModel) {
 
     $('#modal-action-template').on('show.bs.modal', function (e) {
         //e.preventDefault();
+        var $this = $(this);
         var $item = $(e.relatedTarget);
+
+        $this.draggable({
+            handle: ".modal-header",
+            cursor: "move"
+        });
+        //$this.position({
+        //    of: $('#col-main'),
+        //    my: 'center',
+        //    at: 'center'
+        //});
+
         Control.sendMessage($item, '#modal-action-template');
+
     });
 
     $(document).on('submit', 'form#create-source', function (e) {
@@ -138,20 +151,20 @@ function (Control, viewModel) {
 
     $(document).on('click', 'a#source-delete', function (e) {
 
-        //if (viewModel.comments().length > 0) {
+        if (viewModel.comments().length > 0) {
             
-        //    $.confirm({
-        //        title: 'Cascade Delete Source and Comments?',
-        //        content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
-        //        buttons: {
-        //            confirm: function () { deleteSource(); },
-        //            cancel: function () { return; }
-        //        }
-        //    });
-        //}
-        //else {
-        //    deleteSource();
-        //}
+            $.confirm({
+                title: 'Cascade Delete Source and Comments?',
+                content: 'There are child Comments! Continuing will delete the Source record and all child Comments. This action can not be undone!!!',
+                buttons: {
+                    confirm: function () { deleteSource(); },
+                    cancel: function () { return; }
+                }
+            });
+        }
+        else {
+            deleteSource();
+        }
     });
 
     function deleteSource() {
@@ -173,14 +186,14 @@ function (Control, viewModel) {
 
     $(document).on('click', 'a#comment-delete', function (e) {
        
-        //$.confirm({
-        //    title: 'Delete Comment(s)?',
-        //    content: 'This action can not be undone!!!',
-        //    buttons: {
-        //        confirm: function () { deleteComment(); },
-        //        cancel: function () { return; }
-        //    }
-        //});
+        $.confirm({
+            title: 'Delete Comment(s)?',
+            content: 'This action can not be undone!!!',
+            buttons: {
+                confirm: function () { deleteComment(); },
+                cancel: function () { return; }
+            }
+        });
     });
 
     function deleteComment() {

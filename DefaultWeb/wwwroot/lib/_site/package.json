@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
+    "bootstrap": "^4.0.0-beta.3",
     "clean-css-cli": "^4.1.4",
     "cssnano": "^3.10.0",
     "eslint": "^4.2.0",
@@ -57,13 +58,14 @@
   ],
   "corejs": [
     "../jquery/dist/jquery.js",
-    "../jquery-ui/jquery-ui.js",
-    "../blockui/jquery.blockUI.js",
     "../jquery-validation/dist/jquery.validate.js",
     "../jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
     "../jquery-validation/dist/additional-methods.js",
+    "../jquery-ui/jquery-ui.js",
+    "../blockui/jquery.blockUI.js",
+    "../jquery-confirm/js/jquery-confirm.js",
     "../popper.js/dist/umd/popper.js",
-    "../bootstrap/dist/js/bootstrap.js",
+    "node_modules/bootstrap/dist/js/bootstrap.js",
     "../knockout/dist/knockout.js",
     "../almond/almond.js",
     "js/lib/endless_scroll.js"
@@ -79,14 +81,14 @@
     "js/thumbnail.js",
     "js/fileops-client.js",
     "js/fileops-content.js",
+    "js/arcgis.js",
     "js/main.js"
   ],
-  "deployjs": [
-    "dist/js/jcore.js",
-    "dist/js/video.js",
-    "dist/js/pdf.js",
-    "dist/js/pdf-debugger.js",
-    "dist/js/pdf-viewer.js",
-    "dist/js/site.js"
+  "esrijs": [
+    "",
+    "",
+    "",
+    "",
+    ""
   ]
 }

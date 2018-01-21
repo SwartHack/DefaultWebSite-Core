@@ -13,22 +13,18 @@
 
   <ItemGroup>
     <Compile Remove="Views\GIS\**" />
-    <Compile Remove="Views\NewFolder\**" />
     <Compile Remove="Views\Sandpit\Snippets\**" />
     <Compile Remove="wwwroot\css\jquery-ui\**" />
     <Compile Remove="wwwroot\lib\**" />
     <Content Remove="Views\GIS\**" />
-    <Content Remove="Views\NewFolder\**" />
     <Content Remove="Views\Sandpit\Snippets\**" />
     <Content Remove="wwwroot\css\jquery-ui\**" />
     <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="Views\GIS\**" />
-    <EmbeddedResource Remove="Views\NewFolder\**" />
     <EmbeddedResource Remove="Views\Sandpit\Snippets\**" />
     <EmbeddedResource Remove="wwwroot\css\jquery-ui\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
     <None Remove="Views\GIS\**" />
-    <None Remove="Views\NewFolder\**" />
     <None Remove="Views\Sandpit\Snippets\**" />
     <None Remove="wwwroot\css\jquery-ui\**" />
     <None Remove="wwwroot\lib\**" />
@@ -77,6 +73,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Controllers\ArcGisController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Controllers\AccountController.cs" />
     <Content Include="Controllers\ActionResults\DocumentResult.cs" />
     <Content Include="Controllers\ActionResults\ImageResult.cs" />
@@ -85,7 +85,6 @@
     <Content Include="Controllers\base\DwsBaseController.cs" />
     <Content Include="Controllers\CommentsController.cs" />
     <Content Include="Controllers\FileOpsControllers.cs" />
-    <Content Include="Controllers\GISController.cs" />
     <Content Include="Controllers\HomeController.cs" />
     <Content Include="Controllers\ManageController.cs" />
     <Content Include="Controllers\SandpitController.cs" />
@@ -282,10 +281,10 @@
     <PackageReference Include="CoreCompat.System.Drawing.v2" Version="5.2.0-preview1-r131" />
     <PackageReference Include="EntityFrameworkCore.Triggers" Version="1.1.1" />
     <PackageReference Include="NETStandard.Library" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
@@ -341,6 +340,7 @@
     <None Include="wwwroot\lib\_site\dist\js\header.js" />
     <None Include="wwwroot\lib\_site\dist\js\jcore.js" />
     <None Include="wwwroot\lib\_site\dist\js\pdf.worker.js" />
+    <None Include="wwwroot\lib\_site\js\arcgis.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf.worker.js" />
     <None Include="wwwroot\lib\_site\dist\js\site.js" />
@@ -372,6 +372,7 @@
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf_viewer.js" />
     <None Include="wwwroot\lib\_site\js\sandpit.js" />
     <None Include="wwwroot\lib\_site\js\thumbnail.js" />
+    <None Include="wwwroot\lib\_site\sass\_arcgis.scss" />
     <None Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
     <None Include="wwwroot\lib\_site\sass\vendor\jquery-confirm.scss" />
     <None Include="wwwroot\lib\_site\sass\_contact.scss" />

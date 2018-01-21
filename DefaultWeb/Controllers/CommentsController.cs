@@ -6,6 +6,12 @@ using DefaultWeb.Data;
 using DefaultWeb.Models.DefaultWebSite.Repositories;
 using DefaultWeb.Models.DefaultWebSite.Entities;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Transactions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using DefaultWeb.Models.DefaultWebSite;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace DefaultWeb.Controllers
 {
@@ -15,49 +21,53 @@ namespace DefaultWeb.Controllers
     /// </summary>
     public class CommentsController : Controller
     {
-        private readonly DwsDbContext _context;
-        private readonly IDbContextTransaction _transaction;
-
-        public CommentsController(DwsDbContext context)
+        private DwsDbContext DWSDbContext {get; set; }
+       
+        public CommentsController(DwsDbContext dbContext)
         {
-            _context = context;
-            _transaction = _context.Database.BeginTransaction();
-        }
-
-        /// <summary>
-        /// try this for transaction rollback, or try session based....
-        /// </summary>
-        ~ CommentsController()
-        {
-            //_transaction.Commit();
-            _transaction.Rollback();
-            _transaction.Dispose();
-            _context.Dispose();
+            DWSDbContext = dbContext;
         }
 
         public IActionResult CommentsMain()
         {
             return PartialView();
         }
-
         
         /// <summary>
-        /// Retun list off Sources 
+        /// Retun list of Sources for session, plus Comments for this session only
+        /// retaining Sources with no comments!! This took a little patience to figure out.
+        /// basically an OUTER LEFT JOIN
         /// </summary>
         /// <returns></returns>
         public IActionResult GetSources()
         {
+            var tokens = new List<string>() { "", "" };
             try
             {
-                var commentContext = _context.Sources.Include(c => c.Comments);
-                Response.StatusCode = 200;
-                return Json(commentContext.ToArray());
+                using (var context = DWSDbContext)
+                {
+                    var sources = context.Sources.Where(s => s.SessionId == Request.Cookies["DwsSessionToken"] || s.SessionId == Request.Cookies["DwsToken"]).OrderBy(ss => ss.Id);
+
+                    var query = sources.Select(source => new
+                    {
+                        source,
+                        comments = source.Comments.Where(c => c.SessionId == Request.Cookies["DwsSessionToken"] || c.SessionId == Request.Cookies["DwsToken"])
+                    }).AsEnumerable()
+                    .Select(i =>
+                    {
+                        i.source.Comments = i.comments.ToList();
+                        return i.source;
+                    });
+
+                    Response.StatusCode = 200;
+                    return Json(query.ToList());
+                }
             }
             catch (Exception ex)
             {
                 var serverEx = new ServerException() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverEx);
+                return PartialView("~/Views/Shared/_ServerErorr.cshtml", serverEx);
             }
 
         }
@@ -78,7 +88,7 @@ namespace DefaultWeb.Controllers
             {
                 var serverEx = new ServerException() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverEx);
+                return PartialView("~/Views/Shared/_ServerErorr.cshtml", serverEx);
             }
             
         }
@@ -94,11 +104,12 @@ namespace DefaultWeb.Controllers
         {
             try
             {
+                source.SessionId = Request.Cookies["DwsSessionToken"];
                 TryValidateModel(source);
 
                 if (ModelState.IsValid)
                 {
-                    using (var context = _context) ///does this matter still
+                    using (var context = DWSDbContext) ///does this matter still
                     {
                         context.Add(source);
                         context.SaveChanges();
@@ -116,7 +127,7 @@ namespace DefaultWeb.Controllers
             {
                 var serverEx = new ServerException() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/ServerErorr.cshtml", serverEx);
+                return PartialView("~/Views/Shared/_ServerErorr.cshtml", serverEx);
             }
         }
 
@@ -131,11 +142,12 @@ namespace DefaultWeb.Controllers
         {
             try
             {
+                comment.SessionId = Request.Cookies["DwsSessionToken"];
                 TryValidateModel(comment);
 
                 if (ModelState.IsValid)
                 {
-                    using (var context = _context)
+                    using (var context = DWSDbContext)
                     {
                         context.Add(comment);
                         context.SaveChanges();
@@ -154,7 +166,7 @@ namespace DefaultWeb.Controllers
             {
                 var serverEx = new ServerException() { MiscException = ex };
                 Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverEx);
+                return PartialView("~/Views/Shared/_ServerErorr.cshtml", serverEx);
             }
         }
 
@@ -171,30 +183,21 @@ namespace DefaultWeb.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var source = _context.Sources.Include(s => s.Comments).First(s => s.Id == sid);
-
-                    if (source != null)
-                    {
-                        _context.Sources.Remove(source);
-                        _context.SaveChanges();
-                        Response.StatusCode = 200;
-                        return Json(sid);
-                    }
-                    else
-                    {
-                        throw new DbUpdateException("Record not found!", new Exception("Unable to delete source."));
-                    }
+                    var source = DWSDbContext.Sources.Include(s => s.Comments).First(s => s.Id == sid);
+                    DWSDbContext.Sources.Remove(source);
+                    DWSDbContext.SaveChanges();
+                    Response.StatusCode = 200;
+                    return Json(sid);
                 }
                 else
                 {
                     throw new DbUpdateException("Model State Invalid!", new Exception("Delete transaction cancelled."));
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                var serverEx = new ServerException() { MiscException = ex };
-                Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverEx);
+                Response.StatusCode = 200;
+                return Json(sid);
             }
         }
 
@@ -211,29 +214,21 @@ namespace DefaultWeb.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var comment = _context.Comments.First(c => c.Id == cid);
-                    if (comment != null)
-                    {
-                        _context.Comments.Remove(comment);
-                        _context.SaveChanges();
-                        Response.StatusCode = 200;
-                        return Json(cid);
-                    }
-                    else
-                    {
-                        throw new DbUpdateException("Record not found!", new Exception("Unable to delete source."));
-                    }
+                    var comment = DWSDbContext.Comments.First(c => c.Id == cid);
+                    DWSDbContext.Comments.Remove(comment);
+                    DWSDbContext.SaveChanges();
+                    Response.StatusCode = 200;
+                    return Json(cid);
                 }
                 else
                 {
                     throw new DbUpdateException("Model State Invalid!", new Exception("Delete transaction cancelled."));
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                var serverEx = new ServerException() { MiscException = ex };
-                Response.StatusCode = 400;
-                return PartialView("~/Views/_Shared/_ServerErorr.cshtml", serverEx);
+                Response.StatusCode = 200;
+                return Json(cid);
             }
         }
 
@@ -244,7 +239,7 @@ namespace DefaultWeb.Controllers
         /// <returns></returns>
         private bool SourceExists(int id)
         {
-            return _context.Sources.Any(e => e.Id == id);
+            return DWSDbContext.Sources.Any(e => e.Id == id);
         }
     }
 }

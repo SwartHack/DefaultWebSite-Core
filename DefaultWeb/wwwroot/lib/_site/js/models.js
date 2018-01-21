@@ -38,7 +38,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             viewModel.sourceIndex(index);
             var source = viewModel.sources()[index];
             viewModel.source(source);
-            
+
         },
         sourceIndex: ko.observable(''),
         sourcesCount: ko.pureComputed(function () {
@@ -53,10 +53,10 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             var index = viewModel.sources().findIndex(s => s.id == sid);
             var source = viewModel.sources()[viewModel.sourceIndex()];
             viewModel.sources.remove(source);
-            viewModel.source(undefined);
+            viewModel.source('');
         },
         sourceAdded: function (parent, index, item) {
-            var $parent = $(parent); 
+            var $parent = $(parent);
             var $item = $(item);
             //viewModel.sources.sort();
             $item.hide().fadeIn('slow');
@@ -71,7 +71,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         },
         commentIndex: ko.observable(''),
         commentsCount: ko.pureComputed(function () { return 'Records: ' + viewModel.comments().length }, this),
-        commentTitle: ko.pureComputed(function () { return 'Ima a stupid title!'}, this),
+        commentTitle: ko.pureComputed(function () { return 'Ima a stupid title!' }, this),
         addComment: function (comment) {
             viewModel.comments.unshift(comment);
             viewModel.commentId(comment.id);
@@ -88,7 +88,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             console.log('Comment afterAdd... ');
         },
         canAddComment: function () { return viewModel.sources().length === 0 ? false : true },
-         //canDeleteComment: function () {
+        //canDeleteComment: function () {
         //    var list = $('#comments.list-group').children();
         //    var $element = $(list[viewModel.commentIndex()]);
         //    var isClass = $element.hasClass('active')
@@ -102,11 +102,11 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         uploadFilesInfo: ko.observableArray([]),  // dialog binding 'selected-upload-files' template
         uploadFiles: ko.observableArray([]), //matching array of IForm files.
         mimeTypes: ko.observableArray(['image/*', 'application/pdf', 'video/mp4']), //these should come from settings
-        uploadFilesSize: ko.pureComputed( function () { return viewModel.uploadFiles.sumProperty('size') }, this),
-        uploadFilesCount: ko.pureComputed( function () { return viewModel.uploadFiles().length }, this),
+        uploadFilesSize: ko.pureComputed(function () { return viewModel.uploadFiles.sumProperty('size') }, this),
+        uploadFilesCount: ko.pureComputed(function () { return viewModel.uploadFiles().length }, this),
         uploadCount: ko.pureComputed(function () { return 'Number files: ' + viewModel.uploadFiles().length }, this),
         uploadSize: ko.pureComputed(function () { return 'Total size: ' + viewModel.getFileSize(viewModel.uploadFiles.sumProperty('size')) }, this),
-        showFileUpload: ko.pureComputed(function() { return viewModel.uploadFiles().length > 0 && !viewModel.isMaxUpload() }, this),
+        showFileUpload: ko.pureComputed(function () { return viewModel.uploadFiles().length > 0 && !viewModel.isMaxUpload() }, this),
         getFileSize: function (size) {
             var fileSize = 0;
             if (size > 1048576) {
@@ -120,16 +120,16 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             }
             return fileSize;
         },
-        isMaxUpload: ko.pureComputed( function () {
-            var max = ( parseInt(viewModel.uploadFilesSize()) + parseInt(viewModel.serverSpaceCurrent()) ) > parseInt(viewModel.serverSpaceMax() );
+        isMaxUpload: ko.pureComputed(function () {
+            var max = (parseInt(viewModel.uploadFilesSize()) + parseInt(viewModel.serverSpaceCurrent())) > parseInt(viewModel.serverSpaceMax());
             return max
         }, this),
 
-       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         contentCacheQueue: ko.observableArray([]), // TODO
-        
+
         serverFiles: ko.observableArray([]),  // the server-side files after upload
         serverFile: ko.observable(''),
         serverSpaceMax: ko.observable(10000000),
@@ -167,7 +167,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
         //    }
 
         //}
-        
+
     };
 
 
@@ -196,8 +196,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
 
     // subscribe to any ajax errors
     viewModel.errorMsg.subscribe(function (error) {
-        if (error != null)
-        {
+        if (error != null) {
             var $ajaxerr = $('#ajax-error');
             if (!ko.dataFor($ajaxerr[0])) {
                 ko.applyBindings(viewModel, $ajaxerr[0]);
@@ -206,8 +205,9 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
             $($ajaxerr).html(viewModel.errorXhr().responseText);
 
             $('#ajax-error').dialog({
-                width: 600,
-                height: 400,
+                maxWidth: 800,
+                maxHeight: 600,
+                width:800,
                 autoOpen: true,
                 modal: true,
                 buttons: {
@@ -215,8 +215,7 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
                 }
             });
         }
-        else
-        {
+        else {
             $('viewModel.errorData').dialog();
 
         }
@@ -244,17 +243,30 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     /// Source subscribe events/actions
     ///////////////////////////////////////
     viewModel.source.subscribe(function (source) {
-       
-        if (source == undefined) {
-            var prev = viewModel.sourceIndex() - 1;
-            if (prev >= 0)
-            {
-                source = viewModel.sources()[prev];
-                viewModel.sourceId(source.id);
+
+        if ( !source ) {
+
+            //clear out comments here?
+            viewModel.comments([]);
+
+            if (viewModel.sources().length >= 1) {
+                //was there a previous source loaded?
+                var last = parseInt(viewModel.sourceIndex());
+                var prev = last != 'NaN' ? last - 1 : 0;
+                var next = last != 'NaN' ? last : 0;
+
+                if (prev >= 0) {
+                    source = viewModel.sources()[prev];
+                    viewModel.sourceId(source.id);
+                }
+                else {
+                    source = viewModel.sources()[next];
+                    viewModel.sourceId(source.id);
+                }
             }
             return;
         }
-       
+
         ///TODO
         /// this should all be done with a class binding
         var $element = $($('#sources-table tbody tr')[viewModel.sourceIndex()])
@@ -279,11 +291,21 @@ define('dws/model', ['dws/model-utils'], function (ModelUtil) {
     ///////////////////////////////////////
     viewModel.comment.subscribe(function (comment) {
 
-        if ( comment == undefined ) {
-            var prev = viewModel.commentIndex() - 1;
-            if ( prev >= 0 ) {
-                comment = viewModel.comments()[prev];
-                viewModel.commentId(comment.id);
+        if ( !comment ) {
+            if (viewModel.comments().length >= 1) {
+                //was there a previous source loaded?
+                var last = parseInt(viewModel.commentIndex());
+                var prev = last != 'NaN' ? last - 1 : 0;
+                var next = last != 'NaN' ? last : 0;
+
+                if (prev >= 0) {
+                    comment = viewModel.comments()[prev];
+                    viewModel.commentId(comment.id);
+                }
+                else {
+                    comment = viewModel.comments()[next];
+                    viewModel.commentId(comment.id);
+                }
             }
             return;
         }

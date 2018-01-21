@@ -313,16 +313,33 @@
     }
 }
 
-//////////////////////////
-/// new source modal dialog
-//////////////////////////
-div#source-new {
-    border: .015rem solid green;
+#modal-action-template {
+    div.modal-header {
+        padding: .3rem .75rem;
+
+        button {
+        }
+
+        &.waiting {
+            -webkit-animation: dws-waiting 500ms infinite;
+            animation: dws-waiting 500ms infinite;
+        }
+    }
+
+    div.modal-title {
+    }
+
+
+    #target-modal.modal-body {
+        padding: 0;
+    }
 }
 
-form#create-source {
-    border: .015rem solid purple;
 
+form#create-source {
+    margin-left: 5%;
+    margin-right: 5%;
+    
     #form-fields.form-group {
         label {
         }
@@ -337,8 +354,24 @@ form#create-source {
         div textarea {
         }
     }
+}
 
-    #form-buttons.form-group {
-        border: .015rem solid red;
+form#create-comment {
+    margin-left: 5%;
+    margin-right: 5%;
+    
+    #form-fields.form-group {
+        label {
+        }
+
+        #comment-title {
+
+            input {
+            }
+        }
+
+        #comment-content {
+        }
     }
 }
+

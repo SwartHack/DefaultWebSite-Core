@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                 src: ['../bootswatch/*/build.scss', '!../bootswatch/global/build.scss']
             },
             distcss: {
-                src: ['dist/css/*.*', '!dist/css/images', '!dist/css/video-js.css']
+                src: ['dist/css/*.*', '!dist/css/images', '!dist/css/video-js.css', '!dist/css/arcgis.css']
             },
             distjs: {
                 src: ['dist/js/*.*', '!dist/js/pdf.worker.js']
@@ -215,6 +215,21 @@ module.exports = function(grunt) {
         grunt.task.run('concat:jcore');
         grunt.task.run('concat:site');
         grunt.task.run('eslint');
+    });
+
+    //////////////////////////////////////////////////////////
+    //// deal with the esri  css seperately, don't build with site!
+    //////////////////////////////////////////////////////////
+    grunt.registerTask('dist-arcgis-css', function (files) {
+        var scssSrc = '../arcgis-js-api/themes/light/main.scss';
+        var scssDest = 'dist/css/arcgis.css';
+        grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
+        grunt.config('sass.dist.options.precision', 10);
+        grunt.config('sass.dist.options.unix-newlines', true);
+        grunt.task.run('sass');
+
+        grunt.config('postcss.dist.src', scssDest);
+        grunt.task.run('postcss');
     });
 
     //////////////////////////////////////////////////////////

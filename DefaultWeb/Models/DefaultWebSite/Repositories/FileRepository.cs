@@ -111,7 +111,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    throw new Exception("FileRepository", ex);
                 }
                 
             }
@@ -166,8 +166,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
             }
             catch (Exception ex)
             {
-                var serverEx = new ServerException() { MiscException = ex };
-                throw serverEx;
+                throw new Exception("FileRepository", ex);
             }
         }
 
@@ -185,7 +184,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("FileRepository", ex);
             }
 
             foreach (DwsFileInfo fi in files)
@@ -219,7 +218,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("FileRepository", ex);
             }
             
         }
@@ -245,7 +244,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("FileRepository", ex);
             }   
         }
 

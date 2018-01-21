@@ -4,6 +4,7 @@ body {
     padding-top: 3.125rem;
     padding-bottom: 1.5rem;
     @include gradient-x-three-colors(steelblue, lightsteelblue, 75%, darkgray);
+    overflow:hidden;
 }
 
 html {

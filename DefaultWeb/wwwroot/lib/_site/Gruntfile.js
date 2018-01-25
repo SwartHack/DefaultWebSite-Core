@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                 src: ['../bootswatch/*/build.scss', '!../bootswatch/global/build.scss']
             },
             distcss: {
-                src: ['dist/css/*.*', '!dist/css/images', '!dist/css/video-js.css', '!dist/css/arcgis.css']
+                src: ['dist/css/*.*', '!dist/css/images', '!dist/css/video-js.css', '!dist/css/jquery-ui.css', '!dist/css/arcgis.css']
             },
             distjs: {
                 src: ['dist/js/*.*', '!dist/js/pdf.worker.js']
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                 src:['../../css/**', '../../js/**','../../fonts/**', '../../images/**']
             },
             wwwroot: {
-                src: ['../../css/*.cs', '!../../css/images', '../../js/**']
+                src: ['../../css/*.css', '../../js/**', '!../../css/images', '!../../images', '!../../fonts']
             }
         },
         concat: {

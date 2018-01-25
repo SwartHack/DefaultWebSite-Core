@@ -128,6 +128,8 @@ namespace DefaultWeb
             }
             else
             {
+                //app.UseDeveloperExceptionPage();
+                //app.UseDatabaseErrorPage();
                 app.UseExceptionHandler("/Home/Error");
             }
 

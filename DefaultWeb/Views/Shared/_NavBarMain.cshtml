@@ -9,27 +9,16 @@
         <a href="/">Default WebSite<span id="nav-span1" class="text-left">.net</span></a>
         <span id="nav-span2" class="text-left navbar-text"><em>Core</em></span>
     </span>
-    <div id="siteseal">
-        <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qsbIQ45pBjOhL4IIkKzVOfkTX6u3TjXNVOLgjS2im95qBeEDn91SQoNo6aBC"></script>
-    </div>
+
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
             <li><a class="nav-link" href="" data-target="#main-target-area" data-target-controller="Sandpit" data-target-action="SandpitMain">Sandpit</a></li>
             <li><a class="nav-link" href="" data-target="#main-target-area" data-target-controller="Home" data-target-action="GetView" data-target-id="Contact">Contact</a></li>
             <li><a class="nav-link" href="" data-target="#main-target-area" data-target-controller="Home" data-target-action="GetView" data-target-id="About">About</a></li>
-            <li><a class="nav-link" href="" data-target="#main-target-area" data-target-controller="Home" data-target-action="GetView" data-target-id="Comments">Comments</a></li>
             <li><a class="nav-link" href="" data-target="#main-target-area" data-target-controller="Home" data-target-action="GetView" data-target-id="Ack">Acknowledgements</a></li>
-            <li class="dropdown" id="theme-dropdown-item">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown">@ViewData["ThemeName"]</a>
-                <div id="theme-switcher" class="dropdown-menu ">
-                    @foreach (var file in Directory.GetFiles(Host.WebRootPath + @"\css\", "*.css"))
-                    {
-                        var name = System.IO.Path.GetFileName(file);
-                        name = name.Substring(0, name.IndexOf("."));
-                        <a class="dropdown-item" href="/Home/SetTheme?name=@name">@name</a>
-                    }
-                </div>
-            </li>
         </ul>
+    </div>
+    <div id="siteseal">
+        <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=qsbIQ45pBjOhL4IIkKzVOfkTX6u3TjXNVOLgjS2im95qBeEDn91SQoNo6aBC"></script>
     </div>
 </nav>

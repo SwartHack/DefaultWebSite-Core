@@ -22,21 +22,16 @@
 
 }
 
+////////////////////////////////////
+///
+////////////////////////////////////
 #about.card {
-    @extend .dws-page;
-    background-color: firebrick;
-    color: ghostwhite;
-    overflow: auto;
-
-    ul#about-content.list-group {
-        list-style: none;
-        background-color: transparent;
-
-        li.list-group-item {
-            background-color: transparent;
-            border: none;
-        }
-    }
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    overflow-y: auto;
+    @include dws-about();
 }
 
 ////////////////////////////////////
@@ -62,7 +57,7 @@
 #ack.card {
     @extend .dws-page;
     background-color: silver;
-    color: royalblue;
+    color: black;
     padding: 0;
     overflow-y: auto;
 

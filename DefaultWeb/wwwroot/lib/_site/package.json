@@ -84,6 +84,11 @@
     "js/arcgis.js",
     "js/main.js"
   ],
+  "deployjs": [
+    "dist/js/header.js",
+    "dist/js/jcore.js",
+    "dist/js/site.js"
+  ],
   "esrijs": [
     "",
     "",

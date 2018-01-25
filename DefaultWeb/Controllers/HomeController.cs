@@ -37,7 +37,7 @@ namespace DefaultWeb.Controllers
         {
             ViewData["ThemeName"] = ThemeName;
             ViewData["ThemeDevelopment"] = String.Format("lib/_site/dist/css/{0}.css", ThemeName.ToLower());
-            ViewData["ThemeProduction"] = String.Format("css/{0}.min.css", ThemeName.ToLower());
+            ViewData["ThemeProduction"] = String.Format("css/defaultwebsite.min.css", ThemeName.ToLower());
 
             return View();
         }

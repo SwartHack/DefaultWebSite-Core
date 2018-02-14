@@ -13,7 +13,7 @@
     &.waiting {
         -webkit-animation: dws-waiting 100ms infinite;
         animation: dws-waiting 100ms infinite;
-        cursor:wait;
+        cursor: wait;
     }
 
 
@@ -50,7 +50,7 @@
                 display: inline;
             }
 
-            @include hover-focus {
+            @include hover-focus-active {
                 color: crimson;
             }
         }
@@ -89,10 +89,9 @@
                     }
                 }
 
-                
+
 
                 #theme-switcher {
-
                 }
             }
         }

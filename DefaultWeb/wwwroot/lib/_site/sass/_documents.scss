@@ -95,7 +95,7 @@ p {
     font-weight: 400;
     font-size: 1.5vh;
     line-height: 1.8vh;
-    text-align: justify !important;
+    text-align: justify;
     background-color: transparent;
     box-shadow: inset -2px 1px 20px 0px crimson;
 
@@ -118,7 +118,7 @@ p {
 // standar
 .mussing {
     margin: 1vh 2.2vw 1vh 2.2vw;
-    padding: .25vh 2vw .25vh 2vw;
+    padding: .25vh 1vw .25vh 1vw;
     font-size: 2vh;
     font-weight: 400;
     font-style: italic;
@@ -133,6 +133,8 @@ p {
     //font-style: normal;
     text-align: justify;
     line-height: 2vh;
+    margin-left:0;
+    margin-right:0;
     //padding-bottom: .1rem;
     //margin: 1vh 2vw 1vh 2vw;
 }
@@ -246,34 +248,49 @@ div#parable {
     }
 }
 
-///////////////////////////////
-card-text ul {
-    line-height: 1.25rem;
-    margin-left: 3rem;
 
-    li {
+div.note-box {
+    box-shadow: inset 0 0 13px 0px black;
+    padding: .25vh 1vw .25vh 1vw;
+    margin-top:1vh;
+
+    .heading {
+        //padding: .15em .15em;
+        text-align: center;
+
+        .title {
+            padding: 0;
+            font-weight: 600;
+            font-size: 2vh;
+        }
+    }
+
+    .body {
+        //padding: .15em .15em;
     }
 }
 
-.note-box.card-heading {
-    padding: .15em .15em;
-    border: .05em ridge black;
-    border-radius: 0;
-    text-align: center;
+div.note-heading {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+
+    h3 {
+
+    }
+
+    a {
+
+        i {
+
+        }
+    }
+
+
 }
 
-.note-box.card-title {
-    padding: 0;
-    font-weight: bold;
-    line-height: 1;
-}
-
-.note-box.card-body {
-    padding: .15em .15em;
-    border: .05em thin black;
-    border-radius: 0;
-}
-
+//////////////////////////////
 .text-emphasis-box {
     font-size: 1em;
     text-align: center;

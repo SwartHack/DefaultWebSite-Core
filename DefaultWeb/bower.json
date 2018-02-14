@@ -8,9 +8,6 @@
     "font-awesome": "Font-Awesome#v4.7.0",
     "almond": "0.3.3",
     "knockout": "v3.4.2",
-    "arcgis-js-api": "arcgis#4.4.0",
-    "esri-leaflet": "v2.0.8",
-    "esri-leaflet-geocoder": "v2.2.4",
     "blockui": "v2.65"
   },
   "resolutions": {

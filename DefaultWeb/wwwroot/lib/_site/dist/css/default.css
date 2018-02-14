@@ -10265,11 +10265,41 @@ template {
   100% {
     background-image: linear-gradient(to right, crimson, steelblue 75%, black);
     background-repeat: no-repeat; } }
+@-webkit-keyframes dws-text-action-right {
+  from {
+    margin-left: 0; }
+  to {
+    margin-left: 50%; } }
 @keyframes dws-text-action-right {
   from {
     margin-left: 0; }
   to {
     margin-left: 50%; } }
+@-webkit-keyframes dws-rocket-action {
+  from {
+    margin-left: 0; }
+  to {
+    margin-left: 100%; } }
+@keyframes dws-rocket-flash {
+  from, 0% {
+    color: inherit; }
+  50% {
+    color: crimson; }
+  60% {
+    color: inherit; }
+  70% {
+    color: crimson; }
+  80% {
+    color: inherit; }
+  90% {
+    color: crimson; }
+  100% {
+    color: inherit; } }
+@-webkit-keyframes dws-icon-flash {
+  from {
+    color: inherit; }
+  to {
+    color: #28a745; } }
 @keyframes dws-icon-flash {
   from {
     color: inherit; }
@@ -10358,13 +10388,16 @@ template {
 @keyframes pulse {
   from {
     -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1); }
+    transform: scale3d(1, 1, 1);
+    color: inherit; }
   50% {
     -webkit-transform: scale3d(1.05, 1.05, 1.05);
-    transform: scale3d(1.05, 1.05, 1.05); }
+    transform: scale3d(1.05, 1.05, 1.05);
+    color: #5bfa42; }
   to {
     -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1); } }
+    transform: scale3d(1, 1, 1);
+    color: inherit; } }
 @-webkit-keyframes rubberBand {
   from {
     -webkit-transform: scale3d(1, 1, 1);
@@ -10572,7 +10605,7 @@ p {
   font-weight: 400;
   font-size: 1.5vh;
   line-height: 1.8vh;
-  text-align: justify !important;
+  text-align: justify;
   background-color: transparent;
   box-shadow: inset -2px 1px 20px 0px crimson; }
 
@@ -10590,7 +10623,7 @@ p {
 
 .mussing {
   margin: 1vh 2.2vw 1vh 2.2vw;
-  padding: .25vh 2vw .25vh 2vw;
+  padding: .25vh 1vw .25vh 1vw;
   font-size: 2vh;
   font-weight: 400;
   font-style: italic;
@@ -10602,7 +10635,9 @@ p {
 .discussion {
   font-size: 1.5vh;
   text-align: justify;
-  line-height: 2vh; }
+  line-height: 2vh;
+  margin-left: 0;
+  margin-right: 0; }
 
 .side-note {
   text-align: center;
@@ -10696,25 +10731,22 @@ div#parable {
     background-color: transparent;
     color: #000; }
 
-card-text ul {
-  line-height: 1.25rem;
-  margin-left: 3rem; }
+div.note-box {
+  box-shadow: inset 0 0 13px 0px black;
+  padding: .25vh 1vw .25vh 1vw;
+  margin-top: 1vh; }
+  div.note-box .heading {
+    text-align: center; }
+    div.note-box .heading .title {
+      padding: 0;
+      font-weight: 600;
+      font-size: 2vh; }
 
-.note-box.card-heading {
-  padding: .15em .15em;
-  border: .05em ridge black;
-  border-radius: 0;
-  text-align: center; }
-
-.note-box.card-title {
-  padding: 0;
-  font-weight: bold;
-  line-height: 1; }
-
-.note-box.card-body {
-  padding: .15em .15em;
-  border: .05em thin black;
-  border-radius: 0; }
+div.note-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; }
 
 .text-emphasis-box {
   font-size: 1em;
@@ -10865,7 +10897,7 @@ flex-direction: column;*/
       #navbar-main #myNavHeader a #nav-span1 {
         font-size: 1rem;
         display: inline; }
-      #navbar-main #myNavHeader a:focus, #navbar-main #myNavHeader a:hover {
+      #navbar-main #myNavHeader a:focus, #navbar-main #myNavHeader a:active, #navbar-main #myNavHeader a:hover {
         color: crimson; }
     #navbar-main #myNavHeader #nav-span2 {
       display: inline;
@@ -11024,8 +11056,30 @@ flex-direction: column;*/
   padding-right: 1vw; }
   #about.card #software {
     margin-bottom: 2vh; }
+    #about.card #software #software-info {
+      margin: 2vh 2vw 2vh 2vw;
+      padding: .5vh 1vw 1vh 1vw;
+      font-style: italic;
+      font-weight: 500;
+      text-align: justify;
+      background-color: lightgray; }
+    #about.card #software #server-icon {
+      background-color: #ddd;
+      margin-left: 2vw;
+      -webkit-animation: pulse 1s infinite;
+      animation: pulse 3s infinite; }
+    #about.card #software #software-list {
+      font-size: 2vh;
+      line-height: 2.3vh;
+      margin: 2vh 2vw 2vh 2vw;
+      padding: 1vh 1.5vw 1vh 1.5vw;
+      text-align: center; }
   #about.card #hardware {
     margin-bottom: 2vh; }
+    #about.card #hardware #hardware-icon {
+      margin-left: 2vw;
+      -webkit-animation: dws-rocket-flash 1s infinite;
+      animation: 1s linear infinite dws-rocket-flash; }
 
 #contact {
   height: 100%;
@@ -12864,12 +12918,6 @@ body[class*=jconfirm-no-scroll-] {
     font: 10pt Arial, sans-serif;
     line-height: 1.25rem;
     text-align: justify; }
-    .paper-wrapper .paper blockquote.blockquote {
-      font-size: .75rem;
-      margin-bottom: 0px;
-      padding-top: 0px;
-      margin-top: 8px;
-      background-color: #f9f7c2; }
     .paper-wrapper .paper:first-line {
       /*font: 20pt Arial, sans-serif;
       line-height: 33px;*/

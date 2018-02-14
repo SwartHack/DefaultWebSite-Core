@@ -20,6 +20,9 @@ module.exports = function(grunt) {
             options: {
                 force: true
             },
+            any: {
+                src:''
+            },
             bootswatch: {
                 src: ['../bootswatch/*/build.scss', '!../bootswatch/global/build.scss']
             },
@@ -27,7 +30,7 @@ module.exports = function(grunt) {
                 src: ['dist/css/*.*', '!dist/css/images', '!dist/css/video-js.css', '!dist/css/jquery-ui.css', '!dist/css/arcgis.css']
             },
             distjs: {
-                src: ['dist/js/*.*', '!dist/js/pdf.worker.js']
+                src: ['dist/js/*.*', '!dist/js/pdf.worker.js', '!dist/js/lib']
             },
             theme: {
                 src: ''
@@ -145,7 +148,56 @@ module.exports = function(grunt) {
             }
 
         },
-        exec: {
+        dojo: {
+            dist: {
+                options: {
+                    releaseDir: '../dist/js/lib',
+                }
+            },
+            options: {
+                profile: 'site.profile.js',
+                dojo: './js/lib/dojo/dojo.js',
+                load: 'build',
+                cwd: './',
+                basePath: './js/'
+            }
+        },
+
+        requirejs: {
+            support: {
+                options: {
+                    appUrl:".",
+                    baseUrl: "./js/lib",
+                    dir: "./dist/js/lib",
+                    optimize: "uglify2",
+                    optimizeCss: "standard.keepLines.keepWhitespace",
+                    throwWhen: { optimize: false },
+                    preserveLicenseComments: false,
+                    paths: {
+                        "esri": "empty:",
+                        "dojo": "empty:",
+                        "dojo-themes": "empty:",
+                        "dijit": "empty:",
+                        "dojox": "empty:",
+                        "dgrid": "empty:",
+                        "dstore": "empty:",
+                        "moment": "empty:",
+                        "moment/templates": "empty:",
+                    },
+                    fileExclusionRegExp: /test|tests|esri|min|src|demo|demos/g
+                }
+            },
+            digitcss: {
+                options: {
+                    cwd: "./",
+                    cssIn: "./requirejs/src/dijit/themes/nihilo/nihilo.css",
+                    out: "./dist/css/digit.css",
+                    optimizeCss: "standard"
+                }
+            },
+        },
+        
+         exec: {
             //postcss: {
             //    command: 'npm run postcss'
             //}
@@ -218,24 +270,49 @@ module.exports = function(grunt) {
     });
 
     //////////////////////////////////////////////////////////
+    //// Build ESRI dojo loader
+    //////////////////////////////////////////////////////////
+    grunt.registerTask('esri-dojo', function () {
+        grunt.config('clean.any.src', ['./dist/js/lib']);
+        grunt.task.run('clean:any');
+        grunt.task.run('dojo');
+        grunt.config('clean.any.src', ['./dist/js/lib/**/*.uncompressed.js']);
+        grunt.task.run('clean:any');
+    });
+
+    //////////////////////////////////////////////////////////
+    //// Build ESRI RequireJS
+    //////////////////////////////////////////////////////////
+    grunt.registerTask('esri-requirejs', function () {
+        grunt.config('clean.any.src', ['./dist/js/lib']);
+        grunt.task.run('clean:any');
+        grunt.task.run('requirejs:support');
+    });
+
+    //////////////////////////////////////////////////////////
     //// deal with the esri  css seperately, don't build with site!
     //////////////////////////////////////////////////////////
-    grunt.registerTask('dist-arcgis-css', function (files) {
-        var scssSrc = '../arcgis-js-api/themes/light/main.scss';
-        var scssDest = 'dist/css/arcgis.css';
+    grunt.registerTask('esri-css', function (files) {
+        var scssSrc = './requirejs/src/esri/themes/base/core.scss';
+        var scssDest = 'dist/css/esri.css';
         grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
         grunt.config('sass.dist.options.precision', 10);
         grunt.config('sass.dist.options.unix-newlines', true);
+        //grunt.config('sass.dist.options.outputstyle', 'compressed');
         grunt.task.run('sass');
 
         grunt.config('postcss.dist.src', scssDest);
         grunt.task.run('postcss');
+
+
     });
+
+    grunt.registerTask('digit-css', 'requirejs:digitcss');
 
     //////////////////////////////////////////////////////////
     //// deal with the videojs css seperately, don't build with site!
     //////////////////////////////////////////////////////////
-    grunt.registerTask('dist-videojs-css', function (files) {
+    grunt.registerTask('videojs-css', function (files) {
         var scssSrc = '../video-js/src/css/video-js.scss';
         var scssDest = 'dist/css/video-js.css';
         grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
@@ -246,6 +323,11 @@ module.exports = function(grunt) {
         grunt.config('postcss.dist.src', scssDest);
         grunt.task.run('postcss');
     });
+
+
+
+
+
 
     //////////////////////////////////////////////////////////
     /// Builds default bootstrap and cerulean themes

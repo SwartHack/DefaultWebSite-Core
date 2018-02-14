@@ -1,0 +1,7 @@
+{
+    "name": "dws-js",
+    "version": "1.0.1",
+  "description": "DefaultWebSite javascript modules",
+  "dojoBuild": "dws.profile.js"
+
+}

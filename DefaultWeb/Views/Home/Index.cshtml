@@ -76,16 +76,26 @@
 @section JS
 {
 
-    <script>
-        require(['dws/controller'],
-            function (Controller) {
+<script>
+   
+    require(['dws/controller'],
+        function (Controller) {
 
-                $(document).ready(function () {
-                    Controller.setXsrf(@Json.Serialize(_ajaxRequestToken));
-                    Controller.setPdfWorker("@_pdfWorker");
-                });
+            $(document).ready(function () {
+                Controller.setXsrf(@Json.Serialize(_ajaxRequestToken));
+                Controller.setPdfWorker("@_pdfWorker");
+
+                @if ( ViewData["ReturnUrl"] != null )
+                {
+                    <Text>
+                    Controller.dispatch({ url: '@ViewData["ReturnUrl"].ToString()', cache: false }, '@ViewData["ReturnTarget"]');
+                    //window.history.replaceState({ url: url  }, "", "");
+                    </Text>
+
+                }
             });
-
-    </script>
+        });
+    require(['dws/main']);
+</script>
         
 }

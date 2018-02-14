@@ -16,6 +16,12 @@ using System;
 using DefaultWeb.Models.DefaultWebSite.Repositories;
 using DefaultWeb.Models.DefaultWebSite.Filters;
 using Microsoft.Extensions.Options;
+using System.Net;
+using System.IO;
+using Microsoft.AspNetCore.Rewrite;
+using static DefaultWeb.RewriteRules;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace DefaultWeb
 {
@@ -32,6 +38,8 @@ namespace DefaultWeb
             {
                 builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
                 builder.AddJsonFile($"appsettings-dws.{env.EnvironmentName}.json", optional: true);
+
+
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
             }
@@ -42,24 +50,38 @@ namespace DefaultWeb
 
         public IConfiguration Configuration { get; }
 
-
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //////////////////////////////////////////////////////
+            // Add Database Context
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
             //dws specic configuration 
             services.AddDbContext<DwsDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DwsConnection")));
 
+            //////////////////////////////////////////////////////
+            // Add Identity with FrameworkStore and Default Token Provider
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            //////////////////////////////////////////////////////
+            // Add Google Athentication
+            //services.AddAuthentication().AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+            //    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            //});
+
+            //////////////////////////////////////////////////////
+            // Add MVC with Json Serialer options and Session State Temp Data
+            // all in one shot
             services.AddMvc(options =>
             {
                 //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
@@ -73,39 +95,61 @@ namespace DefaultWeb
              })
              .AddSessionStateTempDataProvider();
 
-            //services.AddDistributedMemoryCache();
-            //services.AddSession(options =>
-            //{
-            //    // Set a short timeout for easy testing.
-            //    options.IdleTimeout = TimeSpan.FromSeconds(10);
-            //    //options.Cookie.HttpOnly = true;
-            //});
+            //////////////////////////////////////////////////////
+            // Use Distributed Memory Cache and Add Session
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                //options.IdleTimeout = TimeSpan.FromSeconds(10);
+                //options.Cookie.HttpOnly = true;
+            });
 
+            //////////////////////////////////////////////////////
+            //
             services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<ValidateMimeMultipartContentFilter>();
 
+            //////////////////////////////////////////////////////
+            //
             services.AddAntiforgery(options =>
             {
 
             });
 
-            // Add other provider services.
+            //////////////////////////////////////////////////////
+            // Transient provider services
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
+            //////////////////////////////////////////////////////
             // create service for accessing settings
             services.Configure<DwsSettings>(Configuration.GetSection("DefaultWebSiteSettings"));
 
-            ////////////////////////////
-            /// testing ONLY
-            //services.AddDirectoryBrowser();
-
+            //////////////////////////////////////////////////////
+            //
             services.Configure<IISOptions>(options =>
             {
 
             });
 
+            //////////////////////////////////////////////////////
+            //
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //////////////////////////////////////////////////////
+            //
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddScoped<IUrlHelper>(factory =>
+            {
+                var actionContext = factory.GetService<IActionContextAccessor>()
+                                           .ActionContext;
+                return new UrlHelper(actionContext);
+            });
+
+            ////////////////////////////
+            /// testing ONLY
+            //services.AddDirectoryBrowser();
         }
 
         /// <summary>
@@ -117,9 +161,13 @@ namespace DefaultWeb
         /// <param name="antiforgery"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLife)
         {
+            ////////////////////////////
+            ///
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            ////////////////////////////
+            ///
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -133,13 +181,37 @@ namespace DefaultWeb
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            ////////////////////////////
+            ///
             app.UseStaticFiles();
-            //app.UseSession();
+            app.UseSession();
             app.UseAuthentication();
-           
-            appLife.ApplicationStopping.Register(OnAppStopping);
-            appLife.ApplicationStopped.Register(OnAppStopped);
+            
+            ////////////////////////////
+            ///
+            string sessionid = Guid.NewGuid().ToString();
+            string appid = Configuration.GetSection("DefaultWebSiteSettings").GetValue<String>("AdminSessionId");
+            app.Use(next => context =>
+            {
+                string path = context.Request.Path;
+                context.Response.Cookies.Append("DwsSessionToken", sessionid, new CookieOptions() { HttpOnly = false });
+                context.Response.Cookies.Append("DwsToken", appid, new CookieOptions() { HttpOnly = false });
+                return next(context);
+            });
+            
+            ////////////////////////////
+            ///
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("navbar", "Home/{page:regex(^Contact|About|Ack$)}" , new { controller = "Home", action = "Index" });
+                routes.MapRoute("notepad", "Notepad/{page:regex(^DefaultWebSite|FrameWorks|WinForms|AspNet|NetCore$)}", new { controller = "Home", action = "Index" });
+                routes.MapRoute("sandpit", "Sandpit/", new { controller = "Home", action = "Index", page = "Sandpit" });
 
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{page?}"
+                    );
+            });
 
             //app.Use(next => context =>
             //{
@@ -155,34 +227,31 @@ namespace DefaultWeb
             //return next(context);
             //});
 
-            string sessionid = Guid.NewGuid().ToString();
-            string appid = Configuration.GetSection("DefaultWebSiteSettings").GetValue<String>("AdminSessionId");
-            app.Use(next => context =>
-            {
-                string path = context.Request.Path;
-                context.Response.Cookies.Append("DwsSessionToken", sessionid, new CookieOptions() { HttpOnly = false });
-                context.Response.Cookies.Append("DwsToken", appid, new CookieOptions() { HttpOnly = false });
-                return next(context);
+            //app.UseStatusCodePages(context => {
+            //    var request = context.HttpContext.Request;
+            //    var response = context.HttpContext.Response;
 
-            });
+            //    if ( request.Path.Value.StartsWith("/Home") )
+            //    { 
+            //        response.Redirect("/Home/Index");
+            //    }
 
+            //});
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            //using (StreamReader iisUrlRewriteStreamReader = File.OpenText("IISUrlRewrite.xml"))
+            //{
+            //    var options = new RewriteOptions()
+            //        .AddRedirect("redirect-rule/(.*)", "redirected/$1")
+            //        .AddRewrite(@"^rewrite-rule/(\d+)/(\d+)", "rewritten?var1=$1&var2=$2", skipRemainingRules: true)
+            //        .AddIISUrlRewrite(iisUrlRewriteStreamReader)
+            //        .Add(RewriteRules.RedirectXMLRequests)
+            //        .Add(new RedirectImageRequests(".png", "/png-images"))
+            //        .Add(new RedirectImageRequests(".jpg", "/jpg-images"));
+
+            //    app.UseRewriter(options);
+            //}
+
         }
 
-        private void OnAppStopping()
-        {
-            var test = String.Empty;
-        }
-
-        private void OnAppStopped()
-        {
-            var test = String.Empty;
-        }
     }
 }

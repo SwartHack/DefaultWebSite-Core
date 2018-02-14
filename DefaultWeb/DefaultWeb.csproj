@@ -48,6 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="properties\PublishProfiles\DefaultWebSite.pubxml" />
     <None Remove="Views\Notebook\Snippets\ArchiveFile.html" />
     <None Remove="Views\Notebook\Snippets\CommentEtc.html" />
     <None Remove="Views\Notebook\Snippets\Controller1.html" />
@@ -157,6 +158,12 @@
     <Content Include="wwwroot\lib\_site\.eslintrc.json" />
     <Content Include="wwwroot\lib\_site\dist\css\default.css" />
     <Content Include="wwwroot\lib\_site\dist\css\video-js.css" />
+    <Content Include="wwwroot\lib\_site\esri-dojo\bower.json" />
+    <Content Include="wwwroot\lib\_site\esri-dojo\custom-theme-setup.png" />
+    <Content Include="wwwroot\lib\_site\esri-dojo\default-theme.png" />
+    <Content Include="wwwroot\lib\_site\esri-dojo\package-lock.json" />
+    <Content Include="wwwroot\lib\_site\esri-dojo\package.json" />
+    <Content Include="wwwroot\lib\_site\esri-dojo\skinny-green-latte-theme.png" />
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.eot" />
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.ttf" />
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.woff" />
@@ -252,6 +259,7 @@
     <Content Include="wwwroot\lib\_site\dist\css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="wwwroot\lib\_site\images\underconstruct.jpg" />
     <Content Include="wwwroot\lib\_site\images\under_construction.gif" />
+    <Content Include="wwwroot\lib\_site\js\dws\package.json" />
     <Content Include="wwwroot\lib\_site\package.json" />
     <Content Include="wwwroot\lib\_site\sass\vendor\pdfjs-viewer.scss" />
   </ItemGroup>
@@ -278,6 +286,7 @@
   <ItemGroup>
     <Folder Include="Controllers\ActionFIlters\" />
     <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\lib\_site\dist\js\lib\" />
     <Folder Include="wwwroot\resource\locale\" />
   </ItemGroup>
 
@@ -300,7 +309,28 @@
     <None Include="wwwroot\lib\_site\dist\js\header.js" />
     <None Include="wwwroot\lib\_site\dist\js\jcore.js" />
     <None Include="wwwroot\lib\_site\dist\js\pdf.worker.js" />
+    <None Include="wwwroot\lib\_site\esri-dojo\.bowerrc" />
+    <None Include="wwwroot\lib\_site\esri-dojo\.gitignore" />
+    <None Include="wwwroot\lib\_site\esri-dojo\Gruntfile.js" />
+    <None Include="wwwroot\lib\_site\esri-dojo\gulpfile.js" />
+    <None Include="wwwroot\lib\_site\esri-dojo\makefile" />
+    <None Include="wwwroot\lib\_site\esri-dojo\README.md" />
+    <None Include="wwwroot\lib\_site\esri-dojo\SASS.md" />
+    <None Include="wwwroot\lib\_site\site.profile.js" />
     <None Include="wwwroot\lib\_site\js\arcgis.js" />
+    <None Include="wwwroot\lib\_site\js\dws\actions.js" />
+    <None Include="wwwroot\lib\_site\js\dws\arcgis.js" />
+    <None Include="wwwroot\lib\_site\js\dws\comments.js" />
+    <None Include="wwwroot\lib\_site\js\dws\controller.js" />
+    <None Include="wwwroot\lib\_site\js\dws\dispatcher.js" />
+    <None Include="wwwroot\lib\_site\js\dws\dws.profile.js" />
+    <None Include="wwwroot\lib\_site\js\dws\fileops-client.js" />
+    <None Include="wwwroot\lib\_site\js\dws\fileops-content.js" />
+    <None Include="wwwroot\lib\_site\js\dws\main.js" />
+    <None Include="wwwroot\lib\_site\js\dws\model-utils.js" />
+    <None Include="wwwroot\lib\_site\js\dws\model.js" />
+    <None Include="wwwroot\lib\_site\js\dws\sandpit.js" />
+    <None Include="wwwroot\lib\_site\js\dws\thumbnail.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf.js" />
     <None Include="wwwroot\lib\_site\js\pdfjs\pdf.worker.js" />
     <None Include="wwwroot\lib\_site\dist\js\site.js" />

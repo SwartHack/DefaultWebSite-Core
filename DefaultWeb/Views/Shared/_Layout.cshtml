@@ -1,37 +1,112 @@
 ﻿<html>
 <head>
     @RenderSection("header", true)
+
     <environment names="Development">
         <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true" />
         <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" asp-append-version="false" />
         <link rel="stylesheet" href="~/lib/_site/dist/css/video-js.css" />
-        <link rel="stylesheet" href="~/lib/arcgis-js-api/themes/light/main.css" />
+        <link rel="stylesheet" href="~/lib/_site/dist/css/esri.css" />
+        <link rel="stylesheet" href="~/lib/_site/dist/css/digit.css" />
 
-        @*<link rel="resource" type="application/l10n" href="~/resource/locale/locale.properties" />*@
         <script src="~/lib/_site/dist/js/header.js" type="text/javascript"></script>
+       
     </environment>
+
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/jquery-ui.css" />
-        @*<link rel="stylesheet" href="~/css/video-js.css" />*@
+        <link rel="stylesheet" href="@ViewData["ThemePnpm removeroduction"]" asp-append-version="true" />
         <script src="~/js/header.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
     </environment>
 </head>
+
 <body>
     @{Html.RenderPartial("_NavBarMain.cshtml"); }
-    <div  id="container-primary" class="container">
+    <div id="container-primary" class="container">
         @RenderBody()
     </div>
-   @{Html.RenderPartial("_Templates.cshtml");}
+    @{Html.RenderPartial("_Templates.cshtml");}
+
     <environment names="Development">
+
         <script src="~/lib/_site/dist/js/jcore.js" asp-append-version="true"></script>
-        <script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>
+        @*<script src="~/lib/_site/dist/js/lib/requirejs/require.js"></script>*@
+        <script>
+            var dojoConfig = {
+                baseUrl: "/lib/_site/js/",
+                tlmSiblingsofDojo: false,
+                async: 1,
+                hasCache: {
+                    // these are the values given above, not-built client code may test for these so they need to be available
+                    "dojo-built": 1,
+                    "dojo-loader": 1,
+                    "dojo-undef-api": 0,
+                    dom: 1,
+                    "host-browser": 1,
+
+                    // Disable deferred instrumentation by default in the built version.
+                    "config-deferredInstrumentation": 0,
+
+                    // Dojo loader has built-in "has" api. Since dojoConfig is used
+                    // by Dojo loader, we can set the default here.
+                    "dojo-has-api": 1,
+
+                    // default
+                    "config-selectorEngine": "lite",
+
+                    "esri-featurelayer-webgl": 0,
+
+                    "esri-promise-compatibility": 0,
+                    "esri-promise-compatibility-deprecation-warnings": 1
+                },
+                packages: [
+                    {
+                        name: "dojo",
+                        location: "lib/dojo"
+                    },
+                    {
+                        name: "dijit",
+                        location: "lib/dijit"
+                    },
+                    {
+                        name: "dojox",
+                        location: "lib/dojox"
+                    },
+                    {
+                        name: "dstore",
+                        location: "lib/dstore"
+                    },
+                    {
+                        name: "dgrid",
+                        location: "lib/dgrid"
+                    },
+                    {
+                        name: "esri",
+                        location: "lib/esri"
+                    },
+                    {
+                        name: "moment",
+                        location: "lib/moment",
+                        main: "moment"
+                    },
+                    {
+                        name: "dws",
+                        location: "dws",
+                        main: "main"
+                    }
+                ]
+            };
+            
+        </script>
+        <script src="~/lib/_site/dist/js/lib/dojo/dojo.js"></script>
+        @*<script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>*@
     </environment>
     <environment names="Staging,Production">
         <script src="~/js/defaultwebsite.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("JS", required: true)
+
 </body>
+
 </html>

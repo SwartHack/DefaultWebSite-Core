@@ -48,7 +48,7 @@ namespace DefaultWeb.Controllers
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -79,12 +79,12 @@ namespace DefaultWeb.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    return PartialView(model);
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpGet]
@@ -166,7 +166,7 @@ namespace DefaultWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView(model);
             }
 
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -193,7 +193,7 @@ namespace DefaultWeb.Controllers
             {
                 _logger.LogWarning("Invalid recovery code entered for user with ID {UserId}", user.Id);
                 ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
-                return View();
+                return PartialView();
             }
         }
 
@@ -201,7 +201,7 @@ namespace DefaultWeb.Controllers
         [AllowAnonymous]
         public IActionResult Lockout()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpGet]
@@ -209,7 +209,7 @@ namespace DefaultWeb.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -238,7 +238,7 @@ namespace DefaultWeb.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -293,7 +293,7 @@ namespace DefaultWeb.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
+                return PartialView("ExternalLogin", new ExternalLoginViewModel { Email = email });
             }
         }
 
@@ -326,7 +326,7 @@ namespace DefaultWeb.Controllers
             }
 
             ViewData["ReturnUrl"] = returnUrl;
-            return View(nameof(ExternalLogin), model);
+            return PartialView(nameof(ExternalLogin), model);
         }
 
         [HttpGet]
@@ -343,14 +343,14 @@ namespace DefaultWeb.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{userId}'.");
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return PartialView(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -377,14 +377,14 @@ namespace DefaultWeb.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpGet]
@@ -396,7 +396,7 @@ namespace DefaultWeb.Controllers
                 throw new ApplicationException("A code must be supplied for password reset.");
             }
             var model = new ResetPasswordViewModel { Code = code };
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -420,21 +420,21 @@ namespace DefaultWeb.Controllers
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
             AddErrors(result);
-            return View();
+            return PartialView();
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
         {
-            return View();
+            return PartialView();
         }
 
 
         [HttpGet]
         public IActionResult AccessDenied()
         {
-            return View();
+            return PartialView();
         }
 
         #region Helpers

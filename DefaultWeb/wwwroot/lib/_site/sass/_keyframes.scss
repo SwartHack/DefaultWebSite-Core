@@ -25,17 +25,72 @@
     0% { @include gradient-x-three-colors(black, white, 75%, crimson); }
     100% { @include gradient-x-three-colors(crimson, white, 75%, &black ); }
 }
-
 @keyframes dws-waiting {
     0% { @include gradient-x-three-colors(black, steelblue, 75%, crimson); }
     100% { @include gradient-x-three-colors(crimson, steelblue, 75%, black); }
 }
 
+@-webkit-keyframes dws-text-action-right {
+    from {
+        margin-left: 0;
+    }
+
+    to {
+        margin-left: 50%;
+    }
+}
 @keyframes dws-text-action-right {
     from { margin-left:0; }
     to { margin-left:50%; }
 }
 
+@-webkit-keyframes dws-rocket-action {
+    from {
+        margin-left: 0;
+    }
+
+    to {
+        margin-left: 100%;
+    }
+}
+
+@keyframes dws-rocket-flash {
+
+    from, 0% {
+        color: inherit;
+    }
+    
+    50% {
+        color:crimson;
+    }
+    60% {
+        color: inherit;
+    }
+    70% {
+        color: crimson;
+    }
+    80% {
+        color: inherit;
+    }
+    90% {
+        color: crimson;
+    }
+    100% {
+        color: inherit;
+    }
+}
+
+
+@-webkit-keyframes dws-icon-flash {
+    from {
+        color: inherit;
+    }
+
+    to {
+        color: $green;
+    }
+
+}
 @keyframes dws-icon-flash {
     from { color:inherit; }
     to { color: $green; }
@@ -183,16 +238,21 @@
     from {
         -webkit-transform: scale3d(1, 1, 1);
         transform: scale3d(1, 1, 1);
+        color:inherit;
+       
     }
 
     50% {
         -webkit-transform: scale3d(1.05, 1.05, 1.05);
         transform: scale3d(1.05, 1.05, 1.05);
+        color:#5bfa42;
+        
     }
 
     to {
         -webkit-transform: scale3d(1, 1, 1);
         transform: scale3d(1, 1, 1);
+        color: inherit;
     }
 }
 

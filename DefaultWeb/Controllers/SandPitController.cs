@@ -7,8 +7,20 @@ namespace DefaultWeb.Controllers
     {
 
 
-        public IActionResult SandPitMain()
+        public IActionResult SandpitMain(string page)
         {
+            //if (page != null)
+            //{
+            //    var path = Request.Path.Value;
+            //    var type = path.Substring(1, path.IndexOf("/", 1) - 1);
+              
+            //    ViewData["ReturnUrl"] = String.Format("/Sandpit/GetView/{0}", page);
+            //    ViewData["ReturnTarget"] = "#sandpit-target-area";
+            //    return View("")
+            //}
+
+
+
             return PartialView();
         }
 
@@ -17,12 +29,12 @@ namespace DefaultWeb.Controllers
             return PartialView();
         }
 
-        public IActionResult GetView(string id)
+        public IActionResult GetView(string page)
         {
-                return PartialView(String.Format("~/Views/Sandpit/{0}.cshtml", id));
+                return PartialView(String.Format("~/Views/Sandpit/{0}.cshtml", page));
         }
 
-        public IActionResult UnderConstruction (string id)
+        public IActionResult UnderConstruction (string page)
         {
             return PartialView("~/Views/Shared/_UnderCons.cshtml");
         }

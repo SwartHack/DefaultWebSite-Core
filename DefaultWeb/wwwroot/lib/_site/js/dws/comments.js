@@ -35,6 +35,9 @@ function (Control, viewModel) {
             });
     }
 
+
+
+    //change to late init
     $(document).on('click', '#sources-table tbody tr', function (e) {
         var $item = $(e.currentTarget);
         var id = $item.attr("id");

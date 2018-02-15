@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Rewrite;
 using static DefaultWeb.RewriteRules;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace DefaultWeb
 {
@@ -182,8 +183,14 @@ namespace DefaultWeb
             }
 
             ////////////////////////////
-            ///
-            app.UseStaticFiles();
+            /// Need to account for opengl non-standard GLSL shader files
+            var provider = new FileExtensionContentTypeProvider();
+            provider.Mappings.Add(".glsl", "text/plain");
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = provider
+            });
+                
             app.UseSession();
             app.UseAuthentication();
             

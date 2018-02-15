@@ -1,13 +1,14 @@
 ﻿#arcgis-main {
-    display:flex;
+    display: flex;
     flex-direction: column;
+    flex: 1;
 
-    #arcgis-nav {
-
+    #map-nav {
+        box-shadow: 0 0 7px 0px black;
     }
 
-    #arcgis-map {
 
+    #map-main {
+        flex: 1 1 100%;
     }
-
 }

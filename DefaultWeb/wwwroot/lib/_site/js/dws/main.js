@@ -1,22 +1,9 @@
 ﻿define(function () {
     /////////////////////////////////////////////////////////////////////
-    /// init module - TODO eliminate redundant requires, control initiates all
+    /// init module - 
     //////////////////////////////////////////////////////////////////////
-
     require(['dws/actions']);
     require(['dws/sandpit']);
-    //require(['dws/comments']);
- 
-    //require(['dws/thumbnail']);
-    //require(['dws/fileops-client']);
-    //require(['dws/fileops-content']);
-    //require(['esri/Map']);
-    //require(['dws/arcgis']);
-
-
-    //require('video-codec-js/lib/encoder');
-    //require('video-codec-js/lib/decoder');
-
     require(['dws/controller'],
         function (control) {
 
@@ -24,6 +11,16 @@
                 control.initKO();
             });
         });
+
+    // the rest initialize on demand now!!!
+    // and we have access to the esri API!!
+    // thanks to dojo.
+    //require(['dws/comments']);
+    //require(['dws/thumbnail']);
+    //require(['dws/fileops-client']);
+    //require(['dws/fileops-content']);
+    //require(['esri/Map']);
+    //require(['dws/arcgis']);
 
     //////////////////////////////////////////////////////////////////////
     /// globals go here

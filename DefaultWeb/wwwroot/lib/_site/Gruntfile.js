@@ -75,9 +75,10 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    sourceMap: false
+                    sourceMap: false,
+                    expand:true,
                 },
-                src: [],
+                src: '',
                 dest: ''
             }
         },
@@ -162,41 +163,6 @@ module.exports = function(grunt) {
                 basePath: './js/'
             }
         },
-
-        requirejs: {
-            support: {
-                options: {
-                    appUrl:".",
-                    baseUrl: "./js/lib",
-                    dir: "./dist/js/lib",
-                    optimize: "uglify2",
-                    optimizeCss: "standard.keepLines.keepWhitespace",
-                    throwWhen: { optimize: false },
-                    preserveLicenseComments: false,
-                    paths: {
-                        "esri": "empty:",
-                        "dojo": "empty:",
-                        "dojo-themes": "empty:",
-                        "dijit": "empty:",
-                        "dojox": "empty:",
-                        "dgrid": "empty:",
-                        "dstore": "empty:",
-                        "moment": "empty:",
-                        "moment/templates": "empty:",
-                    },
-                    fileExclusionRegExp: /test|tests|esri|min|src|demo|demos/g
-                }
-            },
-            digitcss: {
-                options: {
-                    cwd: "./",
-                    cssIn: "./requirejs/src/dijit/themes/nihilo/nihilo.css",
-                    out: "./dist/css/digit.css",
-                    optimizeCss: "standard"
-                }
-            },
-        },
-        
          exec: {
             //postcss: {
             //    command: 'npm run postcss'
@@ -220,23 +186,14 @@ module.exports = function(grunt) {
         grunt.task.run('cssmin:wwwroot');
         grunt.task.run('uglify:wwwroot');
         grunt.task.run('copy:pdfworker');
+        grunt.task.run('esri-dojo');
+
+        //// fonts and images
+        //    grunt.task.run('copy:fonts');
+        //    grunt.task.run('copy:images');
+
     });
 
-    //////////////////////////////////////////////////////////
-    //// build all, must have dist-all built
-    //////////////////////////////////////////////////////////
-    //grunt.registerTask('deploy-all', function () {
-    //    grunt.task.run('clean:wwwrootall');
-
-    //    grunt.task.run('cssmin:wwwroot');
-    //    grunt.task.run('uglify:wwwroot');
-
-    //    grunt.task.run('copy:pdfworker');
-
-    //    // fonts and images
-    //    grunt.task.run('copy:fonts');
-    //    grunt.task.run('copy:images');
-    //});
 
     //////////////////////////////////////////////////////////
     //// main dist, builds default theme and js
@@ -251,11 +208,10 @@ module.exports = function(grunt) {
     //// builds ALL themes and js, long running
     //////////////////////////////////////////////////////////
     grunt.registerTask('dist-all', function () {
-        grunt.task.run('themes');
+        grunt.task.run('theme');     
+        grunt.task.run('videojs-css');
+        grunt.task.run('esri-css');
         grunt.task.run('js');
-        
-        grunt.task.run('dist-videojs-css');
-
     });
 
     //////////////////////////////////////////////////////////
@@ -265,8 +221,8 @@ module.exports = function(grunt) {
         grunt.task.run('clean:distjs');
         grunt.task.run('concat:header');
         grunt.task.run('concat:jcore');
-        grunt.task.run('concat:site');
-        grunt.task.run('eslint');
+        //grunt.task.run('concat:site');
+        //grunt.task.run('eslint');
     });
 
     //////////////////////////////////////////////////////////
@@ -281,20 +237,13 @@ module.exports = function(grunt) {
     });
 
     //////////////////////////////////////////////////////////
-    //// Build ESRI RequireJS
-    //////////////////////////////////////////////////////////
-    grunt.registerTask('esri-requirejs', function () {
-        grunt.config('clean.any.src', ['./dist/js/lib']);
-        grunt.task.run('clean:any');
-        grunt.task.run('requirejs:support');
-    });
-
-    //////////////////////////////////////////////////////////
     //// deal with the esri  css seperately, don't build with site!
     //////////////////////////////////////////////////////////
     grunt.registerTask('esri-css', function (files) {
-        var scssSrc = './requirejs/src/esri/themes/base/core.scss';
-        var scssDest = 'dist/css/esri.css';
+        var scssSrc = './js/lib/esri/themes/base/main.scss';
+        var scssDest = './dist/css/esri.css';
+        grunt.config('clean.any.src', scssDest);
+        grunt.task.run('clean:any');
         grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
         grunt.config('sass.dist.options.precision', 10);
         grunt.config('sass.dist.options.unix-newlines', true);
@@ -303,11 +252,8 @@ module.exports = function(grunt) {
 
         grunt.config('postcss.dist.src', scssDest);
         grunt.task.run('postcss');
-
-
     });
-
-    grunt.registerTask('digit-css', 'requirejs:digitcss');
+  
 
     //////////////////////////////////////////////////////////
     //// deal with the videojs css seperately, don't build with site!
@@ -323,11 +269,6 @@ module.exports = function(grunt) {
         grunt.config('postcss.dist.src', scssDest);
         grunt.task.run('postcss');
     });
-
-
-
-
-
 
     //////////////////////////////////////////////////////////
     /// Builds default bootstrap and cerulean themes

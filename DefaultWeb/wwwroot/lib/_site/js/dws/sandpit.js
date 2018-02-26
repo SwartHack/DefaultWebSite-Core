@@ -45,7 +45,8 @@ define(['dws/model'], function (viewModel) {
                             ko.applyBindings(viewModel, $node[0])
                         //}
                     } catch (e) {
-                        console.log("ko re-bind exception:\n" + $node[0]);
+
+                        console.log("ko re-bind exception:\n");
                     }
                 })
             }

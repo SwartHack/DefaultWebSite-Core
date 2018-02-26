@@ -11011,6 +11011,12 @@ html {
   background-color: transparent;
   color: lightsteelblue; }
 
+#container-primary.container.full-screen {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: unset; }
+
 #row-main {
   padding: 0;
   background-image: linear-gradient(to right, darkgray 0%, steelblue 100%);
@@ -12393,14 +12399,282 @@ form#create-comment {
       border-width: 0;
       border-radius: 2px; } }
 
-#arcgis-main {
+#arcgis-main.card {
   display: flex;
-  flex-direction: column;
-  flex: 1; }
-  #arcgis-main #map-nav {
-    box-shadow: 0 0 7px 0px black; }
-  #arcgis-main #map-main {
-    flex: 1 1 100%; }
+  flex-direction: row;
+  flex: 1;
+  background-color: transparent;
+  border: none; }
+  #arcgis-main.card #map-nav {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin-right: 1vw;
+    border: none;
+    box-shadow: 0 0 2px 0px black;
+    background-color: white; }
+    #arcgis-main.card #map-nav #map-nav-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      border: none;
+      box-shadow: 0px 5px 5px -5px grey; }
+      #arcgis-main.card #map-nav #map-nav-header .card-text {
+        margin-left: 1vw;
+        margin-bottom: .5vh; }
+      #arcgis-main.card #map-nav #map-nav-header #toggle-fullscreen {
+        margin-right: .25vw;
+        cursor: pointer; }
+        #arcgis-main.card #map-nav #map-nav-header #toggle-fullscreen i {
+          color: darkslategray; }
+    #arcgis-main.card #map-nav #maps {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding-left: .25vw;
+      padding-right: .25vw;
+            /*&.active {
+                box-shadow: 0 0 7px 0px black;
+                background-color: transparent;
+                //color: $white;
+            }
+
+            @include hover-focus {
+                box-shadow: 0 0 4px 0px black;
+                background-color: transparent;
+            }*/ }
+      #arcgis-main.card #map-nav #maps #maps-default {
+        box-shadow: 0 0 2px 0px black; }
+        #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav {
+          display: flex;
+          flex-direction: row;
+          margin-left: 1vw;
+          margin-right: 1vw;
+          margin-bottom: .25vh;
+          border: none; }
+          #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav #twoDworld {
+            background-color: wheat; }
+            #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav #twoDworld i {
+              color: lightyellow; }
+          #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav #threeDworld {
+            background: #aebcbf;
+            /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover, #aebcbf 0%, #0a0809 47%, #6e7774 57%);
+            /* FF3.6-15 */
+            background: -webkit-radial-gradient(center, ellipse cover, #aebcbf 0%, #0a0809 47%, #6e7774 57%);
+            /* Chrome10-25,Safari5.1-6 */
+            background: radial-gradient(ellipse at center, #aebcbf 0%, #0a0809 47%, #6e7774 57%);
+            /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ }
+            #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav #threeDworld i {
+              color: blue; }
+          #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav .map-default-toggle {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            border: groove .4rem lightgray; }
+            #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav .map-default-toggle.active {
+              border: ridge .65rem lightgreen;
+              opacity: 1; }
+            #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav .map-default-toggle:hover, #arcgis-main.card #map-nav #maps #maps-default div#map-default-nav .map-default-toggle:focus {
+              cursor: pointer; }
+        #arcgis-main.card #map-nav #maps #maps-default #map-base.dropdown {
+          display: flex;
+          justify-content: center; }
+          #arcgis-main.card #map-nav #maps #maps-default #map-base.dropdown .dropdown-toggle {
+            width: 80%;
+            padding: 0;
+            padding-left: 1vw;
+            padding-right: .5vw;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center; }
+          #arcgis-main.card #map-nav #maps #maps-default #map-base.dropdown .dropdown-menu {
+            cursor: pointer;
+            padding-left: 1vw; }
+            #arcgis-main.card #map-nav #maps #maps-default #map-base.dropdown .dropdown-menu li.active {
+              font-weight: 600;
+              font-style: italic; }
+            #arcgis-main.card #map-nav #maps #maps-default #map-base.dropdown .dropdown-menu:hover {
+              cursor: pointer; }
+      #arcgis-main.card #map-nav #maps #maps-custom {
+        box-shadow: 0 0 2px 0px black; }
+      #arcgis-main.card #map-nav #maps #maps-other {
+        box-shadow: 0 0 2px 0px black; }
+  #arcgis-main.card .map-category {
+    margin-top: 1vh; }
+    #arcgis-main.card .map-category .map-category-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      box-shadow: 0px 5px 5px -5px grey; }
+      #arcgis-main.card .map-category .map-category-header .map-category-title {
+        margin-left: 1vw; }
+  #arcgis-main.card .map-tile {
+    margin: 2px; }
+  #arcgis-main.card .map-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0px 5px 5px -5px grey;
+    margin-bottom: 1vh; }
+    #arcgis-main.card .map-header .map-title {
+      text-align: -webkit-right;
+      margin-right: 1vw; }
+  #arcgis-main.card .map-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1vh;
+    margin-left: .5vw;
+    margin-right: .5vw;
+    margin-bottom: 1vh;
+    border: gray 2px double; }
+    #arcgis-main.card .map-info #map-info-area {
+      display: flex;
+      flex-direction: column; }
+      #arcgis-main.card .map-info #map-info-area #map-extent {
+        display: flex;
+        flex-direction: column; }
+        #arcgis-main.card .map-info #map-info-area #map-extent #top {
+          display: flex;
+          flex-direction: row;
+          justify-content: center; }
+        #arcgis-main.card .map-info #map-info-area #map-extent #middle {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly; }
+        #arcgis-main.card .map-info #map-info-area #map-extent #bottom {
+          display: flex;
+          flex-direction: row;
+          justify-content: center; }
+      #arcgis-main.card .map-info #map-info-area #map-scale {
+        display: flex;
+        justify-content: center;
+        font-style: italic;
+        font-weight: 500;
+        border: none;
+        box-shadow: 0px 5px 5px -5px grey; }
+      #arcgis-main.card .map-info #map-info-area #map-center {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        font-style: italic;
+        font-weight: 500;
+        border: none;
+        box-shadow: 0px 5px 5px -5px grey; }
+      #arcgis-main.card .map-info #map-info-area #map-pointer {
+        display: flex;
+        flex-direction: column;
+        padding-left: .5vh;
+        padding-right: .5vh;
+        margin-top: 1vh;
+        font-style: italic;
+        font-weight: 500; }
+        #arcgis-main.card .map-info #map-info-area #map-pointer #map-pointer-checkbox {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          border: none;
+          box-shadow: 0px 5px 5px -5px grey; }
+          #arcgis-main.card .map-info #map-info-area #map-pointer #map-pointer-checkbox #map-pointer-checkbox-label {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline; }
+            #arcgis-main.card .map-info #map-info-area #map-pointer #map-pointer-checkbox #map-pointer-checkbox-label label {
+              font-size: 1.5vh;
+              font-weight: 400;
+              margin-bottom: 0;
+              line-height: 1.7vh; }
+          #arcgis-main.card .map-info #map-info-area #map-pointer #map-pointer-checkbox a#cursor-warning {
+            padding: 0; }
+        #arcgis-main.card .map-info #map-info-area #map-pointer #map-cursors {
+          box-shadow: 0px 5px 5px -5px grey; }
+        #arcgis-main.card .map-info #map-info-area #map-pointer .map-pointer-label {
+          display: flex;
+          flex-direction: row;
+          align-items: baseline; }
+          #arcgis-main.card .map-info #map-info-area #map-pointer .map-pointer-label label {
+            font-size: 1.5vh;
+            font-weight: 400;
+            margin-bottom: 0;
+            line-height: 1.7vh;
+            width: 25%;
+            text-align: -webkit-right; }
+      #arcgis-main.card .map-info #map-info-area #map-reference {
+        font-size: 1.5vh;
+        font-weight: 500;
+        padding: 2px;
+        margin-top: 1vh;
+        margin-left: .5vw;
+        margin-right: .5vw;
+        border: black 1px solid; }
+        #arcgis-main.card .map-info #map-info-area #map-reference .map-reference-label {
+          display: flex;
+          flex-direction: row;
+          align-items: baseline; }
+          #arcgis-main.card .map-info #map-info-area #map-reference .map-reference-label label {
+            font-size: 1.5vh;
+            font-weight: 400;
+            margin-bottom: 0;
+            line-height: 1.7vh;
+            width: 25%;
+            text-align: -webkit-right; }
+      #arcgis-main.card .map-info #map-info-area #projection {
+        font-size: 1.5vh;
+        font-weight: 600;
+        font-style: italic;
+        padding: 2px; }
+      #arcgis-main.card .map-info #map-info-area #meta {
+        font-size: 1.5vh;
+        font-weight: 500;
+        padding: 2px; }
+  #arcgis-main.card .map-tools {
+    display: flex;
+    flex-direction: row;
+    margin-top: .25vh;
+    border: ridge 2px gray;
+    background-color: gray;
+    border-radius: 0; }
+    #arcgis-main.card .map-tools ul#map-tools-nav {
+      display: inline-flex;
+      justify-content: flex-start;
+      list-style-type: none;
+      width: 100%;
+      padding-left: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      padding: 2px; }
+  #arcgis-main.card .map-tool {
+    border-radius: 0;
+    margin-left: .25vw;
+    background-color: lightgray;
+        /*&.active {
+            box-shadow: 0 0 7px 0px black;
+            background-color: transparent;
+            //color: $white;
+        }
+
+        @include hover-focus {
+            box-shadow: 0 0 4px 0px black;
+            background-color: transparent;
+            color: $white;
+        }*/ }
+    #arcgis-main.card .map-tool a {
+      padding-left: .5rem;
+      padding-right: .5rem; }
+  #arcgis-main.card #map-container {
+    flex: 1; }
+    #arcgis-main.card #map-container #map-view-main, #arcgis-main.card #map-container #scene-view-main {
+      display: none;
+      height: 100%;
+      width: 100%;
+      background-color: transparent; }
+  @media (min-width: 1200px) {
+    #arcgis-main.card #toggle-fullscreen {
+      display: block; } }
+  @media (max-width: 1199px) {
+    #arcgis-main.card #toggle-fullscreen {
+      display: none; } }
 
 #server-error.card {
   margin: 0;
@@ -13172,13 +13446,7 @@ body[class*=jconfirm-no-scroll-] {
 .core-icon:before {
   content: "\55"; }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-  /*padding-left: 15px;
-  padding-right: 15px;*/ }
-
-@media (max-width: 767px) {
+@media (max-width: 575px) {
   #navbar-main {
     display: none; }
 

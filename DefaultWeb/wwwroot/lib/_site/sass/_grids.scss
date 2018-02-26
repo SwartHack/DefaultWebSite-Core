@@ -14,6 +14,16 @@ html {
     color:lightsteelblue
 }
 
+#container-primary.container {
+
+    &.full-screen {
+        padding:0;
+        margin:0;
+        width:100%;
+        max-width:unset;
+    }
+}
+
 #row-main {
     padding: 0;
     //margin: 0;
@@ -22,10 +32,6 @@ html {
     //border: 0.625rem solid #e6e6e6;
     @include gradient-x(darkgray,steelblue);
     @include gradient-x-three-colors(darkgray, lightsteelblue, 25%, steelblue);
-
-    &.full-screen {
-
-    }
 
     #col-util {
         padding: 0;

@@ -144,7 +144,17 @@ define(['dws/model-utils'], function (ModelUtil) {
         imageViewApi: ko.pureComputed(function () { return viewModel.serverFile().fileApi }, this),
 
         pdfWorker: ko.observable(''),
-        exif: ko.observableArray([]) // image header details
+        exif: ko.observableArray([]), // image header details
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // ESRI stuff
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        viewMap: ko.observable(''),
+        mapView: ko.observable(''),
+        sceneView: ko.observable(''),
+        viewInfo: ko.observable(''),
+        cursorMap: ko.observable(''),
+        cursorScreen: ko.observable('')
 
         //thumb: ko.observable(),
         //thumbRendered: function (elements, item) {
@@ -170,6 +180,10 @@ define(['dws/model-utils'], function (ModelUtil) {
 
     };
 
+    //viewModel.viewMap.subscribe(function (map) {
+
+    //    var test = map;
+    //});
 
     ////////////////////////////////////////
     /// model events/actions

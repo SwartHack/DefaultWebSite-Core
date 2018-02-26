@@ -67,27 +67,12 @@
 
 
 ////////////////////////
-/// global over-rides
+/// global media size over-rides
 ///////////////////////
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    /*padding-left: 15px;
-    padding-right: 15px;*/
-    //background: linear-gradient(circle, steelblue, hotpink);
-}
-
-
-
 
 
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575px) {
-}
-
-// Small devices (landscape phones, less than 768px)
-@media (max-width: 767px) {
     #navbar-main {
         display: none;
     }
@@ -97,11 +82,17 @@
     }
 }
 
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) {
+   
+}
+
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991px) {
     #siteseal {
         display: none;
     }
+    
 }
 
 // Large devices (desktops, less than 1200px)
@@ -112,10 +103,13 @@
         padding: 0;
     }
 
-    
+   
 }
 
-
+// Large devices (desktops, less than 1200px)
+@media (min-width: 1200px) {
+   
+}
 
 
 

@@ -1,37 +1,179 @@
 ﻿
 <div id="arcgis-main" class="card">
-
     <div id="map-nav">
-        <div class="card-title">GIS Nav</div>
-        <ul class="nav nav-pills">
-            <li class="nav-item active">
-                <a data-target="#arcgis-map" data-target-controller="ArcGis" data-target-action="LoadMap1">Map 1</a>
-            </li>
-            <li class="nav-item active">
-                <a data-target="#arcgis-map" data-target-controller="ArcGis" data-target-action="">Map 2</a>
-            </li>
-        </ul>
+        <div id="map-nav-header">
+            <div class="card-text">Maps Navigator</div>
+            <a id="toggle-fullscreen" role="button" title="Toggle Full Screen">
+                <i class="fa fa-window-maximize"></i>
+            </a>
+        </div>
+        
+        <div id="maps">
+
+            <div id="maps-default" class="map-category active">
+                <div class="map-category-header">
+                    <div class="map-category-title">Default Map</div>
+                    <a class="btn" data-toggle="collapse" data-target="#maps-default-body" role="button">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+
+
+                <div id="maps-default-body">
+                    <div class="map-tile">
+                        <div class="map-header">
+                            <div class="map-title"> World 2d and 3d Map</div>
+                        </div>
+                        <div id="map-default-nav">
+                            <div id="mapView" class="map-default-toggle active" data-target="#map-main">
+                                <i class="fa fa-2x fa-map"></i>
+                            </div>
+                            <div id="sceneView" class="map-default-toggle" data-target="#map-main">
+                                <i class="fa fa-2x fa-globe"></i>
+                            </div>
+                        </div>
+
+                        <div id="map-base" class="dropdown">
+                            <div class="dropdown-toggle" type="button" data-toggle="dropdown"><span>Streets</span><span class="caret"></span></div>
+                            <ul class="dropdown-menu">
+                                <li class="active">Streets</li>
+                                <li>Satellite</li>
+                                <li>Hybrid</li>
+                                <li>Topo</li>
+                                <li>Gray</li>
+                                <li>Dark-gray</li>
+                                <li>Osm</li>
+                                <li>National-Geographic</li>
+                            </ul>
+                        </div>
+
+                        <div class="map-tools">
+                            <ul id="map-tools-nav">
+                                <li class="map-tool">
+                                    <a data-target="#map-main"><i class="fa fa-location-arrow"></i></a>
+                                </li>
+                                <li class="map-tool">
+                                    <a data-target="#map-main"><i class="fa fa-compass"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="map-info">
+
+
+                            <div id="map-info-area">
+                                <div id="map-extent">
+                                    <div id="top" data-bind="text: viewInfo().xmax">0</div>
+                                    <div id="middle">
+                                        <div id="left" data-bind="text: viewInfo().ymin">0</div>
+                                        <div id="center"><i class="fa fa-2x fa-compass"></i></div>
+                                        <div id="right" data-bind="text: viewInfo().ymax">0</div>
+                                    </div>
+                                    <div id="bottom" data-bind="text: viewInfo().xmin">0</div>
+                                </div>
+                                <div id="map-scale" data-bind="text: viewInfo().scale"></div>
+                                <div id="map-center" data-bind="text: viewInfo().center"></div>
+                                <div id="map-pointer">
+                                    <div id="map-pointer-checkbox">
+                                        <div id="map-pointer-checkbox-label">
+                                            <input id="show-cursor" type="checkbox" data-toggle="collapse" data-target="#map-cursors" />
+                                            <label for="show-cursor">Track Pointer Position</label>
+                                        </div>
+                                        <a id="cursor-warning" class="btn btn-small" data-toggle="popover" role="button">
+                                            <i class="fa fa-warning"></i>
+                                        </a>
+                                    </div>
+                                    <div id="map-cursors" class="collapse">
+                                        <div class="map-pointer-label">
+                                            <label for="map-cursor">Map:</label>
+                                            <div id="map-cursor" data-bind="text:cursorMap">1,1</div>
+
+                                        </div>
+                                        <div class="map-pointer-label">
+                                            <label for="screen-cursor">Screen:</label>
+                                            <div id="screen-cursor" data-bind="text:cursorScreen">0,0</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="map-reference">
+                                    <div class="map-reference-label">
+                                        <label for="map-ref-name">Name</label>
+                                        <div id="map-ref-name" data-bind=""></div>
+                                    </div>
+                                    <div class="map-reference-label">
+                                        <label for="map-ref-wkid">WKID</label>
+                                        <div id="map-ref-wkid" data-bind=""></div>
+                                    </div>
+                                    <div class="map-reference-label">
+                                        <label for="map-ref-desc">Description</label>
+                                        <div id="map-ref-desc" data-bind=""></div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="maps-custom" class="map-category">
+                <div class="map-category-header">
+                    <div class="map-category-title">ArcGis Server Maps</div>
+                    <a class="btn" data-toggle="collapse" data-target="#maps-custom-body" role="button">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+
+                <div id="maps-custom-body" class="collapse">
+                    <div class="map-tile">
+                        <div class="map-header">
+                            <div class="map-title"> Server Map 1</div>
+                        </div>
+                    </div>
+                    <div class="map-tile">
+                        <div class="map-header">
+                            <div class="map-title"> Server Map 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="maps-other" class="map-category">
+                <div class="map-category-header">
+                    <div class="map-category-title">Other Maps</div>
+                    <a class="btn" data-toggle="collapse" data-target="#maps-other-body" role="button">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+                <div id="maps-other-body" class="collapse">
+                    <div class="map-tile">
+                        <div class="map-header">
+                            <div class="map-title"> Other Map 1</div>
+                        </div>
+                    </div>
+                    <div class="map-tile">
+                        <div class="map-header">
+                            <div class="map-title"> Your Map Here!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       
     </div>
 
-    <div id="map-main">
-      
+    <div id="map-container" class="card">
+        <div id="map-view-main"></div>
+        <div id="scene-view-main"></div>
     </div>
-
 </div>
 
-
 <script>
-    require(['dws/arcgis'], function (ArcGis) {
-        //$(function () {
-        //    ArcGis.observeKo(true);
-        //});
-        $('#arcgis-main').ready(function () {
-            ArcGis.init();
-        })
-        
-
-        // expand this
-        //$('#col-util').hide();
-        //$('#col-main').addClass('full-size');
-    });
+    /// change this to fire from within js on page load only ??!!
+    require(['dws/arcgis']);
 </script>

@@ -155,7 +155,24 @@
     <Content Include="Views\Notebook\Snippets\StartUpCS.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\lib\_site\.eslintrc.json" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_400.eot" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_400.ttf" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_400.woff" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_600.eot" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_600.ttf" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_600.woff" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_400.eot" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_400.ttf" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_400.woff" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_600.eot" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_600.ttf" />
+    <Content Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_600.woff" />
+    <Content Include="wwwroot\lib\_site\fonts\CalciteWebCoreIcons.ttf" />
+    <Content Include="wwwroot\lib\_site\fonts\CalciteWebCoreIcons.woff" />
+    <Content Include="wwwroot\lib\_site\fonts\VideoJS.eot" />
+    <Content Include="wwwroot\lib\_site\fonts\VideoJS.ttf" />
+    <Content Include="wwwroot\lib\_site\fonts\VideoJS.woff" />
+    <Content Include="wwwroot\lib\_site\js\dws\.eslintrc.json" />
     <Content Include="wwwroot\lib\_site\dist\css\default.css" />
     <Content Include="wwwroot\lib\_site\dist\css\video-js.css" />
     <Content Include="wwwroot\lib\_site\fonts\fontawesome-webfont.eot" />
@@ -302,6 +319,17 @@
     <None Include="wwwroot\lib\_site\dist\js\header.js" />
     <None Include="wwwroot\lib\_site\dist\js\jcore.js" />
     <None Include="wwwroot\lib\_site\dist\js\pdf.worker.js" />
+    <None Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_400.svg" />
+    <None Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_400.woff2" />
+    <None Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_600.svg" />
+    <None Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_600.woff2" />
+    <None Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_400.svg" />
+    <None Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_400.woff2" />
+    <None Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_600.svg" />
+    <None Include="wwwroot\lib\_site\fonts\Avenir_Next_W00_Italic_600.woff2" />
+    <None Include="wwwroot\lib\_site\fonts\CalciteWebCoreIcons.svg" />
+    <None Include="wwwroot\lib\_site\fonts\VideoJS.svg" />
+    <None Include="wwwroot\lib\_site\js\dws\arcgis.utils.js" />
     <None Include="wwwroot\lib\_site\site.profile.js" />
     <None Include="wwwroot\lib\_site\js\dws\actions.js" />
     <None Include="wwwroot\lib\_site\js\dws\arcgis.js" />

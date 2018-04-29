@@ -33,7 +33,7 @@ function (Map, MapView, SceneView, viewModel, Utils) {
         });
 
         $('#showCursor').on('click', function () {
-            $('')
+            $('');
         });
 
 
@@ -62,7 +62,7 @@ function (Map, MapView, SceneView, viewModel, Utils) {
         ///
         mapview.when(function () {
 
-            var info = Utils.extentToInfo(mapview.extent, mapview.scale);
+            var info = Utils.viewToInfo(mapview);
             viewModel.viewInfo(info);
 
         }, function (error) {

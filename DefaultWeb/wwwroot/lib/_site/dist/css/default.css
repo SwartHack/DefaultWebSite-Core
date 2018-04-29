@@ -10848,6 +10848,13 @@ p {
   margin-left: 0;
   margin-right: 0; }
 
+.discussion-welcome {
+  font-size: 1.5vh;
+  text-align: justify;
+  line-height: 2vh;
+  margin-left: 0;
+  margin-right: 0; }
+
 .side-note {
   text-align: center;
   font-size: 2vh;
@@ -11019,6 +11026,7 @@ html {
 
 #row-main {
   padding: 0;
+  height: 100%;
   background-image: linear-gradient(to right, darkgray 0%, steelblue 100%);
   background-repeat: repeat-x;
   background-image: linear-gradient(to right, darkgray, lightsteelblue 25%, steelblue);
@@ -11028,22 +11036,29 @@ html {
     margin: 0; }
     #row-main #col-util .element .inner {
       padding: 0.625rem; }
-      #row-main #col-util .element .inner #col-dws-notebook {
+      #row-main #col-util .element .inner #row-notebook {
         display: flex;
         flex-direction: column;
-        height: 60%;
-        margin: 0;
-        padding: 0;
-        border-radius: 0px;
-        background-color: transparent; }
-      #row-main #col-util .element .inner #col-dws-carousel {
-        width: 100%;
-        height: 37%;
-        max-height: 37%;
-        padding: 0;
-        margin: 0;
-        border-radius: 0px;
-        background: linear-gradient(to right, red, yellow); }
+        flex-grow: 2; }
+        #row-main #col-util .element .inner #row-notebook #col-dws-notebook {
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+          padding: 0;
+          border-radius: 0px;
+          background-color: transparent; }
+      #row-main #col-util .element .inner #row-carousel {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1; }
+        #row-main #col-util .element .inner #row-carousel #col-dws-carousel {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          border-radius: 0px;
+          background: linear-gradient(to right, red, yellow); }
       #row-main #col-util .element .inner #footer-scroll {
         height: 3%;
         padding-left: 1rem;
@@ -13429,9 +13444,16 @@ body[class*=jconfirm-no-scroll-] {
 
 @font-face {
   font-family: 'SwartFont';
-  src: url("/fonts/SwartFont.ttf?v=4.7.0") format("truetype");
+  src: url("/fonts/SwartFont.eot");
+  src: local("SwartFont"), url("/fonts/SwartFont.eot?#iefix") format("embedded-opentype"), url("/fonts/SwartFont.woff2") format("woff2"), url("/fonts/SwartFont.woff") format("woff"), url("/fonts/SwartFont.ttf?v=4.7.0") format("truetype"), url("/fonts/SwartFont.svg#SwartFont") format("svg");
   font-weight: normal;
   font-style: normal; }
+/*@font-face {
+    font-family: 'SwartFont';
+    src: url('/fonts/SwartFont.ttf?v=4.7.0') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}*/
 .swart {
   display: inline-block;
   font: normal normal normal 16px/1 SwartFont;

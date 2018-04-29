@@ -153,6 +153,15 @@ define(['dws/model-utils'], function (ModelUtil) {
         mapView: ko.observable(''),
         sceneView: ko.observable(''),
         viewInfo: ko.observable(''),
+        viewInfoIcon: function (element, checked) {
+            $(element).empty();
+            if (checked) {
+                $(element).append('<i class="fa fa-check-square">');
+            }
+            else {
+                $(element).append('<i class="fa fa-square">');
+            }
+        },
         cursorMap: ko.observable(''),
         cursorScreen: ko.observable('')
 

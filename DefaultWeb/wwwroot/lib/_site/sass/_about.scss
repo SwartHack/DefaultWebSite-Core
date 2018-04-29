@@ -1,0 +1,49 @@
+﻿/// <reference path="defaultwebsite.scss" />
+@mixin dws-about() {
+    padding-left: 1vw;
+    padding-right: 1vw;
+
+    #software {
+        margin-bottom: 2vh;
+
+        #software-info {
+            margin: 2vh 2vw 2vh 2vw;
+            padding: .5vh 1vw 1vh 1vw;
+            font-style: italic;
+            font-weight: 500;
+            text-align: justify;
+            background-color: lightgray;
+        }
+
+        #server-icon {
+            background-color: #ddd;
+            margin-left: 2vw;
+            -webkit-animation: pulse 1s infinite;
+            animation: pulse 3s infinite;
+        }
+
+        #software-list {
+            font-size: 2vh;
+            line-height: 2.3vh;
+            margin: 2vh 2vw 2vh 2vw;
+            padding: 1vh 1.5vw 1vh 1.5vw;
+            text-align:center;
+        }
+    }
+
+    #hardware {
+        margin-bottom: 2vh;
+
+        #hardware-icon {
+            margin-left: 2vw;
+            -webkit-animation: dws-rocket-flash 1s infinite;
+            animation: 1s linear infinite dws-rocket-flash;
+        }
+
+        #hardware-list {
+        }
+    }
+
+    #stats {
+    }
+}

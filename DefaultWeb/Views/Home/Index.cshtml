@@ -27,17 +27,17 @@
 
 <div id="row-main" class="row no-gutters">
     
-    <div id="col-util" class="col-5 h-100">
+    <div id="col-util" class="col-5">
         <div class="element d-flex h-100 flex-column">
             <div class="inner d-flex h-100 flex-column align-items-center justify-content-between">
 
-                <div class="row no-gutters w-100">
+                <div id="row-notebook" class="row no-gutters w-100">
                     <div id="col-dws-notebook" class="col-12 no-gutters">
                         @{ Html.RenderPartial("~/Views/Notebook/NotebookMain.cshtml");}
                     </div>
                </div>
 
-                <div class="row no-gutters w-100">
+                <div id="row-carousel" class="row no-gutters w-100">
                     <div id="col-dws-carousel" class="col-12 no-gutters">
                         @{ Html.RenderPartial("~/Views/Shared/_Carousel.cshtml");}
                     </div>

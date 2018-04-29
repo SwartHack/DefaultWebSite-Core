@@ -34,14 +34,20 @@
 @import "./lib/notepad.scss";
 @import "./lib/notepaper.scss";
 
-
-
 @font-face {
+    font-family: 'SwartFont';
+    src: url('/fonts/SwartFont.eot');
+    src: local('SwartFont'), url('/fonts/SwartFont.eot?#iefix') format('embedded-opentype'), url('/fonts/SwartFont.woff2') format('woff2'), url('/fonts/SwartFont.woff') format('woff'), url('/fonts/SwartFont.ttf?v=4.7.0') format('truetype'), url('/fonts/SwartFont.svg#SwartFont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*@font-face {
     font-family: 'SwartFont';
     src: url('/fonts/SwartFont.ttf?v=4.7.0') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 
 .swart {
     display: inline-block;

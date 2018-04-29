@@ -344,8 +344,6 @@
     <None Include="wwwroot\lib\_site\js\dws\model.js" />
     <None Include="wwwroot\lib\_site\js\dws\sandpit.js" />
     <None Include="wwwroot\lib\_site\js\dws\thumbnail.js" />
-    <None Include="wwwroot\lib\_site\js\pdfjs\pdf.js" />
-    <None Include="wwwroot\lib\_site\js\pdfjs\pdf.worker.js" />
     <None Include="wwwroot\lib\_site\fonts\fontawesome-webfont.svg" />
     <None Include="wwwroot\lib\_site\fonts\fontawesome-webfont.woff2" />
     <None Include="wwwroot\lib\_site\Gruntfile.js" />
@@ -360,9 +358,6 @@
     <None Include="wwwroot\lib\_site\dist\css\images\annotation-paragraph.svg" />
     <None Include="wwwroot\lib\_site\dist\css\images\grab.cur" />
     <None Include="wwwroot\lib\_site\dist\css\images\grabbing.cur" />
-    <None Include="wwwroot\lib\_site\js\lib\endless_scroll.js" />
-    <None Include="wwwroot\lib\_site\js\pdfjs\pdf-debugger.js" />
-    <None Include="wwwroot\lib\_site\js\pdfjs\pdf_viewer.js" />
     <None Include="wwwroot\lib\_site\sass\_about.scss" />
     <None Include="wwwroot\lib\_site\sass\_arcgis.scss" />
     <None Include="wwwroot\lib\_site\sass\defaultwebsite.scss" />
@@ -392,10 +387,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Exiflib\ExifLib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Reference Include="ExifLib">
+      <HintPath>..\Exiflib\bin\debug\ExifLib.dll</HintPath>
+    </Reference>
     <Reference Include="NReco.VideoConverter.LT">
       <HintPath>..\lib\NReco.VideoConverter.LT.dll</HintPath>
     </Reference>

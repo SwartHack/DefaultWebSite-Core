@@ -17,6 +17,7 @@
     "bootstrap": "v4.0.0-beta"
   },
   "devDependencies": {
-    "jquery-confirm": "craftpip/jquery-confirm#^3.3.2"
+    "jquery-confirm": "craftpip/jquery-confirm#^3.3.2",
+    "wellknown": "^0.5.0"
   }
 }

@@ -10,5 +10,6 @@
     "dist-css": "cd ./wwwroot/lib/_site && grunt theme",
     "build": "cd ./wwwroot/lib/_site && grunt build",
     "build-all": "cd ./wwwroot/lib/_site && grunt build-all"
-  }
+  }
+
 }

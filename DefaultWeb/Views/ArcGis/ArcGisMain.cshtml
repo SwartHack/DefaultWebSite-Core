@@ -97,18 +97,23 @@
                                 </div>
                                 <div id="map-reference">
                                     <div class="map-reference-label">
-                                        <label for="map-ref-name">Name</label>
-                                        <div id="map-ref-name" data-bind=""></div>
+                                        <label for="map-ref-wkid">WKID:</label>
+                                        <div id="map-ref-wkid" data-bind="text: viewInfo().wkid"></div>
                                     </div>
+                                    <div id="map-ref-wkname" data-bind="text: viewInfo().wkname"></div>
                                     <div class="map-reference-label">
-                                        <label for="map-ref-wkid">WKID</label>
-                                        <div id="map-ref-wkid" data-bind=""></div>
+                                        <label for="map-ref-wkid">Latest WKID:</label>
+                                        <div id="map-ref-wkid" data-bind="text: viewInfo().latestWkid"></div>
                                     </div>
-                                    <div class="map-reference-label">
-                                        <label for="map-ref-desc">Description</label>
-                                        <div id="map-ref-desc" data-bind=""></div>
+                                    <div id="map-ref-wkname" data-bind="text: viewInfo().latestWkname"></div>
+                                    <div id="map-ref-wkt" data-bind="text: viewInfo().latestWkt"></div>
+                                    <div id="map-reference-meta">
+                                        <div id="is-geographic" data-bind="viewInfoIcon(this,viewInfo().isGeographic)">Geographic</div>
+                                        <div id="is-mercator" data-bind="text: viewInfo().isWebMercator">WebMercator</div>
+                                        <div id="is-wgs84" data-bind="text: viewInfo().isWGS84">WGS84</div>
+                                        <div id="is-wrappable" data-bind="text: viewInfo().isWrappable">Wrappable</div>
                                     </div>
-                                
+
                                 </div>
                             </div>
                         </div>

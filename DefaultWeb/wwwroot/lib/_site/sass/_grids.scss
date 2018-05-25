@@ -43,6 +43,7 @@ html {
                     display: flex;
                     flex-direction: column;
                     flex-grow: 2;
+                    flex-shrink:0;
 
                     #col-dws-notebook {
                         display: flex;
@@ -59,6 +60,7 @@ html {
                     display: flex;
                     flex-direction: column;
                     flex-grow: 1;
+                    flex-shrink:0;
 
                     #col-dws-carousel {
                         display: flex;
@@ -76,7 +78,9 @@ html {
 
 
                 #footer-scroll {
-                    height: 3%;
+                    display:flex;
+                    flex-grow:1;
+                    flex-shrink:0;
                     padding-left: 1rem;
                     padding-right: 1rem;
                 }

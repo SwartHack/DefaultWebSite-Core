@@ -43,9 +43,8 @@
         #carousel-item-1 {
             display: flex;
             flex-flow: column;
-            height: 100%;
-            width: 100%;
-            padding-bottom: 2rem;
+            flex-grow: 1;
+            align-items: center;
             background-color: transparent;
             //border: 1px solid black;
         }
@@ -53,11 +52,10 @@
         #carousel-item-2 {
             display: flex;
             flex-flow: column;
+            flex-grow: 1;
+            align-items: center;
             background-color: transparent;
             //border: 1px solid black;
-            height: 100%;
-            align-items: center;
-
             a {
                 i {
                     //height: 100%;
@@ -78,11 +76,10 @@
         #carousel-item-3 {
             display: flex;
             flex-flow: column;
+            flex-grow: 1;
+            align-items: center;
             background-color: transparent;
             //border: 1px solid black;
-            height: 100%;
-            align-items: center;
-
 
             a {
 

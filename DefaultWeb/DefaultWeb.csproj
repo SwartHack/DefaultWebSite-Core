@@ -9,6 +9,7 @@
     <Company>DefaultWeb</Company>
     <Authors>DefaultWeb</Authors>
     <StartupObject></StartupObject>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>

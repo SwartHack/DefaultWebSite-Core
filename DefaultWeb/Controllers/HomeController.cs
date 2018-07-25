@@ -62,6 +62,12 @@ namespace DefaultWeb.Controllers
                     ViewData["ReturnUrl"] = "/Sandpit/SandpitMain";
                     ViewData["ReturnTarget"] = "#main-target-area";
                 }
+
+                if (type == "Contact")
+                {
+                    ViewData["ReturnUrl"] = String.Format("/Home/GetView/{0}", page);
+                    ViewData["ReturnTarget"] = "#main-target-area";
+                }
             }
 
            

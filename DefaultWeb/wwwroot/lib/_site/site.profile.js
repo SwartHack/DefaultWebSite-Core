@@ -16,8 +16,8 @@ var profile = {
 
     // `basePath` is relative to the directory containing this profile file; in this case, it is being set to the
     // src/ directory, which is the same place as the `baseUrl` directory in the loader configuration.
-    basePath: "./js/",
-    tlmSiblings:false,
+    //basePath: "./js/lib/",
+    tlmSiblings: false,
     action: "release",
     optimize: "closure", // requires Java 6 or later: http://code.google.com/p/closure-compiler/wiki/FAQ
     layerOptimize: "closure",
@@ -46,10 +46,6 @@ var profile = {
     packages: [
         // "app" is a sample path for your application
         // set this accordingly
-        {
-            name: "dws",
-            location: "dws"
-        },
         {
             name: "dojo",
             location: "lib/dojo"
@@ -87,7 +83,11 @@ var profile = {
                     return /\.js$/.test(filename);
                 }
             }
-        }
+        },
+        {
+            name: "dws",
+            location: "dws"
+        },
        
     ],
 
@@ -113,11 +113,12 @@ var profile = {
                 "esri/core/request/script",
 
                 // esri stuff for 3D maps
+                // eventually have to add more!?!?
                 "esri/portal/support/layersCreator",
                 "esri/views/3d/layers/VectorTileLayerView3D"
-            ]
+            ],
             // You can define the locale for your application if you like
-            // includeLocales: ["en-us"]
+           includeLocales: ["en-us"]
         },
         "esri/identity/IdentityManager": {
             include: [

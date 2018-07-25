@@ -213,6 +213,7 @@ namespace DefaultWeb
                 routes.MapRoute("navbar", "Home/{page:regex(^Contact|About|Ack$)}" , new { controller = "Home", action = "Index" });
                 routes.MapRoute("notepad", "Notepad/{page:regex(^DefaultWebSite|FrameWorks|WinForms|AspNet|NetCore$)}", new { controller = "Home", action = "Index" });
                 routes.MapRoute("sandpit", "Sandpit/", new { controller = "Home", action = "Index", page = "Sandpit" });
+                routes.MapRoute("contact", "Contact/", new { controller = "Home", action = "Index", page = "Contact" });
 
                 routes.MapRoute(
                     name: "default",

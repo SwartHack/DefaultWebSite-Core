@@ -78,7 +78,7 @@ module.exports = function(grunt) {
                     sourceMap: false,
                     expand:true,
                 },
-                src: '',
+                src: [''],
                 dest: ''
             }
         },
@@ -109,14 +109,7 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            pdfworker: {
-                expand: true,
-                cwd: 'dist/js/',
-                src: 'pdf.worker.js',
-                dest: '../../js/',
-                filter: 'isFile'
-            },
-            fonts: {
+           fonts: {
                 expand: true,
                 cwd: 'fonts/',
                 src: '*.*',
@@ -130,38 +123,91 @@ module.exports = function(grunt) {
                 dest: '../../images/',
                 filter: 'isFile'
             },
+            pdfworker: {
+                expand: true,
+                cwd: 'js/pdfjs/',
+                src: 'pdf.worker.js',
+                dest: 'dist/js/',
+                filter: 'isFile'
+            },
+            pdfworkerdeploy: {
+                expand: true,
+                cwd: 'dist/js/',
+                src: 'pdf.worker.js',
+                dest: '../../js/',
+                filter: 'isFile'
+            },
+            dijit: {
+                expand: true,
+                cwd: 'js/lib/dijit/themes/',
+                src: 'dijit.css',
+                dest: 'dist/css/',
+                filter: 'isFile'
+            },
+            jqueryuicss: {
+                expand: true,
+                cwd: '../jquery-ui/themes/base/',
+                src: 'jquery-ui.css',
+                dest: 'dist/css/',
+                filter: 'isFile'
+            },
+            dwsjs: {
+                expand: true,
+                cwd: 'dist/js/lib/dws/',
+                src: '*.*',
+                dest: 'dist/js/dws',
+                filter: 'isFile'
+            },
+            sitejs: {
+                expand: true,
+                cwd: 'dist/js/',
+                src: '*.*',
+                dest: '../../js/',
+                filter: 'isFile'
+            }
         },
         uglify: {
-            wwwroot: {
+            header: {
                 options: {
                     compress: {
                         warnings: false
                     },
                     mangle: true,
                     preserveComments: 'some',
-                    sourceMap: '../../js/defaultwebsite.min.js.map',
+                    sourceMap: '../../js/header.min.js.map',
 
                 },
                 files: {
-                    '../../js/defaultwebsite.min.js': ['<%= pkg.deployjs %>'],
                     '../../js/header.min.js': ['<%= pkg.headerjs %>']
+                }
+            },
+            jcore: {
+                options: {
+                    compress: {
+                        warnings: false
+                    },
+                    mangle: true,
+                    preserveComments: 'some',
+                    sourceMap: '../../js/jcore.min.js.map',
+
+                },
+                files: {
+                    '../../js/jcore.min.js': ['<%= pkg.corejs %>']
                 }
             }
 
         },
         dojo: {
-            dist: {
+            deploy: {
                 options: {
-                    releaseDir: '../dist/js/lib',
+                    releaseDir: '../../../js/lib',
+                    profile: 'site.profile.js',
+                    dojo: 'js/lib/dojo/dojo.js',
+                    load: 'build',
+                    basePath: 'js/'
                 }
-            },
-            options: {
-                profile: 'site.profile.js',
-                dojo: './js/lib/dojo/dojo.js',
-                load: 'build',
-                cwd: './',
-                basePath: './js/'
             }
+            
         },
          exec: {
             //postcss: {
@@ -177,16 +223,19 @@ module.exports = function(grunt) {
     grunt.registerTask('none', function () { });
     grunt.registerTask('default', '');
 
-
     //////////////////////////////////////////////////////////
     //// main build, must have dist built
     //////////////////////////////////////////////////////////
-    grunt.registerTask('deploy', function () {
+    grunt.registerTask('build', function () {
+        grunt.task.run('dist');
+
         grunt.task.run('clean:wwwroot');
         grunt.task.run('cssmin:wwwroot');
-        grunt.task.run('uglify:wwwroot');
-        grunt.task.run('copy:pdfworker');
-        grunt.task.run('esri-dojo');
+        grunt.task.run('uglify:header');
+        grunt.task.run('uglify:jcore');
+        grunt.task.run('copy:pdfworkerdeploy');
+       
+        grunt.task.run('site-dojo-js');
 
         //// fonts and images
         //    grunt.task.run('copy:fonts');
@@ -194,46 +243,48 @@ module.exports = function(grunt) {
 
     });
 
-
-    //////////////////////////////////////////////////////////
-    //// main dist, builds default theme and js
-    //////////////////////////////////////////////////////////
     grunt.registerTask('dist', function () {
-        grunt.task.run('theme');
-        grunt.task.run('js');
+        grunt.task.run('dist-css');
+        grunt.task.run('dist-js');
+        
+
+        //// fonts and images
+        //    grunt.task.run('copy:fonts');
+        //    grunt.task.run('copy:images');
 
     });
 
-    //////////////////////////////////////////////////////////
-    //// builds ALL themes and js, long running
-    //////////////////////////////////////////////////////////
-    grunt.registerTask('dist-all', function () {
-        grunt.task.run('theme');     
+    grunt.registerTask('dist-css', function () {
+        grunt.task.run('theme');
         grunt.task.run('videojs-css');
         grunt.task.run('esri-css');
-        grunt.task.run('js');
+        grunt.task.run('copy:jqueryuicss');
     });
 
     //////////////////////////////////////////////////////////
     //// deal with the javascript, don't use VS bundle-minify'
     //////////////////////////////////////////////////////////
-    grunt.registerTask('js', function () {
+    grunt.registerTask('dist-js', function () {
         grunt.task.run('clean:distjs');
         grunt.task.run('concat:header');
         grunt.task.run('concat:jcore');
-        //grunt.task.run('concat:site');
-        //grunt.task.run('eslint');
+        grunt.task.run('copy:pdfworker');
     });
 
+
     //////////////////////////////////////////////////////////
-    //// Build ESRI dojo loader
+    //// deal with the videojs css seperately, don't build with site!
     //////////////////////////////////////////////////////////
-    grunt.registerTask('esri-dojo', function () {
-        grunt.config('clean.any.src', ['./dist/js/lib']);
-        grunt.task.run('clean:any');
-        grunt.task.run('dojo');
-        grunt.config('clean.any.src', ['./dist/js/lib/**/*.uncompressed.js']);
-        grunt.task.run('clean:any');
+    grunt.registerTask('videojs-css', function (files) {
+        var scssSrc = '../video-js/src/css/video-js.scss';
+        var scssDest = 'dist/css/video-js.css';
+        grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
+        grunt.config('sass.dist.options.precision', 10);
+        grunt.config('sass.dist.options.unix-newlines', true);
+        grunt.task.run('sass');
+
+        grunt.config('postcss.dist.src', scssDest);
+        grunt.task.run('postcss');
     });
 
     //////////////////////////////////////////////////////////
@@ -252,23 +303,34 @@ module.exports = function(grunt) {
 
         grunt.config('postcss.dist.src', scssDest);
         grunt.task.run('postcss');
+
+        // copy dijit.css basic components
+        grunt.task.run('copy:dijit');
+
     });
-  
 
     //////////////////////////////////////////////////////////
-    //// deal with the videojs css seperately, don't build with site!
+    //// Build ESRI dojo loader
     //////////////////////////////////////////////////////////
-    grunt.registerTask('videojs-css', function (files) {
-        var scssSrc = '../video-js/src/css/video-js.scss';
-        var scssDest = 'dist/css/video-js.css';
-        grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
-        grunt.config('sass.dist.options.precision', 10);
-        grunt.config('sass.dist.options.unix-newlines', true);
-        grunt.task.run('sass');
+    grunt.registerTask('site-dojo-js', function () {
+        grunt.config('clean.any.src', ['../../js/lib']);
+        grunt.task.run('clean:any');
+        grunt.task.run('dojo:deploy');
+        grunt.config('clean.any.src', ['../../js/lib/**/*.uncompressed.js']);
+        grunt.task.run('clean:any');
 
-        grunt.config('postcss.dist.src', scssDest);
-        grunt.task.run('postcss');
+        grunt.task.run('copy:dwsjs');
     });
+
+
+    //////////////////////////////////////////////////////////
+    //// builds ALL themes and js, long running
+    //////////////////////////////////////////////////////////
+    //grunt.registerTask('dist-all', function () {
+    //    grunt.task.run('theme');     
+    //    
+    //    grunt.task.run('js');
+    //});
 
     //////////////////////////////////////////////////////////
     /// Builds default bootstrap and cerulean themes

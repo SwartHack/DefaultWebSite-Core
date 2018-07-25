@@ -14,7 +14,13 @@
     </environment>
 
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/defaultwebsite.min.css" asp-append-version="true" />
+        @*<link rel="stylesheet" href="@ViewData["ThemeProduction"]" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/jquery-ui.css" asp-append-version="false" />
+        <link rel="stylesheet" href="~/css/video-js.css" />
+        <link rel="stylesheet" href="~/css/esri.css" />
+        <link rel="stylesheet" href="~/css/digit.css" />*@
+
         <script src="~/js/header.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
     </environment>
@@ -100,8 +106,10 @@
         <script src="~/lib/_site/js/lib/dojo/dojo.js"></script>
         @*<script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>*@
     </environment>
+
     <environment names="Staging,Production">
-        <script src="~/js/defaultwebsite.min.js" asp-append-version="true"></script>
+        <script src="~/js/jcore.js" asp-append-version="true"></script>
+        <script src="~/js/lib/dojo/dojo.js"></script>
     </environment>
 
     @RenderSection("JS", required: true)

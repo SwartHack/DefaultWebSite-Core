@@ -1,0 +1,2 @@
+//>>built
+define(function(){return{waitStatus:function(b,a){b?$(a).addClass("waiting"):$(a).removeClass("waiting")},loadingStatus:function(b,a){$(a)[0].complete||($(a)[0].addClass("loading"),$(a).load(function(){$(a).removeClass("loading")}))},callAborted:function(b,a,c){}}});

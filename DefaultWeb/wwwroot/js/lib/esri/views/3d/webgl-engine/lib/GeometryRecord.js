@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","./IdGen"],function(h,k,b){return function(){function a(c,b,d,e,f,g){this.id=a._idGen.gen(c.getId());this.geometry=c;this.materials=b;this.transformation=d;this.instanceParameters=e;this.origin=f;this.customTransformation=g}return a.prototype.getId=function(){return this.id},a.prototype.getStaticTransformation=function(){return this.transformation},a.prototype.getShaderTransformation=function(){return this.customTransformation?this.customTransformation(this.transformation):
+this.transformation},a._idGen=new b,a}()});

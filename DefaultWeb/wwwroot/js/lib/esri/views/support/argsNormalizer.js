@@ -1,0 +1,2 @@
+//>>built
+define(["../../geometry/ScreenPoint"],function(e){return{toScreenPoint:function(a,d,c){var b;return c||(c=new e),Array.isArray(a)?(b=a,a=b[0],d=b[1]):"object"==typeof a&&(b=a,a=b.x,d=b.y),c.x=a,c.y=d,c}}});

@@ -1,0 +1,2 @@
+//>>built
+define({transparency:"Gennemsigtighed",suggested:"Forslag",recent:"Nylig",more:"Mere",moreColorsTooltip:"Se flere farver.",paletteTooltip:"V\u00e6lg en farve.",noColorTooltip:"Ingen farve",hexInputTooltip:"En brugerdefineret farve som hexadecimalt tal (#FFFF00)."});

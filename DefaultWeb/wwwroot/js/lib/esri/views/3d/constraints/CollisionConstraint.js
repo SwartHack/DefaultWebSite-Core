@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../../core/tsSupport/declareExtendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ../../../core/Accessor".split(" "),function(a,c,f,e,d,g){Object.defineProperty(c,"__esModule",{value:!0});a=function(a){function b(){var b=null!==a&&a.apply(this,arguments)||this;return b.enabled=!0,b}return f(b,a),e([d.property()],b.prototype,"enabled",void 0),b=e([d.subclass("esri.views.3d.constraints.CollisionConstraint")],b)}(d.declared(g));c.CollisionConstraint=
+a;c["default"]=a});

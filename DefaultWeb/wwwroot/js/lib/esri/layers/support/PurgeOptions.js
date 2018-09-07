@@ -1,0 +1,2 @@
+//>>built
+define(["../../core/declare","dojo/Stateful"],function(d,e){return d([e],{declaredClass:"esri.layers.support.PurgeOptions",constructor:function(a,b){this.parent=a;for(var c in b)this[c]=b[c]},_displayCountSetter:function(a){this.displayCount=a;this.parent.refresh()}})});

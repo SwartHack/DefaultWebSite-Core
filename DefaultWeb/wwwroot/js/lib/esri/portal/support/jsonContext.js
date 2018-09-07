@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","../Portal","../../core/urlUtils"],function(d,a,b,c){Object.defineProperty(a,"__esModule",{value:!0});a.createForItem=function(a){return{origin:"portal-item",url:c.urlToObject(a.itemUrl),portal:a.portal||b.getDefault()}}});

@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","./TerrainConst","./TilePerLayerInfo"],function(l,m,h,k){return function(){function c(a){this.parent=null;this.lij=a;this.layerInfo=Array(h.LayerClass.LAYER_CLASS_COUNT)}return c.prototype.tileDataAvailable=function(a,b,d){return(b=this.layerInfo[d][b].tilemap)?"unavailable"!==b.getAvailability(a.lij[1],a.lij[2]):!0},c.prototype.modifyLayers=function(a,b,d){a=b.length;for(var c=this.layerInfo[d],f=Array(a),e=0;a>e;e++){var g=b[e];f[e]=-1<g?c[g]:new k(d)}this.layerInfo[d]=
+f},c}()});

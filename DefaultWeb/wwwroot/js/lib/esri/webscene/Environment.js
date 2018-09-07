@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../core/tsSupport/declareExtendsHelper ../core/tsSupport/decorateHelper ../core/JSONSupport ../core/accessorSupport/decorators ./Lighting".split(" "),function(k,l,g,e,h,c,b){return function(f){function a(a){a=f.call(this,a)||this;return a.lighting=new b,a}return g(a,f),d=a,a.prototype.clone=function(){return new d({lighting:b.prototype.clone.call(this.lighting)})},a.sanitizeJSON=function(a){return{lighting:a.lighting?b.sanitizeJSON(a.lighting):(new b).toJSON()}},e([c.property({type:b,
+json:{write:!0}})],a.prototype,"lighting",void 0),a=d=e([c.subclass("esri.webscene.Environment")],a);var d}(c.declared(h))});

@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","./sql92grammar"],function(a,b,c){Object.defineProperty(b,"__esModule",{value:!0});a=function(){function a(){}return a.parse=function(a){return c.parse(a)},a}();b.WhereGrammar=a});

@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../core/accessorSupport/decorators ../../core/lang ./PointCloudFilter".split(" "),function(k,l,f,c,b,g,h){return function(e){function a(a){a=e.call(this)||this;return a.includedReturns=[],a.type="return",a}return f(a,e),d=a,a.prototype.clone=function(){return new d({field:this.field,includedReturns:g.clone(this.includedReturns)})},c([b.property({type:[String],json:{write:{enabled:!0,isRequired:!0}}})],
+a.prototype,"includedReturns",void 0),c([b.property()],a.prototype,"type",void 0),a=d=c([b.subclass("esri.layers.pointCloudFilters.PointCloudReturnFilter")],a);var d}(b.declared(h))});

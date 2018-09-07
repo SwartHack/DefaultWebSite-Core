@@ -1,0 +1,2 @@
+//>>built
+define({transparency:"Prosojnost",suggested:"Predlagano",recent:"Nedavno",more:"Ve\u010d",moreColorsTooltip:"Prika\u017ei ve\u010d barv.",paletteTooltip:"Izberi barvo.",noColorTooltip:"Brez barve",hexInputTooltip:"Barva po meri v \u0161estnajsti\u0161kem zapisu (#FFFF00)."});

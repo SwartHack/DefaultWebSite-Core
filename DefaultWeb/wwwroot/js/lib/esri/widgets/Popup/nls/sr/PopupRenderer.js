@@ -1,0 +1,2 @@
+//>>built
+define({attach:"Prilozi",fields:"Polja",fieldsSummary:"Lista atributa i vrednosti",media:"Mediji",next:"Slede\u0107e",numCharts:"Broj grafikona",numImages:"Broj slika",noTitle:"Bez naslova",previous:"Prethodno"});

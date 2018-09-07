@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","../../../../../geometry/ScreenPoint"],function(c,a,b){Object.defineProperty(a,"__esModule",{value:!0});a.screenPointFromEvent=function(a){return new b({x:a.data.x,y:a.data.y})}});

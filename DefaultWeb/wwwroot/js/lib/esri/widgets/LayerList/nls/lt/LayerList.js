@@ -1,0 +1,2 @@
+//>>built
+define({noItemsToDisplay:"\u0160iuo metu n\u0117ra rodytin\u0173 element\u0173.",layerInvisibleAtScale:"Nematoma naudojant dabartin\u012f mastel\u012f",layerError:"\u012ekeliant \u0161\u012f sluoksn\u012f \u012fvyko klaida",untitledLayer:"Sluoksnis be pavadinimo"});

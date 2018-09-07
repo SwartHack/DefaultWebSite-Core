@@ -1,0 +1,2 @@
+//>>built
+define("require exports ./PointCloudFilter ./PointCloudValueFilter ./PointCloudBitfieldFilter ./PointCloudReturnFilter".split(" "),function(f,a,b,c,d,e){Object.defineProperty(a,"__esModule",{value:!0});a.types={key:"type",base:b,typeMap:{value:c,bitfield:d,"return":e}}});

@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../core/tsSupport/declareExtendsHelper ../core/tsSupport/decorateHelper ./Symbol3DLayer ./support/materialUtils ../core/accessorSupport/decorators".split(" "),function(k,l,f,c,g,h,b){return function(e){function a(a){a=e.call(this)||this;return a.material=null,a.type="line",a.size=1,a}return f(a,e),d=a,a.prototype.clone=function(){return new d({enabled:this.enabled,elevationInfo:this.elevationInfo&&this.elevationInfo.clone(),material:this.material&&this.material.clone(),size:this.size})},
+c([b.property()],a.prototype,"material",void 0),c([b.property()],a.prototype,"type",void 0),c([b.property(h.screenSizeProperty)],a.prototype,"size",void 0),a=d=c([b.subclass("esri.symbols.LineSymbol3DLayer")],a);var d}(b.declared(g))});

@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","../../../../core/ObjectPool"],function(e,f,c){return function(){function a(){this.vertexData=new Map;this.vertexCount=0;this.indexData=[]}return a.prototype.release=function(){this.clear()},a.prototype.clear=function(){this.vertexData.clear();this.vertexCount=0;this.indexData=[]},a.prototype.update=function(a,c,d){for(var b in a)this.vertexData.set(b,a[b]);for(b in this.vertexData)null===a[b]&&this.vertexData["delete"](b);this.vertexCount=c;this.indexData=d},a.pool=new c(a),
+a}()});

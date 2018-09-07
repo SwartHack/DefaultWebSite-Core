@@ -1,0 +1,3 @@
+//>>built
+define(["dws/model"],function(c){return{xhrRequest:function(a){var b=new XMLHttpRequest;b.onload=function(){4==this.readyState&&200==this.status?alert(this.responseText):alert("Message not found!"+this.readyState+":"+this.status+"-"+this.responseText)};b.open("GET",a,!0);b.send()},ajaxRequest:function(a){$.ajax(a).done(function(b,a,d){c.data(b)}).fail(function(b,a,d){c.abort(b,a,d)}).always(function(){})},ajaxRequestDefer:function(a,b){$.ajax(a).done(function(a,d,c){b.resolve(a)}).fail(function(a,
+d,c){b.reject(this.responseText+"\n"+c)}).always(function(){})}}});

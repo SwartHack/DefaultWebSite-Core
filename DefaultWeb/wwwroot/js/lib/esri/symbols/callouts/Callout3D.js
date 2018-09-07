@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper dojo/_base/lang ../../core/JSONSupport ../../core/accessorSupport/decorators".split(" "),function(k,l,f,d,g,h,c){return function(e){function b(a){a=e.call(this)||this;return a.visible=!0,a}return f(b,e),b.prototype.normalizeCtorArgs=function(a){return a&&a.type?(a=g.mixin({},a),delete a.type,a):a},b.prototype.clone=function(){},d([c.property({type:String,readOnly:!0,json:{read:!1,write:{ignoreOrigin:!0}}})],
+b.prototype,"type",void 0),d([c.property({readOnly:!0})],b.prototype,"visible",void 0),b=d([c.subclass("esri.symbols.callouts.Callout3D")],b)}(c.declared(h))});

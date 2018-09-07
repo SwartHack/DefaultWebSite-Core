@@ -1,0 +1,2 @@
+//>>built
+define("require exports ./gfx/svg ./gfx/Circle ./gfx/Group ./gfx/Path ./gfx/Image ./gfx/Rect ./gfx/Shape ./gfx/Surface ./gfx/Text".split(" "),function(m,a,b,c,d,e,f,g,h,k,l){Object.defineProperty(a,"__esModule",{value:!0});a.createSurface=b.createSurface;a.Circle=c["default"];a.Group=d["default"];a.Path=e["default"];a.Image=f["default"];a.Rect=g["default"];a.Shape=h["default"];a.Surface=k["default"];a.Text=l["default"]});

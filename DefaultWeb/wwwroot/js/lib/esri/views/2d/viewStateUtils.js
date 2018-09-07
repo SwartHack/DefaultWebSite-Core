@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports"],function(k,e){Object.defineProperty(e,"__esModule",{value:!0});var g=Math.PI/180;e.snapToPixel=function(c,b,a){var d=a.resolution;a=a.size;return c[0]=d*(Math.round(b[0]/d)+a[0]%2*.5),c[1]=d*(Math.round(b[1]/d)+a[1]%2*.5),c};e.getOuterSize=function(c,b){var a=b.rotation*g,d=Math.abs(Math.cos(a)),a=Math.abs(Math.sin(a)),f=b.size;b=f[0];f=f[1];return c[0]=Math.round(f*a+b*d),c[1]=Math.round(f*d+b*a),c};e.getBBox=function(c,b,a,d){var f=b[0];b=b[1];var e=d[0];d=d[1];a*=.5;
+return c[0]=f-a*e,c[1]=b-a*d,c[2]=f+a*e,c[3]=b+a*d,c};e.bboxIntersects=function(c,b){var a=c[1],d=c[2],f=c[3],e=b[0],g=b[1],h=b[3];return!(c[0]>b[2]||e>d||a>h||g>f)}});

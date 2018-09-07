@@ -1,0 +1,2 @@
+//>>built
+define(["../../core/JSONSupport"],function(a){return a.createSubclass({declaredClass:"esri.tasks.support.DataFile",properties:{itemId:{value:null,json:{read:{source:"itemID"},write:{target:"itemID"}}},url:null}})});

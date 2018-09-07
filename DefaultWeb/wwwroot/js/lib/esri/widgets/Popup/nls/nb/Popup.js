@@ -1,0 +1,2 @@
+//>>built
+define({zoom:"Zoom til",next:"Neste geoobjekt",previous:"Forrige geoobjekt",close:"Lukk",dock:"Fest",undock:"L\u00f8sne",menu:"Meny",untitled:"Uten tittel",pageText:"{index} av {total}",selectedFeature:"Valgt geoobjekt",selectedFeatures:"{total} resultater",loading:"Laster inn",collapse:"Skjul",expand:"Utvid"});

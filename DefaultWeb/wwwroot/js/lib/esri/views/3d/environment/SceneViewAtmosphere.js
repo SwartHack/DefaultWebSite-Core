@@ -1,0 +1,2 @@
+//>>built
+define(["../../../core/Accessor"],function(b){return b.createSubclass({properties:{quality:{}},quality:"low",_qualitySetter:function(a){-1!==["low","high"].indexOf(a)&&this._set("quality",a)},clone:function(){return new this.constructor({quality:this.quality})}})});

@@ -1,0 +1,2 @@
+//>>built
+define({noItemsToDisplay:"No existen elementos disponibles actualmente para mostrar.",layerInvisibleAtScale:"Invisible en la escala actual",layerError:"Se ha producido un error al cargar esta capa",untitledLayer:"Capa sin t\u00edtulo"});

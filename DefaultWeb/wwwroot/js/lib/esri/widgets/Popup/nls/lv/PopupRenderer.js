@@ -1,0 +1,2 @@
+//>>built
+define({attach:"Piesaistes",fields:"Lauki",fieldsSummary:"Atrib\u016btu un v\u0113rt\u012bbu saraksts",media:"Mediji",next:"T\u0101l\u0101k",numCharts:"Diagrammu skaits",numImages:"Att\u0113lu skaits",noTitle:"Bez virsraksta",previous:"Iepriek\u0161\u0113jais"});

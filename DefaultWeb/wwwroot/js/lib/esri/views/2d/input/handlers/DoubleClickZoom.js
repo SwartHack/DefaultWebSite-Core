@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","../../../../core/tsSupport/extendsHelper","../../../input/InputHandler","../../../input/handlers/support"],function(b,e,g,h,k){Object.defineProperty(e,"__esModule",{value:!0});b=function(b){function d(a,f){var c=b.call(this,!0)||this;return c.view=a,c.registerIncoming("double-click",f,function(a){return c._handleDoubleClick(a,f)}),c}return g(d,b),d.prototype._handleDoubleClick=function(a,b){k.eventMatchesPointerType(a.data["native"],"primary")&&(a.stopPropagation(),b?
+this.view.navigation.zoomOut([a.data.x,a.data.y]):this.view.navigation.zoomIn([a.data.x,a.data.y]))},d}(h.InputHandler);e.DoubleClickZoom=b});

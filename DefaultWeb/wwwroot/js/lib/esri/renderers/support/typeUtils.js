@@ -1,0 +1,2 @@
+//>>built
+define("require exports ../Renderer ../SimpleRenderer ../UniqueValueRenderer ../ClassBreaksRenderer".split(" "),function(f,a,b,c,d,e){Object.defineProperty(a,"__esModule",{value:!0});a.types={key:"type",base:b,typeMap:{simple:c,"unique-value":d,"class-breaks":e}}});

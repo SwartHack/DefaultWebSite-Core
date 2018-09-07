@@ -1,0 +1,2 @@
+//>>built
+define({transparency:"Przezroczysto\u015b\u0107",suggested:"Sugerowane",recent:"Ostatnia mapa",more:"Wi\u0119cej",moreColorsTooltip:"Zobacz wi\u0119cej kolor\u00f3w.",paletteTooltip:"Wybierz kolor.",noColorTooltip:"Brak koloru",hexInputTooltip:"Kolor niestandardowy w zapisie szesnastkowym (#FFFF00)."});

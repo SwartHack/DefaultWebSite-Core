@@ -1,0 +1,2 @@
+//>>built
+define({attach:"Bijlagen",fields:"Velden",fieldsSummary:"Lijst met attributen en waarden",media:"Media",next:"Volgende",numCharts:"Aantal grafieken",numImages:"Aantal afbeeldingen",noTitle:"Naamloos",previous:"Vorige"});

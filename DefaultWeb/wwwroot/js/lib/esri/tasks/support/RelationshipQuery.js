@@ -1,0 +1,3 @@
+//>>built
+define(["../../core/Accessor"],function(e){return e.createSubclass({declaredClass:"esri.tasks.support.RelationshipQuery",properties:{definitionExpression:"",geometryPrecision:null,maxAllowableOffset:null,objectIds:null,outFields:null,outSpatialReference:null,relationshipId:null,returnGeometry:!1},toJSON:function(){var a={definitionExpression:this.definitionExpression,relationshipId:this.relationshipId,returnGeometry:this.returnGeometry,maxAllowableOffset:this.maxAllowableOffset,geometryPrecision:this.geometryPrecision},
+c=this.objectIds,d=this.outFields,b=this.outSpatialReference;return c&&(a.objectIds=c.join(",")),d&&(a.outFields=d.join(",")),b&&(a.outSR=b.wkid||JSON.stringify(b.toJSON())),a._ts=this._ts,a}})});

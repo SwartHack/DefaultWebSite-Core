@@ -1,0 +1,2 @@
+//>>built
+define(["../../core/JSONSupport","../../geometry/Point","./FeatureSet"],function(a,b,c){return a.createSubclass({declaredClass:"esri.tasks.support.ImageServiceIdentifyResult",properties:{catalogItemVisibilities:null,catalogItems:{value:null,type:c},location:{value:null,type:b},name:null,objectId:null,properties:null,value:null}})});

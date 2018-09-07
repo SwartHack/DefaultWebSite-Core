@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../core/JSONSupport ../../core/accessorSupport/decorators".split(" "),function(e,f,h,g,k,b){Object.defineProperty(f,"__esModule",{value:!0});e=function(c){function a(){var a=null!==c&&c.apply(this,arguments)||this;return a.url="",a}return h(a,c),d=a,a.prototype.clone=function(){return new d({url:this.url})},g([b.property({type:String,json:{write:{isRequired:!0}}})],a.prototype,"url",void 0),a=
+d=g([b.subclass("esri.webscene.support.Thumbnail")],a);var d}(b.declared(k));f["default"]=e});

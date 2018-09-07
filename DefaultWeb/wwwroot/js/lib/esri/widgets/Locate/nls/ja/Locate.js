@@ -1,0 +1,2 @@
+//>>built
+define({title:"\u73fe\u5728\u306e\u5834\u6240\u3092\u691c\u7d22"});

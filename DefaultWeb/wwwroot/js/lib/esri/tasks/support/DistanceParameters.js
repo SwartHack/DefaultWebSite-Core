@@ -1,0 +1,3 @@
+//>>built
+define(["../../core/Accessor","../../core/kebabDictionary","../../geometry/support/jsonUtils"],function(d,e,c){var f=e({9001:"meters",9002:"feet",9036:"kilometers",9093:"miles",109012:"nautical-miles",109001:"yards"});return d.createSubclass({declaredClass:"esri.tasks.support.DistanceParameters",properties:{geometry1:null,geometry2:null,distanceUnit:null,geodesic:null},toJSON:function(){var b={},a=this.geometry1;a&&(b.geometry1=JSON.stringify({geometryType:c.getJsonType(a),geometry:a}),b.sr=JSON.stringify(this.geometry1.spatialReference.toJSON()));
+a=this.geometry2;return a&&(b.geometry2=JSON.stringify({geometryType:c.getJsonType(a),geometry:a})),this.distanceUnit&&(b.distanceUnit=f.toJSON(this.distanceUnit)),this.geodesic&&(b.geodesic=this.geodesic),b}})});

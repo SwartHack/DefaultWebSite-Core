@@ -1,0 +1,2 @@
+//>>built
+define({noItemsToDisplay:"Non \u00e8 attualmente disponibile alcun elemento da visualizzare.",layerInvisibleAtScale:"Invisibile con la scala attuale",layerError:"Errore durante il caricamento di questo layer",untitledLayer:"Layer senza titolo"});

@@ -1,0 +1,2 @@
+//>>built
+define({transparency:"Transpar\u00eancia",suggested:"Sugeridas",recent:"Recente",more:"Mais",moreColorsTooltip:"Veja mais cores.",paletteTooltip:"Selecionar uma cor.",noColorTooltip:"Sem cor",hexInputTooltip:"Uma cor personalizada em nota\u00e7\u00e3o hexadecimal (#FFFF00)."});

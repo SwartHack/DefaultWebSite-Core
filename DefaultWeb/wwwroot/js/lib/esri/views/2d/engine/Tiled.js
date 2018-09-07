@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","../../../core/tsSupport/extendsHelper","./Evented"],function(e,f,c,d){return function(a){a=function(a){function b(){for(var b=0;b<arguments.length;b++);return a.call(this)||this}return c(b,a),b}(a);return d.EventedMixin(a)}});

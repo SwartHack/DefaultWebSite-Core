@@ -1,0 +1,2 @@
+//>>built
+define({startTracking:"Spustit sledov\u00e1n\u00ed m\u00e9 polohy",stopTracking:"Zastavit sledov\u00e1n\u00ed m\u00e9 polohy"});

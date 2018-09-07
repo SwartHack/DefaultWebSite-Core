@@ -1,0 +1,2 @@
+//>>built
+define("require exports ../core/tsSupport/declareExtendsHelper ../core/tsSupport/decorateHelper ../core/accessorSupport/decorators ../core/Accessor".split(" "),function(g,h,e,c,b,f){return function(d){function a(a){a=d.call(this)||this;return a.created=null,a.rating=null,a}return e(a,d),c([b.property()],a.prototype,"created",void 0),c([b.property()],a.prototype,"rating",void 0),a=c([b.subclass("esri.portal.PortalRating")],a)}(b.declared(f))});

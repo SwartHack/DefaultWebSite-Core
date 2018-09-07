@@ -1,0 +1,3 @@
+//>>built
+define(function(){require(["dws/actions"]);require(["dws/sandpit"]);require(["dws/controller"],function(a){$(document).ready(function(){a.initKO()})});$.fn.scrollToTop=function(){var a=this.scrollParent()?this.scrollParent():$(window),c=a.scrollTop(),d=a.height(),b=this.position();b.bottom=b.top+this.height();b.right=b.left+this.width();(b.bottom<c||b.top>d)&&a.animate({scrollTop:b.top},800)};$.fn.isWithinParent=function(){var a=this.scrollParent()?this.scrollParent():$(window);a.scrollTop();a.scrollLeft();
+a.width();a.height();a=this.offset();a.right=a.left+this.outerWidth();a.bottom=a.top+this.outerHeight()};$(function(){$.each(["show","hide"],function(a,c){var d=$.fn[c];$.fn[c]=function(){this.trigger(c);return d.apply(this,arguments)}})})});

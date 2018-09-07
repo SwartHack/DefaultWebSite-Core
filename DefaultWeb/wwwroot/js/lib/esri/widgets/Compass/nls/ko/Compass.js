@@ -1,0 +1,2 @@
+//>>built
+define({reset:"\ub098\uce68\ubc18 \ubc29\ud5a5 \uc7ac\uc124\uc815"});

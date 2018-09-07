@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","../../../../../geometry/support/scaleUtils"],function(d,e,c){return function(){function b(a){void 0===a&&(a=null);this.spatialReference=a}return Object.defineProperty(b.prototype,"spatialReference",{get:function(){return this._spatialReference},set:function(a){a!==this._spatialReference&&(this._spatialReference=a,this._metersPerDistanceUnit=c.getMetersPerUnitForSR(a),this._metersPerElevationUnit=c.getMetersPerVerticalUnitForSR(a))},enumerable:!0,configurable:!0}),b.prototype.normalizeDistance=
+function(a){return a*this._metersPerDistanceUnit},b.prototype.normalizeElevation=function(a){return a*this._metersPerElevationUnit},b}()});

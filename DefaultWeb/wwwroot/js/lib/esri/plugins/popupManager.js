@@ -1,0 +1,2 @@
+//>>built
+define(["../views/PopupManager"],function(c){return{add:function(a,b){a.popupManager||(a.popupManager=new c(b),a.popupManager.view=a)},remove:function(a){var b=a.popupManager;b&&(b.destroy(),a.popupManager=null)}}});

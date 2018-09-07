@@ -1,0 +1,3 @@
+//>>built
+define(["dojo/_base/lang","../request","./Task","./support/FindResult"],function(b,d,e,f){return e.createSubclass({declaredClass:"esri.tasks.FindTask",properties:{parsedUrl:{get:function(){var a=this._parseUrl(this.url);return a.path+="/find",a}},gdbVersion:{value:null,type:String},url:{}},execute:function(a,c){a=this._encode(b.mixin({},this.parsedUrl.query,{f:"json"},a.toJSON()));this.gdbVersion&&(a.gdbVersion=this.gdbVersion);a={query:a,callbackParamName:"callback"};return(this.requestOptions||
+c)&&(a=b.mixin({},this.requestOptions,c,a)),d(this.parsedUrl.path,a).then(this._handleExecuteResponse)},_handleExecuteResponse:function(a){a=a.data;return a.results=(a.results||[]).map(function(a){return f.fromJSON(a)}),a}})});

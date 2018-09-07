@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../core/tsSupport/extendsHelper ../../core/tsSupport/decorateHelper ../../core/typescript dojo/_base/lang ../../core/Evented ./messageHandler".split(" "),function(l,m,c,d,e,f,g,h){return function(b){function a(){return null!==b&&b.apply(this,arguments)||this}return c(a,b),a.prototype.dojoConstructor=function(a){var k=this;this._setConfig(a);h.on("message-received",function(a){k.__messageReceived(a)})},a.prototype._setConfig=function(a){a&&f.mixin(this,a)},a.prototype.__messageReceived=
+function(a){this._messageReceived(a)},a.prototype._messageReceived=function(a){},a=d([e.subclass()],a)}(g)});

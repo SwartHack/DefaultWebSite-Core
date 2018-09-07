@@ -1,0 +1,3 @@
+//>>built
+var merge=function(a,d,c){return a&&"object"==typeof a&&(d=d||{},Object.keys(a).forEach(function(c){void 0!==a[c]&&(d[c]=a[c])},c||this)),d},mixin=function(a,d){return merge(d,a.prototype)},geomToBbox=function(a){function d(a,b){return a.length||(a=[1/0,1/0,-(1/0),-(1/0)]),b[0]<a[0]&&(a[0]=b[0]),b[1]<a[1]&&(a[1]=b[1]),2<b.length?(b[2]>a[2]&&(a[2]=b[2]),b[3]>a[3]&&(a[3]=b[3])):(b[0]>a[2]&&(a[2]=b[0]),b[1]>a[3]&&(a[3]=b[1])),a}var c=[];if(null!=a.x&&null!=a.y)return[a.x,a.y,a.x,a.y];if(a.points){var e=
+a.points,f=e.length;for(a=-1;++a<f;)c=d(c,e[a]);return c}if(a.paths||a.rings){var g,h=a.paths||a.rings,k=h.length;for(a=-1;++a<k;)for(f=h[a],e=f.length,g=-1;++g<e;)c=d(c,f[g]);return c}};

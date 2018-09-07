@@ -1,0 +1,2 @@
+//>>built
+define({zoom:"Zoom a",next:"Oggetto feature seguente",previous:"Oggetto feature precedente",close:"Chiudi",dock:"Banchina",undock:"Disancora",menu:"Menu",untitled:"Senza titolo",pageText:"{index} di {total}",selectedFeature:"Feature selezionata",selectedFeatures:"{total} risultati",loading:"Caricamento in corso",collapse:"Comprimi",expand:"Espandi"});

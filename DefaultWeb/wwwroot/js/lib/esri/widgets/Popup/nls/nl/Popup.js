@@ -1,0 +1,2 @@
+//>>built
+define({zoom:"Zoomen naar",next:"Volgend object",previous:"Vorig object",close:"Sluiten",dock:"Dok",undock:"Loskoppelen",menu:"Menu",untitled:"Naamloos",pageText:"{index} van {total}",selectedFeature:"Geselecteerd object",selectedFeatures:"{totaal} resultaten",loading:"Laden",collapse:"Inklappen",expand:"Uitklappen"});

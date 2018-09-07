@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","dojo/has","../../core/requireUtils","../../core/lang"],function(b,e,f,g,h){Object.defineProperty(e,"__esModule",{value:!0});e.href=function(a){h.startsWith(a,"esri-icon-")||(a="esri-icon-"+a);var c=b.toUrl("./symbol-defs.svg");a="#"+a;return 7!==f("trident")?""+c+a:a};(function(){7!==f("trident")||document.getElementById("esri-widget__symbol-defs")||g.when(b,["dojo/text!./symbol-defs.svg","dojo/domReady!"]).then(function(a){a=a[0];var c=document.body,b=c.firstChild,d=
+document.createElement("div");d.id="esri-widget__symbol-defs";d.innerHTML=a;b?c.insertBefore(d,b):c.appendChild(d)})})()});

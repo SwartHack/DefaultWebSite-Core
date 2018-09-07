@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports"],function(c,d){return function(){function a(a,b){void 0===b&&(b=0);this._pool=[];this._stack=[];this._index=0;this._factory=a;for(a=0;b>a;++a)this._pool.push(this._factory())}return Object.defineProperty(a.prototype,"size",{get:function(){return this._pool.length},enumerable:!0,configurable:!0}),a.prototype.push=function(){this._stack.push(this._index)},a.prototype.pop=function(){if(0===this._stack.length)throw Error("cannot pop empty stack");this._index=this._stack.pop()},
+a.prototype.allocate=function(){if(0===this._stack.length)throw Error("cannot allocate with empty stack");return this._index>=this._pool.length&&this._pool.push(this._factory()),this._pool[this._index++]},a}()});

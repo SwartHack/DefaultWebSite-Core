@@ -1,0 +1,3 @@
+//>>built
+define(["dojo/_base/declare","./Zlib","./Jpg"],function(m,n,p){return m(null,{constructor:function(){},decode:function(a){var c=new Uint8Array(a);a=new p;a.parse(c);var g,h=a.numComponents,f=a.getData(a.width,a.height,!0),k=a.width*a.height,l=a.eof,b=0,d=0,e=0;if(l<c.length-1)for(d=(new n(c.subarray(l))).getBytes(),g=new Uint8Array(k),b=c=0;b<d.length;b++)for(e=7;0<=e;e--)g[c++]=d[b]>>e&1;c=[];if(1===h)c=[f,f,f];else{for(b=0;3>b;b++)h=new Uint8Array(k),c.push(h);for(d=e=0;k>d;d++)for(b=0;3>b;b++)c[b][d]=
+f[e++]}return{width:a.width,height:a.height,pixels:c,mask:g}}})});

@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","./Collection"],function(e,b,d){Object.defineProperty(b,"__esModule",{value:!0});b.referenceSetter=function(a,c,b){void 0===b&&(b=d);c||(c=new b);c.removeAll();return a&&(Array.isArray(a)||a.isInstanceOf&&a.isInstanceOf(d))?c.addMany(a):c.add(a),c};b.castForReferenceSetter=function(a){return a}});

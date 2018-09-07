@@ -1,0 +1,2 @@
+//>>built
+define(["../../core/JSONSupport","../../Graphic"],function(d,c){return d.createSubclass({declaredClass:"esri.tasks.support.FindResult",properties:{displayFieldName:null,feature:{value:null,type:c,json:{read:{source:["attributes","geometry"],reader:function(a,b){a={};return b.attributes&&(a.attributes=b.attributes),b.geometry&&(a.geometry=b.geometry),c.fromJSON(a)}}}},foundFieldName:null,layerId:null,layerName:null,value:{value:null}}})});

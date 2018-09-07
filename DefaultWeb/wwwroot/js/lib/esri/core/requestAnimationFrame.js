@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","./global","dojo/sniff","./now"],function(c,d,e,a,f){var g;c=a("ff");d=a("ie");var k=a("webkit");a=a("opera");var h=f(),b=e.requestAnimationFrame;return b||(g=k&&"webkit"||c&&"moz"||a&&"o"||d&&"ms",b=e[g+"RequestAnimationFrame"],b||(b=function(a){var b=f(),c=Math.max(0,16-(b-h)),d=e.setTimeout(function(){a(f())},c);return h=b+c,d})),b});

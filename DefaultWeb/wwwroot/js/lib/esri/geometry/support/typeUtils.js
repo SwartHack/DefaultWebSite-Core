@@ -1,0 +1,2 @@
+//>>built
+define("require exports ../../core/accessorSupport/ensureType ../Geometry ../Extent ../Multipoint ../Point ../Polyline ../Polygon".split(" "),function(k,a,b,c,d,e,f,g,h){Object.defineProperty(a,"__esModule",{value:!0});a.types={base:c,key:"type",typeMap:{extent:d,multipoint:e,point:f,polyline:g,polygon:h}};a.ensureType=b.ensureOneOfType(a.types)});

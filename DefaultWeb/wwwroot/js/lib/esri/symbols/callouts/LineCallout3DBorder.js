@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../Color ../../core/JSONSupport ../../core/lang ../../core/accessorSupport/decorators ../support/materialUtils".split(" "),function(b,a,f,e,g,h,k,d,l){Object.defineProperty(a,"__esModule",{value:!0});b=function(b){function c(){var a=null!==b&&b.apply(this,arguments)||this;return a.color=new g("white"),a}return f(c,b),a=c,c.prototype.clone=function(){return new a({color:k.clone(this.color)})},e([d.property(l.colorAndTransparencyProperty)],
+c.prototype,"color",void 0),c=a=e([d.subclass("esri.symbols.support.LineCallout3DBorder")],c);var a}(d.declared(h));a.LineCallout3DBorder=b;a["default"]=b});

@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../../core/tsSupport/declareExtendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ../../../Graphic ../../../core/Accessor ../../../core/Collection ../../../core/Promise".split(" "),function(m,n,e,c,b,f,g,h,k){var l=h.ofType(f);return function(d){function a(a){a=d.call(this)||this;return a.updating=!1,a}return e(a,d),c([b.property({constructOnly:!0})],a.prototype,"layer",void 0),c([b.property({constructOnly:!0})],a.prototype,"layerView",
+void 0),c([b.property({type:l,constructOnly:!0})],a.prototype,"graphics",void 0),c([b.property({readOnly:!0})],a.prototype,"updating",void 0),a=c([b.subclass("esri.layers.graphics.controllers.MemoryController")],a)}(b.declared(g,k))});

@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports"],function(c,d){Object.defineProperty(d,"__esModule",{value:!0});c=function(){function b(a,b){this.color=a;this.intensity=b}return b.prototype.set=function(a){void 0!==a.color&&(this.color=a.color);void 0!==a.intensity&&(this.intensity=a.intensity)},b}();d.AmbientLight=c;c=function(){function b(a,b,c){this.color=a;this.intensity=b;this.direction=c}return b.prototype.set=function(a){void 0!==a.color&&(this.color=a.color);void 0!==a.intensity&&(this.intensity=a.intensity);
+void 0!==a.direction&&(this.direction=a.direction)},b}();d.DirectionalLight=c});

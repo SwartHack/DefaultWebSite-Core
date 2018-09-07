@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","./workers"],function(e,f,d){return function(){function a(a,b,c){this.client=a;this.id=b;this._targetWorker={id:c}}return Object.defineProperty(a.prototype,"workerId",{get:function(){return this._targetWorker.id},enumerable:!0,configurable:!0}),a.prototype.invoke=function(a,b,c){return d.invoke(a,b,c,this._targetWorker,this.id)},a.prototype.close=function(){d.closeConnection(this)},a}()});

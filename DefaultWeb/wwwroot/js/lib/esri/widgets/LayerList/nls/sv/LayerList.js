@@ -1,0 +1,2 @@
+//>>built
+define({noItemsToDisplay:"Just nu finns det inga objekt att visa.",layerInvisibleAtScale:"Osynlig p\u00e5 den aktuella skalan",layerError:"Ett fel uppstod n\u00e4r det h\u00e4r lagret skulle l\u00e4sas in",untitledLayer:"Namnl\u00f6st lager"});

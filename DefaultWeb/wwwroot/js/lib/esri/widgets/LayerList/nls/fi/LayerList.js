@@ -1,0 +1,2 @@
+//>>built
+define({noItemsToDisplay:"N\u00e4ytett\u00e4vi\u00e4 kohteita ei ole.",layerInvisibleAtScale:"Ei ole n\u00e4kyviss\u00e4 nykyisess\u00e4 mittakaavassa",layerError:"Virhe karttatason lataamisessa",untitledLayer:"Nime\u00e4m\u00e4t\u00f6n karttataso"});

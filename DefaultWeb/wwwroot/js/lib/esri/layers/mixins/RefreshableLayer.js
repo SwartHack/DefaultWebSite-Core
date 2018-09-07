@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../core/accessorSupport/decorators ../../core/Accessor".split(" "),function(h,k,f,e,c,g){return function(d){function b(){var a=null!==d&&d.apply(this,arguments)||this;return a.refreshInterval=0,a}return f(b,d),b.prototype.refresh=function(){this.emit("refresh")},e([c.property({type:Number,cast:function(a){return.1<=a?a:0>=a?0:.1},json:{read:{source:"refreshInterval"},write:{target:"refreshInterval"},
+origins:{"web-scene":{read:!1,write:!1}}}})],b.prototype,"refreshInterval",void 0),b=e([c.subclass("esri.layers.mixins.RefreshableLayer")],b)}(c.declared(g))});

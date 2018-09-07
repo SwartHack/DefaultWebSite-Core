@@ -1,0 +1,3 @@
+//>>built
+define({searchButtonTitle:"Otsi",clearButtonTitle:"T\u00fchjenda otsing",placeholder:"Otsi aadressi v\u00f5i kohta",searchIn:"Otsi",all:"K\u00f5ik",allPlaceholder:"Otsi aadressi v\u00f5i kohta",emptyValue:"Sisestage otsingutermin.",untitledResult:"Pealkirjata",untitledSource:"Pealkirjata allikas",noResults:"Tulemusi pole",noResultsFound:"Tulemeid ei leitud.",noResultsFoundForValue:"V\u00e4\u00e4rtuse {value} jaoks ei leitud tulemusi.",showMoreResults:"Kuva veel tulemusi",hideMoreResults:"Peida",searchResult:"Otsi tulemusi",
+moreResultsHeader:"Veel tulemusi",esriLocatorName:"Esri World Geocoder",useCurrentLocation:"Kasuta praegust asukohta"});

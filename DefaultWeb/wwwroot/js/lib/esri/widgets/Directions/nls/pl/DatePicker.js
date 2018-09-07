@@ -1,0 +1,2 @@
+//>>built
+define({goToPreviousMonth:"Przejd\u017a do poprzedniego miesi\u0105ca",goToNextMonth:"Przejd\u017a do nast\u0119pnego miesi\u0105ca",goToPreviousYear:"Przejd\u017a do poprzedniego roku",goToNextYear:"Przejd\u017a do nast\u0119pnego roku"});

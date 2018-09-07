@@ -1,0 +1,2 @@
+//>>built
+define("require exports ../../../core/tsSupport/declareExtendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ./MomentElementViewModel".split(" "),function(g,h,d,e,c,f){return function(a){function b(){return null!==a&&a.apply(this,arguments)||this}return d(b,a),b=e([c.subclass("esri.widgets.Directions.CalendarViewModel")],b)}(c.declared(f))});

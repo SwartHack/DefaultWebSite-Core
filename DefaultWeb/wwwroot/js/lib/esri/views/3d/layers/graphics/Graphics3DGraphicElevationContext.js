@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","../../../../core/tsSupport/extendsHelper","./ElevationContext"],function(f,g,d,e){return function(b){function c(a){a=b.call(this,a)||this;return a.centerPointInElevationSR=null,a}return d(c,b),c}(e)});

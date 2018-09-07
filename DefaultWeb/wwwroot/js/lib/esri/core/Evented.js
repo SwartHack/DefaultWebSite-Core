@@ -1,0 +1,2 @@
+//>>built
+define(["./declare","dojo/Evented"],function(c,d){return c(d,{declaredClass:"esri.core.Evented",hasEventListener:function(a){return a="on"+a,!(!this[a]||!this[a].after)},emit:function(a,b){return this.hasEventListener(a)?(b=b||{},b.target||(b.target=this),this.inherited(arguments,[a,b])):void 0}})});

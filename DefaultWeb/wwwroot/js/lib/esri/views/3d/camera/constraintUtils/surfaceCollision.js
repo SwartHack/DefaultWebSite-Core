@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","../intersectionUtils","../../lib/glMatrix"],function(l,c,k,f){Object.defineProperty(c,"__esModule",{value:!0});c.apply=function(e,b,g,a){void 0===g&&(g=0);void 0===a&&(a=b);var d=e.state.constraints;if(b!==a&&a.copyFrom(b),!d.collision.enabled)return!1;var c=k.surfaceElevationBelowEye(e,b);b=e.renderCoordsHelper.getAltitude(b.eye);d=d.collision.elevationMargin;return b-c>=d?!1:(f.vec3d.subtract(a.center,a.eye,h),e.renderCoordsHelper.setAltitude(c+d,a.eye),1===g&&f.vec3d.add(a.eye,
+h,a.center),a.markViewDirty(),!0)};var h=f.vec3d.create()});

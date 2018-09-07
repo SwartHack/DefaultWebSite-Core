@@ -1,0 +1,2 @@
+//>>built
+define(["../../core/JSONSupport","./ClassificationDefinition"],function(a,b){return a.createSubclass({declaredClass:"esri.tasks.support.GenerateRendererParameters",properties:{classificationDefinition:{value:null,type:b,json:{read:{source:"classificationDef"},write:{target:"classificationDef"}}},where:{value:null,type:String,json:{write:!0}}}})});

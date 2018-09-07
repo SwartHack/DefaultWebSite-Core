@@ -1,0 +1,2 @@
+//>>built
+define({attach:"Lampiran",fields:"Kolom",fieldsSummary:"Daftar atribut dan nilai",media:"Media",next:"Berikutnya",numCharts:"Jumlah bagan",numImages:"Jumlah gambar",noTitle:"Tidak berjudul",previous:"Sebelumnya"});

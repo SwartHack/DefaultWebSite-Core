@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports"],function(a,b){return{invalidArguments:"Invalid arguments",hostNotReady:"Host is not yet ready. Override the function hostReady to know when the host is ready.",selectionNotSupported:"DataSource does not support selection.",invalidObjectIdArray:"objectIds argument must be an array of object ids.",messageTimeout:"The function has timed out. The host could not reply or an error occurred in the host."}});

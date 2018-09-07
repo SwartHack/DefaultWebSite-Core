@@ -1,0 +1,2 @@
+//>>built
+define({transparency:"Transparenz",suggested:"Empfohlen",recent:"Zuletzt verwendet",more:"Weitere",moreColorsTooltip:"Mehr Farben anzeigen.",paletteTooltip:"Eine Farbe ausw\u00e4hlen.",noColorTooltip:"Keine Farbe",hexInputTooltip:"Eine benutzerdefinierte Farbe in hexadezimaler Schreibweise (#FFFF00)."});

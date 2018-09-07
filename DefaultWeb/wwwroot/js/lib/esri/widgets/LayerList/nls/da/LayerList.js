@@ -1,0 +1,2 @@
+//>>built
+define({noItemsToDisplay:"Der er ikke nogen elementer at vise p\u00e5 nuv\u00e6rende tidspunkt.",layerInvisibleAtScale:"Usynlig ved det aktuelle m\u00e5lestoksforhold",layerError:"Der opstod en fejl under indl\u00e6sning af dette lag",untitledLayer:"Lag uden titel"});

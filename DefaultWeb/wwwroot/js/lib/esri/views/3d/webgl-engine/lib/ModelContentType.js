@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports"],function(b,c){return function(){function a(){}return a.LAYER="layers",a.OBJECT="objects",a.GEOMETRY="geometries",a.MATERIAL="materials",a.TEXTURE="textures",a}()});

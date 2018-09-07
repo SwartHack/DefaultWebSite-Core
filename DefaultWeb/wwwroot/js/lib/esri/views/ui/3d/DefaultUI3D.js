@@ -1,0 +1,2 @@
+//>>built
+define("require exports ../../../core/tsSupport/declareExtendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ../DefaultUI dojo/_base/lang".split(" "),function(h,k,d,e,b,f,g){return function(c){function a(){return c.call(this)||this}return d(a,c),a.prototype.getDefaults=function(){return g.mixin(this.inherited(arguments),{components:["attribution","zoom","navigation-toggle","compass"]})},a=e([b.subclass("esri.views.ui.3d.DefaultUI3D")],a)}(b.declared(f))});

@@ -1,0 +1,2 @@
+//>>built
+define(["../../core/JSONSupport","../../geometry/Extent","../../geometry/Point"],function(a,b,c){return a.createSubclass({declaredClass:"esri.tasks.support.AddressCandidate",properties:{address:null,attributes:null,extent:{value:null,type:b},location:{value:null,type:c},score:null}})});

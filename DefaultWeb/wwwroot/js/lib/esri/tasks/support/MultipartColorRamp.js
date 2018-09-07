@@ -1,0 +1,2 @@
+//>>built
+define(["dojo/_base/array","./ColorRamp"],function(a,b){return b.createSubclass({declaredClass:"esri.tasks.support.MultipartColorRamp",properties:{colorRamps:[],type:"multipart"},toJSON:function(){return{type:"multipart",colorRamps:a.map(this.colorRamps,function(a){return a.toJSON()})}}})});

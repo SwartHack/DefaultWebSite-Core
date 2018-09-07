@@ -1,0 +1,2 @@
+//>>built
+define({transparency:"Transparant",suggested:"Voorgesteld",recent:"Recent",more:"Meer",moreColorsTooltip:"Meer kleuren zien.",paletteTooltip:"Kies een kleur.",noColorTooltip:"Geen kleur",hexInputTooltip:"Een aangepaste kleur in hexadecimale notering (#FFFF00)."});

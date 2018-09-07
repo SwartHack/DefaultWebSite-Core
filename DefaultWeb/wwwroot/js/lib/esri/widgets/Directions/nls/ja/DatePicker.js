@@ -1,0 +1,2 @@
+//>>built
+define({goToPreviousMonth:"\u524d\u306e\u6708\u306b\u79fb\u52d5",goToNextMonth:"\u6b21\u306e\u6708\u306b\u79fb\u52d5",goToPreviousYear:"\u524d\u306e\u5e74\u306b\u79fb\u52d5",goToNextYear:"\u6b21\u306e\u5e74\u306b\u79fb\u52d5"});

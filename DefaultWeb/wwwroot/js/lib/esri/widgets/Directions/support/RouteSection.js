@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../../core/tsSupport/declareExtendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ../../../core/Accessor".split(" "),function(g,h,e,c,b,f){return function(d){function a(a){a=d.call(this)||this;return a.maneuvers=[],a.name=null,a.open=!1,a}return e(a,d),c([b.property()],a.prototype,"maneuvers",void 0),c([b.property()],a.prototype,"name",void 0),c([b.property()],a.prototype,"open",void 0),a=c([b.subclass("esri.widgets.Directions.support.RouteSection")],
+a)}(b.declared(f))});

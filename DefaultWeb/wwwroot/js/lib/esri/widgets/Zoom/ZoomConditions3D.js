@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../core/tsSupport/declareExtendsHelper ../../core/tsSupport/decorateHelper ../../core/accessorSupport/decorators ../../core/Accessor".split(" "),function(g,h,e,c,b,f){return function(d){function a(){var a=null!==d&&d.apply(this,arguments)||this;return a.canZoomIn=!0,a.canZoomOut=!0,a}return e(a,d),c([b.property({readOnly:!0})],a.prototype,"canZoomIn",void 0),c([b.property({readOnly:!0})],a.prototype,"canZoomOut",void 0),a=c([b.subclass("esri.widgets.Zoom.ZoomConditions3D")],
+a)}(b.declared(f))});

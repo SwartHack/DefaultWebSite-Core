@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","./PointSizeAlgorithm","./PointSizeFixedSizeAlgorithm","./PointSizeSplatAlgorithm"],function(e,a,b,c,d){Object.defineProperty(a,"__esModule",{value:!0});a.pointSizeAlgorithmTypes={key:"type",base:b["default"],typeMap:{"fixed-size":c["default"],splat:d["default"]}}});

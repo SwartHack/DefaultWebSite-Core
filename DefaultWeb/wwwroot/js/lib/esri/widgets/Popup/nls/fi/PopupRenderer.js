@@ -1,0 +1,2 @@
+//>>built
+define({attach:"Liitteet",fields:"Kent\u00e4t",fieldsSummary:"Ominaisuustietojen ja arvojen luettelo",media:"Media",next:"Seuraava",numCharts:"Kaavioiden m\u00e4\u00e4r\u00e4",numImages:"Kuvien m\u00e4\u00e4r\u00e4",noTitle:"Nimet\u00f6n",previous:"Edellinen"});

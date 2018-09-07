@@ -1,0 +1,2 @@
+//>>built
+define({attach:"Priponke",fields:"Polja",fieldsSummary:"Seznam atributov in vrednosti",media:"Mediji",next:"Naprej",numCharts:"\u0160tevilo grafov",numImages:"\u0160tevilo slik",noTitle:"Neimenovano",previous:"Prej\u0161nji"});

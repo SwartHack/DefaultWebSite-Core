@@ -1,0 +1,27 @@
+{
+  "name": "arcgis-js-api",
+  "version": "4.6.0",
+  "description": "Minified, unbuilt version of the ArcGIS API for JavaScript",
+  "license": "SEE LICENSE IN copyright.txt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esri/arcgis-js-api.git"
+  },
+  "keywords": [
+    "esrijs",
+    "esri",
+    "arcgis",
+    "gis"
+  ],
+  "dependencies": {
+    "dgrid": "Esri/dgrid#v1.13.0/esri-3.23.0",
+    "dijit": "Esri/dijit#v1.13.0/esri-3.23.0",
+    "dojo": "Esri/dojo#v1.13.0/esri-3.23.0",
+    "dojo-dstore": "^1.1.2",
+    "dojo-util": "^1.13.0",
+    "dojox": "Esri/dojox#v1.13.0/esri-3.23.0",
+    "moment": "2.18.1"
+  },
+  "homepage": "https://developers.arcgis.com/javascript",
+  "dojoBuild": "esri.profile.js"
+}

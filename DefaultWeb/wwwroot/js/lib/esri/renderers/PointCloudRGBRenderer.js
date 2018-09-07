@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../core/tsSupport/declareExtendsHelper ../core/tsSupport/decorateHelper ../core/accessorSupport/decorators dojo/_base/lang ../core/lang ./PointCloudRenderer".split(" "),function(l,m,f,c,b,g,h,k){return function(e){function a(a){a=e.call(this)||this;return a.type="point-cloud-rgb",a.field=null,a}return f(a,e),d=a,a.prototype.clone=function(){return new d(g.mixin(this.cloneProperties(),{field:h.clone(this.field)}))},c([b.property()],a.prototype,"type",void 0),c([b.property({json:{write:!0},
+type:String})],a.prototype,"field",void 0),a=d=c([b.subclass("esri.renderers.PointCloudRGBRenderer")],a);var d}(b.declared(k))});

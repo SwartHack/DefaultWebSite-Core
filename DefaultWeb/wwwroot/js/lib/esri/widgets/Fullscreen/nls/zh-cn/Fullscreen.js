@@ -1,0 +1,2 @@
+//>>built
+define({enter:"\u8fdb\u5165\u5168\u5c4f\u6a21\u5f0f",exit:"\u9000\u51fa\u5168\u5c4f\u6a21\u5f0f"});

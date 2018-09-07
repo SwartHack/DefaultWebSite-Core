@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","../../../../core/tsSupport/extendsHelper","../../../input/InputHandler"],function(a,b,e,f){Object.defineProperty(b,"__esModule",{value:!0});a=function(a){function c(c,b,e){var d=a.call(this,!0)||this;return d.key=b,d.registerIncoming("key-down",e,function(a){return d._handleKeyDown(a)}),d}return e(c,a),c.prototype._handleKeyDown=function(a){a.data.key===this.key&&(this.activate(),a.stopPropagation())},c}(f.InputHandler);b.SingleKey=a});

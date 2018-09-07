@@ -1,0 +1,2 @@
+//>>built
+define({noItemsToDisplay:"Kuvamiseks pole praegu \u00fchtki sisuobjekti.",layerInvisibleAtScale:"Praeguses m\u00f5\u00f5tkavas mitten\u00e4htav",layerError:"Selle kihi laadimisel ilmnes t\u00f5rge",untitledLayer:"Pealkirjata kiht"});

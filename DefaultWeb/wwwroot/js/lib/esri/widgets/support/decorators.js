@@ -1,0 +1,2 @@
+//>>built
+define(["require","exports","./decorators/accessibleHandler","./decorators/renderable","./decorators/vmEvent"],function(g,b,d,e,f){function a(a){for(var c in a)b.hasOwnProperty(c)||(b[c]=a[c])}Object.defineProperty(b,"__esModule",{value:!0});a(d);a(e);a(f)});

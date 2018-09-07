@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../core/tsSupport/declareExtendsHelper ../core/tsSupport/decorateHelper ./Symbol3DLayer ../core/accessorSupport/decorators".split(" "),function(h,k,f,c,g,b){return function(e){function a(a){a=e.call(this)||this;return a.type="extrude",a.size=void 0,a.material=null,a}return f(a,e),d=a,a.prototype.clone=function(){return new d({enabled:this.enabled,elevationInfo:this.elevationInfo&&this.elevationInfo.clone(),material:this.material&&this.material.clone(),size:this.size})},c([b.property()],
+a.prototype,"type",void 0),c([b.property({type:Number,json:{write:!0}})],a.prototype,"size",void 0),c([b.property()],a.prototype,"material",void 0),a=d=c([b.subclass("esri.symbols.ExtrudeSymbol3DLayer")],a);var d}(b.declared(g))});

@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","../../../../core/tsSupport/extendsHelper","../../../input/InputHandler","../../../input/handlers/support"],function(b,f,g,h,k){Object.defineProperty(f,"__esModule",{value:!0});b=function(b){function e(l,a,c){var d=b.call(this,!0)||this;return d.view=l,d.pointerType=a,d.registerIncoming("drag",c,function(a){return d._handleDrag(a)}),d}return g(e,b),e.prototype._handleDrag=function(b){var a=b.data;if(!(1<a.pointers.length)&&k.eventMatchesPointerType(a.pointers[0].startEvent["native"],
+this.pointerType)){var c=this.view.navigation.rotate;switch(a.action){case "start":c.begin(this.view,a);break;case "update":c.update(this.view,a);break;case "end":c.end(this.view,a)}b.stopPropagation()}},e}(h.InputHandler);f.DragRotate=b});

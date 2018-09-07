@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","../../../core/Warning","../../support/pointCloud/PointSizeFixedSizeAlgorithm","../../support/pointCloud/PointSizeSplatAlgorithm"],function(k,d,f,g,h){Object.defineProperty(d,"__esModule",{value:!0});var e={pointCloudFixedSizeAlgorithm:g["default"],pointCloudSplatAlgorithm:h["default"]};d.read=function(a,b,c){return(b=a?e[a.type]||null:null)?(b=new b,b.read(a,c),b):(c&&c.messages&&a&&c.messages.push(new f("pointsizealgorithm:unsupported","Point size algorithms of type '"+
+(a.type||"unknown")+"' are not supported",{definition:a,context:c})),null)};d.fromJSON=function(a){var b=a?e[a.type]||null:null;return b?b.fromJSON(a):null}});

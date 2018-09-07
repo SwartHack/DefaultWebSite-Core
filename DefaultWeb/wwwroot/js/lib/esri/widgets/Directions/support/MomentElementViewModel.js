@@ -1,0 +1,3 @@
+//>>built
+define("require exports ../../../core/tsSupport/declareExtendsHelper ../../../core/tsSupport/decorateHelper ../../../core/accessorSupport/decorators ../../../core/Accessor ../../../moment".split(" "),function(h,k,f,c,b,g,e){return function(d){function a(){var a=null!==d&&d.apply(this,arguments)||this;return a.value=e(),a}return f(a,d),a.prototype.castValue=function(a){return e(a)},c([b.property()],a.prototype,"state",void 0),c([b.property()],a.prototype,"value",void 0),c([b.cast("value")],a.prototype,
+"castValue",null),a=c([b.subclass("esri.widgets.Directions.MomentElementViewModel")],a)}(b.declared(g))});

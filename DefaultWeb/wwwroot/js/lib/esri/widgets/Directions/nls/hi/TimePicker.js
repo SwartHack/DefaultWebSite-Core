@@ -1,0 +1,2 @@
+//>>built
+define({inputTitle:"\u0938\u092e\u092f \u0938\u0947\u091f \u0915\u0930\u0947\u0902"});

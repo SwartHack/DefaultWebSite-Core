@@ -1,0 +1,2 @@
+//>>built
+define({attach:"Privitci",fields:"Polja",fieldsSummary:"Popis atributa i vrijednosti",media:"Mediji",next:"Sljede\u0107e",numCharts:"Broj grafikona",numImages:"Broj slika",noTitle:"Neimenovano",previous:"Prethodno"});

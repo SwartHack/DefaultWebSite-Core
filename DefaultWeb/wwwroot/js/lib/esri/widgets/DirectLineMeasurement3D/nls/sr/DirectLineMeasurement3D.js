@@ -1,0 +1,2 @@
+//>>built
+define({title:"Merenja",hint:"Otpo\u010dnite merenja klikom na scenu kako biste namestili prvu ta\u010dku",distance:"Rastojanje",direct:"Direktno",horizontal:"Horizontalno",vertical:"Vertikalno",unit:"Jedinica",newMeasurement:"Novo merenje",units:{metric:"Metrika",imperial:"Imperijalne",kilometers:"Kilometri",meters:"Metri",miles:"Milje",inches:"In\u010di",feet:"Stope",yards:"Jardi","nautical-miles":"Nauti\u010dke milje","us-feet":"Stope (SAD)","degrees-minutes-seconds":"DMS",degrees:"Stepeni"}});

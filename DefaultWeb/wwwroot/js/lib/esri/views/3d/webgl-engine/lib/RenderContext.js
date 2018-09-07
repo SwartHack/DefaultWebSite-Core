@@ -1,0 +1,3 @@
+//>>built
+define(["require","exports","./RenderSlot","./RenderPass"],function(d,e,c,a){return function(){function b(){this.normals=this.lightingData=this.highlight=this.depth=this.camera=null;this.pass=a.MATERIAL;this.shadowMap=null;this.slot=c.BACKGROUND;this.options=this.rctx=this.framebufferTex=this.stencilRenderingHelper=this.offscreenRenderingHelper=this.ssaoHelper=null;this.renderOccludedOnly=!1}return Object.defineProperty(b.prototype,"isHighlightPass",{get:function(){return this.pass===a.MATERIAL_HIGHLIGHT},
+enumerable:!0,configurable:!0}),b}()});

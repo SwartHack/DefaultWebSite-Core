@@ -68,31 +68,31 @@
                 packages: [
                     {
                         name: "dojo",
-                        location: "lib/dojo"
+                        location: "dojo"
                     },
                     {
                         name: "dijit",
-                        location: "lib/dijit"
+                        location: "dijit"
                     },
                     {
                         name: "dojox",
-                        location: "lib/dojox"
+                        location: "dojox"
                     },
                     {
                         name: "dstore",
-                        location: "lib/dstore"
+                        location: "dstore"
                     },
                     {
                         name: "dgrid",
-                        location: "lib/dgrid"
+                        location: "dgrid"
                     },
                     {
                         name: "esri",
-                        location: "lib/esri"
+                        location: "esri"
                     },
                     {
                         name: "moment",
-                        location: "lib/moment",
+                        location: "moment",
                         main: "moment"
                     },
                     {
@@ -103,13 +103,13 @@
             };
             
         </script>
-        <script src="~/lib/_site/js/lib/dojo/dojo.js"></script>
+        <script src="~/lib/_site/node_modules/dojo/dojo.js"></script>
         @*<script src="~/lib/_site/dist/js/site.js" asp-append-version="true"></script>*@
     </environment>
 
     <environment names="Staging,Production">
-        <script src="~/js/jcore.js" asp-append-version="true"></script>
-        <script src="~/js/lib/dojo/dojo.js"></script>
+        <script src="~/js/jcore.min.js" asp-append-version="true"></script>
+        <script src="~/js/dojo/dojo.js"></script>
     </environment>
 
     @RenderSection("JS", required: true)

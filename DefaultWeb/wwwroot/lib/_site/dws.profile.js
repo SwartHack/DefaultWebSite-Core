@@ -62,7 +62,7 @@ var profile = {
         },
         {
             name: "dstore",
-            location: DIR +  "/dstore"
+            location: DIR +  "/dojo-dstore"
         },
         {
             name: "dgrid",
@@ -206,7 +206,7 @@ var profile = {
             include: [
                 "dojo/domReady",
                 // include the app, set accordingly for your application
-                "app/main",
+                "dws/main",
 
                 /** enforce some modules loading */
                 /** not included because dom is -1 */

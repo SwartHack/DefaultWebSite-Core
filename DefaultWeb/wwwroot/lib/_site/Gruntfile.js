@@ -21,7 +21,7 @@ module.exports = function(grunt) {
                 force: true
             },
             any: {
-                src:''
+                src:['']
             },
             bootswatch: {
                 src: ['../bootswatch/*/build.scss', '!../bootswatch/global/build.scss']
@@ -198,14 +198,18 @@ module.exports = function(grunt) {
 
         },
         dojo: {
-            deploy: {
+            dist: {
                 options: {
-                    releaseDir: '../../../js/lib',
-                    profile: 'site.profile.js',
-                    dojo: 'js/lib/dojo/dojo.js',
-                    load: 'build',
-                    basePath: 'js/'
+                    releaseDir: '../../../js'
                 }
+            },
+            options: {
+                
+                profile: 'dws.profile.js',
+                dojo: 'dojoconfig.js',
+                load: 'build',
+                cwd: './',
+                basePath: './js/'
             }
             
         },
@@ -229,7 +233,11 @@ module.exports = function(grunt) {
     grunt.registerTask('build', function () {
         grunt.task.run('dist');
 
-        grunt.task.run('clean:wwwroot');
+        //grunt.task.run('clean:wwwroot');
+        grunt.config('clean.any.src', ['../../css/*.css', '../../js/**', '!../../css/images', '!../../images', '!../../fonts']);
+        grunt.task.run('clean:any');
+        
+
         grunt.task.run('cssmin:wwwroot');
         grunt.task.run('uglify:header');
         grunt.task.run('uglify:jcore');
@@ -276,8 +284,8 @@ module.exports = function(grunt) {
     //// deal with the videojs css seperately, don't build with site!
     //////////////////////////////////////////////////////////
     grunt.registerTask('videojs-css', function (files) {
-        var scssSrc = '../video-js/src/css/video-js.scss';
-        var scssDest = 'dist/css/video-js.css';
+        var scssSrc = './node_modules/video.js/src/css/video-js.scss';
+        var scssDest = './dist/css/video-js.css';
         grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
         grunt.config('sass.dist.options.precision', 10);
         grunt.config('sass.dist.options.unix-newlines', true);
@@ -291,7 +299,7 @@ module.exports = function(grunt) {
     //// deal with the esri  css seperately, don't build with site!
     //////////////////////////////////////////////////////////
     grunt.registerTask('esri-css', function (files) {
-        var scssSrc = './js/lib/esri/themes/base/main.scss';
+        var scssSrc = ['node_modules/arcgis-js-api/themes/**/*.scss', '!node_modules/arcgis-js-api/themes/base/**'];
         var scssDest = './dist/css/esri.css';
         grunt.config('clean.any.src', scssDest);
         grunt.task.run('clean:any');
@@ -313,13 +321,13 @@ module.exports = function(grunt) {
     //// Build ESRI dojo loader
     //////////////////////////////////////////////////////////
     grunt.registerTask('site-dojo-js', function () {
-        grunt.config('clean.any.src', ['../../js/lib']);
+        grunt.config('clean.any.src', ['../../js/*']);
         grunt.task.run('clean:any');
-        grunt.task.run('dojo:deploy');
-        grunt.config('clean.any.src', ['../../js/lib/**/*.uncompressed.js']);
+        grunt.task.run('dojo');
+        grunt.config('clean.any.src', ['../../js/**/*.uncompressed.js']);
         grunt.task.run('clean:any');
 
-        grunt.task.run('copy:dwsjs');
+        //grunt.task.run('copy:dwsjs');
     });
 
 

@@ -22,7 +22,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://BRUCELEE:50854/"
+      "applicationUrl": "http://localhost:50854/"
     }
   }
 }

@@ -30,7 +30,8 @@
 }
 
 #notes-list {
-    display: flex;
+    display:flex;
+    flex-grow: 1;
     border-radius: 0px;
     border: none;
     margin: 0;

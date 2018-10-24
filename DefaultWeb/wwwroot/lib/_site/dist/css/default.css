@@ -11403,9 +11403,7 @@ html {
     #row-main #col-util .element .inner {
       padding: 0.625rem; }
       #row-main #col-util .element .inner #row-notebook {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 2;
+        flex-grow: 3;
         flex-shrink: 0; }
         #row-main #col-util .element .inner #row-notebook #col-dws-notebook {
           display: flex;
@@ -11413,24 +11411,20 @@ html {
           margin: 0;
           padding: 0;
           border-radius: 0px;
-          background-color: transparent; }
+          background-color: transparent;
+          border: 1px solid black; }
       #row-main #col-util .element .inner #row-carousel {
-        display: flex;
-        flex-direction: column;
         flex-grow: 1;
         flex-shrink: 0; }
         #row-main #col-util .element .inner #row-carousel #col-dws-carousel {
           display: flex;
           flex-direction: column;
-          width: 100%;
-          padding: 0;
           margin: 0;
+          padding: 0;
           border-radius: 0px;
-          background: linear-gradient(to right, red, yellow); }
+          background: linear-gradient(to right, red, yellow);
+          border: 1px solid black; }
       #row-main #col-util .element .inner #footer-scroll {
-        display: flex;
-        flex-grow: 1;
-        flex-shrink: 0;
         padding-left: 1rem;
         padding-right: 1rem; }
   #row-main #col-main {
@@ -11901,6 +11895,7 @@ flex-direction: column;*/
 
 #notes-list {
   display: flex;
+  flex-grow: 1;
   border-radius: 0px;
   border: none;
   margin: 0;

@@ -33,13 +33,13 @@
 
                 <div id="row-notebook" class="row no-gutters w-100">
                     <div id="col-dws-notebook" class="col-12 no-gutters">
-                        @*@{ Html.RenderPartial("~/Views/Notebook/NotebookMain.cshtml");}*@
+                        @{ await Html.RenderPartialAsync("~/Views/Notebook/NotebookMain.cshtml");}
                     </div>
                </div>
 
                 <div id="row-carousel" class="row no-gutters w-100">
                     <div id="col-dws-carousel" class="col-12 no-gutters">
-                        @*@{ Html.RenderPartial("~/Views/Shared/_Carousel.cshtml");}*@
+                        @{ await Html.RenderPartialAsync("~/Views/Shared/_Carousel.cshtml");}
                     </div>
 
                     
@@ -64,7 +64,7 @@
         <div class="element d-flex h-100 flex-column justify-content-between">
             <div class="inner d-flex h-100 flex-column align-items-center justify-content-center">
                 <div id="main-target-area">
-                    @{Html.RenderPartial("~/Views/Home/Welcome.cshtml"); } 
+                    @{ await Html.RenderPartialAsync("~/Views/Home/Welcome.cshtml"); } 
                 </div>
             </div>
         </div>

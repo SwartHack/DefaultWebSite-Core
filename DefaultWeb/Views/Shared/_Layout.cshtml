@@ -39,7 +39,7 @@
         @*<script src="~/lib/_site/dist/js/lib/requirejs/require.js"></script>*@
         <script>
             var dojoConfig = {
-                baseUrl: "/lib/_site/js/",
+                baseUrl: "/lib/_site/",
                 tlmSiblingsofDojo: false,
                 async: 1,
                 hasCache: {
@@ -68,36 +68,36 @@
                 packages: [
                     {
                         name: "dojo",
-                        location: "dojo"
+                        location: "./node_modules/dojo"
                     },
                     {
                         name: "dijit",
-                        location: "dijit"
+                        location: "./node_modules/dijit"
                     },
                     {
                         name: "dojox",
-                        location: "dojox"
+                        location: "./node_modules/dojox"
                     },
                     {
                         name: "dstore",
-                        location: "dstore"
+                        location: "./node_modules/dstore"
                     },
                     {
                         name: "dgrid",
-                        location: "dgrid"
+                        location: "./node_modules/dgrid"
                     },
                     {
                         name: "esri",
-                        location: "esri"
+                        location: "./node_modules/arcgis-js-api"
                     },
                     {
                         name: "moment",
-                        location: "moment",
+                        location: "./node_modules/moment",
                         main: "moment"
                     },
                     {
                         name: "dws",
-                        location: "dws"
+                        location: "./js/dws"
                     }
                 ]
             };

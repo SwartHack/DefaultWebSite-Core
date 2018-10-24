@@ -73,11 +73,11 @@ module.exports = function(grunt) {
             src: ['dist/js/site.js']
         },
         sass: {
+            options: {
+                
+            },
             dist: {
-                options: {
-                    sourceMap: false,
-                    expand:true,
-                },
+                
                 src: [''],
                 dest: ''
             }
@@ -243,7 +243,7 @@ module.exports = function(grunt) {
         grunt.task.run('uglify:jcore');
         grunt.task.run('copy:pdfworkerdeploy');
        
-        grunt.task.run('site-dojo-js');
+        grunt.task.run('dws-dojo-js');
 
         //// fonts and images
         //    grunt.task.run('copy:fonts');
@@ -286,9 +286,11 @@ module.exports = function(grunt) {
     grunt.registerTask('videojs-css', function (files) {
         var scssSrc = './node_modules/video.js/src/css/video-js.scss';
         var scssDest = './dist/css/video-js.css';
+
         grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
-        grunt.config('sass.dist.options.precision', 10);
-        grunt.config('sass.dist.options.unix-newlines', true);
+        grunt.config('sass.options.precision', 10);
+        grunt.config('sass.options.unix-newlines', true);
+
         grunt.task.run('sass');
 
         grunt.config('postcss.dist.src', scssDest);
@@ -299,14 +301,23 @@ module.exports = function(grunt) {
     //// deal with the esri  css seperately, don't build with site!
     //////////////////////////////////////////////////////////
     grunt.registerTask('esri-css', function (files) {
-        var scssSrc = ['node_modules/arcgis-js-api/themes/**/*.scss', '!node_modules/arcgis-js-api/themes/base/**'];
+        var scssSrc = './node_modules/arcgis-js-api/themes/light/main.scss';
         var scssDest = './dist/css/esri.css';
+
         grunt.config('clean.any.src', scssDest);
         grunt.task.run('clean:any');
+
         grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
-        grunt.config('sass.dist.options.precision', 10);
-        grunt.config('sass.dist.options.unix-newlines', true);
-        //grunt.config('sass.dist.options.outputstyle', 'compressed');
+        //grunt.config('sass.options.outputStyle:', 'compressed');
+        //grunt.config('sass.options.precision', 10);
+        //grunt.config('sass.options.unix-newlines', true);
+        
+        //grunt.config('sass.dist.files.expand', true);
+        //grunt.config('sass.dist.files.src', scssSrc);
+        //grunt.config('sass.dist.files.ext', '.css');
+        
+
+        
         grunt.task.run('sass');
 
         grunt.config('postcss.dist.src', scssDest);
@@ -320,7 +331,7 @@ module.exports = function(grunt) {
     //////////////////////////////////////////////////////////
     //// Build ESRI dojo loader
     //////////////////////////////////////////////////////////
-    grunt.registerTask('site-dojo-js', function () {
+    grunt.registerTask('dws-dojo-js', function () {
         grunt.config('clean.any.src', ['../../js/*']);
         grunt.task.run('clean:any');
         grunt.task.run('dojo');
@@ -414,9 +425,9 @@ module.exports = function(grunt) {
         }
 
         //dist = { src: scssSrc, dest: scssDest };
+        grunt.config('sass.options.precision', 10);
+        grunt.config('sass.options.unix-newlines', true);
         grunt.config('sass.dist', { src: scssSrc, dest: scssDest });
-        grunt.config('sass.dist.options.precision', 10);
-        grunt.config('sass.dist.options.unix-newlines', true);
         grunt.task.run('sass');
 
         grunt.config('postcss.dist.src', scssDest);

@@ -40,10 +40,12 @@ html {
                 padding: 0.625rem;
 
                 #row-notebook {
-                    display: flex;
-                    flex-direction: column;
-                    flex-grow: 2;
+                    //display: flex;
+                    //flex-direction: column;
+                    flex-grow: 3;
                     flex-shrink:0;
+
+                    //flex: 3 0 auto;
 
                     #col-dws-notebook {
                         display: flex;
@@ -52,35 +54,38 @@ html {
                         padding: 0;
                         border-radius: 0px;
                         background-color: transparent;
-                        //border: 1px solid black;
-                    }
+                        border: 1px solid black;
+
+                     }
                 }
 
                 #row-carousel {
-                    display: flex;
-                    flex-direction: column;
+                    //display: flex;
+                    //flex-direction: column;
                     flex-grow: 1;
                     flex-shrink:0;
+
+                    //flex: 2 0 auto;
 
                     #col-dws-carousel {
                         display: flex;
                         flex-direction: column;
-                        width: 100%;
+                        //width: 100%;
                         //flex-grow: 1;
-                        padding: 0;
                         margin: 0;
+                        padding: 0;
                         border-radius: 0px;
-                        //border: 1px solid black;
                         background: linear-gradient(to right, red, yellow);
+                        border: 1px solid black;
                     }
                 }
 
 
 
                 #footer-scroll {
-                    display:flex;
-                    flex-grow:1;
-                    flex-shrink:0;
+                    //display: flex;
+                    //flex-grow: 1;
+                    //flex-shrink: 0;
                     padding-left: 1rem;
                     padding-right: 1rem;
                 }

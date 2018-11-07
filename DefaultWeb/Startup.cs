@@ -131,7 +131,7 @@ namespace DefaultWeb
             //
             services.Configure<IISOptions>(options =>
             {
-
+                options.ForwardClientCertificate = false;
             });
 
             //////////////////////////////////////////////////////
@@ -168,7 +168,10 @@ namespace DefaultWeb
             loggerFactory.AddDebug();
 
             ////////////////////////////
-            ///
+            /// TODO
+            /// expand to help us better
+            /// 
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

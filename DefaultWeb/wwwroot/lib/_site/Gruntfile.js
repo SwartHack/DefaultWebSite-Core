@@ -200,15 +200,13 @@ module.exports = function(grunt) {
         dojo: {
             dist: {
                 options: {
+                    releaseDir: '../../../js',
                     profile: 'dws.profile.js',
                     dojo: 'dojoconfig.js',
                     load: 'build',
-                    releaseDir: '../../../js',
-                    basePath: './js/',
-                    baseUrl:'~/js'
+                    basePath: '/js/'
                 }
             }
-            
         },
          exec: {
             //postcss: {

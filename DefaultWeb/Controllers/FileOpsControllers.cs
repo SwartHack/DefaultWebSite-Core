@@ -80,21 +80,21 @@ namespace DefaultWeb.Controllers
         //[ServiceFilter(typeof(ValidateMimeMultipartContentFilter))]
         public IActionResult UploadFiles(DwsFileUpload uploadInfo)
         {
-            try
-            {
+            //try
+            //{
                 uploadInfo.SessionId = Request.Cookies["DwsSessionToken"];
                 List<DwsFileInfo> fileinfo = FileRepository.SaveUploadFiles(uploadInfo);
                 FileRepository.CommitTransaction(); //like to avoid this, but can't share transaction with Ajax!!?? TODO
                 Response.StatusCode = 200;
                 return Json(fileinfo);
 
-            }
-            catch (Exception ex)
-            {
-                Response.StatusCode = 500;
-                var serverEx = new ServerException() { MiscException = ex };
-                return PartialView("~/Views/Shared/_ServerError.cshtml", serverEx); ;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Response.StatusCode = 500;
+            //    var serverEx = new ServerException() { MiscException = ex };
+            //    return PartialView("~/Views/Shared/_ServerError.cshtml", serverEx); ;
+            //}
         }
 
         /// <summary>

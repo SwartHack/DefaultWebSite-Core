@@ -18,8 +18,8 @@ var profile = {
 
     // `basePath` is relative to the directory containing this profile file; in this case, it is being set to the
     // src/ directory, which is the same place as the `baseUrl` directory in the loader configuration.
-    //basePath: "./js",
-    //baseUrl: '/js/dojo/',
+    //basePath: "./js/",
+    baseUrl: '/js/dojo/',
     tlmSiblings: false,
     action: "release",
     optimize: "closure", // requires Java 6 or later: http://code.google.com/p/closure-compiler/wiki/FAQ

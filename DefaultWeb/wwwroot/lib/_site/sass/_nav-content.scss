@@ -1,31 +1,19 @@
 ﻿/// <reference path="defaultwebsite.scss" />
 
-.dws-page {
+#welcome {
     height: 100%;
-    //padding: 5%;
+    //margin-top:.5rem;
     margin: 0;
+    border: none;
     border-radius: 0;
-}
-
-#welcome.card {
-    @extend .dws-page;
     background-color: transparent;
     overflow-y: auto;
-    //margin-top:.5rem;
-    padding:0;
-    border:none;
-
-    .card-header {
-        border:none;
-        margin-right:2vw;
-    }
-
 }
 
 ////////////////////////////////////
 ///
 ////////////////////////////////////
-#about.card {
+#about {
     height: 100%;
     margin: 0;
     border-radius: 0;
@@ -47,24 +35,12 @@
 }
 
 
-#comments.card {
-    @extend .dws-page;
-    background-color: hotpink;
-    color: chartreuse;
-}
-
-
-#ack.card {
-    @extend .dws-page;
+#ack {
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    border: none;
     background-color: silver;
     color: black;
-    padding: 0;
     overflow-y: auto;
-
-    .card-block {
-        display: block;
-        //padding: 0;
-        margin: 0;
-        background-color: transparent;
-    }
 }

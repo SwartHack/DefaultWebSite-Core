@@ -131,7 +131,7 @@ namespace DefaultWeb
             //
             services.Configure<IISOptions>(options =>
             {
-                options.ForwardClientCertificate = false;
+                //options.ForwardClientCertificate = false;
             });
 
             //////////////////////////////////////////////////////
@@ -167,6 +167,7 @@ namespace DefaultWeb
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+
             ////////////////////////////
             /// TODO
             /// expand to help us better
@@ -175,7 +176,6 @@ namespace DefaultWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
             }
             else
@@ -183,6 +183,7 @@ namespace DefaultWeb
                 //app.UseDeveloperExceptionPage();
                 //app.UseDatabaseErrorPage();
                 app.UseExceptionHandler("/Home/Error");
+                //app.UseHsts();
             }
 
             ////////////////////////////

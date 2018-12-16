@@ -5,7 +5,7 @@
             <h3>A Default WebSite.net Core</h3>
             <a href="https://github.com/SwartHack/defaultwebsite-core" target="_blank"><i class="fa fa-3x fa-github-square"></i></a>
         </div>
-       
+
         <p class="discussion">
             This missive will go on a bit, as I add more content and detail. The purpose here is give descriptions and
             comments on the basic set-up, architecture and various patterns and practices investigated and demonstrated by Default WebSite.net.
@@ -28,7 +28,7 @@
         <div class="note-box">
             <div class="heading">
                 <div class="title">A note on: CSS, Bootstrap, Bootswatch and media/device size</div>
-             </div>
+            </div>
             <div class="body">
                 <p class="discussion">
                     <span class="emphasis-text">The site integrates Bootstrap, but does </span>
@@ -65,72 +65,87 @@
             muck up the entire build process. This enables separate build events for client and server code, which facilitates development and debugging; as well as continuous integration management.
         </p>
         <p class="lead"> Here are a few key highlights to the process</p>
-        <p class="discussion">
-            <span class="emphasis-leadin">Manage all the Bower packages using command-line</span>, from the project's default directory. 
-            This populates all the requisite <span class="emphasis-text">wwwroot/_site</span> contents, which the <span class="emphasis-text">wwwroot/_site</span>'s scripts require. 
-            The utilized Bower packages are listed in the project's &nbsp;
-            <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/bower.json" target="_blank"><i class="fa fa-github"></i> bower.json file.</a>&nbsp;
+        <p class="exclamation">
+            Bower is Obsolete
         </p>
+        <strike>
+            <p class="discussion">
+                <span class="emphasis-leadin">Manage all the Bower packages using command-line</span>, from the project's default directory.
+                This populates all the requisite <span class="emphasis-text">wwwroot/_site</span> contents, which the <span class="emphasis-text">wwwroot/_site</span>'s scripts require.
+                The utilized Bower packages are listed in the project's &nbsp;
+                <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/bower.json" target="_blank"><i class="fa fa-github"></i> bower.json file.</a>&nbsp;
+            </p>
+            <p class="discussion">
+                If you downloaded the project and want to restore the bower packages simply open a command-line tool with Administrative privileges,
+                in the project's root directory and execute the bower command:
+            </p>
+            <p class="code">&gt;\ bower install</p>
+        </strike>
         <p class="discussion">
-            If you downloaded the project and want to restore the bower packages simply open a command-line tool with Administrative privileges, 
-            in the project's root directory and execute the bower command:
-        </p>
-        <p class="code">&gt;\ bower install</p>
-        <p class="discussion"><span class="emphasis-leadin">Manage the <span class="emphasis-text">wwwroot/_site</span> build process of CSS and Javascript</span>&nbsp;manually using 
-            <a class="link-brand" href="https://nodejs.org/en/download/" target="_blank">Node.js</a>, 
-            <a class="link-brand" href="https://www.npmjs.com/" target="_blank">npm</a> and 
-            <a class="link-brand" href="https://gruntjs.com/" target="_blank">Grunt</a>, 
-            from the command line in the <span class="emphasis-text">wwwroot/_site</span> directory. DO NOT USE npm in the project's root directory. It is advisable to avoid a "node_modules" 
+            <span class="emphasis-leadin">Manage the <span class="emphasis-text">wwwroot/_site</span> build process of CSS and Javascript</span>&nbsp;manually using
+            <a class="link-brand" href="https://nodejs.org/en/download/" target="_blank">Node.js</a>,
+            <a class="link-brand" href="https://www.npmjs.com/" target="_blank">npm</a> and
+            <a class="link-brand" href="https://gruntjs.com/" target="_blank">Grunt</a>,
+            from the command line in the <span class="emphasis-text">wwwroot/_site</span> directory. DO NOT USE npm in the project's root directory. It is advisable to avoid a "node_modules"
             directory in the project root!
         </p>
         <p class="discussion">
-            To restore all of the required NPM packages, in the <span class="emphasis-text">wwwroot/_site</span> directory with the Admin command line execute (requires 
-            <a class="link-brand" href="https://nodejs.org/en/download/" target="_blank">Node.js</a> and 
+            To restore all of the required NPM packages, in the <span class="emphasis-text">wwwroot/_site</span> directory with the Admin command line execute (requires
+            <a class="link-brand" href="https://nodejs.org/en/download/" target="_blank">Node.js</a> and
             <a class="link-brand" href="https://github.com/gruntjs/grunt-cli" target="_blank">grunt-cli</a>):
         </p>
         <p class="code">&gt;\ npm rebuild</p>
         <p class="emphasis-leadin">Notes on Grunt, SASS, CSS &amp; Bootstrap 4</p>
-        <p class="discussion">CSS files are preprocessed and compiled using&nbsp;
+        <p class="discussion">
+            CSS files are preprocessed and compiled using&nbsp;
             <a class="link-brand" href="https://github.com/gruntjs/grunt-contrib-sass" target="_blank">grunt-contrib-sass v1.0.0.</a>&nbsp;This is a node wrapper for using actual&nbsp;
             <a class="link-brand" href="http://www.ruby-lang.org/en/downloads/" target="_blank">Ruby</a>&nbsp;&nbsp;
-            <a class="link-brand" href="http://sass-lang.com/download.html" target="_blank">SASS</a>&nbsp;compilers, and not an implementation of 
+            <a class="link-brand" href="http://sass-lang.com/download.html" target="_blank">SASS</a>&nbsp;compilers, and not an implementation of
             <a class="link-brand" href="http://sass-lang.com/libsass" target="_blank">LIBSASS</a>. To configure this component follow the instructions outlined in&nbsp;
-            <a class="link-brand" href="https://github.com/gruntjs/grunt-contrib-sass" target="_blank">grunt-contrib-sass v1.0.0.</a>&nbsp;Make sure to be in the 
+            <a class="link-brand" href="https://github.com/gruntjs/grunt-contrib-sass" target="_blank">grunt-contrib-sass.</a>&nbsp;Make sure to be in the
             <span class="emphasis-text">wwwroot/_site</span> directory to run the command.
         </p>
         <p class="code">&gt;\ gem install sass</p>
         <p class="discussion">
-            <a href="https://getbootstrap.com/" target="_blank">Bootstrap 4b.x</a> provides the base styling and responsive functionality, 
-            but it is integrated into the SASS assembly process a little differently. The standard approach utilizes a CSS reference to a default&nbsp; 
+            <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> provides the base styling and responsive functionality,
+            but it is integrated into the SASS assembly process a little differently. The standard approach utilizes a CSS reference to a default&nbsp;
             bootstrap.css and then a reference to the "Site.css" for local customizations and overrides.
         </p>
         <p class="code">&lt;link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /&gt;<br /> &lt;link rel="stylesheet" href="~/css/site.css" /&gt;</p>
         <p class="discussion">
-            Here the process is reversed and the site.css becomes the root and only css file. At the SASS assembly level we reference only one source file. In this case, as illustrated in 
-         <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/sass/defaultwebsite.scss" target="_blank"><i class="fa fa-github"></i> defaultwebsite.scss</a>.
+            Here the process is reversed and the site.css becomes the root and only css file. At the SASS assembly level we reference only one source file. In this case, as illustrated in
+            <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/sass/defaultwebsite.scss" target="_blank"><i class="fa fa-github"></i> defaultwebsite.scss</a>.
         </p>
         <p class="code">&lt;link rel="stylesheet" href="&amp ViewData["ThemeDevelopment"]" /&gt;</p>
         <p class="discussion">
             where "ThemeDevelopment" would&nbsp; indicate the default Bootstrap theme, "default", or a Bootswatch theme, i.e. "cerulean".&nbsp;BootSwatch themes for Bootstrap4 are incorporated into every build...
         </p>
-        <p class="discussion"><span class="emphasis-leadin">Use 
-            <a class="link-brand" href="">Almond.js</a> and 
-            <a class="link-brand" href="">AMD</a></span> for your javascript architecture. It just makes more sense and eliminates CommonJs! Then throw in some 
+        <p class="exclamation">
+            Oh No! DOJO!?
+        </p>
+        <p class="discussion">
+            <strike class="emphasis-leadin">
+                Use
+                <a class="link-brand" href="">Almond.js</a> and
+                <a class="link-brand" href="">AMD</a>
+            </strike> 
+        </p>
+        <p class="discussion">
+            Throw in some
             <span class="emphasis-brand">JQuery, JQuery UI, Ajax/Json</span>
+            <span class="emphasis-leadin">Build the Client</span>(this is always going to change...)
         </p>
         <p class="discussion">
-            <span class="emphasis-leadin">Build the Client</span>(this is going to change...)
-        </p>
-        <p class="discussion">
-            The <span class="emphasis-text">wwwroot/_site</span> 
-            <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/Gruntfile.js" target="_blank"><i class="fa fa-github"></i> gruntfile.js</a> and 
-            <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/package.json" target="_blank"><i class="fa fa-github"></i> package.json</a> 
+            The <span class="emphasis-text">wwwroot/_site</span>
+            <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/Gruntfile.js" target="_blank"><i class="fa fa-github"></i> gruntfile.js</a> and
+            <a href="https://github.com/SwartHack/defaultwebsite-core/blob/master/DefaultWeb/wwwroot/lib/_site/package.json" target="_blank"><i class="fa fa-github"></i> package.json</a>
             run the show for grunt processing. If everything is installed and working, this&nbsp;command will build the default Bootstrap theme then lint and bundle the javascript.&nbsp;
         </p>
         <p class="code">&gt;/ grunt build</p>
         <p class="discussion">Inspecting the gruntfile illustrates many other command options for building the client-side components.</p>
-        <p class="mussing">Ok, there are a <strong><em>number</em></strong> of <span class="emphasis">"client-side"</span> prerequisites! 
-            Which has become the nature of web client-side development nowadays. <span class="emphasis">What happened to the "Thin Client"?!</span> 
+        <p class="mussing">
+            Ok, there are a <strong><em>number</em></strong> of <span class="emphasis">"client-side"</span> prerequisites!
+            Which has become the nature of web client-side development nowadays. <span class="emphasis">What happened to the "Thin Client"?!</span>
             In the case of this site, only expect more to be added! &ldquo;The More The Merrier&rdquo;! Nice exposure to a variety of approaches&hellip;
         </p>
         <h4>Server-Side Overview - TODO</h4>

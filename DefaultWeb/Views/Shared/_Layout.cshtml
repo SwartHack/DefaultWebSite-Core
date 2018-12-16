@@ -4,7 +4,7 @@
 
     <environment names="Development">
         <link rel="stylesheet" href="@ViewData["ThemeDevelopment"]" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" asp-append-version="false" />
+        <link rel="stylesheet" href="~/lib/_site/dist/css/jquery-ui.css" asp-append-version="false" />
         <link rel="stylesheet" href="~/lib/_site/dist/css/video-js.css" />
         <link rel="stylesheet" href="~/lib/_site/dist/css/esri.css" />
         <link rel="stylesheet" href="~/lib/_site/dist/css/digit.css" />
@@ -27,11 +27,11 @@
 </head>
 
 <body>
-    @{Html.RenderPartial("_NavBarMain.cshtml"); }
+    @{ await Html.RenderPartialAsync("_NavBarMain.cshtml"); }
     <div id="container-primary" class="container">
         @RenderBody()
     </div>
-    @{Html.RenderPartial("_Templates.cshtml");}
+    @{  await Html.RenderPartialAsync("_Templates.cshtml");}
 
     <environment names="Development">
 

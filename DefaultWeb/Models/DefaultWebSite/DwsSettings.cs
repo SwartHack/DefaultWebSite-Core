@@ -8,6 +8,7 @@ namespace DefaultWeb.Models.DefaultWebSite
     public class DwsSettings
     {
         public string Title { get; set; }
+        public string ServerName { get; set; }
         public string  ServerFileShare { get; set; }
         public string ArchivePhysicalPath { get; set; }
         public bool UseHardCacheInDisk { get; set; }

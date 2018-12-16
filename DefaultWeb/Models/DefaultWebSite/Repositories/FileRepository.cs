@@ -38,7 +38,7 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
         {
             FileContext = context;
             FileLogger = loggerFactory.CreateLogger("FileRepository");
-            string host = contextAccessor.HttpContext.Request.Host.Host;
+            string host = Environment.MachineName;
             string share = settings.Value.ServerFileShare;
             ServerFileShare = String.Format(@"\\{0}\{1}", host, share);
         }
@@ -105,14 +105,17 @@ namespace DefaultWeb.Models.DefaultWebSite.Repositories
             string uploadDir = String.Format(@"{0}\{1}", ServerFileShare, sessionId);
             if (!Directory.Exists(uploadDir))
             {
+
                 try
                 {
                     Directory.CreateDirectory(uploadDir);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("FileRepository", ex);
+
+                    throw ex;
                 }
+                
                 
             }
             return uploadDir;

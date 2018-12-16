@@ -30,7 +30,7 @@
                     <div id="file-ops-doc" class="col-12 no-gutters">
                         <div class="card-title">About File Operations</div>
                         <div class="card-text">
-                            @{ Html.RenderPartial("~/Views/Sandpit/Content/FileIO.cshtml"); }
+                            @{await Html.RenderPartialAsync("~/Views/Sandpit/Content/FileIO.cshtml"); }
                         </div>
                     </div>
                 </div>

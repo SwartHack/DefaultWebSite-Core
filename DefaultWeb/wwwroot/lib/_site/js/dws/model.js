@@ -132,7 +132,7 @@ define(['dws/model-utils'], function (ModelUtil) {
 
         serverFiles: ko.observableArray([]),  // the server-side files after upload
         serverFile: ko.observable(''),
-        serverSpaceMax: ko.observable(10000000),
+        serverSpaceMax: ko.observable(45000000),
         serverSpaceCurrent: ko.pureComputed(function () { return viewModel.serverFiles.sumProperty('fileSize') }, this),
         serverFilesCount: ko.pureComputed(function () { return viewModel.serverFiles().length }, this),
         serverSpace: ko.pureComputed(function () {

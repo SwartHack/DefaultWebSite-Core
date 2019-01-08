@@ -11107,6 +11107,16 @@ template {
   to {
     -webkit-transform: rotate3d(0, 0, 1, 0deg);
     transform: rotate3d(0, 0, 1, 0deg); } }
+#dws-browser-version {
+  display: none;
+  width: 100%;
+  height: 100%; }
+
+#dws-browser-size {
+  display: none;
+  width: 100%;
+  height: 100%; }
+
 .dws-brand {
   font-style: italic;
   font-weight: 700; }
@@ -11859,6 +11869,10 @@ flex-direction: column;*/
   background-color: silver;
   color: black;
   overflow-y: auto; }
+
+#dws-browser-message {
+  height: 100%;
+  margin: 3vh; }
 
 #dws-notebook-header.card-header {
   display: flex;
@@ -13827,7 +13841,10 @@ body[class*=jconfirm-no-scroll-] {
     display: block; } }
 @media (max-width: 991px) {
   #siteseal {
-    display: none; } }
+    display: none; }
+
+  #dws-browser-size {
+    display: block; } }
 @media (max-width: 1199px) {
   #container-primary {
     max-width: none;

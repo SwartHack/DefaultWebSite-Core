@@ -10371,7 +10371,7 @@ return jQuery;
 } );
 
 /*!
- * jQuery Validation Plugin v1.18.0
+ * jQuery Validation Plugin v1.19.0
  *
  * https://jqueryvalidation.org/
  *
@@ -10515,6 +10515,7 @@ $.extend( $.fn, {
 	// https://jqueryvalidation.org/rules/
 	rules: function( command, argument ) {
 		var element = this[ 0 ],
+			isContentEditable = typeof this.attr( "contenteditable" ) !== "undefined" && this.attr( "contenteditable" ) !== "false",
 			settings, staticRules, existingRules, data, param, filtered;
 
 		// If nothing is selected, return empty object; can't chain anyway
@@ -10522,7 +10523,7 @@ $.extend( $.fn, {
 			return;
 		}
 
-		if ( !element.form && element.isContentEditable ) {
+		if ( !element.form && isContentEditable ) {
 			element.form = this.closest( "form" )[ 0 ];
 			element.name = this.attr( "name" );
 		}
@@ -10783,9 +10784,10 @@ $.extend( $.validator, {
 			} );
 
 			function delegate( event ) {
+				var isContentEditable = typeof $( this ).attr( "contenteditable" ) !== "undefined" && $( this ).attr( "contenteditable" ) !== "false";
 
 				// Set form expando on contenteditable
-				if ( !this.form && this.isContentEditable ) {
+				if ( !this.form && isContentEditable ) {
 					this.form = $( this ).closest( "form" )[ 0 ];
 					this.name = $( this ).attr( "name" );
 				}
@@ -11019,12 +11021,14 @@ $.extend( $.validator, {
 			.not( this.settings.ignore )
 			.filter( function() {
 				var name = this.name || $( this ).attr( "name" ); // For contenteditable
+				var isContentEditable = typeof $( this ).attr( "contenteditable" ) !== "undefined" && $( this ).attr( "contenteditable" ) !== "false";
+
 				if ( !name && validator.settings.debug && window.console ) {
 					console.error( "%o has no name assigned", this );
 				}
 
 				// Set form expando on contenteditable
-				if ( this.isContentEditable ) {
+				if ( isContentEditable ) {
 					this.form = $( this ).closest( "form" )[ 0 ];
 					this.name = name;
 				}
@@ -11079,6 +11083,7 @@ $.extend( $.validator, {
 		elementValue: function( element ) {
 			var $element = $( element ),
 				type = element.type,
+				isContentEditable = typeof $element.attr( "contenteditable" ) !== "undefined" && $element.attr( "contenteditable" ) !== "false",
 				val, idx;
 
 			if ( type === "radio" || type === "checkbox" ) {
@@ -11087,7 +11092,7 @@ $.extend( $.validator, {
 				return element.validity.badInput ? "NaN" : $element.val();
 			}
 
-			if ( element.isContentEditable ) {
+			if ( isContentEditable ) {
 				val = $element.text();
 			} else {
 				val = $element.val();
@@ -12449,7 +12454,7 @@ return $;
 }));
 
 /*!
- * jQuery Validation Plugin v1.18.0
+ * jQuery Validation Plugin v1.19.0
  *
  * https://jqueryvalidation.org/
  *
@@ -12492,6 +12497,38 @@ return $;
 	}, $.validator.format( "Please enter between {0} and {1} words." ) );
 
 }() );
+
+/**
+ * This is used in the United States to process payments, deposits,
+ * or transfers using the Automated Clearing House (ACH) or Fedwire
+ * systems. A very common use case would be to validate a form for
+ * an ACH bill payment.
+ */
+$.validator.addMethod( "abaRoutingNumber", function( value ) {
+	var checksum = 0;
+	var tokens = value.split( "" );
+	var length = tokens.length;
+
+	// Length Check
+	if ( length !== 9 ) {
+		return false;
+	}
+
+	// Calc the checksum
+	// https://en.wikipedia.org/wiki/ABA_routing_transit_number
+	for ( var i = 0; i < length; i += 3 ) {
+		checksum +=	parseInt( tokens[ i ], 10 )     * 3 +
+					parseInt( tokens[ i + 1 ], 10 ) * 7 +
+					parseInt( tokens[ i + 2 ], 10 );
+	}
+
+	// If not zero and divisible by 10 then valid
+	if ( checksum !== 0 && checksum % 10 === 0 ) {
+		return true;
+	}
+
+	return false;
+}, "Please enter a valid routing number." );
 
 // Accept a value from a file input based on a required mimetype
 $.validator.addMethod( "accept", function( value, element, param ) {
@@ -12707,10 +12744,140 @@ $.validator.addMethod( "cifES", function( value, element ) {
 }, "Please specify a valid CIF number." );
 
 /*
+ * Brazillian CNH number (Carteira Nacional de Habilitacao) is the License Driver number.
+ * CNH numbers have 11 digits in total: 9 numbers followed by 2 check numbers that are being used for validation.
+ */
+$.validator.addMethod( "cnhBR", function( value ) {
+
+  // Removing special characters from value
+  value = value.replace( /([~!@#$%^&*()_+=`{}\[\]\-|\\:;'<>,.\/? ])+/g, "" );
+
+  // Checking value to have 11 digits only
+  if ( value.length !== 11 ) {
+    return false;
+  }
+
+  var sum = 0, dsc = 0, firstChar,
+		firstCN, secondCN, i, j, v;
+
+  firstChar = value.charAt( 0 );
+
+  if ( new Array( 12 ).join( firstChar ) === value ) {
+    return false;
+  }
+
+  // Step 1 - using first Check Number:
+  for ( i = 0, j = 9, v = 0; i < 9; ++i, --j ) {
+    sum += +( value.charAt( i ) * j );
+  }
+
+  firstCN = sum % 11;
+  if ( firstCN >= 10 ) {
+    firstCN = 0;
+    dsc = 2;
+  }
+
+  sum = 0;
+  for ( i = 0, j = 1, v = 0; i < 9; ++i, ++j ) {
+    sum += +( value.charAt( i ) * j );
+  }
+
+  secondCN = sum % 11;
+  if ( secondCN >= 10 ) {
+    secondCN = 0;
+  } else {
+    secondCN = secondCN - dsc;
+  }
+
+  return ( String( firstCN ).concat( secondCN ) === value.substr( -2 ) );
+
+}, "Please specify a valid CNH number" );
+
+/*
+ * Brazillian value number (Cadastrado de Pessoas Juridica).
+ * value numbers have 14 digits in total: 12 numbers followed by 2 check numbers that are being used for validation.
+ */
+$.validator.addMethod( "cnpjBR", function( value, element ) {
+	"use strict";
+
+	if ( this.optional( element ) ) {
+		return true;
+	}
+
+	// Removing no number
+	value = value.replace( /[^\d]+/g, "" );
+
+	// Checking value to have 14 digits only
+	if ( value.length !== 14 ) {
+		return false;
+	}
+
+	// Elimina values invalidos conhecidos
+	if ( value === "00000000000000" ||
+		value === "11111111111111" ||
+		value === "22222222222222" ||
+		value === "33333333333333" ||
+		value === "44444444444444" ||
+		value === "55555555555555" ||
+		value === "66666666666666" ||
+		value === "77777777777777" ||
+		value === "88888888888888" ||
+		value === "99999999999999" ) {
+		return false;
+	}
+
+	// Valida DVs
+	var tamanho = ( value.length - 2 );
+	var numeros = value.substring( 0, tamanho );
+	var digitos = value.substring( tamanho );
+	var soma = 0;
+	var pos = tamanho - 7;
+
+	for ( var i = tamanho; i >= 1; i-- ) {
+		soma += numeros.charAt( tamanho - i ) * pos--;
+		if ( pos < 2 ) {
+			pos = 9;
+		}
+	}
+
+	var resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+
+	if ( resultado !== parseInt( digitos.charAt( 0 ), 10 ) ) {
+		return false;
+	}
+
+	tamanho = tamanho + 1;
+	numeros = value.substring( 0, tamanho );
+	soma = 0;
+	pos = tamanho - 7;
+
+	for ( var il = tamanho; il >= 1; il-- ) {
+		soma += numeros.charAt( tamanho - il ) * pos--;
+		if ( pos < 2 ) {
+			pos = 9;
+		}
+	}
+
+	resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+
+	if ( resultado !== parseInt( digitos.charAt( 1 ), 10 ) ) {
+		return false;
+	}
+
+	return true;
+
+}, "Please specify a CNPJ value number" );
+
+/*
  * Brazillian CPF number (Cadastrado de Pessoas Físicas) is the equivalent of a Brazilian tax registration number.
  * CPF numbers have 11 digits in total: 9 numbers followed by 2 check numbers that are being used for validation.
  */
-$.validator.addMethod( "cpfBR", function( value ) {
+$.validator.addMethod( "cpfBR", function( value, element ) {
+	"use strict";
+
+	if ( this.optional( element ) ) {
+		return true;
+	}
 
 	// Removing special characters from value
 	value = value.replace( /([~!@#$%^&*()_+=`{}\[\]\-|\\:;'<>,.\/? ])+/g, "" );
@@ -12809,7 +12976,7 @@ $.validator.addMethod( "creditcard", function( value, element ) {
 }, "Please enter a valid credit card number." );
 
 /* NOTICE: Modified version of Castle.Components.Validator.CreditCardValidator
- * Redistributed under the the Apache License 2.0 at http://www.apache.org/licenses/LICENSE-2.0
+ * Redistributed under the Apache License 2.0 at http://www.apache.org/licenses/LICENSE-2.0
  * Valid Types: mastercard, visa, amex, dinersclub, enroute, discover, jcb, unknown, all (overrides all other settings)
  */
 $.validator.addMethod( "creditcardtypes", function( value, element, param ) {
@@ -13245,6 +13412,11 @@ $.validator.addMethod( "maxsizetotal", function( value, element, param ) {
 
 $.validator.addMethod( "mobileNL", function( value, element ) {
 	return this.optional( element ) || /^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)6((\s|\s?\-\s?)?[0-9]){8}$/.test( value );
+}, "Please specify a valid mobile number" );
+
+$.validator.addMethod( "mobileRU", function( phone_number, element ) {
+	var ruPhone_number = phone_number.replace( /\(|\)|\s+|-/g, "" );
+	return this.optional( element ) || ruPhone_number.length > 9 && /^((\+7|7|8)+([0-9]){10})$/.test( ruPhone_number );
 }, "Please specify a valid mobile number" );
 
 /* For UK phone functions, do the following server side processing:
@@ -35275,7 +35447,7 @@ var jconfirm, Jconfirm;
 
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.14.4
+ * @version 1.14.6
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -35378,7 +35550,8 @@ function getStyleComputedProperty(element, property) {
     return [];
   }
   // NOTE: 1 DOM access here
-  var css = getComputedStyle(element, null);
+  var window = element.ownerDocument.defaultView;
+  var css = window.getComputedStyle(element, null);
   return property ? css[property] : css;
 }
 
@@ -35466,7 +35639,7 @@ function getOffsetParent(element) {
   var noOffsetParent = isIE(10) ? document.body : null;
 
   // NOTE: 1 DOM access here
-  var offsetParent = element.offsetParent;
+  var offsetParent = element.offsetParent || null;
   // Skip hidden elements which don't have an offsetParent
   while (offsetParent === noOffsetParent && element.nextElementSibling) {
     offsetParent = (element = element.nextElementSibling).offsetParent;
@@ -35478,9 +35651,9 @@ function getOffsetParent(element) {
     return element ? element.ownerDocument.documentElement : document.documentElement;
   }
 
-  // .offsetParent will return the closest TD or TABLE in case
+  // .offsetParent will return the closest TH, TD or TABLE in case
   // no offsetParent is present, I hate this job...
-  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
+  if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
     return getOffsetParent(offsetParent);
   }
 
@@ -36028,9 +36201,10 @@ function getReferenceOffsets(state, popper, reference) {
  * @returns {Object} object containing width and height properties
  */
 function getOuterSizes(element) {
-  var styles = getComputedStyle(element);
-  var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
-  var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
+  var window = element.ownerDocument.defaultView;
+  var styles = window.getComputedStyle(element);
+  var x = parseFloat(styles.marginTop || 0) + parseFloat(styles.marginBottom || 0);
+  var y = parseFloat(styles.marginLeft || 0) + parseFloat(styles.marginRight || 0);
   var result = {
     width: element.offsetWidth + y,
     height: element.offsetHeight + x
@@ -36482,6 +36656,52 @@ function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
 
 /**
  * @function
+ * @memberof Popper.Utils
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Boolean} shouldRound - If the offsets should be rounded at all
+ * @returns {Object} The popper's position offsets rounded
+ *
+ * The tale of pixel-perfect positioning. It's still not 100% perfect, but as
+ * good as it can be within reason.
+ * Discussion here: https://github.com/FezVrasta/popper.js/pull/715
+ *
+ * Low DPI screens cause a popper to be blurry if not using full pixels (Safari
+ * as well on High DPI screens).
+ *
+ * Firefox prefers no rounding for positioning and does not have blurriness on
+ * high DPI screens.
+ *
+ * Only horizontal placement and left/right values need to be considered.
+ */
+function getRoundedOffsets(data, shouldRound) {
+  var _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+
+  var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;
+  var isVariation = data.placement.indexOf('-') !== -1;
+  var sameWidthOddness = reference.width % 2 === popper.width % 2;
+  var bothOddWidth = reference.width % 2 === 1 && popper.width % 2 === 1;
+  var noRound = function noRound(v) {
+    return v;
+  };
+
+  var horizontalToInteger = !shouldRound ? noRound : isVertical || isVariation || sameWidthOddness ? Math.round : Math.floor;
+  var verticalToInteger = !shouldRound ? noRound : Math.round;
+
+  return {
+    left: horizontalToInteger(bothOddWidth && !isVariation && shouldRound ? popper.left - 1 : popper.left),
+    top: verticalToInteger(popper.top),
+    bottom: verticalToInteger(popper.bottom),
+    right: horizontalToInteger(popper.right)
+  };
+}
+
+var isFirefox = isBrowser && /Firefox/i.test(navigator.userAgent);
+
+/**
+ * @function
  * @memberof Modifiers
  * @argument {Object} data - The data object generated by `update` method
  * @argument {Object} options - Modifiers configuration and options
@@ -36510,15 +36730,7 @@ function computeStyle(data, options) {
     position: popper.position
   };
 
-  // Avoid blurry text by using full pixel integers.
-  // For pixel-perfect positioning, top/bottom prefers rounded
-  // values, while left/right prefers floored values.
-  var offsets = {
-    left: Math.floor(popper.left),
-    top: Math.round(popper.top),
-    bottom: Math.round(popper.bottom),
-    right: Math.floor(popper.right)
-  };
+  var offsets = getRoundedOffsets(data, window.devicePixelRatio < 2 || !isFirefox);
 
   var sideA = x === 'bottom' ? 'top' : 'bottom';
   var sideB = y === 'right' ? 'left' : 'right';

@@ -45,32 +45,42 @@ namespace DefaultWeb.Controllers
                 var index = path.IndexOf("/", 1);
                 var type =  index == -1 ?  path.Substring(1, path.Length - 1) : path.Substring(1, index - 1);
 
-                if ( type == "Home" )
+                switch (type.ToLower())
                 {
-                    ViewData["ReturnUrl"] = String.Format("/Home/GetView/{0}", page);
-                    ViewData["ReturnTarget"] = "#main-target-area";
-                }
+                    case "home":
+                        ViewData["ReturnUrl"] = String.Format("/Home/GetView/{0}", page);
+                        ViewData["ReturnTarget"] = "#main-target-area";
+                        break;
 
-                if (type == "Notepad")
-                {
-                    ViewData["ReturnUrl"] = String.Format("/Home/GetNote/{0}", page);
-                    ViewData["ReturnTarget"] = "#main-target-area";
-                }
+                    case "notepad":
+                        ViewData["ReturnUrl"] = String.Format("/Home/GetNote/{0}", page);
+                        ViewData["ReturnTarget"] = "#main-target-area";
+                        break;
 
-                if (type == "Sandpit")
-                {
-                    ViewData["ReturnUrl"] = "/Sandpit/SandpitMain";
-                    ViewData["ReturnTarget"] = "#main-target-area";
-                }
+                    case "sandpit":
+                        ViewData["ReturnUrl"] = "/Sandpit/SandpitMain";
+                        ViewData["ReturnTarget"] = "#main-target-area";
+                        break;
 
-                if (type == "Contact")
-                {
-                    ViewData["ReturnUrl"] = String.Format("/Home/GetView/{0}", page);
-                    ViewData["ReturnTarget"] = "#main-target-area";
+                    case "contact":
+                        ViewData["ReturnUrl"] = String.Format("/Home/GetView/{0}", page);
+                        ViewData["ReturnTarget"] = "#main-target-area";
+                        break;
+
+                    default:
+
+                        break;
                 }
             }
 
-           
+            ViewData["BypassBrowser"] = "no";
+
+
+           if ( Request.QueryString.HasValue )
+            {
+                ViewData["BypassBrowser"] = "yes";
+            }
+
 
             ViewData["ThemeName"] = ThemeName;
             ViewData["ThemeDevelopment"] = String.Format("~/lib/_site/dist/css/{0}.css", ThemeName.ToLower());

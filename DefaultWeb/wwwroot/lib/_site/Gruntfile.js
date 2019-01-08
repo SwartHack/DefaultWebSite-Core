@@ -74,10 +74,8 @@ module.exports = function(grunt) {
         },
         sass: {
             options: {
-                
             },
             dist: {
-                
                 src: [''],
                 dest: ''
             }

@@ -98,7 +98,15 @@
     #siteseal {
         display: none;
     }
+
+    #dws-browser-size {
+        display:block;
+    }
     
+}
+
+@media (min-width:990px) {
+
 }
 
 // Large devices (desktops, less than 1200px)
@@ -112,7 +120,7 @@
    
 }
 
-// Large devices (desktops, less than 1200px)
+// Large devices (desktops, bigger than 1200px)
 @media (min-width: 1200px) {
    
 }

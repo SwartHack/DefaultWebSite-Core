@@ -14,6 +14,36 @@ function (viewModel, Dispatch) {
         Dispatch.ajaxRequest(settings);
     }
 
+    ////////////////////////////////////////////////////////////////////
+    ///
+    ////////////////////////////////////////////////////////////////////
+    function checkBrowser() {
+        // Opera 8.0+
+        var isOpera = (!!window.opr && !! window.opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+        // Firefox 1.0+
+        var isFirefox = typeof InstallTrigger !== 'undefined';
+
+        // Safari 3.0+ "[object HTMLElementConstructor]" 
+        var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+
+        // Internet Explorer 6-11
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+        // Edge 20+
+        var isEdge = !isIE && !!window.StyleMedia;
+
+        // Chrome 1+
+        var isChrome = !!window.chrome;
+
+        // Blink engine detection
+        var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+        if (!isChrome && !isFirefox ) {
+            $('#dws-browser-version').show();
+        }
+    }
+
     //////////////////////////////////
     ///
     ////////////////////////////////
@@ -117,6 +147,7 @@ function (viewModel, Dispatch) {
     }
 
     return {
+        
         initKO: initKO,
         test: test,
         sendMessage: sendMessage,
@@ -126,6 +157,7 @@ function (viewModel, Dispatch) {
         parseNavUrl: parseNavUrl,
         setXsrf: setXsrf,
         setPdfWorker: setPdfWorker,
-        dispatch: dispatch
+        dispatch: dispatch,
+        checkBrowser: checkBrowser
     }
 });

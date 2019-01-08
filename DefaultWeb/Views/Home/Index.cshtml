@@ -26,10 +26,13 @@
 }
 
 <div id="row-main" class="row no-gutters">
+ 
+    @{ await Html.RenderPartialAsync("~/Views/Shared/_DwsBrowser.cshtml");}
     
     <div id="col-util" class="col-5">
         <div class="element d-flex h-100 flex-column">
             <div class="inner d-flex h-100 flex-column align-items-center justify-content-between">
+
 
                 <div id="row-notebook" class="row no-gutters w-100">
                     <div id="col-dws-notebook" class="col-12 no-gutters">
@@ -75,27 +78,34 @@
 
 @section JS
 {
-
 <script>
-   
-    require(['dws/controller'],
-        function (Controller) {
+        require(['dws/controller'],
+            function (Controller) {
+                $(document).ready(function () {
 
-            $(document).ready(function () {
-                Controller.setXsrf(@Json.Serialize(_ajaxRequestToken));
-                Controller.setPdfWorker("@_pdfWorker");
 
-                @if ( ViewData["ReturnUrl"] != null )
-                {
-                    <Text>
-                    Controller.dispatch({ url: '@ViewData["ReturnUrl"].ToString()', cache: false }, '@ViewData["ReturnTarget"]');
-                    //window.history.replaceState({ url: url  }, "", "");
-                    </Text>
+                    @if (ViewData["BypassBrowser"] != null && ViewData["BypassBrowser"].ToString() == "no")
+                    {
+                        <Text>
+                        Controller.checkBrowser();
+                        </Text>
+                    }
 
-                }
+                    Controller.setXsrf(@Json.Serialize(_ajaxRequestToken));
+                    Controller.setPdfWorker("@_pdfWorker");
+                    
+                   
+
+                    @if ( ViewData["ReturnUrl"] != null )
+                    {
+                        <Text>
+                        Controller.dispatch({ url: '@ViewData["ReturnUrl"].ToString()', cache: false }, '@ViewData["ReturnTarget"]');
+                        //window.history.replaceState({ url: url  }, "", "");
+                        </Text>
+
+                    }
+                });
             });
-        });
-    require(['dws/main']);
+        require(['dws/main']);
 </script>
-        
 }

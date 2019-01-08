@@ -219,6 +219,8 @@ namespace DefaultWeb
                 routes.MapRoute("sandpit", "Sandpit/", new { controller = "Home", action = "Index", page = "Sandpit" });
                 routes.MapRoute("contact", "Contact/", new { controller = "Home", action = "Index", page = "Contact" });
 
+
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{page?}"
